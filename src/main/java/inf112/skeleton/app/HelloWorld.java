@@ -31,6 +31,7 @@ public class HelloWorld implements ApplicationListener {
 
         batch.begin();
         font.draw(batch, "Hello World", 200, 200);
+        font.draw(batch, "Goodbye World", 200, 50);
         batch.end();
     }
 
