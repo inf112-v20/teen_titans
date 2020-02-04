@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.3.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="8" height="8" tilewidth="300" tileheight="300" infinite="0" nextlayerid="12" nextobjectid="1">
+ <tileset firstgid="1" source="basicTiles.tsx"/>
+ <layer id="1" name="Ground" width="8" height="8">
+  <data encoding="csv">
+5,5,5,5,5,5,5,5,
+5,5,5,5,5,5,5,5,
+5,5,5,5,5,5,5,5,
+5,5,5,5,5,5,5,5,
+5,5,5,5,5,5,5,5,
+5,5,5,5,5,5,5,5,
+5,5,5,5,5,5,5,5,
+5,5,5,5,5,5,5,5
+</data>
+ </layer>
+ <group id="2" name="Annoyances">
+  <layer id="3" name="Walls" width="8" height="8">
+   <data encoding="csv">
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,30,0,0,23,0,0,
+0,0,30,0,0,23,0,0,
+0,0,30,0,0,23,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0
+</data>
+  </layer>
+  <layer id="4" name="Zoomers" width="8" height="8">
+   <data encoding="csv">
+0,0,0,0,0,0,0,0,
+0,0,0,50,50,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,49,49,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0
+</data>
+  </layer>
+ </group>
+ <group id="6" name="BadStuff">
+  <layer id="7" name="Holes" width="8" height="8">
+   <data encoding="csv">
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,92,92,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0
+</data>
+  </layer>
+ </group>
+ <group id="9" name="GoodStuff">
+  <layer id="11" name="Flags" width="8" height="8">
+   <data encoding="csv">
+0,0,0,0,55,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,79,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,63,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,71,0,
+0,0,0,0,0,0,0,0
+</data>
+  </layer>
+  <layer id="10" name="PlayerSpawn" width="8" height="8">
+   <data encoding="csv">
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+121,0,0,0,0,0,0,122
+</data>
+  </layer>
+ </group>
+</map>
