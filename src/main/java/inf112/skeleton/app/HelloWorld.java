@@ -38,6 +38,7 @@ public class HelloWorld implements ApplicationListener {
 
     @Override
     public void create() {
+        position = new Vector2(4, 0);
         batch = new SpriteBatch();
         font = new BitmapFont();
         font.setColor(Color.RED);
@@ -49,7 +50,7 @@ public class HelloWorld implements ApplicationListener {
 
         map = new TmxMapLoader().load("assets/testMap.tmx");
         camera = new OrthographicCamera();
-        renderer = new OrthogonalTiledMapRenderer(map, 1/90000);
+        renderer = new OrthogonalTiledMapRenderer(map, (float)(1/90000));
         ground =      (TiledMapTileLayer) map.getLayers().get("Ground");
         hole =        (TiledMapTileLayer) map.getLayers().get("Holes");
         wall =        (TiledMapTileLayer) map.getLayers().get("Walls");
@@ -63,9 +64,8 @@ public class HelloWorld implements ApplicationListener {
         playerWon.setTile(new StaticTiledMapTile(frank[0][2]));
 
         camera.setToOrtho(false, 8, 8);
-        camera.viewportWidth = 8;
-        camera.viewportHeight = 8;
-        camera.position.set(8/2f, 8/2f, 0);
+        camera.position.set(4f, 4f, 0);
+        camera.update();
         renderer.setView(camera);
 
     }
@@ -84,7 +84,7 @@ public class HelloWorld implements ApplicationListener {
         renderer.render();
 
 
-        playerLayer.setCell(0, 2400, playerCell);
+        //playerLayer.setCell(0, 2400, playerCell);
 
     }
 
