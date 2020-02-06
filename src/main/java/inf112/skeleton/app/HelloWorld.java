@@ -42,15 +42,19 @@ public class HelloWorld implements ApplicationListener {
         font = new BitmapFont();
         font.setColor(Color.RED);
 
+        playerCell = new Cell();
+        playerDead = new Cell();
+        playerWon  = new Cell();
+
 
         map = new TmxMapLoader().load("assets/testMap.tmx");
         camera = new OrthographicCamera();
         renderer = new OrthogonalTiledMapRenderer(map, 1/90000);
-        ground = (TiledMapTileLayer) new TiledMap().getLayers().get("Ground");
-        hole = (TiledMapTileLayer) new TiledMap().getLayers().get("Holes");
-        wall = (TiledMapTileLayer) new TiledMap().getLayers().get("Walls");
-        flag = (TiledMapTileLayer) new TiledMap().getLayers().get("Flags");
-        playerLayer = (TiledMapTileLayer) new TiledMap().getLayers().get("Player");
+        ground =      (TiledMapTileLayer) map.getLayers().get("Ground");
+        hole =        (TiledMapTileLayer) map.getLayers().get("Holes");
+        wall =        (TiledMapTileLayer) map.getLayers().get("Walls");
+        flag =        (TiledMapTileLayer) map.getLayers().get("Flags");
+        playerLayer = (TiledMapTileLayer) map.getLayers().get("Player");
 
         Texture player = new Texture(Gdx.files.internal("player.png"));
         TextureRegion[][] frank = new TextureRegion(new Texture("player.png")).split(300,300);
@@ -78,6 +82,7 @@ public class HelloWorld implements ApplicationListener {
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
+
 
         playerLayer.setCell(0, 2400, playerCell);
 
