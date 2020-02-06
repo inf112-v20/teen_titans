@@ -2,11 +2,12 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -14,13 +15,13 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
-import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 
-public class HelloWorld implements ApplicationListener {
+public class HelloWorld extends InputAdapter implements ApplicationListener {
     private SpriteBatch batch;
     private BitmapFont font;
     TiledMap map;
@@ -29,7 +30,7 @@ public class HelloWorld implements ApplicationListener {
     TiledMapTileLayer wall;
     TiledMapTileLayer flag;
     TiledMapTileLayer playerLayer;
-    OrthoCachedTiledMapRenderer render;
+    OrthogonalTiledMapRenderer renderer;
     OrthographicCamera camera;
 
     Vector2 position;
@@ -39,28 +40,37 @@ public class HelloWorld implements ApplicationListener {
 
     @Override
     public void create() {
+        position = new Vector2(4, 0);
+        Gdx.input.setInputProcessor(this);
+
         batch = new SpriteBatch();
         font = new BitmapFont();
         font.setColor(Color.RED);
 
+        playerCell = new Cell();
+        playerDead = new Cell();
+        playerWon  = new Cell();
+
+
         map = new TmxMapLoader().load("assets/testMap.tmx");
-        ground = (TiledMapTileLayer) new TiledMap().getLayers().get("Ground");
-        hole = (TiledMapTileLayer) new TiledMap().getLayers().get("Holes");
-        wall = (TiledMapTileLayer) new TiledMap().getLayers().get("Walls");
-        flag = (TiledMapTileLayer) new TiledMap().getLayers().get("Flags");
-        playerLayer = (TiledMapTileLayer) new TiledMap().getLayers().get("Player");
+        camera = new OrthographicCamera();
+        renderer = new OrthogonalTiledMapRenderer(map, (float)(1/90000));
+        ground =      (TiledMapTileLayer) map.getLayers().get("Ground");
+        hole =        (TiledMapTileLayer) map.getLayers().get("Holes");
+        wall =        (TiledMapTileLayer) map.getLayers().get("Walls");
+        flag =        (TiledMapTileLayer) map.getLayers().get("Flags");
+        playerLayer = (TiledMapTileLayer) map.getLayers().get("Player");
 
         Texture player = new Texture(Gdx.files.internal("player.png"));
-        TextureRegion[][] frank = new TextureRegion(new Texture(Gdx.files.internal("player.png"))).split(300,300);
+        TextureRegion[][] frank = new TextureRegion(new Texture("player.png")).split(300,300);
         playerCell.setTile(new StaticTiledMapTile(frank[0][0]));
         playerDead.setTile(new StaticTiledMapTile(frank[0][1]));
         playerWon.setTile(new StaticTiledMapTile(frank[0][2]));
 
-
-        camera.setToOrtho(false,3.0f,5);
+        camera.setToOrtho(false, 8, 8);
+        camera.position.set(4f, 4f, 0);
         camera.update();
-
-        render.setView(camera);
+        renderer.setView(camera);
 
     }
 
@@ -75,10 +85,8 @@ public class HelloWorld implements ApplicationListener {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
-        batch.begin();
-        font.draw(batch, "Hello World", 200, 200);
-        font.draw(batch, "Goodbye World", 200, 50);
-        batch.end();
+        renderer.render();
+
 
         playerLayer.setCell(0, 2400, playerCell);
 
@@ -95,4 +103,33 @@ public class HelloWorld implements ApplicationListener {
     @Override
     public void resume() {
     }
+
+    @Override
+    public boolean keyUp(int keycode){
+        switch(keycode){
+            case(Input.Keys.UP):
+                playerLayer.setCell((int) position.x, (int) position.y, null);
+                position.y -= 300;
+                playerLayer.setCell((int) position.x, (int) position.y, playerCell);
+                return true;
+
+            case(Input.Keys.DOWN):
+                playerLayer.setCell((int) position.x, (int) position.y, null);
+                position.y += 300;
+                playerLayer.setCell((int) position.x, (int) position.y, playerCell);
+                return true;
+            case(Input.Keys.RIGHT):
+                playerLayer.setCell((int) position.x, (int) position.y, null);
+                position.x += 300;
+                playerLayer.setCell((int) position.x, (int) position.y, playerCell);
+                return true;
+            case(Input.Keys.LEFT):
+                playerLayer.setCell((int) position.x, (int) position.y, null);
+                position.x -= 300;
+                playerLayer.setCell((int) position.x, (int) position.y, playerCell);
+                return true;
+        }
+        return false;
+    }
+
 }
