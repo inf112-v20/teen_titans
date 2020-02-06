@@ -15,6 +15,7 @@ public class Main {
         cfg.height = 500;
 
 
+
         GameMap<ITile> map = new GameMap<>(10, 10);
         map.set(new BaseTile(), 0, 0);
 
