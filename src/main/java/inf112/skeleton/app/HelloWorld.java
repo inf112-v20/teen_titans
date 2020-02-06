@@ -24,6 +24,7 @@ public class HelloWorld implements ApplicationListener {
     TiledMapTileLayer hole;
     TiledMapTileLayer wall;
     TiledMapTileLayer flag;
+    TiledMapTileLayer playerLayer;
 
     Vector2 position;
     Cell playerCell;
@@ -41,6 +42,7 @@ public class HelloWorld implements ApplicationListener {
         hole = (TiledMapTileLayer) new TiledMap().getLayers().get("Holes");
         wall = (TiledMapTileLayer) new TiledMap().getLayers().get("Walls");
         flag = (TiledMapTileLayer) new TiledMap().getLayers().get("Flags");
+        playerLayer = (TiledMapTileLayer) new TiledMap().getLayers().get("Player");
 
         Texture player = new Texture(Gdx.files.internal("player.png"));
         TextureRegion[][] frank = new TextureRegion(new Texture(Gdx.files.internal("player.png"))).split(300,300);
@@ -48,7 +50,7 @@ public class HelloWorld implements ApplicationListener {
         playerDead.setTile(new StaticTiledMapTile(frank[0][1]));
         playerWon.setTile(new StaticTiledMapTile(frank[0][2]));
 
-        position.add(0,0);
+
     }
 
     @Override
@@ -66,6 +68,8 @@ public class HelloWorld implements ApplicationListener {
         font.draw(batch, "Hello World", 200, 200);
         font.draw(batch, "Goodbye World", 200, 50);
         batch.end();
+
+        playerLayer.setCell(0, 2400, playerCell);
 
     }
 
