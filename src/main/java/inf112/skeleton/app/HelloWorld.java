@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 
 public class HelloWorld implements ApplicationListener {
     private SpriteBatch batch;
@@ -18,6 +19,7 @@ public class HelloWorld implements ApplicationListener {
     TiledMapTileLayer hole;
     TiledMapTileLayer wall;
     TiledMapTileLayer flag;
+
 
     @Override
     public void create() {
