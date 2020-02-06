@@ -112,6 +112,7 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
                 position.y -= 300;
                 playerLayer.setCell((int) position.x, (int) position.y, playerCell);
                 return true;
+
             case(Input.Keys.DOWN):
                 playerLayer.setCell((int) position.x, (int) position.y, null);
                 position.y += 300;
@@ -128,7 +129,6 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
                 playerLayer.setCell((int) position.x, (int) position.y, playerCell);
                 return true;
         }
-
         return false;
     }
 
