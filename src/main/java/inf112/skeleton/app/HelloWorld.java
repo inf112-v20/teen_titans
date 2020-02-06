@@ -2,6 +2,8 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,7 +18,7 @@ import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 
-public class HelloWorld implements ApplicationListener {
+public class HelloWorld extends InputAdapter implements ApplicationListener {
     private SpriteBatch batch;
     private BitmapFont font;
     TiledMap map;
@@ -33,6 +35,8 @@ public class HelloWorld implements ApplicationListener {
 
     @Override
     public void create() {
+        Gdx.input.setInputProcessor(this);
+
         batch = new SpriteBatch();
         font = new BitmapFont();
         font.setColor(Color.RED);
@@ -84,4 +88,33 @@ public class HelloWorld implements ApplicationListener {
     @Override
     public void resume() {
     }
+
+    @Override
+    public boolean keyUp(int keycode){
+        switch(keycode){
+            case(Input.Keys.UP):
+                playerLayer.setCell((int) position.x, (int) position.y, null);
+                position.y -= 300;
+                playerLayer.setCell((int) position.x, (int) position.y, playerCell);
+                return true;
+            case(Input.Keys.DOWN):
+                playerLayer.setCell((int) position.x, (int) position.y, null);
+                position.y += 300;
+                playerLayer.setCell((int) position.x, (int) position.y, playerCell);
+                return true;
+            case(Input.Keys.RIGHT):
+                playerLayer.setCell((int) position.x, (int) position.y, null);
+                position.x += 300;
+                playerLayer.setCell((int) position.x, (int) position.y, playerCell);
+                return true;
+            case(Input.Keys.LEFT):
+                playerLayer.setCell((int) position.x, (int) position.y, null);
+                position.x -= 300;
+                playerLayer.setCell((int) position.x, (int) position.y, playerCell);
+                return true;
+        }
+
+        return false;
+    }
+
 }
