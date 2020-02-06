@@ -4,12 +4,19 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 
@@ -21,9 +28,14 @@ public class HelloWorld implements ApplicationListener {
     TiledMapTileLayer hole;
     TiledMapTileLayer wall;
     TiledMapTileLayer flag;
+    TiledMapTileLayer playerLayer;
     OrthoCachedTiledMapRenderer render;
     OrthographicCamera camera;
 
+    Vector2 position;
+    Cell playerCell;
+    Cell playerDead;
+    Cell playerWon;
 
     @Override
     public void create() {
@@ -36,6 +48,14 @@ public class HelloWorld implements ApplicationListener {
         hole = (TiledMapTileLayer) new TiledMap().getLayers().get("Holes");
         wall = (TiledMapTileLayer) new TiledMap().getLayers().get("Walls");
         flag = (TiledMapTileLayer) new TiledMap().getLayers().get("Flags");
+        playerLayer = (TiledMapTileLayer) new TiledMap().getLayers().get("Player");
+
+        Texture player = new Texture(Gdx.files.internal("player.png"));
+        TextureRegion[][] frank = new TextureRegion(new Texture(Gdx.files.internal("player.png"))).split(300,300);
+        playerCell.setTile(new StaticTiledMapTile(frank[0][0]));
+        playerDead.setTile(new StaticTiledMapTile(frank[0][1]));
+        playerWon.setTile(new StaticTiledMapTile(frank[0][2]));
+
 
         camera.setToOrtho(false,3.0f,5);
         camera.update();
@@ -54,6 +74,14 @@ public class HelloWorld implements ApplicationListener {
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+
+        batch.begin();
+        font.draw(batch, "Hello World", 200, 200);
+        font.draw(batch, "Goodbye World", 200, 50);
+        batch.end();
+
+        playerLayer.setCell(0, 2400, playerCell);
+
     }
 
     @Override
