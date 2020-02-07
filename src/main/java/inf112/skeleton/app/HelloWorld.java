@@ -4,7 +4,6 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -16,29 +15,28 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 
 public class HelloWorld extends InputAdapter implements ApplicationListener {
-public class HelloWorld implements ApplicationListener  {
+
     private SpriteBatch batch;
     private BitmapFont font;
-    TiledMap map;
-    TiledMapTileLayer ground;
-    TiledMapTileLayer hole;
-    TiledMapTileLayer wall;
-    TiledMapTileLayer flag;
-    TiledMapTileLayer playerLayer;
-    OrthogonalTiledMapRenderer renderer;
-    OrthographicCamera camera;
+    private TiledMap map;
+    private TiledMapTileLayer ground;
+    private TiledMapTileLayer hole;
+    private TiledMapTileLayer wall;
+    private TiledMapTileLayer flag;
+    private TiledMapTileLayer playerLayer;
+    private OrthogonalTiledMapRenderer renderer;
+    private OrthographicCamera camera;
 
-    Vector2 position;
-    Cell playerCell;
-    Cell playerDead;
-    Cell playerWon;
+    private Vector2 position;
+    private Cell playerCell;
+    private Cell playerDead;
+    private Cell playerWon;
 
     @Override
     public void create() {
@@ -56,7 +54,7 @@ public class HelloWorld implements ApplicationListener  {
 
         map = new TmxMapLoader().load("assets/testMap.tmx");
         camera = new OrthographicCamera();
-        renderer = new OrthogonalTiledMapRenderer(map, (float)(1/300));
+        renderer = new OrthogonalTiledMapRenderer(map, (float)(1/90000));
         ground =      (TiledMapTileLayer) map.getLayers().get("Ground");
         hole =        (TiledMapTileLayer) map.getLayers().get("Holes");
         wall =        (TiledMapTileLayer) map.getLayers().get("Walls");
@@ -146,3 +144,4 @@ public class HelloWorld implements ApplicationListener  {
 
 
 }
+
