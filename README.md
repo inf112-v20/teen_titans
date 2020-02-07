@@ -95,16 +95,12 @@ Kunne lage et program for brikken min
 
 ## Summary of assignment 1
 
-Vi har jobbet bra sammen som en gruppe, og fått til det aller meste. Vi endte opp med å sitte fast på å sette opp
-kamera, så vi får aldri testet om spiller-brikken blir plassert, eller om vi kan flytte den. Går ut i fra at det er
-korrekt. Vi får testet om bevegelse og posisjoner fungerer ved å legge inn printer som sier at spiller beveger seg
-og hvilke posisjon den er i.
-
-Vi prøvde å følge tutorialen for LibGDX step for step, men vi må ha gjort en liten feil. Har gått gjennom steg for steg
-i koden, for å se etter mulige feil.
+Vi har jobbet bra sammen som en gruppe. Vi slet litt med å plassere kameraet korrekt, men det gikk til slutt.
 
 Arbeidsfordelingen gikk bra, alle fikk gjort noe, selv om kompetansenivået er variert.
+Det var få ting å gjøre så vi parprogramerte det som måtte gjøres.
+Vi har litt forskjellig med commits, men mange av de er bare små endringer for å lære hvordan git fungerer.
 
 Det som må gjøres nå er å få laget flere regler for spillet, som at et spiller dør, vinner, har flere liv, skyter
-lasere og bånd på gulvet som beveger seg. Det er bedre å slik til å funke, før en fokuserer på runder, programerings
+lasere og bånd på gulvet som beveger seg. Det er bedre å få slik til å funke, før en fokuserer på runder, programerings
 kort og lignende.
