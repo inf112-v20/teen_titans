@@ -11,8 +11,8 @@ public class Main {
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "hello-world";
-        cfg.width = 2400;
-        cfg.height = 2400;
+        cfg.width = 1500;
+        cfg.height = 1500;
 
 
         new LwjglApplication(new HelloWorld(), cfg);
