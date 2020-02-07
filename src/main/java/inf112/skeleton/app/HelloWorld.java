@@ -32,6 +32,7 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
     private TiledMapTileLayer playerLayer;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
+    private long cycle;
 
     private Vector2 position;
     private Cell playerCell;
@@ -40,7 +41,8 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
 
     @Override
     public void create() {
-        position = new Vector2(4, 0);
+        cycle = 0;
+        position = new Vector2(0, 0);
         Gdx.input.setInputProcessor(this);
 
         batch = new SpriteBatch();
@@ -52,12 +54,12 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
         playerWon  = new Cell();
 
 
-        map = new TmxMapLoader().load("assets/testMap.tmx");
+        map = new TmxMapLoader().load("example.tmx");
         camera = new OrthographicCamera();
-        renderer = new OrthogonalTiledMapRenderer(map, (float)(1/90000));
+        renderer = new OrthogonalTiledMapRenderer(map, 1/300f);
         ground =      (TiledMapTileLayer) map.getLayers().get("Ground");
-        hole =        (TiledMapTileLayer) map.getLayers().get("Holes");
-        wall =        (TiledMapTileLayer) map.getLayers().get("Walls");
+        hole =        (TiledMapTileLayer) map.getLayers().get("Hole");
+        //wall =        (TiledMapTileLayer) map.getLayers().get("Walls");
         flag =        (TiledMapTileLayer) map.getLayers().get("Flags");
         playerLayer = (TiledMapTileLayer) map.getLayers().get("Player");
 
@@ -67,7 +69,7 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
         playerDead.setTile(new StaticTiledMapTile(frank[0][1]));
         playerWon.setTile(new StaticTiledMapTile(frank[0][2]));
 
-        camera.setToOrtho(false, 8, 8);
+        camera.setToOrtho(false, 5, 5);
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
         camera.update();
         renderer.setView(camera);
@@ -84,8 +86,9 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+        cycle++; //Player ble rendera hver frame, no bare frame 1
+        if (cycle == 1) playerLayer.setCell(0, 0, playerCell);
 
-        playerLayer.setCell(0, 0, playerCell);
         renderer.render();
 
 
@@ -133,12 +136,13 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
     /**
      * Checks whether suggested player position is valid.
      * @param pos new position to try.
-     * @return true if given position is a valid plauyer position, false otherwise.
+     * @return true if given position is a valid player position, false otherwise.
      */
     public boolean validPlayerPosition(Vector2 pos){
-        if(wall.getCell((int)pos.x,(int)pos.y) != null || pos.x < 0 || pos.x >= camera.viewportWidth || pos.y < 0 || pos.y >= camera.viewportHeight){
-            return false;
-        }
+        //wall.getCell((int)pos.x,(int)pos.y) != null ||
+        if( pos.x < 0 || pos.x >= camera.viewportWidth || pos.y < 0 || pos.y >= camera.viewportHeight){
+         return false;
+    }
         return true;
     }
 
