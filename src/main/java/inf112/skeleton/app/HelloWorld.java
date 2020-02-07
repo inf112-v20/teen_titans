@@ -15,28 +15,28 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 
 public class HelloWorld extends InputAdapter implements ApplicationListener {
+
     private SpriteBatch batch;
     private BitmapFont font;
-    TiledMap map;
-    TiledMapTileLayer ground;
-    TiledMapTileLayer hole;
-    TiledMapTileLayer wall;
-    TiledMapTileLayer flag;
-    TiledMapTileLayer playerLayer;
-    OrthogonalTiledMapRenderer renderer;
-    OrthographicCamera camera;
+    private TiledMap map;
+    private TiledMapTileLayer ground;
+    private TiledMapTileLayer hole;
+    private TiledMapTileLayer wall;
+    private TiledMapTileLayer flag;
+    private TiledMapTileLayer playerLayer;
+    private OrthogonalTiledMapRenderer renderer;
+    private OrthographicCamera camera;
 
-    Vector2 position;
-    Cell playerCell;
-    Cell playerDead;
-    Cell playerWon;
+    private Vector2 position;
+    private Cell playerCell;
+    private Cell playerDead;
+    private Cell playerWon;
 
     @Override
     public void create() {
@@ -54,7 +54,7 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
 
         map = new TmxMapLoader().load("assets/testMap.tmx");
         camera = new OrthographicCamera();
-        renderer = new OrthogonalTiledMapRenderer(map, (float)(1/300));
+        renderer = new OrthogonalTiledMapRenderer(map, (float)(1/90000));
         ground =      (TiledMapTileLayer) map.getLayers().get("Ground");
         hole =        (TiledMapTileLayer) map.getLayers().get("Holes");
         wall =        (TiledMapTileLayer) map.getLayers().get("Walls");
@@ -107,30 +107,41 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
 
     @Override
     public boolean keyUp(int keycode){
-        switch(keycode){
-            case(Input.Keys.UP):
-                playerLayer.setCell((int) position.x, (int) position.y, null);
-                position.y -= 300;
-                playerLayer.setCell((int) position.x, (int) position.y, playerCell);
-                return true;
-
-            case(Input.Keys.DOWN):
-                playerLayer.setCell((int) position.x, (int) position.y, null);
-                position.y += 300;
-                playerLayer.setCell((int) position.x, (int) position.y, playerCell);
-                return true;
-            case(Input.Keys.RIGHT):
-                playerLayer.setCell((int) position.x, (int) position.y, null);
-                position.x += 300;
-                playerLayer.setCell((int) position.x, (int) position.y, playerCell);
-                return true;
-            case(Input.Keys.LEFT):
-                playerLayer.setCell((int) position.x, (int) position.y, null);
-                position.x -= 300;
-                playerLayer.setCell((int) position.x, (int) position.y, playerCell);
-                return true;
+        Vector2 newPos = generateNewPlayerPosition(keycode);
+        if(validPlayerPosition(newPos)){
+            playerLayer.setCell((int)position.x, (int)position.y, null);
+            position = newPos;
+            playerLayer.setCell((int)position.x, (int)position.y, playerCell);
+            return true;
         }
         return false;
     }
 
+    /**
+     * @param keycode key that was pressed
+     * @return a new position if player has pressed a key indicating a move, old position otherwise.
+     */
+    public Vector2 generateNewPlayerPosition(int keycode) {
+        if(keycode == Input.Keys.UP) return new Vector2().set(position.x, position.y+1);
+        else if(keycode == Input.Keys.DOWN) return new Vector2().set(position.x, position.y-1);
+        else if(keycode == Input.Keys.LEFT) return new Vector2().set(position.x-1, position.y);
+        else if(keycode == Input.Keys.RIGHT) return new Vector2().set(position.x+1, position.y);
+        else return position;
+
+    }
+
+    /**
+     * Checks whether suggested player position is valid.
+     * @param pos new position to try.
+     * @return true if given position is a valid plauyer position, false otherwise.
+     */
+    public boolean validPlayerPosition(Vector2 pos){
+        if(wall.getCell((int)pos.x,(int)pos.y) != null || pos.x < 0 || pos.x >= camera.viewportWidth || pos.y < 0 || pos.y >= camera.viewportHeight){
+            return false;
+        }
+        return true;
+    }
+
+
 }
+
