@@ -56,7 +56,7 @@ public class HelloWorld implements ApplicationListener  {
 
         map = new TmxMapLoader().load("assets/testMap.tmx");
         camera = new OrthographicCamera();
-        renderer = new OrthogonalTiledMapRenderer(map, (float)(1/90000));
+        renderer = new OrthogonalTiledMapRenderer(map, (float)(1/300));
         ground =      (TiledMapTileLayer) map.getLayers().get("Ground");
         hole =        (TiledMapTileLayer) map.getLayers().get("Holes");
         wall =        (TiledMapTileLayer) map.getLayers().get("Walls");
@@ -70,7 +70,7 @@ public class HelloWorld implements ApplicationListener  {
         playerWon.setTile(new StaticTiledMapTile(frank[0][2]));
 
         camera.setToOrtho(false, 8, 8);
-        camera.position.set(4f, 4f, 0);
+        camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
         camera.update();
         renderer.setView(camera);
 
@@ -87,10 +87,11 @@ public class HelloWorld implements ApplicationListener  {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
+        playerLayer.setCell(0, 0, playerCell);
         renderer.render();
 
 
-        playerLayer.setCell(0, 2400, playerCell);
+
 
     }
 
@@ -108,30 +109,40 @@ public class HelloWorld implements ApplicationListener  {
 
     @Override
     public boolean keyUp(int keycode){
-        switch(keycode){
-            case(Input.Keys.UP):
-                playerLayer.setCell((int) position.x, (int) position.y, null);
-                position.y -= 300;
-                playerLayer.setCell((int) position.x, (int) position.y, playerCell);
-                return true;
-
-            case(Input.Keys.DOWN):
-                playerLayer.setCell((int) position.x, (int) position.y, null);
-                position.y += 300;
-                playerLayer.setCell((int) position.x, (int) position.y, playerCell);
-                return true;
-            case(Input.Keys.RIGHT):
-                playerLayer.setCell((int) position.x, (int) position.y, null);
-                position.x += 300;
-                playerLayer.setCell((int) position.x, (int) position.y, playerCell);
-                return true;
-            case(Input.Keys.LEFT):
-                playerLayer.setCell((int) position.x, (int) position.y, null);
-                position.x -= 300;
-                playerLayer.setCell((int) position.x, (int) position.y, playerCell);
-                return true;
+        Vector2 newPos = generateNewPlayerPosition(keycode);
+        if(validPlayerPosition(newPos)){
+            playerLayer.setCell((int)position.x, (int)position.y, null);
+            position = newPos;
+            playerLayer.setCell((int)position.x, (int)position.y, playerCell);
+            return true;
         }
         return false;
     }
+
+    /**
+     * @param keycode key that was pressed
+     * @return a new position if player has pressed a key indicating a move, old position otherwise.
+     */
+    public Vector2 generateNewPlayerPosition(int keycode) {
+        if(keycode == Input.Keys.UP) return new Vector2().set(position.x, position.y+1);
+        else if(keycode == Input.Keys.DOWN) return new Vector2().set(position.x, position.y-1);
+        else if(keycode == Input.Keys.LEFT) return new Vector2().set(position.x-1, position.y);
+        else if(keycode == Input.Keys.RIGHT) return new Vector2().set(position.x+1, position.y);
+        else return position;
+
+    }
+
+    /**
+     * Checks whether suggested player position is valid.
+     * @param pos new position to try.
+     * @return true if given position is a valid plauyer position, false otherwise.
+     */
+    public boolean validPlayerPosition(Vector2 pos){
+        if(wall.getCell((int)pos.x,(int)pos.y) != null || pos.x < 0 || pos.x >= camera.viewportWidth || pos.y < 0 || pos.y >= camera.viewportHeight){
+            return false;
+        }
+        return true;
+    }
+
 
 }
