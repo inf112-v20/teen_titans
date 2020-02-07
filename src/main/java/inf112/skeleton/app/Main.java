@@ -11,13 +11,9 @@ public class Main {
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "hello-world";
-        cfg.width = 500;
-        cfg.height = 500;
+        cfg.width = 2400;
+        cfg.height = 2400;
 
-
-
-        GameMap<ITile> map = new GameMap<>(10, 10);
-        map.set(new BaseTile(), 0, 0);
 
         new LwjglApplication(new HelloWorld(), cfg);
     }

@@ -54,7 +54,7 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
 
         map = new TmxMapLoader().load("assets/testMap.tmx");
         camera = new OrthographicCamera();
-        renderer = new OrthogonalTiledMapRenderer(map, (float)(1/90000));
+        renderer = new OrthogonalTiledMapRenderer(map, (float)(1/300));
         ground =      (TiledMapTileLayer) map.getLayers().get("Ground");
         hole =        (TiledMapTileLayer) map.getLayers().get("Holes");
         wall =        (TiledMapTileLayer) map.getLayers().get("Walls");
@@ -68,7 +68,7 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
         playerWon.setTile(new StaticTiledMapTile(frank[0][2]));
 
         camera.setToOrtho(false, 8, 8);
-        camera.position.set(4f, 4f, 0);
+        camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
         camera.update();
         renderer.setView(camera);
 
@@ -85,10 +85,11 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
+        playerLayer.setCell(0, 0, playerCell);
         renderer.render();
 
 
-        playerLayer.setCell(0, 2400, playerCell);
+
 
     }
 
