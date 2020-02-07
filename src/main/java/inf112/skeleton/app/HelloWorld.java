@@ -60,9 +60,9 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
         playerLayer = (TiledMapTileLayer) map.getLayers().get("Player");
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 8, 8);
+        camera.setToOrtho(false, 5, 5);
         camera.position.set((float) camera.viewportWidth/2, (float) camera.viewportHeight/2, 0);
-        renderer = new OrthogonalTiledMapRenderer(map, (float)(1/300));
+        renderer = new OrthogonalTiledMapRenderer(map, 1/300f);
 
         Texture player = new Texture(Gdx.files.internal("player.png"));
         TextureRegion[][] frank = new TextureRegion(new Texture("player.png")).split(300,300);
