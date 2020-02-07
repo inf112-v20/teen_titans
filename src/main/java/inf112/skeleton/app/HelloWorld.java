@@ -43,23 +43,22 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
         position = new Vector2(4, 0);
         Gdx.input.setInputProcessor(this);
 
-        batch = new SpriteBatch();
-        font = new BitmapFont();
-        font.setColor(Color.RED);
-
         playerCell = new Cell();
         playerDead = new Cell();
         playerWon  = new Cell();
 
 
         map = new TmxMapLoader().load("assets/testMap.tmx");
-        camera = new OrthographicCamera();
-        renderer = new OrthogonalTiledMapRenderer(map, (float)(1/300));
         ground =      (TiledMapTileLayer) map.getLayers().get("Ground");
         hole =        (TiledMapTileLayer) map.getLayers().get("Holes");
         wall =        (TiledMapTileLayer) map.getLayers().get("Walls");
         flag =        (TiledMapTileLayer) map.getLayers().get("Flags");
         playerLayer = (TiledMapTileLayer) map.getLayers().get("Player");
+
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, 8, 8);
+        camera.position.set((float) camera.viewportWidth/2, (float) camera.viewportHeight/2, 0);
+        renderer = new OrthogonalTiledMapRenderer(map, (float)(1/300));
 
         Texture player = new Texture(Gdx.files.internal("player.png"));
         TextureRegion[][] frank = new TextureRegion(new Texture("player.png")).split(300,300);
@@ -67,8 +66,6 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
         playerDead.setTile(new StaticTiledMapTile(frank[0][1]));
         playerWon.setTile(new StaticTiledMapTile(frank[0][2]));
 
-        camera.setToOrtho(false, 8, 8);
-        camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
         camera.update();
         renderer.setView(camera);
 
@@ -76,8 +73,7 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
 
     @Override
     public void dispose() {
-        batch.dispose();
-        font.dispose();
+        renderer.dispose();
     }
 
     @Override
