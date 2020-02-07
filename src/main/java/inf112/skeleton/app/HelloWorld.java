@@ -15,37 +15,33 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 
 public class HelloWorld extends InputAdapter implements ApplicationListener {
-
     private SpriteBatch batch;
     private BitmapFont font;
-    private TiledMap map;
-    private TiledMapTileLayer ground;
-    private TiledMapTileLayer hole;
-    private TiledMapTileLayer wall;
-    private TiledMapTileLayer flag;
-    private TiledMapTileLayer playerLayer;
-    private OrthogonalTiledMapRenderer renderer;
-    private OrthographicCamera camera;
+    TiledMap map;
+    TiledMapTileLayer ground;
+    TiledMapTileLayer hole;
+    TiledMapTileLayer wall;
+    TiledMapTileLayer flag;
+    TiledMapTileLayer playerLayer;
+    OrthogonalTiledMapRenderer renderer;
+    OrthographicCamera camera;
 
-    private Vector2 position;
-    private Cell playerCell;
-    private Cell playerDead;
-    private Cell playerWon;
+    Vector2 position;
+    Cell playerCell;
+    Cell playerDead;
+    Cell playerWon;
 
     @Override
     public void create() {
         position = new Vector2(4, 0);
         Gdx.input.setInputProcessor(this);
-
-        batch = new SpriteBatch();
-        font = new BitmapFont();
-        font.setColor(Color.RED);
 
         playerCell = new Cell();
         playerDead = new Cell();
@@ -53,13 +49,16 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
 
 
         map = new TmxMapLoader().load("assets/testMap.tmx");
-        camera = new OrthographicCamera();
-        renderer = new OrthogonalTiledMapRenderer(map, (float)(1/90000));
         ground =      (TiledMapTileLayer) map.getLayers().get("Ground");
         hole =        (TiledMapTileLayer) map.getLayers().get("Holes");
         wall =        (TiledMapTileLayer) map.getLayers().get("Walls");
         flag =        (TiledMapTileLayer) map.getLayers().get("Flags");
         playerLayer = (TiledMapTileLayer) map.getLayers().get("Player");
+
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, 8, 8);
+        camera.position.set((float) camera.viewportWidth/2, (float) camera.viewportHeight/2, 0);
+        renderer = new OrthogonalTiledMapRenderer(map, (float)(1/300));
 
         Texture player = new Texture(Gdx.files.internal("player.png"));
         TextureRegion[][] frank = new TextureRegion(new Texture("player.png")).split(300,300);
@@ -67,8 +66,6 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
         playerDead.setTile(new StaticTiledMapTile(frank[0][1]));
         playerWon.setTile(new StaticTiledMapTile(frank[0][2]));
 
-        camera.setToOrtho(false, 8, 8);
-        camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
         camera.update();
         renderer.setView(camera);
 
@@ -76,8 +73,7 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
 
     @Override
     public void dispose() {
-        batch.dispose();
-        font.dispose();
+        renderer.dispose();
     }
 
     @Override
@@ -144,4 +140,3 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
 
 
 }
-
