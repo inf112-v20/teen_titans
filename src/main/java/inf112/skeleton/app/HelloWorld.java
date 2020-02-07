@@ -15,13 +15,13 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 
 public class HelloWorld extends InputAdapter implements ApplicationListener {
-
     private SpriteBatch batch;
     private BitmapFont font;
     private TiledMap map;
@@ -45,10 +45,6 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
         position = new Vector2(0, 0);
         Gdx.input.setInputProcessor(this);
 
-        batch = new SpriteBatch();
-        font = new BitmapFont();
-        font.setColor(Color.RED);
-
         playerCell = new Cell();
         playerDead = new Cell();
         playerWon  = new Cell();
@@ -62,6 +58,11 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
         //wall =        (TiledMapTileLayer) map.getLayers().get("Walls");
         flag =        (TiledMapTileLayer) map.getLayers().get("Flags");
         playerLayer = (TiledMapTileLayer) map.getLayers().get("Player");
+
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, 8, 8);
+        camera.position.set((float) camera.viewportWidth/2, (float) camera.viewportHeight/2, 0);
+        renderer = new OrthogonalTiledMapRenderer(map, (float)(1/300));
 
         Texture player = new Texture(Gdx.files.internal("player.png"));
         TextureRegion[][] frank = new TextureRegion(new Texture("player.png")).split(300,300);
@@ -78,8 +79,7 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
 
     @Override
     public void dispose() {
-        batch.dispose();
-        font.dispose();
+        renderer.dispose();
     }
 
     @Override
@@ -148,4 +148,3 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
 
 
 }
-
