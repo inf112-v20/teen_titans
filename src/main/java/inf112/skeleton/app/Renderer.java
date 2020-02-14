@@ -133,7 +133,7 @@ public class Renderer extends InputAdapter implements ApplicationListener {
      * @param pos new position to try.
      * @return true if given position is a valid player position, false otherwise.
      */
-    private boolean validPlayerPosition(Vector2 pos){
+    public boolean validPlayerPosition(Vector2 pos){
         return pos.x < 0 || pos.x >= camera.viewportWidth || pos.y < 0 || pos.y >= camera.viewportHeight;
     }
 
