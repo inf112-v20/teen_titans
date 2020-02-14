@@ -2,9 +2,7 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import gamemap.GameMap;
-import gamemap.tiles.BaseTile;
-import gamemap.tiles.ITile;
+
 
 
 public class Main {
