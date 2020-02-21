@@ -4,26 +4,19 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 
-public class HelloWorld extends InputAdapter implements ApplicationListener {
-    private SpriteBatch batch;
-    private BitmapFont font;
+public class Renderer extends InputAdapter implements ApplicationListener {
     private TiledMap map;
     private TiledMapTileLayer ground;
     private TiledMapTileLayer hole;
@@ -38,6 +31,12 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
     private Cell playerCell;
     private Cell playerDead;
     private Cell playerWon;
+
+    GameLoop mainLoop;
+
+    public Renderer(){
+        GameLoop mainLoop = new GameLoop(this);
+    }
 
     @Override
     public void create() {
@@ -91,9 +90,6 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
 
         renderer.render();
 
-
-
-
     }
 
     @Override
@@ -130,7 +126,6 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
         else if(keycode == Input.Keys.LEFT) return new Vector2().set(position.x-1, position.y);
         else if(keycode == Input.Keys.RIGHT) return new Vector2().set(position.x+1, position.y);
         else return position;
-
     }
 
     /**
@@ -139,11 +134,7 @@ public class HelloWorld extends InputAdapter implements ApplicationListener {
      * @return true if given position is a valid player position, false otherwise.
      */
     public boolean validPlayerPosition(Vector2 pos){
-        //wall.getCell((int)pos.x,(int)pos.y) != null ||
-        if( pos.x < 0 || pos.x >= camera.viewportWidth || pos.y < 0 || pos.y >= camera.viewportHeight){
-         return false;
-    }
-        return true;
+        return pos.x < 0 || pos.x >= camera.viewportWidth || pos.y < 0 || pos.y >= camera.viewportHeight;
     }
 
 
