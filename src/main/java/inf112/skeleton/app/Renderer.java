@@ -16,7 +16,11 @@ import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Renderer extends InputAdapter implements ApplicationListener {
+
     private TiledMap map;
     private TiledMapTileLayer ground;
     private TiledMapTileLayer hole;
@@ -25,55 +29,50 @@ public class Renderer extends InputAdapter implements ApplicationListener {
     private TiledMapTileLayer playerLayer;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
-    private long cycle;
 
     private Vector2 position;
     private Cell playerCell;
     private Cell playerDead;
     private Cell playerWon;
 
-    GameLoop mainLoop;
+    private Board board;
 
-    public Renderer(){
-        GameLoop mainLoop = new GameLoop(this);
+    private void setup(){
+        board = new Board();
+
+        map = board.getMap();
+        HashMap<String, TiledMapTileLayer> layers = board.getMapLayers();
+        ground = layers.get("ground");
+        hole = layers.get("hole");
+        wall = layers.get("wall");
+        flag = layers.get("flag");
+        playerLayer = layers.get("playerLayer");
+
+        HashMap<String, TiledMapTileLayer.Cell> playerStates = board.getPlayerStates();
+        playerCell = playerStates.get("alive");
+        playerDead = playerStates.get("dead");
+        playerWon = playerStates.get("won");
     }
 
     @Override
     public void create() {
-        cycle = 0;
+        setup();
+
         position = new Vector2(0, 0);
         Gdx.input.setInputProcessor(this);
 
-        playerCell = new Cell();
-        playerDead = new Cell();
-        playerWon  = new Cell();
-
-
-        map = new TmxMapLoader().load("example.tmx");
         camera = new OrthographicCamera();
         renderer = new OrthogonalTiledMapRenderer(map, 1/300f);
-        ground =      (TiledMapTileLayer) map.getLayers().get("Ground");
-        hole =        (TiledMapTileLayer) map.getLayers().get("Hole");
-        //wall =        (TiledMapTileLayer) map.getLayers().get("Walls");
-        flag =        (TiledMapTileLayer) map.getLayers().get("Flags");
-        playerLayer = (TiledMapTileLayer) map.getLayers().get("Player");
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 5, 5);
         camera.position.set((float) camera.viewportWidth/2, (float) camera.viewportHeight/2, 0);
         renderer = new OrthogonalTiledMapRenderer(map, 1/300f);
 
-        Texture player = new Texture(Gdx.files.internal("player.png"));
-        TextureRegion[][] frank = new TextureRegion(new Texture("player.png")).split(300,300);
-        playerCell.setTile(new StaticTiledMapTile(frank[0][0]));
-        playerDead.setTile(new StaticTiledMapTile(frank[0][1]));
-        playerWon.setTile(new StaticTiledMapTile(frank[0][2]));
-
         camera.setToOrtho(false, 5, 5);
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
         camera.update();
         renderer.setView(camera);
-
     }
 
     @Override
@@ -85,10 +84,7 @@ public class Renderer extends InputAdapter implements ApplicationListener {
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-        //cycle++; //Player ble rendera hver frame, no bare frame 1
-
         playerLayer.setCell((int)position.x,(int)position.y, playerCell);
-
         renderer.render();
 
     }

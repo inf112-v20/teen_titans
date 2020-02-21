@@ -6,26 +6,13 @@ public class GameLoop {
     Renderer renderer;
 
 
+
     public GameLoop(Renderer renderer){
         this.renderer = renderer;
     }
 
-
-    private void gameLoop(){
-        while(true){
-
-        }
-    }
-
-
-    private void roundLoop(){
+    private void setup(){
 
     }
-
-    public boolean testPosition(Vector2 vector) {
-        return renderer.validPlayerPosition(vector);
-    }
-
-
 
 }
