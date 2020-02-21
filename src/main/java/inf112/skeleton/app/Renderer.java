@@ -84,6 +84,7 @@ public class Renderer extends InputAdapter implements ApplicationListener {
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+
         playerLayer.setCell((int)position.x,(int)position.y, playerCell);
         renderer.render();
 

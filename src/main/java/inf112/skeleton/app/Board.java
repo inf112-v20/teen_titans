@@ -9,6 +9,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,6 +51,10 @@ public class Board {
 
     public HashMap<String, TiledMapTileLayer.Cell> getPlayerStates() {
         return playerStates;
+    }
+
+    public boolean validPlayerPosition(Vector2 pos){
+        return pos.x >= 0 && pos.x < camera.viewportWidth && pos.y >= 0 && pos.y < camera.viewportHeight;
     }
 }
 
