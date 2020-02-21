@@ -85,8 +85,9 @@ public class Renderer extends InputAdapter implements ApplicationListener {
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-        cycle++; //Player ble rendera hver frame, no bare frame 1
-        if (cycle == 1) playerLayer.setCell(0, 0, playerCell);
+        //cycle++; //Player ble rendera hver frame, no bare frame 1
+
+        playerLayer.setCell((int)position.x,(int)position.y, playerCell);
 
         renderer.render();
 
@@ -108,9 +109,9 @@ public class Renderer extends InputAdapter implements ApplicationListener {
     public boolean keyUp(int keycode){
         Vector2 newPos = generateNewPlayerPosition(keycode);
         if(validPlayerPosition(newPos)){
+            System.out.println("hei");
             playerLayer.setCell((int)position.x, (int)position.y, null);
             position = newPos;
-            playerLayer.setCell((int)position.x, (int)position.y, playerCell);
             return true;
         }
         return false;
@@ -134,7 +135,7 @@ public class Renderer extends InputAdapter implements ApplicationListener {
      * @return true if given position is a valid player position, false otherwise.
      */
     public boolean validPlayerPosition(Vector2 pos){
-        return pos.x < 0 || pos.x >= camera.viewportWidth || pos.y < 0 || pos.y >= camera.viewportHeight;
+        return pos.x >= 0 && pos.x < camera.viewportWidth && pos.y >= 0 && pos.y < camera.viewportHeight;
     }
 
 
