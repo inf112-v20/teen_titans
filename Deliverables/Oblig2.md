@@ -21,3 +21,8 @@ objektene. Å få mappet til lese av robotene sine posisjoner, for å
 si noe om posisjonen (legal, illegal, legal but dead).
 3. Tester er viktige for at vi skal oppnå krav. Viktige tester som for
 eksempel å se at en robot går korrekt, og at den "dør" når den detter ut av mappet.
+###
+Vi er ferdige med kravene som vi mente var viktigst, som å vise spiller,
+spillerbrett og flag. Nå som vi vet at dette fungerer, så skal vi kunne
+si at en spiller får poeng/vinner når den går på flagget, og at forskjellige
+tiles på brettet gjør forskjellige ting (f.eks. vegger, hull, rullebånd, etc.)
