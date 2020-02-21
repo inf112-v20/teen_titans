@@ -87,6 +87,7 @@ public class Robot extends InputAdapter {
             case LEFT:
                 return (new Vector2(pos.x - distance, pos.y));
         }
+        return pos;
     }
 
     /**
