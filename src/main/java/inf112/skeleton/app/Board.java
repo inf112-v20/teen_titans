@@ -16,6 +16,7 @@ public class Board extends InputAdapter {
     private Robot player;
 
     public Board(){
+
         position = new Vector2(0, 0);
         player = new Robot(0, 0, this);
         player.createPlayerTexture("player.png");
@@ -29,7 +30,6 @@ public class Board extends InputAdapter {
         mapLayers.put("flag", (TiledMapTileLayer) map.getLayers().get("Flags"));
         mapLayers.put("playerLayer", (TiledMapTileLayer) map.getLayers().get("Player"));
         mapLayers.get("playerLayer").setCell((int) position.x, (int) position.y, player.getTexture());
-
     }
 
     public Robot getPlayer(){
@@ -48,7 +48,9 @@ public class Board extends InputAdapter {
     public boolean keyUp(int keycode){
         Vector2 newPos = generateNewPlayerPosition(keycode, player.getPos());
         if(validPlayerPosition(newPos)){
-            moveElement(newPos, player);
+            getPlayerLayer().setCell((int)position.x, (int) position.y, null);
+            position = newPos;
+            getPlayerLayer().setCell((int)position.x, (int) position.y, player.getTexture());
             return true;
         }
         return false;
@@ -57,6 +59,7 @@ public class Board extends InputAdapter {
     public void moveElement(Vector2 newPos, Robot element){
         getPlayerLayer().setCell((int) player.getPos().x, (int) player.getPos().y, null);
         getPlayerLayer().setCell((int) newPos.x, (int) newPos.y, element.getTexture());
+        position = newPos;
     }
 
     /**
