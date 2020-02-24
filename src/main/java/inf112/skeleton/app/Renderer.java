@@ -19,21 +19,26 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Renderer  implements ApplicationListener {
+public class Renderer implements ApplicationListener {
 
-    private Board board;
+    private GameLoop gameLoop;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
+    private int count;
+
+    public Renderer(){
+        count = 0;
+    }
 
     @Override
     public void create() {
-        board = new Board();
-        Gdx.input.setInputProcessor(board);
+        gameLoop = new GameLoop();
+        Gdx.input.setInputProcessor(gameLoop.getBoard());
         camera = new OrthographicCamera();
-        renderer = new OrthogonalTiledMapRenderer(board.getMap(), 1/300f);
+        renderer = new OrthogonalTiledMapRenderer(gameLoop.getBoard().getMap(), 1/300f);
         camera.setToOrtho(false, 5, 5);
         camera.position.set((float) camera.viewportWidth/2, (float) camera.viewportHeight/2, 0);
-        renderer = new OrthogonalTiledMapRenderer(board.getMap(), 1/300f);
+        renderer = new OrthogonalTiledMapRenderer(gameLoop.getBoard().getMap(), 1/300f);
         camera.setToOrtho(false, 5, 5);
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
         camera.update();
@@ -49,8 +54,9 @@ public class Renderer  implements ApplicationListener {
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-        board.getMap();
+        if(count++ % 30 == 0) gameLoop.loop();
         renderer.render();
+
     }
 
     @Override

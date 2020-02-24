@@ -1,15 +1,25 @@
 package inf112.skeleton.app;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 
-public class Robot extends InputAdapter {
+import java.util.HashMap;
+
+public class Robot {
+
     private enum dir {UP, RIGHT, DOWN, LEFT} //The current direction the robot if facing
     private dir direction;
     private Vector2 pos;
     private int MAXHP = 10;
     private int currentHP;
+    private HashMap<String, TiledMapTileLayer.Cell> playerStates;
+    private Board board;
 
     /**
      * Constructor for the robot.
@@ -18,11 +28,20 @@ public class Robot extends InputAdapter {
      * @param xPos The horisontal starting pos
      * @param yPos The vertical starting pos
      */
-    public void Robot(int xPos, int yPos) {
-        pos.x = xPos;
-        pos.y = yPos;
+    public Robot(int xPos, int yPos, Board board) {
+        this.board = board;
+        pos = new Vector2(xPos, yPos);
         currentHP = MAXHP;
         this.direction = dir.UP; //Kanskje endre til en parameter for ROBOT
+    }
+
+    public void createPlayerTexture(String location){
+        playerStates = new HashMap<>();
+        Texture playerTexture = new Texture(Gdx.files.internal(location));
+        TextureRegion[][] frank = new TextureRegion(playerTexture).split(300,300);
+        playerStates.put("alive", new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(frank[0][0])));
+        playerStates.put("dead", new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(frank[0][1])));
+        playerStates.put("won", new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(frank[0][2])));
     }
 
     /**
@@ -30,7 +49,7 @@ public class Robot extends InputAdapter {
      * @return
      */
     public Vector2 getPos() {
-        return (pos);
+        return pos;
     }
 
     /**
@@ -50,7 +69,6 @@ public class Robot extends InputAdapter {
      */
     public Vector2 die(){
         currentHP = 10;
-
         return (new Vector2(0, 0)); // test death
     }
 
@@ -62,7 +80,7 @@ public class Robot extends InputAdapter {
      */
     //TODO Add walls and don't (necessarily) kill after illegal position
     public Vector2 testMove(int distance) {
-        if (Board.validPlayerPosition(move(distance))) {
+        if (board.validPlayerPosition(move(distance))) {
             pos = (move(distance));
         }
         else {
@@ -98,6 +116,16 @@ public class Robot extends InputAdapter {
     public void turn(dir direction) {
 
     }
+
+    public TiledMapTileLayer.Cell getTexture(){
+        //return playerStates.get("alive");
+        return ((currentHP > 0) ? playerStates.get("dead") : playerStates.get("alive"));
+    }
+
+    public HashMap<String, TiledMapTileLayer.Cell> getPlayerStates(){
+        return playerStates;
+    }
+
 
 
 
