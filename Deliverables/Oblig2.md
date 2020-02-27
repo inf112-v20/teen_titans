@@ -28,13 +28,28 @@ og samtidig diskutere valg. Klassestruktur, flere møter, arbeidsfordeling, mer 
 Windows og Linux (OSX), slik at spillet fungerer for hvilken som helst spiller. Og siden vi jobber med 3 Windows PC-er og 2
 MACs får vi alltid testet kompabilitet. Ved å kjøre spillet på forskjellige OS arbeider vi alltid med dette kravet.
 2. Det viktigste å få til nå er å ha klasser for de forskjellige
-objektene.  Å få mappet til lese av robotene sine posisjoner, for å
-si noe om posisjonen (legal, illegal, legal but dead).
+objektene. Å få mappet til lese av robotene sine posisjoner, for å
+si noe om posisjonen (legal, illegal, legal but dead). 
 3. Tester er viktige for at vi skal oppnå krav. Viktige tester som for
-eksempel å se at en robot går korrekt, og at den "dør" når den detter ut av mappet.
+eksempel å se at en robot går korrekt, og at den "dør" når den faller ut av mappet.
 4. Multithreading vil få spillet til å kjøre mer effektiv, og det er en naturlig abstraksjon (seperation of church and  state).
 Akseptansekriteriet for multithreading er at critical sections ikke blir skadet av parrallelt kjørende tråder. Arbeidsoppgaver
 gjør Bendik siden han har god peiling på multithreading.
+5. Legge til programkort slik at spilleren kan gi komandoer til roboten sin. Akseptansekriteriene 
+blir at spilleren kan feilfritt få roboten til bevege seg og at game-loopen klarer å 
+uavhengig utføre komandoene på roboten. Arbeidsoppgaven blir da å finne ut hvordan vi skal designe og
+implementere kortene.
+
+Multithreading og testing blir aktivt jobbet med. Kort er høgt prioritert siden 
+de er en stor del av spillmekanikken, siden det er slik spilleren skal bevege roboten.
+Forskjellige klasser for hvert obkjekt blir gjort hver gang vi lager et nytt obkjet.
+MVP er nå at vi skal ha kort som kan styres av spilleren, og at roboten kan interacte med
+vegger og farer med brettet, som laser, vegger og hull (utfordring). Flag som er 
+win-condition er fortsatt noe som må fikses.
+Siden forrgie gang har vi begynt på multithreading, noe som kan minne om hva programkortene skal kunne gjøre,
+og refactoring. Krava vi hadde før var å se spillerbrettet og spiller, som vi er ferdig med.
+En bug vi har for øyeblikket er at spilleren starter som "død", men det kan lett fikses.
+
 ###
 Vi er ferdige med kravene som vi mente var viktigst, som å vise spiller,
 spillerbrett og flag. Nå som vi vet at dette fungerer, så skal vi kunne
