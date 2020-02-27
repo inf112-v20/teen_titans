@@ -20,19 +20,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Renderer implements ApplicationListener {
-
     private GameLoop gameLoop;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
-    private int count;
-
-    public Renderer(){
-        count = 0;
-    }
 
     @Override
     public void create() {
-        gameLoop = new GameLoop();
+        try {
+            gameLoop = new GameLoop();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        gameLoop.loop.start();
+
         Gdx.input.setInputProcessor(gameLoop.getBoard());
         camera = new OrthographicCamera();
         renderer = new OrthogonalTiledMapRenderer(gameLoop.getBoard().getMap(), 1/300f);
@@ -54,7 +54,6 @@ public class Renderer implements ApplicationListener {
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-        if(count++ % 30 == 0) gameLoop.loop();
         renderer.render();
 
     }
