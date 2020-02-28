@@ -16,14 +16,21 @@ public class AppTest {
         Board game = new Board();
     }
 
-
+    @Test
+    public void robotTakesDamageTest(){
+        Robot robot = new Robot(0, 0);
+        int oldHP = robot.getCurrentHP();
+        robot.takeDamage(2);
+        int newHP = robot.getCurrentHP();
+        assertTrue(oldHP > newHP);
+    }
 
     /**
      * Rigorous Test :-)
      */
 
 
-    
+
     ///player position test
 
     ///player hp test (hvis han tar 1 damage orginal hp -1)

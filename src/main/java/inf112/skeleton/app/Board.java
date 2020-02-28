@@ -18,7 +18,7 @@ public class Board extends InputAdapter {
     public Board(){
 
         position = new Vector2(0, 0);
-        player = new Robot(0, 0, this);
+        player = new Robot(0, 0);
         player.createPlayerTexture("player.png");
 
         map = new TmxMapLoader().load("example.tmx");

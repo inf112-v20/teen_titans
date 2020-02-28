@@ -1,8 +1,6 @@
 package inf112.skeleton.app;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -12,6 +10,10 @@ import com.badlogic.gdx.math.Vector2;
 import java.util.HashMap;
 
 public class Robot {
+
+    public int getCurrentHP() {
+        return currentHP;
+    }
 
     private enum dir {UP, RIGHT, DOWN, LEFT} //The current direction the robot if facing
     private dir direction;
@@ -28,7 +30,7 @@ public class Robot {
      * @param xPos The horisontal starting pos
      * @param yPos The vertical starting pos
      */
-    public Robot(int xPos, int yPos, Board board) {
+    public Robot(int xPos, int yPos) {
         this.board = board;
         pos = new Vector2(xPos, yPos);
         currentHP = MAXHP;
