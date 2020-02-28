@@ -19,7 +19,6 @@ public class Robot {
     private int MAXHP = 10;
     private int currentHP;
     private HashMap<String, TiledMapTileLayer.Cell> playerStates;
-    private Board board;
 
     /**
      * Constructor for the robot.
@@ -28,8 +27,7 @@ public class Robot {
      * @param xPos The horisontal starting pos
      * @param yPos The vertical starting pos
      */
-    public Robot(int xPos, int yPos, Board board) {
-        this.board = board;
+    public Robot(int xPos, int yPos) {
         pos = new Vector2(xPos, yPos);
         currentHP = MAXHP;
         this.direction = dir.UP; //Kanskje endre til en parameter for ROBOT
@@ -50,6 +48,14 @@ public class Robot {
      */
     public Vector2 getPos() {
         return pos;
+    }
+
+    public int getMAXHP(){
+        return MAXHP;
+    }
+
+    public int getCurrentHP(){
+        return currentHP;
     }
 
     /**
