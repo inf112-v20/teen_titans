@@ -27,8 +27,6 @@ public class Renderer implements ApplicationListener {
     @Override
     public void create() {
         gameLoop = new GameLoop();
-
-
         gameLoop.loop.start();
         setupTextures();
 
