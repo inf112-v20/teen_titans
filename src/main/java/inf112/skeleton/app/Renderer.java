@@ -32,6 +32,7 @@ public class Renderer implements ApplicationListener {
             e.printStackTrace();
         }
         gameLoop.loop.start();
+        setupTextures();
 
         Gdx.input.setInputProcessor(gameLoop.getBoard());
         camera = new OrthographicCamera();
@@ -48,6 +49,7 @@ public class Renderer implements ApplicationListener {
     @Override
     public void dispose() {
         renderer.dispose();
+        gameLoop.loop.interrupt();
     }
 
     @Override
@@ -68,6 +70,10 @@ public class Renderer implements ApplicationListener {
 
     @Override
     public void resume() {
+    }
+
+    private void setupTextures(){
+        gameLoop.getBoard().createTextures();
     }
 
 

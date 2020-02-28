@@ -1,9 +1,6 @@
 package inf112.skeleton.app;
 
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-
 import java.util.Random;
 
 public class GameLoop extends Thread{
@@ -11,7 +8,7 @@ public class GameLoop extends Thread{
     Board board;
     public Thread loop;
 
-    public GameLoop() throws InterruptedException {
+    public GameLoop(){
         board = new Board();
         random = new Random();
         createLoopThread();
@@ -19,8 +16,14 @@ public class GameLoop extends Thread{
 
     public void createLoopThread() {
         loop = new Thread(() -> {
-
             while(true) {
+
+                //Game logikk her inne:::::
+                //Card handler
+                //Movement handler
+                //other
+
+
                 int nextMove = random.nextInt(4);
                 switch (nextMove) {
                     case 0:
@@ -36,14 +39,15 @@ public class GameLoop extends Thread{
                         board.keyUp(Input.Keys.RIGHT);
                         break;
                 }
-
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }
 
+
+
+            }
         });
     }
 
