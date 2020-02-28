@@ -3,7 +3,7 @@ package inf112.skeleton.app;
 import com.badlogic.gdx.Input;
 import java.util.Random;
 
-public class GameLoop extends Thread{
+public class GameLoop{
     Random random;
     Board board;
     public Thread loop;
@@ -11,10 +11,10 @@ public class GameLoop extends Thread{
     public GameLoop(){
         board = new Board();
         random = new Random();
-        createLoopThread();
+        createGameLoopThread();
     }
 
-    public void createLoopThread() {
+    private void createGameLoopThread() {
         loop = new Thread(() -> {
             while(true) {
 
