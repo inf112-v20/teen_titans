@@ -14,7 +14,7 @@ de andre. Bendik tar seg av seg av refaktorering og finpussing av koden,
 siden han har ett øye for detaljer. Grunner for mye commits fra en person er fordi
 vi som oftes jobber i par. Par-koding har sine fordeler som at begge kan
 lære direkte av hverandre, men og at det er lettere å se sammenhenger
-og samtidig diskutere valg. Klassestruktur, flere møter, arbeidsfordeling, mer spredde commits.
+og samtidig diskutere valg. Flere møter, arbeidsfordeling, mer spredde commits.
 
 ####Møtereferat
  Møte 23.02.20
@@ -48,7 +48,7 @@ vegger og farer med brettet, som laser, vegger og hull (utfordring). Flag som er
 win-condition er fortsatt noe som må fikses.
 Siden forrgie gang har vi begynt på multithreading, noe som kan minne om hva programkortene skal kunne gjøre,
 og refactoring. Krava vi hadde før var å se spillerbrettet og spiller, som vi er ferdig med.
-En bug vi har for øyeblikket er at spilleren starter som "død", men det kan lett fikses.
+For øyeblikket har vi ingen bugs, men vi er klar over at det kommer til å skje.
 
 ###
 Vi er ferdige med kravene som vi mente var viktigst, som å vise spiller,

@@ -38,10 +38,10 @@ public class Robot {
     public void createPlayerTexture(String location){
         playerStates = new HashMap<>();
         Texture playerTexture = new Texture(Gdx.files.internal(location));
-        TextureRegion[][] frank = new TextureRegion(playerTexture).split(300,300);
-        playerStates.put("alive", new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(frank[0][0])));
-        playerStates.put("dead", new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(frank[0][1])));
-        playerStates.put("won", new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(frank[0][2])));
+        TextureRegion[][] robotStates = new TextureRegion(playerTexture).split(300,300);
+        playerStates.put("alive", new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotStates[0][0])));
+        playerStates.put("dead", new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotStates[0][1])));
+        playerStates.put("won", new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotStates[0][2])));
     }
 
     /**
