@@ -32,9 +32,6 @@ public class Board extends InputAdapter {
         mapLayers.get("playerLayer").setCell((int) position.x, (int) position.y, player.getTexture());
     }
 
-    public Robot getPlayer(){
-        return player;
-    }
 
     public TiledMap getMap(){
         return map;
@@ -54,12 +51,6 @@ public class Board extends InputAdapter {
             return true;
         }
         return false;
-    }
-
-    public void moveElement(Vector2 newPos, Robot element){
-        getPlayerLayer().setCell((int) player.getPos().x, (int) player.getPos().y, null);
-        getPlayerLayer().setCell((int) newPos.x, (int) newPos.y, element.getTexture());
-        position = newPos;
     }
 
     /**

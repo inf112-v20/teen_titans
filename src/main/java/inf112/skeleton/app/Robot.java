@@ -56,6 +56,7 @@ public class Robot {
      * Call to take damage
      * @param dmg How much damage taken
      */
+    //TODO Implement sources of damage
     public void takeDamage(int dmg) {
         currentHP--;
         if (currentHP <= 0) {
@@ -67,27 +68,12 @@ public class Robot {
      * Kill the robot (currently resets position and health)
      * @return returns the starting position
      */
+    //TODO Change robot state to dead and don't reset position
     public Vector2 die(){
         currentHP = 10;
         return (new Vector2(0, 0)); // test death
     }
 
-    /**
-     * Tests if move is legal
-     * If not it kills the robot
-     * @param distance
-     * @return
-     */
-    //TODO Add walls and don't (necessarily) kill after illegal position
-    public Vector2 testMove(int distance) {
-        if (board.validPlayerPosition(move(distance))) {
-            pos = (move(distance));
-        }
-        else {
-            return die();
-        }
-        return pos;
-    }
 
     /**
      * Gives a new position for the robot
@@ -118,14 +104,8 @@ public class Robot {
     }
 
     public TiledMapTileLayer.Cell getTexture(){
-        //return playerStates.get("alive");
-        return ((currentHP > 0) ? playerStates.get("dead") : playerStates.get("alive"));
+        return ((currentHP < 0) ? playerStates.get("dead") : playerStates.get("alive"));
     }
-
-    public HashMap<String, TiledMapTileLayer.Cell> getPlayerStates(){
-        return playerStates;
-    }
-
 
 
 
