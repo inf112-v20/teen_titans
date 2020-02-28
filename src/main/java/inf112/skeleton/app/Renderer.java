@@ -26,8 +26,12 @@ public class Renderer implements ApplicationListener {
 
     @Override
     public void create() {
-        gameLoop = new GameLoop();
-        gameLoop.loop.start();
+        //try {
+            gameLoop = new GameLoop();
+        //} catch (InterruptedException e) {
+            //e.printStackTrace();
+        //}
+        //gameLoop.loop.start();
         setupTextures();
 
         Gdx.input.setInputProcessor(gameLoop.getBoard());

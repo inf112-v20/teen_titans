@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Unit test for simple App.
@@ -21,7 +22,7 @@ public class AppTest {
      }
      */
 
-    @Test
+    /**@Test
     public void robotTakesDamageTest(){
         Robot robot = new Robot(0, 0);
         int oldHP = robot.getCurrentHP();
@@ -94,5 +95,5 @@ public class AppTest {
     public void shouldAnswerWithTrue()
     {
         assertTrue( true );
-    }
+    }*/
 }
