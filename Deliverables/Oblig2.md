@@ -8,13 +8,17 @@ Kanban fungerer bra som prosjektmetodikk der vi er kjappe med å si ifra
 om forandringer men også gi tilbakemelding om forbedringer. Vi begrenser
 oss ved å ta få ting om gangen, får de til å fungere før vi beveger oss
 videre. Vi skal forbedre oss på møter, med tanke på hyppighet og oppmøte i tide.
+Vi har kommet til et punkt der vi må spille Robo Rally brettspillet for å
+være sikkre på at det vi gjør videre er korrekt.
 Selv om det er spredd erfaring innenfor koding i gruppen
 er det bra med arbeida fra alle, der de med mye erfaring lærer
 de andre. Bendik tar seg av seg av refaktorering og finpussing av koden,
 siden han har ett øye for detaljer. Grunner for mye commits fra en person er fordi
 vi som oftes jobber i par. Par-koding har sine fordeler som at begge kan
 lære direkte av hverandre, men og at det er lettere å se sammenhenger
-og samtidig diskutere valg. Flere møter, arbeidsfordeling, mer spredde commits.
+og samtidig diskutere valg. Hans Christian og Jostein har jobbet ilag med tester, hovedsakelig på Hans Christian sin PC,
+så derfor vil det slå ut litt på commits fra Jostein.
+Forberedings punkt til neste sprint: Flere møter, arbeidsfordeling, mer spredde commits.
 
 ####Møtereferat
  Møte 23.02.20
@@ -34,7 +38,7 @@ si noe om posisjonen (legal, illegal, legal but dead).
 eksempel å se at en robot går korrekt, og at den "dør" når den faller ut av mappet.
 4. Multithreading vil få spillet til å kjøre mer effektiv, og det er en naturlig abstraksjon (seperation of church and  state).
 Akseptansekriteriet for multithreading er at critical sections ikke blir skadet av parrallelt kjørende tråder. Arbeidsoppgaver
-gjør Bendik siden han har god peiling på multithreading.
+gjør Bendik siden han har god peiling på multithreading. 
 5. Legge til programkort slik at spilleren kan gi komandoer til roboten sin. Akseptansekriteriene 
 blir at spilleren kan feilfritt få roboten til bevege seg og at game-loopen klarer å 
 uavhengig utføre komandoene på roboten. Arbeidsoppgaven blir da å finne ut hvordan vi skal designe og
