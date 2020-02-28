@@ -6,6 +6,8 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
+
 import java.util.HashMap;
 
 public class Board extends InputAdapter {
@@ -14,11 +16,13 @@ public class Board extends InputAdapter {
     private HashMap<String, TiledMapTileLayer> mapLayers;
     private Vector2 position;
     private Robot player;
+    private Robot[] listOfPlayers = new Robot[5];
 
     public Board(){
 
         position = new Vector2(0, 0);
         player = new Robot(0, 0);
+        listOfPlayers[0] = player; //TEMP FOR Å LEGGE TIL SPILLERE (TESTING)
         player.createPlayerTexture("player.png");
 
         map = new TmxMapLoader().load("example.tmx");
@@ -72,6 +76,18 @@ public class Board extends InputAdapter {
      */
     public boolean validPlayerPosition(Vector2 pos){
         return pos.x >= 0 && pos.x < 5 && pos.y >= 0 && pos.y < 5;
+    }
+
+    public Vector2 getPosition(){
+        return position;
+    }
+
+    public void createTextures(){
+        player.createPlayerTexture("player.png");
+    }
+
+    public Robot[] getPlayers(){
+        return listOfPlayers;
     }
 }
 
