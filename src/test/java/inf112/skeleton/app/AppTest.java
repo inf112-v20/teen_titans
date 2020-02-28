@@ -14,10 +14,12 @@ import org.junit.Test;
 
 public class AppTest {
 
-    @Before
-    public void setUp(){
-        Board game = new Board();
-    }
+    /**
+     @Before
+     public void setUp(){
+     Board game = new Board();
+     }
+     */
 
     @Test
     public void robotTakesDamageTest(){
@@ -27,10 +29,6 @@ public class AppTest {
         int newHP = robot.getCurrentHP();
         assertTrue(oldHP > newHP);
     }
-
-    /**
-     * Rigorous Test :-)
-     */
 
     @Test
     public void IllegalMoveDownBelowMapTest(){
@@ -43,6 +41,43 @@ public class AppTest {
         assertTrue(playerPos.x == 0 && playerPos.y == 0);
 
     }
+
+    @Test
+    public void MoveUpTest(){
+        GameLoop game = new GameLoop();
+        Board board = game.getBoard();
+        Robot bob = board.getPlayers()[0];
+        board.keyUp(Input.Keys.UP);
+        Vector2 playerPos = bob.getPos();
+
+        assertTrue(playerPos.x == 0 && playerPos.y == 1);
+
+    }
+
+    @Test
+    public void MoveRightTest() {
+        GameLoop game = new GameLoop();
+        Board board = game.getBoard();
+        Robot bob = board.getPlayers()[0];
+        board.keyUp(Input.Keys.RIGHT);
+        Vector2 playerPos = bob.getPos();
+
+        assertTrue(playerPos.x == 1 && playerPos.y == 0);
+
+    }
+
+    @Test
+    public void IllegalMoveLeftOutMapTest(){
+        GameLoop game = new GameLoop();
+        Board board = game.getBoard();
+        Robot bob = board.getPlayers()[0];
+        board.keyUp(Input.Keys.LEFT);
+        Vector2 playerPos = bob.getPos();
+
+        assertTrue(playerPos.x == 0 && playerPos.y == 0);
+
+    }
+
     ///player position test
 
     ///player hp test (hvis han tar 1 damage orginal hp -1)
@@ -53,12 +88,7 @@ public class AppTest {
 
     ///player move, hvis han står i en posisjon så keycode, ny posisjon(keycode)
 
-    ///player damage
-
     ///illegal moves
-
-
-
 
     @Test
     public void shouldAnswerWithTrue()
