@@ -13,12 +13,16 @@ import java.util.HashMap;
 
 public class Robot {
 
-    private enum dir {UP, RIGHT, DOWN, LEFT} //The current direction the robot is facing
+
+
+    private enum dir {UP, RIGHT, DOWN, LEFT} //The current direction the robot if facing
     private dir direction;
     private Vector2 pos;
     private int MAXHP = 10;
     private int currentHP;
     private HashMap<String, TiledMapTileLayer.Cell> playerStates;
+
+
 
     /**
      * Constructor for the robot.

@@ -23,7 +23,7 @@ public class Board extends InputAdapter {
         position = new Vector2(0, 0);
         player = new Robot(0, 0);
         listOfPlayers[0] = player; //TEMP FOR Å LEGGE TIL SPILLERE (TESTING)
-        player.createPlayerTexture("player.png");
+
 
         map = new TmxMapLoader().load("example.tmx");
 
@@ -33,7 +33,7 @@ public class Board extends InputAdapter {
         mapLayers.put("wall", (TiledMapTileLayer) map.getLayers().get("Wall"));
         mapLayers.put("flag", (TiledMapTileLayer) map.getLayers().get("Flags"));
         mapLayers.put("playerLayer", (TiledMapTileLayer) map.getLayers().get("Player"));
-        mapLayers.get("playerLayer").setCell((int) position.x, (int) position.y, player.getTexture());
+
     }
 
 
@@ -84,7 +84,10 @@ public class Board extends InputAdapter {
 
     public void createTextures(){
         player.createPlayerTexture("player.png");
+        mapLayers.get("playerLayer").setCell((int) position.x, (int) position.y, player.getTexture());
     }
+
+
 
     public Robot[] getPlayers(){
         return listOfPlayers;

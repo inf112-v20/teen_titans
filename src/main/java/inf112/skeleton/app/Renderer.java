@@ -26,11 +26,7 @@ public class Renderer implements ApplicationListener {
 
     @Override
     public void create() {
-        try {
-            gameLoop = new GameLoop();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        gameLoop = new GameLoop();
         gameLoop.loop.start();
         setupTextures();
 
