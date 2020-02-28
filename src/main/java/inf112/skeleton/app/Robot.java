@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 public class Robot {
 
-    private enum dir {UP, RIGHT, DOWN, LEFT} //The current direction the robot if facing
+    private enum dir {UP, RIGHT, DOWN, LEFT} //The current direction the robot is facing
     private dir direction;
     private Vector2 pos;
     private int MAXHP = 10;
@@ -28,8 +28,7 @@ public class Robot {
      * @param xPos The horisontal starting pos
      * @param yPos The vertical starting pos
      */
-    public Robot(int xPos, int yPos, Board board) {
-        this.board = board;
+    public Robot(int xPos, int yPos) {
         pos = new Vector2(xPos, yPos);
         currentHP = MAXHP;
         this.direction = dir.UP; //Kanskje endre til en parameter for ROBOT

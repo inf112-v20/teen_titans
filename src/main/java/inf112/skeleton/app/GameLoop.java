@@ -11,7 +11,7 @@ public class GameLoop extends Thread{
     public GameLoop(){
         board = new Board();
         random = new Random();
-        loop();
+        //loop();
     }
 
 

@@ -14,19 +14,21 @@ public class Board extends InputAdapter {
     private HashMap<String, TiledMapTileLayer> mapLayers;
     private Vector2 position;
     private Robot player;
+    private Robot[] listOfPlayers = new Robot[5];
 
     public Board(){
 
         position = new Vector2(0, 0);
-        player = new Robot(0, 0, this);
+        player = new Robot(0, 0);
+        listOfPlayers[0] = player; //TEMP FOR Å LEGGE TIL SPILLERE (TESTING)
         player.createPlayerTexture("player.png");
 
         map = new TmxMapLoader().load("example.tmx");
 
         mapLayers = new HashMap<>();
         mapLayers.put("ground", (TiledMapTileLayer) map.getLayers().get("Ground"));
-        mapLayers.put("hole", (TiledMapTileLayer) map.getLayers().get("Hole"));
-        mapLayers.put("wall", (TiledMapTileLayer) map.getLayers().get("Wall"));
+        mapLayers.put("hole", (TiledMapTileLayer) map.getLayers().get("Holes"));
+        mapLayers.put("wall", (TiledMapTileLayer) map.getLayers().get("Walls"));
         mapLayers.put("flag", (TiledMapTileLayer) map.getLayers().get("Flags"));
         mapLayers.put("playerLayer", (TiledMapTileLayer) map.getLayers().get("Player"));
         mapLayers.get("playerLayer").setCell((int) position.x, (int) position.y, player.getTexture());
@@ -47,9 +49,10 @@ public class Board extends InputAdapter {
         if(validPlayerPosition(newPos)){
             getPlayerLayer().setCell((int)position.x, (int) position.y, null);
             position = newPos;
-            getPlayerLayer().setCell((int)position.x, (int) position.y, player.getTexture());
+
             return true;
         }
+
         return false;
     }
 
@@ -72,6 +75,10 @@ public class Board extends InputAdapter {
      */
     public boolean validPlayerPosition(Vector2 pos){
         return pos.x >= 0 && pos.x < 5 && pos.y >= 0 && pos.y < 5;
+    }
+
+    public Robot[] getPlayers(){
+        return listOfPlayers;
     }
 }
 
