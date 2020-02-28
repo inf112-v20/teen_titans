@@ -133,3 +133,5 @@ objektene. Å få mappet til lese av robotene sine posisjoner, for å
 si noe om posisjonen (legal, illegal, legal but dead).
 3. Tester er viktige for at vi skal oppnå krav. Viktige tester som for
 eksempel å se at en robot går korrekt, og at den "dør" når den detter ut av mappet.
+
+

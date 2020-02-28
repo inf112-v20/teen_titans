@@ -10,7 +10,6 @@ public class Main {
         cfg.title = "hello-world";
         cfg.width = 1500;
         cfg.height = 1500;
-
         new LwjglApplication(new Renderer(), cfg);
     }
 }

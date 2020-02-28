@@ -6,6 +6,8 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
+
 import java.util.HashMap;
 
 public class Board extends InputAdapter {
@@ -27,8 +29,8 @@ public class Board extends InputAdapter {
 
         mapLayers = new HashMap<>();
         mapLayers.put("ground", (TiledMapTileLayer) map.getLayers().get("Ground"));
-        mapLayers.put("hole", (TiledMapTileLayer) map.getLayers().get("Holes"));
-        mapLayers.put("wall", (TiledMapTileLayer) map.getLayers().get("Walls"));
+        mapLayers.put("hole", (TiledMapTileLayer) map.getLayers().get("Hole"));
+        mapLayers.put("wall", (TiledMapTileLayer) map.getLayers().get("Wall"));
         mapLayers.put("flag", (TiledMapTileLayer) map.getLayers().get("Flags"));
         mapLayers.put("playerLayer", (TiledMapTileLayer) map.getLayers().get("Player"));
         mapLayers.get("playerLayer").setCell((int) position.x, (int) position.y, player.getTexture());
@@ -49,10 +51,9 @@ public class Board extends InputAdapter {
         if(validPlayerPosition(newPos)){
             getPlayerLayer().setCell((int)position.x, (int) position.y, null);
             position = newPos;
-
+            getPlayerLayer().setCell((int)position.x, (int) position.y, player.getTexture());
             return true;
         }
-
         return false;
     }
 
@@ -75,6 +76,14 @@ public class Board extends InputAdapter {
      */
     public boolean validPlayerPosition(Vector2 pos){
         return pos.x >= 0 && pos.x < 5 && pos.y >= 0 && pos.y < 5;
+    }
+
+    public Vector2 getPosition(){
+        return position;
+    }
+
+    public void createTextures(){
+        player.createPlayerTexture("player.png");
     }
 
     public Robot[] getPlayers(){

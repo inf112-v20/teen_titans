@@ -19,7 +19,6 @@ public class Robot {
     private int MAXHP = 10;
     private int currentHP;
     private HashMap<String, TiledMapTileLayer.Cell> playerStates;
-    private Board board;
 
     /**
      * Constructor for the robot.
@@ -49,6 +48,14 @@ public class Robot {
      */
     public Vector2 getPos() {
         return pos;
+    }
+
+    public int getMAXHP(){
+        return MAXHP;
+    }
+
+    public int getCurrentHP(){
+        return currentHP;
     }
 
     /**
