@@ -13,16 +13,12 @@ import java.util.HashMap;
 
 public class Robot {
 
-
-
-    private enum dir {UP, RIGHT, DOWN, LEFT} //The current direction the robot if facing
-    private dir direction;
-    private Vector2 pos;
+    private Direction dir;
+    private Pos pos;
     private int MAXHP = 10;
     private int currentHP;
     private HashMap<String, TiledMapTileLayer.Cell> playerStates;
-
-
+    private TiledMapTileLayer.Cell currentState;
 
     /**
      * Constructor for the robot.
@@ -32,9 +28,15 @@ public class Robot {
      * @param yPos The vertical starting pos
      */
     public Robot(int xPos, int yPos) {
-        pos = new Vector2(xPos, yPos);
+
+        pos = new Pos();
+        pos.setPos(xPos, yPos);
+
         currentHP = MAXHP;
-        this.direction = dir.UP; //Kanskje endre til en parameter for ROBOT
+        dir = Direction.NORTH; //Kanskje endre til en parameter for ROBOT
+
+        createPlayerTexture("player.png");
+        currentState = playerStates.get("alive");
     }
 
     public void createPlayerTexture(String location){
@@ -46,12 +48,20 @@ public class Robot {
         playerStates.put("won", new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotStates[0][2])));
     }
 
+    public TiledMapTileLayer.Cell getCurrentState() {
+        return currentState;
+    }
+
     /**
      * returns the current position of the robot
      * @return
      */
-    public Vector2 getPos() {
+    public Pos getPos() {
         return pos;
+    }
+
+    public Direction getDir() {
+        return dir;
     }
 
     public int getMAXHP(){
@@ -79,9 +89,8 @@ public class Robot {
      * @return returns the starting position
      */
     //TODO Change robot state to dead and don't reset position
-    public Vector2 die(){
-        currentHP = 10;
-        return (new Vector2(0, 0)); // test death
+    public void die(){
+        currentState = playerStates.get("dead");
     }
 
 
@@ -90,32 +99,59 @@ public class Robot {
      * @param distance How far the robot moves in 'direction'
      * @return returns the new position for the robot
      */
-    public Vector2 move(int distance) {
-        switch (direction) {
-            case UP:
-                return (new Vector2(pos.x, pos.y + distance));
-            case RIGHT:
-                return (new Vector2(pos.x + distance, pos.y));
-            case DOWN:
-                return (new Vector2(pos.x, pos.y - distance));
-            case LEFT:
-                return (new Vector2(pos.x - distance, pos.y));
+    public void move(int distance) {
+        switch (dir) {
+            case NORTH:
+                pos.setPosY(pos.getPosY() + distance);
+                break;
+            case EAST:
+                pos.setPosX(pos.getPosX() + distance);
+                break;
+            case SOUTH:
+                pos.setPosY(pos.getPosY() - distance);
+                break;
+            case WEST:
+                pos.setPosX(pos.getPosX() - distance);
+                break;
         }
-        return pos;
+
     }
 
     /**
      * Turns the robot in a certain direction
-     * @param direction The robots new rotation
+     * @param turnRight The robots new rotation
      */
     //TODO Give code
-    public void turn(dir direction) {
-
+    public void turn(boolean turnRight) {
+        if (turnRight) {
+            dir = dir.next();
+        }
+        else {
+            dir = dir.last();
+        }
+        updateModel();
     }
 
-    public TiledMapTileLayer.Cell getTexture(){
-        return ((currentHP < 0) ? playerStates.get("dead") : playerStates.get("alive"));
+    private void updateModel(){
+        switch (dir) {
+            case NORTH:
+                currentState.setRotation(TiledMapTileLayer.Cell.ROTATE_0);
+                break;
+            case EAST:
+                currentState.setRotation(TiledMapTileLayer.Cell.ROTATE_270);
+                break;
+            case SOUTH:
+                currentState.setRotation(TiledMapTileLayer.Cell.ROTATE_180);
+                break;
+            case WEST:
+                currentState.setRotation(TiledMapTileLayer.Cell.ROTATE_90);
+                break;
+        }
     }
+
+//    public TiledMapTileLayer.Cell getTexture(){
+//        return ((currentHP < 0) ? playerStates.get("dead") : playerStates.get("alive"));
+//    }
 
 
 

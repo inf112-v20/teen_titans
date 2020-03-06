@@ -33,6 +33,7 @@ public class AppTest {
 
     @Test
     public void IllegalMoveDownBelowMapTest(){
+
         GameLoop game = new GameLoop();
         Board board = game.getBoard();
         Robot bob = board.getPlayers()[0];

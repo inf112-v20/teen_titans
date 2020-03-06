@@ -27,7 +27,7 @@ public class Renderer implements ApplicationListener {
     @Override
     public void create() {
         //try {
-            gameLoop = new GameLoop();
+        gameLoop = new GameLoop();
         //} catch (InterruptedException e) {
             //e.printStackTrace();
         //}
