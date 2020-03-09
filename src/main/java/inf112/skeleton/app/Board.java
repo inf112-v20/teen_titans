@@ -14,6 +14,7 @@ public class Board extends InputAdapter {
 
     private TiledMap map;
     private HashMap<String, TiledMapTileLayer> mapLayers;
+    private TiledMapTileLayer playerLayer;
     private Vector2 position;
     private Robot player;
     private Robot[] listOfPlayers = new Robot[5];
@@ -35,6 +36,7 @@ public class Board extends InputAdapter {
         mapLayers.put("wall", (TiledMapTileLayer) map.getLayers().get("Wall"));
         mapLayers.put("flag", (TiledMapTileLayer) map.getLayers().get("Flags"));
         mapLayers.put("playerLayer", (TiledMapTileLayer) map.getLayers().get("Player"));
+        playerLayer = mapLayers.get("playerLayer");
 
     }
 
@@ -51,13 +53,34 @@ public class Board extends InputAdapter {
     public boolean keyUp(int keyCode){
         Pos oldPos = player.getPos().copy();
         Pos newPos = new Pos();
+        newPos.setPos(oldPos.getPosX(), oldPos.getPosY());
         if(keyCode == Input.Keys.UP) {
+
+            switch(player.getDir()){
+                case NORTH:
+                    newPos.setPos(newPos.getPosX(), newPos.getPosY() + 1);
+                    break;
+                case EAST:
+                    newPos.setPos(newPos.getPosX() + 1, newPos.getPosY());
+                    break;
+                case WEST:
+                    newPos.setPos(newPos.getPosX() - 1, newPos.getPosY());
+                    break;
+                case SOUTH:
+                    newPos.setPos(newPos.getPosX(), newPos.getPosY() - 1);
+                    break;
+            }
+
             if (checkValidPos(newPos)) {
                 player.move(1);
+
+
             }
             else {
                 System.out.println("Illegal move");
-                return false;
+                player.die();
+                updatePlayer(oldPos); //Update player
+                return false; //TODO Spør bendik om det er nødvendig å returne true/false
             }
         }
         else if (keyCode == Input.Keys.LEFT) {
@@ -67,22 +90,16 @@ public class Board extends InputAdapter {
             player.turn(RIGHT);
         }
 
-        System.out.println("valid = " + checkValidPos(newPos));
 
+        updatePlayer(oldPos); //Update player
 
-
-
-        getPlayerLayer().setCell(oldPos.getPosX(), oldPos.getPosY(), null);
-        getPlayerLayer().setCell(player.getPos().getPosX(), player.getPos().getPosY(), player.getCurrentState());
-
-        System.out.println("Oldpos = " + oldPos.getPosX() + " " + oldPos.getPosY());
-        System.out.println(player.getPos().getPosX());
-        System.out.println(player.getPos().getPosY());
-        System.out.println(player.getDir());
-        System.out.println(newPos.getPosY());
-        System.out.println();
         return true;
 
+    }
+
+    private void updatePlayer(Pos oldPos){
+        getPlayerLayer().setCell(oldPos.getPosX(), oldPos.getPosY(), null);
+        playerLayer.setCell(player.getPos().getPosX(), player.getPos().getPosY(), player.getCurrentState());
     }
 
     private boolean checkValidPos(Pos pos) {
@@ -128,7 +145,7 @@ public class Board extends InputAdapter {
 
     public void createTextures(){
         //player.createPlayerTexture("player.png"); //Flyttet til robot så den kan holde styr på seg selv
-        mapLayers.get("playerLayer").setCell(player.getPos().getPosX(), player.getPos().getPosY(), player.getCurrentState());
+        playerLayer.setCell(player.getPos().getPosX(), player.getPos().getPosY(), player.getCurrentState());
     }
 
     public Robot[] getPlayers(){

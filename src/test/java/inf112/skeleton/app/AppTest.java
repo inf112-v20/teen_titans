@@ -3,6 +3,7 @@ package inf112.skeleton.app;
 import static org.junit.Assert.assertTrue;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.math.Vector2;
 
 import org.junit.Before;
@@ -21,6 +22,13 @@ public class AppTest {
      Board game = new Board();
      }
      */
+
+
+    @RunWith(GdxTestRunner.class)
+    public class testTest{
+        //TODO Test test
+
+    }
 
     /**@Test
     public void robotTakesDamageTest(){

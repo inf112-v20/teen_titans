@@ -91,6 +91,7 @@ public class Robot {
     //TODO Change robot state to dead and don't reset position
     public void die(){
         currentState = playerStates.get("dead");
+
     }
 
 
