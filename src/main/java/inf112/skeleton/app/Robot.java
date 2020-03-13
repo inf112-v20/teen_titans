@@ -88,10 +88,15 @@ public class Robot {
      * Kill the robot (currently resets position and health)
      * @return returns the starting position
      */
-    //TODO Change robot state to dead and don't reset position
+
     public void die(){
         currentState = playerStates.get("dead");
+        updateModel();
+    }
 
+    public void win(){
+        currentState = playerStates.get("won");
+        updateModel();
     }
 
 

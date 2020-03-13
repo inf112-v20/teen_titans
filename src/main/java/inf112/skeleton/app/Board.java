@@ -18,6 +18,11 @@ public class Board extends InputAdapter {
     private Vector2 position;
     private Robot player;
     private Robot[] listOfPlayers = new Robot[5];
+    private final int BOARDWIDTH = 5;
+    private final int BOARDHEIGHT = 5;
+    private final int LEGALMOVE = 1; //For normal board movement
+    private final int ILLEGALMOVE = 0; //For walls/obstacles
+    private final int SUICIDALMOVE = -1; //For holes/fall off map
     private final boolean RIGHT = true;
     private final boolean LEFT = false;
 
@@ -34,7 +39,7 @@ public class Board extends InputAdapter {
         mapLayers.put("ground", (TiledMapTileLayer) map.getLayers().get("Ground"));
         mapLayers.put("hole", (TiledMapTileLayer) map.getLayers().get("Hole"));
         mapLayers.put("wall", (TiledMapTileLayer) map.getLayers().get("Wall"));
-        mapLayers.put("flag", (TiledMapTileLayer) map.getLayers().get("Flags"));
+        mapLayers.put("flag", (TiledMapTileLayer) map.getLayers().get("Flag"));
         mapLayers.put("playerLayer", (TiledMapTileLayer) map.getLayers().get("Player"));
         playerLayer = mapLayers.get("playerLayer");
 
@@ -71,16 +76,16 @@ public class Board extends InputAdapter {
                     break;
             }
 
-            if (checkValidPos(newPos)) {
+            if (checkPos(newPos) == LEGALMOVE) {
                 player.move(1);
 
-
             }
-            else {
-                System.out.println("Illegal move");
+            else if (checkPos(newPos) == SUICIDALMOVE) {
+                System.out.println("You died");
+                player.move(1);
                 player.die();
                 updatePlayer(oldPos); //Update player
-                return false; //TODO Spør bendik om det er nødvendig å returne true/false
+                
             }
         }
         else if (keyCode == Input.Keys.LEFT) {
@@ -102,49 +107,32 @@ public class Board extends InputAdapter {
         playerLayer.setCell(player.getPos().getPosX(), player.getPos().getPosY(), player.getCurrentState());
     }
 
-    private boolean checkValidPos(Pos pos) {
-        return pos.getPosX() >= 0 && pos.getPosX() < 5 && pos.getPosY() >= 0 && pos.getPosY() < 5;
+    private int checkPos(Pos pos) {
+        if (pos.getPosX() >= 0 && pos.getPosX() < BOARDWIDTH && pos.getPosY() >= 0 && pos.getPosY() < BOARDHEIGHT) {
+            try {
+                if (mapLayers.get("hole").getCell(pos.getPosX(), pos.getPosY()) != null) return SUICIDALMOVE;
+                else if (mapLayers.get("flag").getCell(pos.getPosX(), pos.getPosY()) != null) {
+                    player.win();
+                    return LEGALMOVE;
+                }
+            }
+            catch (NullPointerException e)
+            {
+                //Do nothing
+            }
+        }
+        else {
+            return SUICIDALMOVE;
+        }
+
+        return LEGALMOVE;
     }
-
-//    @Override
-//    public boolean keyUp(int keycode){
-//        Vector2 newPos = generateNewPlayerPosition(keycode, player.getPos().getPos());
-//        if(validPlayerPosition(newPos)){
-//            getPlayerLayer().setCell((int)position.x, (int) position.y, null);
-//            position = newPos;
-//            getPlayerLayer().setCell((int)position.x, (int) position.y, player.getTexture());
-//            return true;
-//        }
-//        return false;
-//    }
-
-    /**
-     * @param keycode key that was pressed
-     * @return a new position if player has pressed a key indicating a move, old position otherwise.
-     */
-//    public Vector2 generateNewPlayerPosition(int keycode, Vector2 pos) {
-//        if(keycode == Input.Keys.UP) return new Vector2().set(position.x, position.y+1);
-//        else if(keycode == Input.Keys.DOWN) return new Vector2().set(position.x, position.y-1);
-//        else if(keycode == Input.Keys.LEFT) return new Vector2().set(position.x-1, position.y);
-//        else if(keycode == Input.Keys.RIGHT) return new Vector2().set(position.x+1, position.y);
-//        else return position;
-//    }
-
-    /**
-     * Checks whether suggested player position is valid.
-     * @param pos new position to try.
-     * @return true if given position is a valid player position, false otherwise.
-     */
-//    public boolean validPlayerPosition(Vector2 pos){
-//        return pos.x >= 0 && pos.x < 5 && pos.y >= 0 && pos.y < 5;
-//    }
 
     public Vector2 getPosition(){
         return position;
     }
 
     public void createTextures(){
-        //player.createPlayerTexture("player.png"); //Flyttet til robot så den kan holde styr på seg selv
         playerLayer.setCell(player.getPos().getPosX(), player.getPos().getPosY(), player.getCurrentState());
     }
 
