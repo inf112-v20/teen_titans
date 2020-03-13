@@ -23,6 +23,8 @@ public class Renderer implements ApplicationListener {
     private GameLoop gameLoop;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
+    private final int BOARDHEIGHT = 10;
+    private final int BOARDWIDTH = 10;
 
     @Override
     public void create() {
@@ -37,10 +39,10 @@ public class Renderer implements ApplicationListener {
         Gdx.input.setInputProcessor(gameLoop.getBoard());
         camera = new OrthographicCamera();
         renderer = new OrthogonalTiledMapRenderer(gameLoop.getBoard().getMap(), 1/300f);
-        camera.setToOrtho(false, 5, 5);
+        camera.setToOrtho(false, BOARDWIDTH, BOARDHEIGHT);
         camera.position.set((float) camera.viewportWidth/2, (float) camera.viewportHeight/2, 0);
         renderer = new OrthogonalTiledMapRenderer(gameLoop.getBoard().getMap(), 1/300f);
-        camera.setToOrtho(false, 5, 5);
+        camera.setToOrtho(false, BOARDWIDTH, BOARDHEIGHT);
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
         camera.update();
         renderer.setView(camera);

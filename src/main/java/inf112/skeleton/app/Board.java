@@ -18,8 +18,8 @@ public class Board extends InputAdapter {
     private Vector2 position;
     private Robot player;
     private Robot[] listOfPlayers = new Robot[5];
-    private final int BOARDWIDTH = 5;
-    private final int BOARDHEIGHT = 5;
+    private final int BOARDWIDTH = 10;
+    private final int BOARDHEIGHT = 10;
     private final int LEGALMOVE = 1; //For normal board movement
     private final int ILLEGALMOVE = 0; //For walls/obstacles
     private final int SUICIDALMOVE = -1; //For holes/fall off map
@@ -33,16 +33,17 @@ public class Board extends InputAdapter {
         listOfPlayers[0] = player; //TEMP FOR Å LEGGE TIL SPILLERE (TESTING)
 
 
-        map = new TmxMapLoader().load("example.tmx");
+        map = new TmxMapLoader().load("testMap2.tmx");
 
         mapLayers = new HashMap<>();
+        mapLayers.put("conveyor", (TiledMapTileLayer) map.getLayers().get("Conveyor"));
+        mapLayers.put("flag", (TiledMapTileLayer) map.getLayers().get("Flag"));
+        mapLayers.put("gear", (TiledMapTileLayer) map.getLayers().get("Gear"));
         mapLayers.put("ground", (TiledMapTileLayer) map.getLayers().get("Ground"));
         mapLayers.put("hole", (TiledMapTileLayer) map.getLayers().get("Hole"));
-        mapLayers.put("wall", (TiledMapTileLayer) map.getLayers().get("Wall"));
-        mapLayers.put("flag", (TiledMapTileLayer) map.getLayers().get("Flag"));
         mapLayers.put("playerLayer", (TiledMapTileLayer) map.getLayers().get("Player"));
+        mapLayers.put("wall", (TiledMapTileLayer) map.getLayers().get("Wall"));
         playerLayer = mapLayers.get("playerLayer");
-
     }
 
 
@@ -94,7 +95,6 @@ public class Board extends InputAdapter {
         else if (keyCode == Input.Keys.RIGHT) {
             player.turn(RIGHT);
         }
-
 
         updatePlayer(oldPos); //Update player
 
