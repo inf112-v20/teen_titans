@@ -15,9 +15,8 @@ public class Board extends InputAdapter {
     private TiledMap map;
     private HashMap<String, TiledMapTileLayer> mapLayers;
     private TiledMapTileLayer playerLayer;
-    private Vector2 position;
     private Robot player;
-    private Robot[] listOfPlayers = new Robot[5];
+    private Robot[] listOfPlayers;
     private final int BOARDWIDTH = 10;
     private final int BOARDHEIGHT = 10;
     private final int LEGALMOVE = 1; //For normal board movement
@@ -26,12 +25,9 @@ public class Board extends InputAdapter {
     private final boolean RIGHT = true;
     private final boolean LEFT = false;
 
-    public Board(){
-
-        position = new Vector2(0, 0);
-        player = new Robot(0, 0);
-        listOfPlayers[0] = player; //TEMP FOR Å LEGGE TIL SPILLERE (TESTING)
-
+    public Board(Robot[] players){
+        listOfPlayers = players;
+        player = listOfPlayers[0];
 
         map = new TmxMapLoader().load("testMap2.tmx");
 
@@ -85,8 +81,8 @@ public class Board extends InputAdapter {
                 System.out.println("You died");
                 player.move(1);
                 player.die();
-                updatePlayer(oldPos); //Update player
-                
+                updatePlayer(oldPos, player); //Update player
+
             }
         }
         else if (keyCode == Input.Keys.LEFT) {
@@ -96,13 +92,13 @@ public class Board extends InputAdapter {
             player.turn(RIGHT);
         }
 
-        updatePlayer(oldPos); //Update player
+        updatePlayer(oldPos, player); //Update player
 
         return true;
 
     }
 
-    private void updatePlayer(Pos oldPos){
+    public void updatePlayer(Pos oldPos, Robot player){
         getPlayerLayer().setCell(oldPos.getPosX(), oldPos.getPosY(), null);
         playerLayer.setCell(player.getPos().getPosX(), player.getPos().getPosY(), player.getCurrentState());
     }
@@ -126,10 +122,6 @@ public class Board extends InputAdapter {
         }
 
         return LEGALMOVE;
-    }
-
-    public Vector2 getPosition(){
-        return position;
     }
 
     public void createTextures(){

@@ -1,16 +1,26 @@
 package inf112.skeleton.app.cards;
 
-public class BaseCard implements ICard, Comparable<ICard> {
-    private int priority;
+import inf112.skeleton.app.Robot;
 
-    public BaseCard(int priority){
+public class TurnRightCard implements ICard{
+
+    int priority;
+    Robot robot;
+
+    public TurnRightCard(int priority, Robot robot){
         this.priority = priority;
+        this.robot = robot;
     }
 
 
     @Override
     public int getPriority() {
-        return priority;
+        return 0;
+    }
+
+    @Override
+    public void action() {
+        robot.turn(true);
     }
 
     @Override

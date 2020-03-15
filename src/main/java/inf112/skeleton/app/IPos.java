@@ -17,4 +17,6 @@ public interface IPos {
     void setPos(int x, int y);
 
     Pos copy();
+
+    String toString();
 }
