@@ -47,4 +47,11 @@ public class Pos implements IPos {
         copy.setPos(x, y);
         return copy;
     }
+
+    @Override
+    public String toString() {
+        return "(" + getPosX() + ", " + getPosY() + ")";
+    }
+
+
 }
