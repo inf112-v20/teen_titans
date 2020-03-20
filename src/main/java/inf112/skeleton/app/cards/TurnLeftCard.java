@@ -1,16 +1,17 @@
 package inf112.skeleton.app.cards;
 
 import inf112.skeleton.app.Board;
+import inf112.skeleton.app.Player;
 import inf112.skeleton.app.Robot;
 
 public class TurnLeftCard implements ICard{
 
     private int priority;
-    private Robot robot;
+    private Player player;
 
-    public TurnLeftCard(int priority, Robot robot){
+    public TurnLeftCard(int priority, Player player){
         this.priority = priority;
-        this.robot = robot;
+        this.player = player;
     }
 
 
@@ -24,7 +25,7 @@ public class TurnLeftCard implements ICard{
 
     @Override
     public void action() {
-        robot.turn(false);
+        player.getRobot().turn(false);
     }
 
     @Override
@@ -32,5 +33,11 @@ public class TurnLeftCard implements ICard{
         if(priority > card.getPriority()) return 1;
         else if(priority == card.getPriority()) return 0;
         else return -1;
+    }
+
+
+    @Override
+    public String toString(){
+        return "Left";
     }
 }
