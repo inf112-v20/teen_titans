@@ -20,7 +20,7 @@ public class TurnRightCard implements ICard{
     }
 
     @Override
-    public Robot getRobot() { return robot; }
+    public Robot getRobot() { return player.getRobot(); }
 
     @Override
     public void action() {

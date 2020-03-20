@@ -12,8 +12,8 @@ public class Player {
     private ArrayList<ICard> sortedCards;
     Scanner scanner = new Scanner(System.in);
 
-    public Player(int x, int y){
-        robot = new Robot(x, y);
+    public Player(Robot robot){
+        this.robot = robot;
     }
 
 

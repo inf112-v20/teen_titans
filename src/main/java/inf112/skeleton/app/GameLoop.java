@@ -20,6 +20,9 @@ public class GameLoop{
         robots = new Robot[]{
             new Robot(3, 3), //Player 0
         };
+        players = new Player[] {
+                new Player(robots[0]),
+        };
         robots = new Robot[players.length];
         for(int i = 0; i < players.length; i++){
             robots[i] = players[i].getRobot();
