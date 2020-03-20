@@ -1,6 +1,7 @@
 package inf112.skeleton.app.cards;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Vector2;
 import inf112.skeleton.app.Board;
 import inf112.skeleton.app.Pos;
 import inf112.skeleton.app.Robot;
@@ -25,7 +26,9 @@ public class MoveForwardCard implements ICard{
 
     @Override
     public void action() {
-        board.keyUp(Input.Keys.UP);
+        Pos oldPos = robot.getPos().copy();
+        robot.move(1);
+        board.updatePlayer(oldPos, robot);
     }
 
     @Override

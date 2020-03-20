@@ -32,7 +32,7 @@ public class GameLoop{
                 r++;
                 for(PriorityQueue<ICard> round : cardHandler.getSortedCards()){
                     ICard currentCard = round.remove();
-                    //currentCard.action();
+                    currentCard.action();
                     try {
                         Thread.sleep(200);
                     } catch (InterruptedException e) {
