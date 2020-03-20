@@ -19,6 +19,9 @@ public class TurnRightCard implements ICard{
     }
 
     @Override
+    public Robot getRobot() { return robot; }
+
+    @Override
     public void action() {
         robot.turn(true);
     }

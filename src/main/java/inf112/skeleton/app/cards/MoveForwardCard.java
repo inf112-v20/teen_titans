@@ -25,10 +25,13 @@ public class MoveForwardCard implements ICard{
     }
 
     @Override
+    public Robot getRobot() {return robot; }
+
+    @Override
     public void action() {
-        Pos oldPos = robot.getPos().copy();
+
         robot.move(1);
-        board.updatePlayer(oldPos, robot);
+
     }
 
     @Override

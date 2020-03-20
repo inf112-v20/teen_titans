@@ -9,5 +9,7 @@ public interface IRobot {
 
     void die();
 
+    void push();
+
 
 }
