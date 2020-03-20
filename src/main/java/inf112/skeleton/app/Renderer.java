@@ -35,9 +35,6 @@ public class Renderer implements ApplicationListener {
         camera = new OrthographicCamera();
         renderer = new OrthogonalTiledMapRenderer(gameLoop.getBoard().getMap(), 1/300f);
         camera.setToOrtho(false, BOARDWIDTH, BOARDHEIGHT);
-        camera.position.set((float) camera.viewportWidth/2, (float) camera.viewportHeight/2, 0);
-        renderer = new OrthogonalTiledMapRenderer(gameLoop.getBoard().getMap(), 1/300f);
-        camera.setToOrtho(false, BOARDWIDTH, BOARDHEIGHT);
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
         camera.update();
         renderer.setView(camera);

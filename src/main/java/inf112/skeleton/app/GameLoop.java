@@ -31,6 +31,7 @@ public class GameLoop{
             while(true) {
                 r++;
                 for(PriorityQueue<ICard> round : cardHandler.getSortedCards()){
+
                     ICard currentCard = round.remove();
                     currentCard.action();
                     try {
@@ -44,7 +45,6 @@ public class GameLoop{
             }
         });
     }
-
 
     public Board getBoard(){
         return board;
