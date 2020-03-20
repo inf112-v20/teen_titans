@@ -10,17 +10,22 @@ import java.util.Random;
 public class GameLoop{
     Random random;
     Board board;
+    Player[] players;
     Robot[] robots;
     CardHandler cardHandler;
     public Thread loop;
 
     public GameLoop(){
-
-        robots = new Robot[]{
-            new Robot(3, 3), //Player 0
+        players = new Player[]{
+                new Player(3, 3)
         };
+        robots = new Robot[players.length];
+        for(int i = 0; i < players.length; i++){
+            robots[i] = players[i].getRobot();
+        }
+
         board = new Board(robots);
-        cardHandler = new CardHandler(robots, board);
+        cardHandler = new CardHandler(players, board);
         random = new Random();
         createGameLoopThread();
     }

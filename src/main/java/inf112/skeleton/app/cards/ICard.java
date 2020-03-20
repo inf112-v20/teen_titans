@@ -16,4 +16,11 @@ public interface ICard extends Comparable<ICard> {
     void action();
 
 
+    /**
+     * @return String representation of card.
+     */
+    @Override
+    String toString();
+
+
 }
