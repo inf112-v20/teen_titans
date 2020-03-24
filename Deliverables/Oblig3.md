@@ -4,7 +4,7 @@
 ####Møtereferat 
 13.03.20
 Snakket om hva som må  gjøres fremover. Vi ble enige om at Kort, main menu er første prioritet for øyeblikket. Vi fordelte oppgaver igjen for at allle skulle ha noe å jobbe med.
-Hvor Bendik skal jobbe med spiller logikk og kort og Ola tar seg av lyd og main menu. Mathias jobber videre med det han gjorde sist. Jostein og Hans-Christian hjelper til der det trengs
+Hvor Bendik skal jobbe med spiller logikk og kort og Ola tar seg av lyd og main menu. Mathias jobber med conveyorbelts. Jostein og Hans-Christian hjelper til der det trengs
 og skriver brukerhistorier og svarer på oppgavene i oblig3. Vi bestemte oss også for at alle skulle sette seg ordentlig inn i reglene.
 
 20.03.20
@@ -31,8 +31,12 @@ Gruppedynamikken fungerer utmerket.
 
 
 ### Deloppgave 2 Krav
------ Jostein
+Krav: Fungerende kort og main menu
+Siden sist har vi fått in en player class, conveyor bellts....
+----- Jostein brukerhistorier
 
+MVP er nå at vi skal ha kort som kan styres av spilleren, og at roboten kan interacte med
+vegger og farer med brettet, som laser, vegger og hull (utfordring). Ettersom dette er noe av det viktigiste for selve spillet. 
 
 ### Deloppgave 3 Produktleveranse og kodekvalitet
 
