@@ -8,7 +8,7 @@ Hvor Bendik skal jobbe med spiller logikk og kort og Ola tar seg av lyd og main 
 og skriver brukerhistorier og svarer på oppgavene i oblig3. Vi bestemte oss også for at alle skulle sette seg ordentlig inn i reglene.
 
 20.03.20
-
+Oppdaterte hverandre på hva vi har gjort så langt, og hva vi skal gjøre fremover. Mathias fikset blant annet converyorbelts, og Bendik la til player class, og fikset renderer.
 
 24.03.20
 
@@ -28,3 +28,23 @@ Vi har tilpasset oss godt med møter på discord nå som skolen er stengt.
 Vi har priortiert Kort og main menu fremover.
 Det funker bra med møter en til to ganger i uken, og det er god kommunikasjon både gjennom Slack, Messenger og på discord.
 Gruppedynamikken fungerer utmerket.  
+
+
+### Deloppgave 2 Krav
+----- Jostein
+
+
+### Deloppgave 3 Produktleveranse og kodekvalitet
+
+Dere må dokumentere hvordan prosjektet bygger, testes og kjøres, slik at det er lett for gruppelderne å
+bygge, teste og kjøre koden deres. Under vurdering kommer koden også til å brukertestes.
+Prosjektet skal kunne bygge, testes og kjøres på Linux, Windows og OSX.
+Lever klassediagram. (Hvis det er veldig mange klasser, lager dere for de viktigste.)
+Kodekvalitet og testdekning vektlegges. Merk at testene dere skriver skal brukes i produktet. Det kan
+være smart å skrive manuelle tester for å teste det som er grafisk.
+Utførte oppgaver skal være ferdige.
+Hvis dere tester manuelt: lever beskrivelser av hvordan testen foregår, slik at gruppeleder kan utføre
+testen selv.
+Under vurdering vil det vektlegges at alle bidrar til kodebasen. Hvis det er stor forskjell i hvem som
+committer, må dere legge ved en kort forklaring for hvorfor det er sånn. Husk å committe alt. (Også
+designfiler)
