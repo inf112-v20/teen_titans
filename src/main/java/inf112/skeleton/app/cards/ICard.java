@@ -1,5 +1,7 @@
 package inf112.skeleton.app.cards;
 
+import inf112.skeleton.app.Robot;
+
 public interface ICard extends Comparable<ICard> {
 
     /**
@@ -8,12 +10,20 @@ public interface ICard extends Comparable<ICard> {
      */
     int getPriority();
 
+    Robot getRobot();
 
 
     /**
      * Performs action.
      */
     void action();
+
+
+    /**
+     * @return String representation of card.
+     */
+    @Override
+    String toString();
 
 
 }

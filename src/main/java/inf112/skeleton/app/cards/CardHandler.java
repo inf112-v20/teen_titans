@@ -1,6 +1,7 @@
 package inf112.skeleton.app.cards;
 
 import inf112.skeleton.app.Board;
+import inf112.skeleton.app.Player;
 import inf112.skeleton.app.Robot;
 
 import java.util.ArrayList;
@@ -10,12 +11,12 @@ import java.util.Random;
 
 public class CardHandler {
     private PriorityQueue<ICard>[] cardsPQ;
-    private Robot[] players;
+    private Player[] players;
     private ArrayList<ICard>[] individuallySortedCards;
     private Random random;
     private Board board;
 
-    public CardHandler(Robot[] players, Board board){
+    public CardHandler(Player[] players, Board board){
         random = new Random();
         this.players = players;
         this.board = board;

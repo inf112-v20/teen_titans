@@ -10,6 +10,7 @@ import java.util.Random;
 public class GameLoop{
     Random random;
     Board board;
+    Player[] players;
     Robot[] robots;
     CardHandler cardHandler;
     public Thread loop;
@@ -19,8 +20,16 @@ public class GameLoop{
         robots = new Robot[]{
             new Robot(3, 3), //Player 0
         };
+        players = new Player[] {
+                new Player(robots[0]),
+        };
+        robots = new Robot[players.length];
+        for(int i = 0; i < players.length; i++){
+            robots[i] = players[i].getRobot();
+        }
+
         board = new Board(robots);
-        cardHandler = new CardHandler(robots, board);
+        cardHandler = new CardHandler(players, board);
         random = new Random();
         createGameLoopThread();
     }
@@ -32,7 +41,9 @@ public class GameLoop{
                 r++;
                 for(PriorityQueue<ICard> round : cardHandler.getSortedCards()){
                     ICard currentCard = round.remove();
-                    //currentCard.action();
+
+                    //doRobotTurn(currentCard);
+
                     try {
                         Thread.sleep(200);
                     } catch (InterruptedException e) {
@@ -41,8 +52,23 @@ public class GameLoop{
                     }
                 }
 
+                doGroundTileEffects();
+
+
+
             }
         });
+    }
+
+    private void doGroundTileEffects(){
+        board.doGroundTileEffects();
+    }
+
+    private void doRobotTurn(ICard currentCard) {
+        Robot currentRobot = currentCard.getRobot();
+        Pos oldPos = currentRobot.getPos().copy();
+        currentCard.action();
+        board.updatePlayer(oldPos, currentRobot);
     }
 
 

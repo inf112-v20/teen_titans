@@ -155,6 +155,23 @@ public class Robot {
         }
     }
 
+    public void push(Direction pushDir) {
+        switch (pushDir) {
+            case NORTH:
+                pos.setPosY(pos.getPosY() + 1);
+                break;
+            case EAST:
+                pos.setPosX(pos.getPosX() + 1);
+                break;
+            case SOUTH:
+                pos.setPosY(pos.getPosY() - 1);
+                break;
+            case WEST:
+                pos.setPosX(pos.getPosX() - 1);
+                break;
+        }
+    }
+
 //    public TiledMapTileLayer.Cell getTexture(){
 //        return ((currentHP < 0) ? playerStates.get("dead") : playerStates.get("alive"));
 //    }
