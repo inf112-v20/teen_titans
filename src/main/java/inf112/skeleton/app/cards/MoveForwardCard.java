@@ -22,7 +22,7 @@ public class MoveForwardCard implements ICard{
 
     @Override
     public int getPriority() {
-        return 0;
+        return priority;
     }
 
     @Override

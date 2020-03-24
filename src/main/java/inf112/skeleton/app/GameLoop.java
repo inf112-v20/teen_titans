@@ -41,8 +41,7 @@ public class GameLoop{
                 r++;
                 for(PriorityQueue<ICard> round : cardHandler.getSortedCards()){
                     ICard currentCard = round.remove();
-
-                    //doRobotTurn(currentCard);
+                    doRobotTurn(currentCard);
 
                     try {
                         Thread.sleep(200);

@@ -31,7 +31,6 @@ public class Player {
             int cardToPlay = scanner.nextInt();
             sortedCards.add(cardStorage.remove(cardToPlay));
         }
-
     }
 
 
@@ -43,5 +42,4 @@ public class Player {
     public Robot getRobot(){
         return robot;
     }
-
 }
