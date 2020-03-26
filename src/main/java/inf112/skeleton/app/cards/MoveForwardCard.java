@@ -1,7 +1,5 @@
 package inf112.skeleton.app.cards;
 
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.math.Vector2;
 import inf112.skeleton.app.Board;
 import inf112.skeleton.app.Player;
 import inf112.skeleton.app.Pos;

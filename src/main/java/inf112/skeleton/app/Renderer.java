@@ -2,17 +2,9 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.scenes.Cards;
 
 public class Renderer implements ApplicationListener {
@@ -29,7 +21,6 @@ public class Renderer implements ApplicationListener {
 
     @Override
     public void create() {
-
         cards = new Cards();
         gameLoop = new GameLoop();
         gameLoop.loop.start();
@@ -38,10 +29,9 @@ public class Renderer implements ApplicationListener {
         camera = new OrthographicCamera();
         renderer = new OrthogonalTiledMapRenderer(gameLoop.getBoard().getMap(), 1/300f);
         camera.setToOrtho(false, BOARDWIDTH, BOARDHEIGHT);
-        camera.position.set(camera.viewportWidth/2 - 1, camera.viewportHeight/2 -2, 0);
+        camera.position.set(camera.viewportWidth/2 - 1, camera.viewportHeight/2 - 2, 0);
         camera.update();
         renderer.setView(camera);
-
 
     }
 

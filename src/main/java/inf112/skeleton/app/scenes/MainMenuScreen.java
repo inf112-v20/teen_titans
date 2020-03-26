@@ -1,8 +1,9 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.scenes;
 
 import com.badlogic.gdx.Screen;
 
 public class MainMenuScreen implements Screen {
+
     @Override
     public void show() {
 
