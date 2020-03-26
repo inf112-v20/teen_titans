@@ -6,11 +6,16 @@
 Snakket om hva som må  gjøres fremover. Vi ble enige om at Kort, main menu er første prioritet for øyeblikket. Vi fordelte oppgaver igjen for at allle skulle ha noe å jobbe med.
 Hvor Bendik skal jobbe med spiller logikk og kort og Ola tar seg av lyd og main menu. Mathias jobber med conveyorbelts. Jostein og Hans-Christian hjelper til der det trengs
 og skriver brukerhistorier og svarer på oppgavene i oblig3. Vi bestemte oss også for at alle skulle sette seg ordentlig inn i reglene.
+meeting minuts 60min. 
 
 20.03.20
 Oppdaterte hverandre på hva vi har gjort så langt, og hva vi skal gjøre fremover. Mathias fikset blant annet converyorbelts, og Bendik la til player class, og fikset renderer.
+Snakket om struktur. Satt opp board elements. 
+meeting minuts 30min. 
 
 24.03.20
+meeting minuts 60min.
+
 
 27.03.20
 
@@ -30,25 +35,31 @@ Det funker bra med møter en til to ganger i uken, og det er god kommunikasjon b
 Gruppedynamikken fungerer utmerket.  
 
 
-### Deloppgave 2 Krav
-Krav: Fungerende kort og main menu
-Siden sist har vi fått in en player class, conveyor bellts....
------ Jostein brukerhistorier
 
-MVP er nå at vi skal ha kort som kan styres av spilleren, og at roboten kan interacte med
-vegger og farer med brettet, som laser, vegger og hull (utfordring). Ettersom dette er noe av det viktigiste for selve spillet. 
 
-### Deloppgave 3 Produktleveranse og kodekvalitet
+KRAV Må lage flere tester for å sjekke at koden fungerer nå og i fremtiden 
+Flere spillere
+Main menu
+Lasere må sjekke 1 og 1 rute foran seg til de finner en vegg eller spiller så stopper de 
 
-Dere må dokumentere hvordan prosjektet bygger, testes og kjøres, slik at det er lett for gruppelderne å
-bygge, teste og kjøre koden deres. Under vurdering kommer koden også til å brukertestes.
-Prosjektet skal kunne bygge, testes og kjøres på Linux, Windows og OSX.
-Lever klassediagram. (Hvis det er veldig mange klasser, lager dere for de viktigste.)
-Kodekvalitet og testdekning vektlegges. Merk at testene dere skriver skal brukes i produktet. Det kan
-være smart å skrive manuelle tester for å teste det som er grafisk.
-Utførte oppgaver skal være ferdige.
-Hvis dere tester manuelt: lever beskrivelser av hvordan testen foregår, slik at gruppeleder kan utføre
-testen selv.
-Under vurdering vil det vektlegges at alle bidrar til kodebasen. Hvis det er stor forskjell i hvem som
-committer, må dere legge ved en kort forklaring for hvorfor det er sånn. Husk å committe alt. (Også
-designfiler)
+MVP: Flere spiller, må kunne styres av spilleren med kort, må kunne dø og vinne 
+Ingen bugs for øyeblikket (som vi vet om) 
+
+
+Vi må bli bedre på å bruke prosjektboard igjen (slappe med å oppdatere)
+Spre arbeidsmengenden litt mer (kanban jobbe litt hele tiden for å ikke bli overwhelmed» 
+
+
+Bendik plassere kort på bordet
+
+Erfaringer som er verdt å nevne: 
+Hjemmekontor struggles 
+Par programmering ikke lov
+Vanskeligere å kommunisere når vi ikke kan fysisk vise
+Jævla gode på video møter via discord 
+Mer spredte commits 
+
+
+Prioritet fremover:
+Tester alle tulle med for å få de til å funke, om noen finner god mal send til andre
+Må få kortene til å kunne bli brukt av spillere så vi kan teste de (ikke nødvendigvis flere kort atm) 
