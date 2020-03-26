@@ -1,5 +1,6 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.scenes;
 import com.badlogic.gdx.Game;
+import inf112.skeleton.app.scenes.MainMenuScreen;
 
 public class Orchestrator extends Game {
     private MainMenuScreen menuScreen;
