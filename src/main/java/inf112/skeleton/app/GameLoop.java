@@ -23,6 +23,7 @@ public class GameLoop{
         players = new Player[] {
                 new Player(robots[0]),
         };
+
         robots = new Robot[players.length];
         for(int i = 0; i < players.length; i++){
             robots[i] = players[i].getRobot();
@@ -41,8 +42,7 @@ public class GameLoop{
                 r++;
                 for(PriorityQueue<ICard> round : cardHandler.getSortedCards()){
                     ICard currentCard = round.remove();
-
-                    //doRobotTurn(currentCard);
+                    doRobotTurn(currentCard);
 
                     try {
                         Thread.sleep(200);

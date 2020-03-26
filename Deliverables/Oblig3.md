@@ -33,7 +33,25 @@ Gruppedynamikken fungerer utmerket.
 ### Deloppgave 2 Krav
 Krav: Fungerende kort og main menu
 Siden sist har vi fått in en player class, conveyor bellts....
------ Jostein brukerhistorier
+
+### Brukerhistorie
+Jeg som kunde ønsker å se brettet sånn at jeg kan se hvor på brettet man vinner, hvor man ikke kan gå, hvor man dør etc.
+
+* Brikkens plassering på brettet er for å finne ut hvor man starter hen for å finne en strategi til å komme seg til mål.
+
+* En roteringsfunksjon til brikken sånn at jeg kan endre på hvilken vei jeg skal til.
+Farlige og ufarlige fellefunksjoner, der ved at man går til de farlige vil man miste liv, eventuelt dø.
+Og ved at man går til de ufarlige vil brikken bevege seg eller rotere seg i en ny retning uten sin vilje.
+
+* En kortfunksjon der man velger hva man skal gjøre når det er min tur.
+
+* Et flagg for å se hvor man vinner.
+
+Jeg som spiller ønsker:
+
+* At RoboRally er et flerspiller spill for å kunne spille med andre
+
+* 
 
 MVP er nå at vi skal ha kort som kan styres av spilleren, og at roboten kan interacte med
 vegger og farer med brettet, som laser, vegger og hull (utfordring). Ettersom dette er noe av det viktigiste for selve spillet. 

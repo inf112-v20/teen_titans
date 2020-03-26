@@ -17,7 +17,7 @@ public class TurnLeftCard implements ICard{
 
     @Override
     public int getPriority() {
-        return 0;
+        return priority;
     }
 
     @Override
