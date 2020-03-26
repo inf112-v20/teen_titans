@@ -40,7 +40,7 @@ public class GameLoop{
                 r++;
                 for(PriorityQueue<ICard> round : cardHandler.getSortedCards()){
                     ICard currentCard = round.remove();
-                    doRobotTurn(currentCard);
+                    //doRobotTurn(currentCard);
 
                     try {
                         Thread.sleep(200);
@@ -68,12 +68,12 @@ public class GameLoop{
         Pos oldPos = currentRobot.getPos().copy();
         currentCard.action();
         board.updatePlayer(oldPos, currentRobot);
-    }
+    }*/
 
 
     public Board getBoard(){
         return board;
-    }*/
+    }
 
 
 
