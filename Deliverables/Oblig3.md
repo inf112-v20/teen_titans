@@ -15,7 +15,7 @@ meeting minuts 30min.
 Oppdaterte hverandre på hva vi har gjort så langt, og hva vi skal gjøre fremover. Matias fikset blant annet converyorbelts, og Bendik la til player class, og fikset renderer.
 
 24.03.20
-meeting minuts 60min.
+meeting minutes 60min.
 
 
 Rollene fungerer fint, og Matias gjør stadig vekk en fabelaktig jobb som teamleader. 
@@ -35,6 +35,9 @@ Vi har priortiert Kort og main menu fremover.
 Det funker bra med møter en til to ganger i uken, og det er god kommunikasjon både gjennom Slack, Messenger og på discord.
 Gruppedynamikken fungerer utmerket.  
 
+####Noen ting å forbedre
+Vi må bli bedre på å bruke prosjektboard igjen (slappe med å oppdatere)
+Spre arbeidsmengenden litt mer (kanban jobbe litt hele tiden for å ikke bli overwhelmed)
 
 ### Deloppgave 2 Krav
 Krav: Fungerende kort og main menu
@@ -68,8 +71,16 @@ Main menu
 Lasere må sjekke 1 og 1 rute foran seg til de finner en vegg eller spiller så stopper de 
 
 MVP: Flere spiller, må kunne styres av spilleren med kort, må kunne dø og vinne 
-Ingen bugs for øyeblikket (som vi vet om) 
+Ett bug er at på den døde modellen til spilleren, og vinnermodellen, så kommer det en hvit linje
+når den er snudd i enkelte retninger
 
+Bendik plassere kort på bordet
+Erfaringer som er verdt å nevne: 
+Hjemmekontor struggles 
+Par programmering ikke lov
+Vanskeligere å kommunisere når vi ikke kan fysisk vise
+Jævla gode på video møter via discord 
+Mer spredte commits
 
 ### Deloppgave 3 Produktleveranse og kodekvalitet
 
