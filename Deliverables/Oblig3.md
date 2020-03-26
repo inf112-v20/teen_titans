@@ -3,20 +3,18 @@
 
 ####Møtereferat 
 13.03.20
-Snakket om hva som må  gjøres fremover. Vi ble enige om at Kort, main menu er første prioritet for øyeblikket. Vi fordelte oppgaver igjen for at allle skulle ha noe å jobbe med.
-Hvor Bendik skal jobbe med spiller logikk og kort og Ola tar seg av lyd og main menu. Mathias jobber med conveyorbelts. Jostein og Hans-Christian hjelper til der det trengs
+Snakket om hva som må  gjøres fremover. Vi ble enige om at Kort, main menu er første prioritet for øyeblikket. Vi fordelte oppgaver igjen for at alle skulle ha noe å jobbe med.
+Hvor Bendik skal jobbe med spiller logikk og kort og Ola tar seg av lyd og main menu. Matias jobber med conveyorbelts. Jostein og Hans-Christian hjelper til der det trengs
 og skriver brukerhistorier og svarer på oppgavene i oblig3. Vi bestemte oss også for at alle skulle sette seg ordentlig inn i reglene.
 
 20.03.20
-Oppdaterte hverandre på hva vi har gjort så langt, og hva vi skal gjøre fremover. Mathias fikset blant annet converyorbelts, og Bendik la til player class, og fikset renderer.
+Oppdaterte hverandre på hva vi har gjort så langt, og hva vi skal gjøre fremover. Matias fikset blant annet converyorbelts, og Bendik la til player class, og fikset renderer.
 
 24.03.20
 
-27.03.20
-
 Rollene fungerer fint, og Matias gjør stadig vekk en fabelaktig jobb som teamleader. 
-Vår bruk av Kanban som prosjektmetodikk fungerer fremdeles fint. Vi er kjappe med å si ifra om foraandringer, og gi tilbakemeldinger om forbedringer.
-Nå som skolen er stengt har det blitt noe mindre par-programmering, men dette gjøres over discsord når vi føler vi har behov eller det vil være en fordel.
+Vår bruk av Kanban som prosjektmetodikk fungerer fremdeles fint. Vi er kjappe med å si ifra om forandringer, og å gi tilbakemeldinger om forbedringer.
+Nå som skolen er stengt har det blitt noe mindre par-programmering, men dette gjøres over discord når vi føler vi har behov eller det vil være en fordel.
 Vi har tilpasset oss godt med møter på discord nå som skolen er stengt. 
 
 
