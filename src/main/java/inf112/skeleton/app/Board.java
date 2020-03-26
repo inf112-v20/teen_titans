@@ -18,7 +18,6 @@ public class Board extends InputAdapter {
     private TiledMapTileLayer playerLayer;
     private Robot player;
     private Robot[] listOfPlayers;
-    //private String[] possiblehazards = {"conveyor", "gear", "hole", "wall"}; Tror kan fjernes
     private final int BOARDWIDTH = 10;
     private final int BOARDHEIGHT = 10;
     private final int LEGALMOVE = 1; //For normal board movement
@@ -30,7 +29,6 @@ public class Board extends InputAdapter {
     public Board(Robot[] players){
         listOfPlayers = players;
         player = listOfPlayers[0];
-
 
         map = new TmxMapLoader().load("testMap2.tmx");
 
