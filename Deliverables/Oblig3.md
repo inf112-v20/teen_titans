@@ -86,19 +86,6 @@ Under vurdering vil det vektlegges at alle bidrar til kodebasen. Hvis det er sto
 committer, må dere legge ved en kort forklaring for hvorfor det er sånn. Husk å committe alt. (Også
 designfiler)
 
-#### Manuelle tester
-
-* Å bevege seg et skritt fram bruker man arrow key up, og rotere brikken bruker man arrow key right / left.
-Eks. et skritt nord er bare å trykke på arrow key up, et skritt west er arrow key left & up,
-et skritt east er arrow key right & up og et skritt south er 2 trykk på arrow key left / right & 1 up.
-Dette er eksempel fra når brikken peker opp mot nord
-
-* Ved at man går på *Hullet* vil brikken dø
-
-* Ved at man går på *Gears* vil brikken snu seg
-
-* Ved at man går på *Conveyor belt* vil brikken flytte seg i den retningen den peker
-
 Prioritet fremover:
 Tester alle tulle med for å få de til å funke, om noen finner god mal send til andre
 Må få kortene til å kunne bli brukt av spillere så vi kan teste de (ikke nødvendigvis flere kort atm) 
