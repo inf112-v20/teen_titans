@@ -1,13 +1,11 @@
 package inf112.skeleton.app;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import com.badlogic.gdx.math.Vector2;
+
 
 import java.util.HashMap;
 
@@ -62,14 +60,6 @@ public class Robot {
 
     public Direction getDir() {
         return dir;
-    }
-
-    public int getMAXHP(){
-        return MAXHP;
-    }
-
-    public int getCurrentHP(){
-        return currentHP;
     }
 
     /**

@@ -2,13 +2,9 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
-
 import java.util.HashMap;
 
 public class Board extends InputAdapter {
@@ -18,7 +14,6 @@ public class Board extends InputAdapter {
     private TiledMapTileLayer playerLayer;
     private Robot player;
     private Robot[] listOfPlayers;
-    //private String[] possiblehazards = {"conveyor", "gear", "hole", "wall"}; Tror kan fjernes
     private final int BOARDWIDTH = 10;
     private final int BOARDHEIGHT = 10;
     private final int LEGALMOVE = 1; //For normal board movement
@@ -30,7 +25,6 @@ public class Board extends InputAdapter {
     public Board(Robot[] players){
         listOfPlayers = players;
         player = listOfPlayers[0];
-
 
         map = new TmxMapLoader().load("testMap2.tmx");
 
