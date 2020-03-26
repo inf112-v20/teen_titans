@@ -21,7 +21,7 @@ meeting minuts 60min.
 
 Rollene fungerer fint, og Matias gjør stadig vekk en fabelaktig jobb som teamleader. 
 Vår bruk av Kanban som prosjektmetodikk fungerer fremdeles fint. Vi er kjappe med å si ifra om foraandringer, og gi tilbakemeldinger om forbedringer.
-Nå som skolen er stengt har det blitt noe mindre par-programmering, men dette gjøres over discsord når vi føler vi har behov eller det vil være en fordel.
+Nå som skolen er stengt har det blitt lit par progarmmering, men vi hjelper hverandre via screenshare på discord. 
 Vi har tilpasset oss godt med møter på discord nå som skolen er stengt. 
 
 
