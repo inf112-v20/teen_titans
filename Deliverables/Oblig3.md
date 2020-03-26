@@ -3,8 +3,8 @@
 
 ####Møtereferat 
 13.03.20
-Snakket om hva som må  gjøres fremover. Vi ble enige om at Kort, main menu er første prioritet for øyeblikket. Vi fordelte oppgaver igjen for at allle skulle ha noe å jobbe med.
-Hvor Bendik skal jobbe med spiller logikk og kort og Ola tar seg av lyd og main menu. Mathias jobber med conveyorbelts. Jostein og Hans-Christian hjelper til der det trengs
+Snakket om hva som må  gjøres fremover. Vi ble enige om at Kort, main menu er første prioritet for øyeblikket. Vi fordelte oppgaver igjen for at alle skulle ha noe å jobbe med.
+Hvor Bendik skal jobbe med spiller logikk og kort og Ola tar seg av lyd og main menu. Matias jobber med conveyorbelts. Jostein og Hans-Christian hjelper til der det trengs
 og skriver brukerhistorier og svarer på oppgavene i oblig3. Vi bestemte oss også for at alle skulle sette seg ordentlig inn i reglene.
 meeting minuts 60min. 
 
@@ -12,14 +12,15 @@ meeting minuts 60min.
 Oppdaterte hverandre på hva vi har gjort så langt, og hva vi skal gjøre fremover. Mathias fikset blant annet converyorbelts, og Bendik la til player class, og fikset renderer.
 Snakket om struktur. Satt opp board elements. 
 meeting minuts 30min. 
+Oppdaterte hverandre på hva vi har gjort så langt, og hva vi skal gjøre fremover. Matias fikset blant annet converyorbelts, og Bendik la til player class, og fikset renderer.
 
 24.03.20
 meeting minuts 60min.
 
 
-27.03.20
-
 Rollene fungerer fint, og Matias gjør stadig vekk en fabelaktig jobb som teamleader. 
+Vår bruk av Kanban som prosjektmetodikk fungerer fremdeles fint. Vi er kjappe med å si ifra om forandringer, og å gi tilbakemeldinger om forbedringer.
+Nå som skolen er stengt har det blitt noe mindre par-programmering, men dette gjøres over discord når vi føler vi har behov eller det vil være en fordel.
 Vår bruk av Kanban som prosjektmetodikk fungerer fremdeles fint. Vi er kjappe med å si ifra om foraandringer, og gi tilbakemeldinger om forbedringer.
 Nå som skolen er stengt har det blitt lit par progarmmering, men vi hjelper hverandre via screenshare på discord. 
 Vi har tilpasset oss godt med møter på discord nå som skolen er stengt. 
@@ -70,19 +71,7 @@ MVP: Flere spiller, må kunne styres av spilleren med kort, må kunne dø og vin
 Ingen bugs for øyeblikket (som vi vet om) 
 
 
-Vi må bli bedre på å bruke prosjektboard igjen (slappe med å oppdatere)
-Spre arbeidsmengenden litt mer (kanban jobbe litt hele tiden for å ikke bli overwhelmed» 
-
-
-Bendik plassere kort på bordet
-
-Erfaringer som er verdt å nevne: 
-Hjemmekontor struggles 
-Par programmering ikke lov
-Vanskeligere å kommunisere når vi ikke kan fysisk vise
-Jævla gode på video møter via discord 
-Mer spredte commits 
-
+### Deloppgave 3 Produktleveranse og kodekvalitet
 
 Dere må dokumentere hvordan prosjektet bygger, testes og kjøres, slik at det er lett for gruppelderne å
 bygge, teste og kjøre koden deres. Under vurdering kommer koden også til å brukertestes.
