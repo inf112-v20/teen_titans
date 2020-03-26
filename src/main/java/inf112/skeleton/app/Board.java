@@ -26,7 +26,6 @@ public class Board extends InputAdapter {
         listOfPlayers = players;
         player = listOfPlayers[0];
 
-
         map = new TmxMapLoader().load("testMap2.tmx");
 
         mapLayers = new HashMap<>();

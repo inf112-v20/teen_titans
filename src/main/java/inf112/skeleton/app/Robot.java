@@ -161,4 +161,11 @@ public class Robot {
                 break;
         }
     }
+
+//    public TiledMapTileLayer.Cell getTexture(){
+//        return ((currentHP < 0) ? playerStates.get("dead") : playerStates.get("alive"));
+//    }
+
+
+
 }
