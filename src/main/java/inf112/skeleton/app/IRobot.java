@@ -1,17 +1,18 @@
 package inf112.skeleton.app;
 
-import com.badlogic.gdx.math.Vector2;
 
 public interface IRobot {
 
 
-    void turn();
+    void turn(boolean turnRight);
 
-    Pos move();
+    void move(int distance);
 
     void die();
 
-    void push();
+    void push(Direction pushDir);
+
+    Direction getDir();
 
 
 }

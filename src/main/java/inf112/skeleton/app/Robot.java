@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import java.util.HashMap;
 
-public class Robot {
+public class Robot implements IRobot {
 
     private Direction dir;
     private Pos pos;
@@ -84,6 +84,7 @@ public class Robot {
         }
     }
 
+
     /**
      * Kill the robot (currently resets position and health)
      * @return returns the starting position
@@ -93,6 +94,7 @@ public class Robot {
         currentState = playerStates.get("dead");
         updateModel();
     }
+
 
     public void win(){
         currentState = playerStates.get("won");
@@ -105,6 +107,7 @@ public class Robot {
      * @param distance How far the robot moves in 'direction'
      * @return returns the new position for the robot
      */
+    @Override
     public void move(int distance) {
         switch (dir) {
             case NORTH:
@@ -127,7 +130,7 @@ public class Robot {
      * Turns the robot in a certain direction
      * @param turnRight The robots new rotation
      */
-    //TODO Give code
+    @Override
     public void turn(boolean turnRight) {
         if (turnRight) {
             dir = dir.next();
@@ -155,6 +158,7 @@ public class Robot {
         }
     }
 
+    @Override
     public void push(Direction pushDir) {
         switch (pushDir) {
             case NORTH:
@@ -171,11 +175,6 @@ public class Robot {
                 break;
         }
     }
-
-//    public TiledMapTileLayer.Cell getTexture(){
-//        return ((currentHP < 0) ? playerStates.get("dead") : playerStates.get("alive"));
-//    }
-
 
 
 }
