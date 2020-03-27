@@ -31,7 +31,7 @@ Vi er flinke til å høre på hverandres meninger, og gi gode tilbakemeldinger. 
 har vi måtte flytte over til digitale løsninger som screenshare via discord, og all kommunikasjon over discord/slack/messanger. Det er selvsagt lettere å vise ting fysisk, men denne løsningen fungerer greit.
 Vi har blitt rimelig flink på møter via discord.
 I det siste har vi vært litt slappe med å oppdatere prosjektboard, noe som vi må forbedre oss på. Samtidig burde vi nok spre arbeidsmengeden litt mer. Vi har hatt tendenser til å benytte oss av "skippertak".
-Kanban bygger jo trossalt på att man skal jobbe litt hele tiden, for å ikke bli "overwhelmed". 
+Kanban bygger jo trossalt på att man skal jobbe litt hele tiden, for å ikke bli "overwhelmed".
 Programmeringsmessig er det også et frustrasjonsmoment å ikke få sitte sammen. I tilfeller hvor man sitter fast og trenger hjelp fra et annet gruppemedlem, blir hjelpen mindre effektiv. Vi merker hvor viktig peking og kroppsspråk er når man diskuterer kode.
 En stemme i seg selv er ikke nok.
 
@@ -58,16 +58,21 @@ Jeg som kunde ønsker:
 * Brikkens plassering på brettet er for å finne ut hvor man starter hen for å finne en strategi til å komme seg til mål.
 
 * En roteringsfunksjon til brikken sånn at jeg kan endre på hvilken vei jeg skal til.
-Farlige og ufarlige fellefunksjoner, der ved at man går til de farlige vil man miste liv, eventuelt dø.
+
+* Farlige og ufarlige fellefunksjoner, der ved at man går til de farlige vil man miste liv, eventuelt dø.
 Og ved at man går til de ufarlige vil brikken bevege seg eller rotere seg i en ny retning uten sin vilje.
 
 * En kortfunksjon der man velger hva man skal gjøre når det er min tur.
 
+* Laserfunksjon, både i brettet som skader brikkens helse og en for brikkens bruk for å skyte på andre brikker.
+
 * Et flagg for å se hvor man vinner.
+
+* At når en brikke dør, vil brikken bli borte fra brettet og det vil komme opp at du har dødd.
 
 Jeg som spiller ønsker:
 
-* At RoboRally er et flerspiller spill for å kunne spille med andre
+* At RoboRally er et flerspiller spill for å kunne spille med andre.
 
 *
 
