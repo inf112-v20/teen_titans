@@ -7,7 +7,6 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import inf112.skeleton.app.scenes.Cards;
 import inf112.skeleton.app.scenes.Orchestrator;
 import inf112.skeleton.app.scenes.HudManager;
 
@@ -22,10 +21,10 @@ public class Renderer implements ApplicationListener, Screen {
 
     private HudManager hudManager;
 
-    public Renderer(Orchestrator orchestrator){
+   /** public Renderer(Orchestrator orchestrator){
         parent = orchestrator;
         create();
-    }
+    }*/
     @Override
     public void create() {
         gameLoop = new GameLoop();

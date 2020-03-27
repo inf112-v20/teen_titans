@@ -1,6 +1,6 @@
 package inf112.skeleton.app.scenes;
 import com.badlogic.gdx.Game;
-import inf112.skeleton.app.scenes.MainMenuScreen;
+import inf112.skeleton.app.Renderer;
 
 public class Orchestrator extends Game {
     private LoadingScreen loadingScreen;
@@ -8,6 +8,7 @@ public class Orchestrator extends Game {
     private PreferencesScreen preferencesScreen;
     private ApplicationScreen applicationScreen;
     private EndScreen endScreen;
+    private Renderer renderer;
 
 
     public final static int MENU = 0;

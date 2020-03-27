@@ -11,6 +11,6 @@ public class Main {
         cfg.title = "Robo Rally";
         cfg.width = 1500;
         cfg.height = 1500;
-        new LwjglApplication(new Orchestrator(), cfg);
+        new LwjglApplication(new Renderer(), cfg);
     }
 }

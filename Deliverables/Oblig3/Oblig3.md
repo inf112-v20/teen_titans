@@ -23,7 +23,8 @@ Endret litt på tester for å tilpasse nye movement. Gått igjennom kode for å 
 meeting minutes 90min.
 
 27.03.20
-meeting minutes ___.
+Jobbet med innlevering nummer 3. Bendik oppdaterte gruppen på endringen han gjorde med de nye kortene. Jobbet mye med main menu, men fikk det ikke til å fungere 100%.
+meeting minutes 180min.
 
 Rollene fungerer fint, og Matias gjør stadig vekk en fabelaktig jobb som teamleader. Vi ser derfor ingen grunn til å endre på vår rollestruktur.
 Vår bruk av Kanban som prosjektmetodikk fungerer fremdeles fint. Vi er kjappe med å si ifra om forandringer, og å gi tilbakemeldinger om forbedringer. Vi er stort sett fornøyd med våre valg, så ser ikke noe grunn til å endre på noe for øyeblikket.
