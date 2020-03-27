@@ -61,19 +61,20 @@ public class GameLoop{
         board.doGroundTileEffects();
     }
 
-    // doRobotTurn is er en gjør at roboten går automatisk.
-    /**private void doRobotTurn(ICard currentCard) {
+    // doRobotTurn is er en gjør per nå at roboten går automatisk.
+    public void doRobotTurn(ICard currentCard) {
         Robot currentRobot = currentCard.getRobot();
         Pos oldPos = currentRobot.getPos().copy();
         currentCard.action();
         board.updatePlayer(oldPos, currentRobot);
-    }*/
+    }
 
 
     public Board getBoard(){
         return board;
     }
 
-
-
+    public Player[] getPlayers() {
+        return players;
+    }
 }

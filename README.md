@@ -9,15 +9,16 @@ Simple skeleton with libgdx.
 Clone the project to Intellij and press play.
 
 ## Manuel Tests
-1. If you press UP-arrow, the character should walk 1 step up.
-2. If you press 2 LEFT/RIGHT-arrow & UP-arrow, the character should walk 1 step down.
-3. If you press RIGHT-arrow & UP-arrow, the character should walk 1 step RIGHT.
-4. If you press LEFT-arrow & UP-arrow, the character should walk 1 step LEFT.
+1. If you click UP-card, the character should walk 1 step up.
+2. If you click 2 LEFT/RIGHT-cards & UP-card, the character should walk 1 step down.
+3. If you click RIGHT-card & UP-card, the character should walk 1 step RIGHT.
+4. If you click LEFT-card & UP-card, the character should walk 1 step LEFT.
 6. Step to the left, it should not move.
 7. Step down, it should not move.
 8. Step on the HOLE will make the character die
 9. Step on the GEARS will make the character rotate
 10. Step on the CONVEYOR BELT will make the character move towards the direction it points
+11. Start the game and graphics appear means graphics work.
 
 
 ## Known bugs

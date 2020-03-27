@@ -30,23 +30,25 @@ Vår bruk av Kanban som prosjektmetodikk fungerer fremdeles fint. Vi er kjappe m
 Vi er flinke til å høre på hverandres meninger, og gi gode tilbakemeldinger. Ingen spørsmål er dumme og man får hjelp når det trengs. Nå som skolen er stengt
 har vi måtte flytte over til digitale løsninger som screenshare via discord, og all kommunikasjon over discord/slack/messanger. Det er selvsagt lettere å vise ting fysisk, men denne løsningen fungerer greit.
 Vi har blitt rimelig flink på møter via discord.
-I det siste har vi vært litt slappe med å oppdatere prosjektboard, noe som vi må forbedre oss på. Samtidig burde vi nok spre arbeidsmengeden litt mer. Har blitt tendenser til "skippertak".
-Kanban bygger jo trossalt på att man skal jobbe litt hele tiden, for å ikke bli "overwhelmed".
+I det siste har vi vært litt slappe med å oppdatere prosjektboard, noe som vi må forbedre oss på. Samtidig burde vi nok spre arbeidsmengeden litt mer. Vi har hatt tendenser til å benytte oss av "skippertak".
+Kanban bygger jo trossalt på att man skal jobbe litt hele tiden, for å ikke bli "overwhelmed". 
+Programmeringsmessig er det også et frustrasjonsmoment å ikke få sitte sammen. I tilfeller hvor man sitter fast og trenger hjelp fra et annet gruppemedlem, blir hjelpen mindre effektiv. Vi merker hvor viktig peking og kroppsspråk er når man diskuterer kode.
+En stemme i seg selv er ikke nok.
 
 ####Noen ting å forbedre
-Vi må bli bedre på å bruke prosjektboard igjen (slappe med å oppdatere)
-Spre arbeidsmengenden litt mer (kanban jobbe litt hele tiden for å ikke bli overwhelmed)
+Vi må bli bedre på å bruke prosjektboard igjen (slappe med å oppdatere).
+Vi må spre arbeidsmengenden mer effektivt. Per nå har vi lange dager hvor vi skriver enorme mengder kode, og dager hvor vi ikke gjør noen ting.
 
 Vi har priortiert Kort og main menu fremover.
 Det funker bra med møter en til to ganger i uken, og det er god kommunikasjon både gjennom Slack, Messenger og på discord. Etter at universitet ble stengt har det blitt litt flere møter enn før. Som helt klart er en fordel.
-Gruppedynamikken og vår kommunikasjon fungerer utmerket.  
+Gruppedynamikken og vår kommunikasjon fungerer.  
 
 
 
 
 ### Deloppgave 2 Krav
 Krav: Fungerende kort og main menu
-Siden sist har vi fått in en player class, conveyor bellts....
+Siden sist har vi fått in en player class, conveyor belts....
 
 ### Brukerhistorie
 Jeg som kunde ønsker:
@@ -69,8 +71,7 @@ Jeg som spiller ønsker:
 
 *
 
-MVP er nå at vi skal ha kort som kan styres av spilleren, og at roboten kan interacte med
-vegger og farer med brettet, som laser, vegger og hull (utfordring). Ettersom dette er noe av det viktigiste for selve spillet.
+MVP er nå at vi skal ha kort som kan styres av spilleren, og at roboten kan interagere med farer på brettet.
 
 ### Deloppgave 3 Produktleveranse og kodekvalitet
 
@@ -94,8 +95,10 @@ Eks. et skritt nord er bare å trykke på arrow key up, et skritt west er arrow 
 et skritt east er arrow key right & up og et skritt south er 2 trykk på arrow key left / right & 1 up.
 Dette er eksempel fra når brikken peker opp mot nord
 
-* Ved at man går på *Hullet* vil brikken dø
+* Ved at man går på *Hult* vil brikken dø
+
+* Ved at man går på *Flagg* vil brikken "vinne"
 
 * Ved at man går på *Gears* vil brikken snu seg
 
-* Ved at man går på *Conveyor belt* vil brikken flytte seg i den retningen den peker
+* Ved at man går på *Conveyor belt* vil brikken flytte seg i den retningen beltet peker

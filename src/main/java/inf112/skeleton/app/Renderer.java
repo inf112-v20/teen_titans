@@ -22,14 +22,14 @@ public class Renderer implements ApplicationListener {
 
     @Override
     public void create() {
-        hudManager = new HudManager();
         gameLoop = new GameLoop();
+        hudManager = new HudManager(gameLoop);
         gameLoop.loop.start();
         setupTextures();
 
         InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(gameLoop.getBoard());
-        multiplexer.addProcessor(hudManager.);
+        multiplexer.addProcessor(hudManager);
         Gdx.input.setInputProcessor(multiplexer);
 
         camera = new OrthographicCamera();
