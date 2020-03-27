@@ -2,14 +2,16 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import inf112.skeleton.app.scenes.Orchestrator;
 import inf112.skeleton.app.scenes.HudManager;
 
-public class Renderer implements ApplicationListener {
-
+public class Renderer implements ApplicationListener, Screen {
+    private Orchestrator parent;
     private GameLoop gameLoop;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
@@ -19,7 +21,10 @@ public class Renderer implements ApplicationListener {
 
     private HudManager hudManager;
 
-
+   /** public Renderer(Orchestrator orchestrator){
+        parent = orchestrator;
+        create();
+    }*/
     @Override
     public void create() {
         gameLoop = new GameLoop();
@@ -59,6 +64,16 @@ public class Renderer implements ApplicationListener {
     }
 
     @Override
+    public void show() {
+
+    }
+
+    @Override
+    public void render(float v) {
+
+    }
+
+    @Override
     public void resize(int width, int height) {
     }
 
@@ -68,6 +83,11 @@ public class Renderer implements ApplicationListener {
 
     @Override
     public void resume() {
+    }
+
+    @Override
+    public void hide() {
+
     }
 
     private void setupTextures(){
