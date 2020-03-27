@@ -1,33 +1,47 @@
 ## Oblig 3
 ### Deloppgave 1 Team og Prosjekt
 
-####Møtereferat 
+####Møtereferat
 13.03.20
-Snakket om hva som må  gjøres fremover. Vi ble enige om at Kort, main menu er første prioritet for øyeblikket. Vi fordelte oppgaver igjen for at allle skulle ha noe å jobbe med.
-Hvor Bendik skal jobbe med spiller logikk og kort og Ola tar seg av lyd og main menu. Mathias jobber med conveyorbelts. Jostein og Hans-Christian hjelper til der det trengs
+Snakket om hva som må  gjøres fremover. Vi ble enige om at Kort, main menu er første prioritet for øyeblikket. Vi fordelte oppgaver igjen for at alle skulle ha noe å jobbe med.
+Hvor Bendik skal jobbe med spiller logikk og kort og Ola tar seg av lyd og main menu. Matias jobber med conveyorbelts. Jostein og Hans-Christian hjelper til der det trengs
 og skriver brukerhistorier og svarer på oppgavene i oblig3. Vi bestemte oss også for at alle skulle sette seg ordentlig inn i reglene.
+meeting minutes 60min.
 
 20.03.20
 Oppdaterte hverandre på hva vi har gjort så langt, og hva vi skal gjøre fremover. Mathias fikset blant annet converyorbelts, og Bendik la til player class, og fikset renderer.
+Snakket om struktur. Satt opp board elements.
+meeting minutes 30min.
 
 24.03.20
+Oppdaterte hverandre på hva vi har gjort siden sist. Gikk gjennom oblig3 og fordelete oppgaver. Ble enige om at vi må være flinkere med å holde prosjekt boardet oppdatert.
+meeting minutes 60min.
+
+26.03.20
+Oppdaterte hverandre på hva vi har gjort siden sist. Gikk gjennom obli3 og retteskjema et par ganger for å være sikre på at vi har alt klar til innlevrering.
+Endret litt på tester for å tilpasse nye movement. Gått igjennom kode for å rydde litt i ubrukt kode.
+meeting minutes 90min.
 
 27.03.20
+meeting minutes ___.
 
-Rollene fungerer fint, og Matias gjør stadig vekk en fabelaktig jobb som teamleader. 
-Vår bruk av Kanban som prosjektmetodikk fungerer fremdeles fint. Vi er kjappe med å si ifra om foraandringer, og gi tilbakemeldinger om forbedringer.
-Nå som skolen er stengt har det blitt noe mindre par-programmering, men dette gjøres over discsord når vi føler vi har behov eller det vil være en fordel.
-Vi har tilpasset oss godt med møter på discord nå som skolen er stengt. 
+Rollene fungerer fint, og Matias gjør stadig vekk en fabelaktig jobb som teamleader. Vi ser derfor ingen grunn til å endre på vår rollestruktur.
+Vår bruk av Kanban som prosjektmetodikk fungerer fremdeles fint. Vi er kjappe med å si ifra om forandringer, og å gi tilbakemeldinger om forbedringer. Vi er stort sett fornøyd med våre valg, så ser ikke noe grunn til å endre på noe for øyeblikket.
+Vi er flinke til å høre på hverandres meninger, og gi gode tilbakemeldinger. Ingen spørsmål er dumme og man får hjelp når det trengs. Nå som skolen er stengt
+har vi måtte flytte over til digitale løsninger som screenshare via discord, og all kommunikasjon over discord/slack/messanger. Det er selvsagt lettere å vise ting fysisk, men denne løsningen fungerer greit.
+Vi har blitt rimelig flink på møter via discord.
+I det siste har vi vært litt slappe med å oppdatere prosjektboard, noe som vi må forbedre oss på. Samtidig burde vi nok spre arbeidsmengeden litt mer. Har blitt tendenser til "skippertak".
+Kanban bygger jo trossalt på att man skal jobbe litt hele tiden, for å ikke bli "overwhelmed".
 
-
-####Gjør et kort retrospektiv hvor dere vurderer hva dere har klart til nå, og hva som kan forbedres. Dette
-####skal handle om prosjektstruktur, ikke kode. Dere kan selvsagt diskutere kode, men dette handler ikke
-####om feilretting, men om hvordan man jobber og kommuniserer.
-####Bli enige om maks tre forbedringspunkter fra retrospektivet, som skal følges opp under neste sprint.
+####Noen ting å forbedre
+Vi må bli bedre på å bruke prosjektboard igjen (slappe med å oppdatere)
+Spre arbeidsmengenden litt mer (kanban jobbe litt hele tiden for å ikke bli overwhelmed)
 
 Vi har priortiert Kort og main menu fremover.
-Det funker bra med møter en til to ganger i uken, og det er god kommunikasjon både gjennom Slack, Messenger og på discord.
-Gruppedynamikken fungerer utmerket.  
+Det funker bra med møter en til to ganger i uken, og det er god kommunikasjon både gjennom Slack, Messenger og på discord. Etter at universitet ble stengt har det blitt litt flere møter enn før. Som helt klart er en fordel.
+Gruppedynamikken og vår kommunikasjon fungerer utmerket.  
+
+
 
 
 ### Deloppgave 2 Krav
@@ -53,10 +67,10 @@ Jeg som spiller ønsker:
 
 * At RoboRally er et flerspiller spill for å kunne spille med andre
 
-* 
+*
 
 MVP er nå at vi skal ha kort som kan styres av spilleren, og at roboten kan interacte med
-vegger og farer med brettet, som laser, vegger og hull (utfordring). Ettersom dette er noe av det viktigiste for selve spillet. 
+vegger og farer med brettet, som laser, vegger og hull (utfordring). Ettersom dette er noe av det viktigiste for selve spillet.
 
 ### Deloppgave 3 Produktleveranse og kodekvalitet
 
