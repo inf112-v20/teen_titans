@@ -2,10 +2,11 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import inf112.skeleton.app.scenes.Cards;
+import inf112.skeleton.app.scenes.HudManager;
 
 public class Renderer implements ApplicationListener {
 
@@ -16,16 +17,21 @@ public class Renderer implements ApplicationListener {
     public final int BOARDHEIGHT = 12;
     public final int BOARDWIDTH = 12;
 
-    private Cards cards;
+    private HudManager hudManager;
 
 
     @Override
     public void create() {
-        cards = new Cards();
+        hudManager = new HudManager();
         gameLoop = new GameLoop();
         gameLoop.loop.start();
         setupTextures();
-        Gdx.input.setInputProcessor(gameLoop.getBoard());
+
+        InputMultiplexer multiplexer = new InputMultiplexer();
+        multiplexer.addProcessor(gameLoop.getBoard());
+        multiplexer.addProcessor(hudManager.);
+        Gdx.input.setInputProcessor(multiplexer);
+
         camera = new OrthographicCamera();
         renderer = new OrthogonalTiledMapRenderer(gameLoop.getBoard().getMap(), 1/300f);
         camera.setToOrtho(false, BOARDWIDTH, BOARDHEIGHT);
@@ -38,7 +44,7 @@ public class Renderer implements ApplicationListener {
     @Override
     public void dispose() {
         renderer.dispose();
-        cards.getStage().dispose();
+        hudManager.getStage().dispose();
         gameLoop.loop.interrupt();
     }
 
@@ -47,8 +53,8 @@ public class Renderer implements ApplicationListener {
         Gdx.gl.glClearColor(1, 1, 0, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         renderer.render();
-        cards.getStage().draw();
-        cards.getStage().act();
+        hudManager.getStage().draw();
+        hudManager.getStage().act();
 
     }
 

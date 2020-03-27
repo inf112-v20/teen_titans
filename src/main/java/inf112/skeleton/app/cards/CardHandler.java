@@ -2,8 +2,6 @@ package inf112.skeleton.app.cards;
 
 import inf112.skeleton.app.Board;
 import inf112.skeleton.app.Player;
-import inf112.skeleton.app.Robot;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.PriorityQueue;

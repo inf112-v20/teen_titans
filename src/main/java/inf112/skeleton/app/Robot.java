@@ -61,14 +61,6 @@ public class Robot {
         return dir;
     }
 
-    public int getMAXHP(){
-        return MAXHP;
-    }
-
-    public int getCurrentHP(){
-        return currentHP;
-    }
-
     /**
      * Call to take damage
      * @param dmg How much damage taken
