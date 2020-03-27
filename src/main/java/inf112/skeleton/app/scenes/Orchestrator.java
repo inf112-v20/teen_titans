@@ -1,7 +1,6 @@
 package inf112.skeleton.app.scenes;
 import com.badlogic.gdx.Game;
-import inf112.skeleton.app.Renderer;
-
+import inf112.skeleton.app.scenes.MainMenuScreen;
 
 public class Orchestrator extends Game {
     private LoadingScreen loadingScreen;
@@ -9,7 +8,6 @@ public class Orchestrator extends Game {
     private PreferencesScreen preferencesScreen;
     private ApplicationScreen applicationScreen;
     private EndScreen endScreen;
-    private Renderer renderer;
 
 
     public final static int MENU = 0;
@@ -33,9 +31,8 @@ public class Orchestrator extends Game {
                 this.setScreen(preferencesScreen);
                 break;
             case APPLICATION:
-                if(renderer == null) renderer = new Renderer(this);
-                renderer.render();
-                this.setScreen(renderer);
+                if(applicationScreen == null) applicationScreen = new ApplicationScreen(this);
+                this.setScreen(applicationScreen);
                 break;
             case ENDGAME:
                 if(endScreen == null) endScreen = new EndScreen(this);

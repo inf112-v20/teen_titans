@@ -48,55 +48,10 @@ public class Board extends InputAdapter {
         return mapLayers.get("playerLayer");
     }
 
-    @Override
-    public boolean keyUp(int keyCode){
-        Pos oldPos = player.getPos().copy();
-        Pos newPos = new Pos();
-        newPos.setPos(oldPos.getPosX(), oldPos.getPosY());
-        if(keyCode == Input.Keys.UP) {
-
-            switch(player.getDir()){
-                case NORTH:
-                    newPos.setPos(newPos.getPosX(), newPos.getPosY() + 1);
-                    break;
-                case EAST:
-                    newPos.setPos(newPos.getPosX() + 1, newPos.getPosY());
-                    break;
-                case WEST:
-                    newPos.setPos(newPos.getPosX() - 1, newPos.getPosY());
-                    break;
-                case SOUTH:
-                    newPos.setPos(newPos.getPosX(), newPos.getPosY() - 1);
-                    break;
-            }
-
-            if (checkPos(newPos) == LEGALMOVE) {
-                player.move(1); //TODO Når spilleren går 2 så må player.move loope 2 ganga så vi ikkje skipper en rute
-
-            }
-            else if (checkPos(newPos) == SUICIDALMOVE) {
-                System.out.println("You died");
-                player.move(1);
-                player.die();
-                updatePlayer(oldPos, player); //Update player
-
-            }
-        }
-        else if (keyCode == Input.Keys.LEFT) {
-            player.turn(LEFT);
-        }
-        else if (keyCode == Input.Keys.RIGHT) {
-            player.turn(RIGHT);
-        }
-
-        updatePlayer(oldPos, player); //Update player
-
-        return true;
-
-    }
 
     public void updatePlayer(Pos oldPos, Robot player){
         getPlayerLayer().setCell(oldPos.getPosX(), oldPos.getPosY(), null);
+        if(checkPos(player.getPos()) == SUICIDALMOVE){player.die();}
         playerLayer.setCell(player.getPos().getPosX(), player.getPos().getPosY(), player.getCurrentState());
     }
 
