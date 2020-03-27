@@ -1,9 +1,7 @@
 package inf112.skeleton.app;
 
-import com.badlogic.gdx.Input;
 import inf112.skeleton.app.cards.CardHandler;
 import inf112.skeleton.app.cards.ICard;
-
 import java.util.PriorityQueue;
 import java.util.Random;
 
@@ -53,7 +51,6 @@ public class GameLoop{
                 }
 
                 doGroundTileEffects();
-
 
 
             }
