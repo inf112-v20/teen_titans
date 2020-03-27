@@ -9,7 +9,7 @@ import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 
 import java.util.HashMap;
 
-public class Robot {
+public class Robot implements IRobot {
 
     private Direction dir;
     private Pos pos;
