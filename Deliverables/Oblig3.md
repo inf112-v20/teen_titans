@@ -56,20 +56,27 @@ Jeg som kunde ønsker:
 * Brikkens plassering på brettet er for å finne ut hvor man starter hen for å finne en strategi til å komme seg til mål.
 
 * En roteringsfunksjon til brikken sånn at jeg kan endre på hvilken vei jeg skal til.
-Farlige og ufarlige fellefunksjoner, der ved at man går til de farlige vil man miste liv, eventuelt dø.
+
+* Farlige og ufarlige fellefunksjoner, der ved at man går til de farlige vil man miste liv, eventuelt dø.
 Og ved at man går til de ufarlige vil brikken bevege seg eller rotere seg i en ny retning uten sin vilje.
 
 * En kortfunksjon der man velger hva man skal gjøre når det er min tur.
 
+* Laserfunksjon, både i brettet som skader brikkens helse og en for brikkens bruk for å skyte på andre brikker.
+
 * Et flagg for å se hvor man vinner.
+
+* At når en brikke dør, vil brikken bli borte fra brettet og det vil komme opp at du har dødd.
 
 Jeg som spiller ønsker:
 
-* At RoboRally er et flerspiller spill for å kunne spille med andre
+* At RoboRally er et flerspiller spill for å kunne spille med andre.
 
-* 
+* At det er mulig å eliminere andre spillere ved bruk av laseren.
 
+* At det er en og en sin tur, og ikke alle på en gang for å finne ut en måte å vinne på.
 
+* At det er flere vinnere, så lenge man kommer seg fram til flagget.
 
 Vårt MVP krav nå er Flere spiller som må kunne styres av spilleren via kort. Disse må også kunne dø og vinne. Dette er fordi det er helt essensielt for selve spillet.  
 Ett bug er at på den døde modellen til spilleren, og vinnermodellen, så kommer det en hvit linje når den er snudd i enkelte retninger.
