@@ -1,5 +1,6 @@
 package inf112.skeleton.app.cards;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import inf112.skeleton.app.Robot;
 
 public interface ICard extends Comparable<ICard> {
@@ -24,6 +25,12 @@ public interface ICard extends Comparable<ICard> {
      */
     @Override
     String toString();
+
+
+    /**
+     * @return title of current card's image representation
+     */
+    Image getImage();
 
 
 }

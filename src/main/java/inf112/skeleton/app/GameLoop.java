@@ -1,11 +1,13 @@
 package inf112.skeleton.app;
 
-import inf112.skeleton.app.cards.CardHandler;
-import inf112.skeleton.app.cards.ICard;
+import com.badlogic.gdx.InputAdapter;
+import inf112.skeleton.app.cards.*;
+import inf112.skeleton.app.scenes.HudManager;
 import java.util.PriorityQueue;
 import java.util.Random;
 
-public class GameLoop{
+public class GameLoop extends InputAdapter {
+    HudManager hud;
     Random random;
     Board board;
     Player[] players;
@@ -13,21 +15,15 @@ public class GameLoop{
     CardHandler cardHandler;
     public Thread loop;
 
-    public GameLoop(){
+    public GameLoop(HudManager hud){
 
-        robots = new Robot[]{
-            new Robot(3, 3), //Player 0
-        };
+        board = new Board(1);
+        this.hud = hud;
+
         players = new Player[] {
-                new Player(robots[0]),
+                new Player(board.getRobots()[0], hud, board),
         };
 
-        robots = new Robot[players.length];
-        for(int i = 0; i < players.length; i++){
-            robots[i] = players[i].getRobot();
-        }
-
-        board = new Board(robots);
         cardHandler = new CardHandler(players, board);
         random = new Random();
         createGameLoopThread();
@@ -37,13 +33,18 @@ public class GameLoop{
         loop = new Thread(() -> {
             int r = 0;
             while(true) {
-                r++;
-                for(PriorityQueue<ICard> round : cardHandler.getSortedCards()){
-                    ICard currentCard = round.remove();
+                PriorityQueue<ICard>[] queues = cardHandler.getSortedCards();
+                hud.recieveCards(players[0].getCardStorage());
+
+
+                for(PriorityQueue<ICard> round : queues){
+                    if(round.size() < 0) {
+                        ICard currentCard = round.remove();
+                    }
                     //doRobotTurn(currentCard);
 
                     try {
-                        Thread.sleep(200);
+                        Thread.sleep(10);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
 
@@ -77,4 +78,7 @@ public class GameLoop{
     public Player[] getPlayers() {
         return players;
     }
+
+
+
 }

@@ -27,15 +27,12 @@ public class Renderer implements ApplicationListener, Screen {
     }*/
     @Override
     public void create() {
-        gameLoop = new GameLoop();
-        hudManager = new HudManager(gameLoop);
+        hudManager = new HudManager();
+        gameLoop = new GameLoop(hudManager);
         gameLoop.loop.start();
         setupTextures();
 
-        InputMultiplexer multiplexer = new InputMultiplexer();
-        multiplexer.addProcessor(gameLoop.getBoard());
-        multiplexer.addProcessor(hudManager);
-        Gdx.input.setInputProcessor(multiplexer);
+        Gdx.input.setInputProcessor(gameLoop.getPlayers()[0]);
 
         camera = new OrthographicCamera();
         renderer = new OrthogonalTiledMapRenderer(gameLoop.getBoard().getMap(), 1/300f);

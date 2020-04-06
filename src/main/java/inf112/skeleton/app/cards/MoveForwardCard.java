@@ -1,5 +1,8 @@
 package inf112.skeleton.app.cards;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import inf112.skeleton.app.Board;
 import inf112.skeleton.app.Player;
 import inf112.skeleton.app.Pos;
@@ -10,7 +13,7 @@ public class MoveForwardCard implements ICard{
     private int priority;
     private Player player;
     private Board board;
-
+    private Image image = new Image(new Texture(Gdx.files.internal("MoveForwardCard.png")));
 
     public MoveForwardCard(int priority, Player player, Board board){
         this.board = board;
@@ -31,7 +34,6 @@ public class MoveForwardCard implements ICard{
         Pos oldPos = player.getRobot().getPos().copy();
         player.getRobot().move(1);
         board.updatePlayer(oldPos, player.getRobot());
-
     }
 
     @Override
@@ -42,9 +44,14 @@ public class MoveForwardCard implements ICard{
     }
 
 
-
     @Override
     public String toString(){
         return "Forward 1";
     }
+
+    @Override
+    public Image getImage() {
+        return image;
+    }
+
 }

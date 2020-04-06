@@ -1,10 +1,11 @@
 package inf112.skeleton.app;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import inf112.skeleton.app.cards.ICard;
+
 import java.util.HashMap;
 
 public class Board extends InputAdapter {
@@ -12,8 +13,8 @@ public class Board extends InputAdapter {
     private TiledMap map;
     private HashMap<String, TiledMapTileLayer> mapLayers;
     private TiledMapTileLayer playerLayer;
-    private Robot player;
-    private Robot[] listOfPlayers;
+    private Robot robot;
+    private Robot[] listOfRobots;
     private final int BOARDWIDTH = 10;
     private final int BOARDHEIGHT = 10;
     private final int LEGALMOVE = 1; //For normal board movement
@@ -22,9 +23,9 @@ public class Board extends InputAdapter {
     private final boolean RIGHT = true;
     private final boolean LEFT = false;
 
-    public Board(Robot[] players){
-        listOfPlayers = players;
-        player = listOfPlayers[0];
+
+    public Board(int numPlayers){
+        createRobots(numPlayers);
 
         map = new TmxMapLoader().load("testMap2.tmx");
 
@@ -48,6 +49,13 @@ public class Board extends InputAdapter {
         return mapLayers.get("playerLayer");
     }
 
+    public void doRobotTurn(ICard currentCard) {
+        Robot currentRobot = currentCard.getRobot();
+        Pos oldPos = currentRobot.getPos().copy();
+        currentCard.action();
+        updatePlayer(oldPos, currentRobot);
+    }
+
 
     public void updatePlayer(Pos oldPos, Robot player){
         getPlayerLayer().setCell(oldPos.getPosX(), oldPos.getPosY(), null);
@@ -60,7 +68,7 @@ public class Board extends InputAdapter {
             try {
                 if (mapLayers.get("hole").getCell(pos.getPosX(), pos.getPosY()) != null) return SUICIDALMOVE;
                 else if (mapLayers.get("flag").getCell(pos.getPosX(), pos.getPosY()) != null) {
-                    player.win();
+                    robot.win();
                     return LEGALMOVE;
                 }
             }
@@ -78,7 +86,7 @@ public class Board extends InputAdapter {
 
     public void doGroundTileEffects(){
         Pos currentPos;
-        for (Robot robot : listOfPlayers) {
+        for (Robot robot : listOfRobots) {
             currentPos = robot.getPos().copy();
             if (mapLayers.get("conveyor").getCell(currentPos.getPosX(), currentPos.getPosY()) != null) {
                 conveyorTypes(currentPos, robot);
@@ -141,12 +149,25 @@ public class Board extends InputAdapter {
     }
 
     public void createTextures(){
-        playerLayer.setCell(player.getPos().getPosX(), player.getPos().getPosY(), player.getCurrentState());
+        playerLayer.setCell(robot.getPos().getPosX(), robot.getPos().getPosY(), robot.getCurrentState());
     }
 
-    public Robot[] getPlayers(){
-        return listOfPlayers;
+    private void createRobots(int n){
+        listOfRobots = new Robot[n];
+        for(int i = 0; i < n; i++){
+            //TODO, LAG CUSTOM PLASSERING
+            listOfRobots[i] = new Robot(3, 3);
+        }
+        robot = listOfRobots[0];
     }
+
+    public Robot[] getRobots(){
+        return listOfRobots;
+    }
+
+
+
+
 }
 
 

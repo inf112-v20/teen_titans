@@ -2,15 +2,19 @@ package inf112.skeleton.app.cards;
 
 import inf112.skeleton.app.Board;
 import inf112.skeleton.app.Player;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Random;
 
 public class CardHandler {
+    private ArrayList<ICard> deck;
+
     private PriorityQueue<ICard>[] cardsPQ;
     private Player[] players;
-    private ArrayList<ICard>[] individuallySortedCards;
+    private ICard[][] individuallySortedCards;
     private Random random;
     private Board board;
 
@@ -18,55 +22,56 @@ public class CardHandler {
         random = new Random();
         this.players = players;
         this.board = board;
-        individuallySortedCards = new ArrayList[players.length];
+        createDeck();
+        individuallySortedCards = new ICard[players.length][5];
 
 
-        cardsPQ = new PriorityQueue[9];
+        cardsPQ = new PriorityQueue[5];
         for(int i = 0; i < cardsPQ.length; i++){
             cardsPQ[i] = new PriorityQueue<>();
         }
     }
 
+    public void createDeck(){
+        deck = new ArrayList<>();
+        for(int i = 0; i < players.length * 5; i++){
+            deck.add(new MoveForwardCard(random.nextInt(1000), players[0], board));
+        }
+        for(int i = 0; i < players.length * 2; i++){
+            deck.add(new TurnRightCard(random.nextInt(1000), players[0]));
+        }
+        for(int i = 0; i < players.length * 2; i++){
+            deck.add(new TurnLeftCard(random.nextInt(1000), players[0]));
+        }
+    }
+
     private void dealCards(){
+        Collections.shuffle(deck);
         for(int p = 0; p < players.length; p++) {
             ArrayList<ICard> playerCards = new ArrayList<>();
-            for (int i = 0; i < 3; i++) {
-                playerCards.add(new TurnRightCard(random.nextInt(1000), players[p]));
+            for(int i = p*players.length; i < p*players.length + 9; i++){
+                playerCards.add(deck.get(i));
             }
-            for (int i = 0; i < 3; i++) {
-                int priority = random.nextInt(1000);
-                playerCards.add(new TurnLeftCard(random.nextInt(1000), players[p]));
-            }
-            for (int i = 0; i < 3; i++) {
-                playerCards.add(new MoveForwardCard(random.nextInt(1000), players[p], board));
-            }
-
-            //TODO Send cards to players, have players select order of which cards should be played.
-            Collections.shuffle(playerCards);
-            individuallySortedCards[p] = playerCards;
-
+            players[p].recieveCards(playerCards);
+            ICard[] sortedCards = players[p].getSortedCards();
+            individuallySortedCards[p] = sortedCards;
         }
     }
 
 
     private void addCardsToPQArray(){
-        for(int i = 0; i < cardsPQ.length; i++){
+        for(int i = 0; i < 5; i++){
             PriorityQueue<ICard> currentQueue = new PriorityQueue<>();
-
-            for(int j = 0; j < individuallySortedCards.length; j++){
-                if(individuallySortedCards[j].size() > 0) {
-                    currentQueue.add(individuallySortedCards[j].remove(0));
-                }
+            for(ICard[] playerChoice : individuallySortedCards){
+                currentQueue.add(playerChoice[i]);
             }
             cardsPQ[i] = currentQueue;
         }
+
     }
 
 
     public PriorityQueue<ICard>[] getSortedCards(){
-        for(PriorityQueue<ICard> queue : cardsPQ){
-            queue.clear();
-        }
         dealCards();
         addCardsToPQArray();
 
