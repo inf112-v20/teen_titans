@@ -13,15 +13,24 @@ public class Player extends InputAdapter {
     private Board board;
     private HudManager hud;
     private Robot robot;
-    private ICard[] cardStorage = new ICard[9];
-    private ICard[] sortedCards = new ICard[5];
+    private ArrayList<ICard> cardStorage = new ArrayList<>();
 
     public ICard[] getCardStorage(){
+        ICard[] cardStorage = new ICard[9];
+        for(int i = 0; i < this.cardStorage.size(); i++){
+            cardStorage[i] = this.cardStorage.get(i);
+        }
         return cardStorage;
     }
+
     public ICard[] getSortedCards(){
+        ICard[] sortedCards = new ICard[5];
+        for(int i = 0; i < sortedCards.length; i++){
+            sortedCards[i] = this.cardStorage.get(i);
+        }
         return sortedCards;
     }
+
     public Robot getRobot(){
         return robot;
     }
@@ -33,16 +42,15 @@ public class Player extends InputAdapter {
     }
 
     public void recieveCards(ArrayList<ICard> cards){
-        cardStorage = new ICard[9];
-        sortedCards = new ICard[5];
-        int iters = cards.size();
-        for(int i = 0; i < iters; i++){
-            ICard currentCard = cards.remove(0);
-            cardStorage[i] = currentCard;
-        }
+        cardStorage = cards;
     }
 
-    
+
+
+
+
+
+
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button){
 

@@ -34,7 +34,7 @@ public class GameLoop extends InputAdapter {
             int r = 0;
             while(true) {
                 PriorityQueue<ICard>[] queues = cardHandler.getSortedCards();
-                hud.recieveCards(players[0].getCardStorage());
+                hud.recieveCards((ICard[]) players[0].getCardStorage());
 
 
                 for(PriorityQueue<ICard> round : queues){
@@ -62,13 +62,6 @@ public class GameLoop extends InputAdapter {
         board.doGroundTileEffects();
     }
 
-    // doRobotTurn is er en gjør per nå at roboten går automatisk.
-    public void doRobotTurn(ICard currentCard) {
-        Robot currentRobot = currentCard.getRobot();
-        Pos oldPos = currentRobot.getPos().copy();
-        currentCard.action();
-        board.updatePlayer(oldPos, currentRobot);
-    }
 
 
     public Board getBoard(){

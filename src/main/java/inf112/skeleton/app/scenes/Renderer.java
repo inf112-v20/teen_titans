@@ -1,4 +1,4 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.scenes;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -7,10 +7,12 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import inf112.skeleton.app.GameLoop;
 import inf112.skeleton.app.scenes.Orchestrator;
 import inf112.skeleton.app.scenes.HudManager;
 
-public class Renderer implements ApplicationListener, Screen {
+public class Renderer {
+
     private Orchestrator parent;
     private GameLoop gameLoop;
     private OrthogonalTiledMapRenderer renderer;
@@ -21,12 +23,16 @@ public class Renderer implements ApplicationListener, Screen {
 
     private HudManager hudManager;
 
-   /** public Renderer(Orchestrator orchestrator){
-        parent = orchestrator;
-        create();
-    }*/
-    @Override
+
+
+   public Renderer(Orchestrator orchestrator) {
+       System.out.println("2");
+       parent = orchestrator;
+       create();
+   }
+
     public void create() {
+        System.out.println("3");
         hudManager = new HudManager();
         gameLoop = new GameLoop(hudManager);
         gameLoop.loop.start();
@@ -43,47 +49,18 @@ public class Renderer implements ApplicationListener, Screen {
 
     }
 
-    @Override
     public void dispose() {
         renderer.dispose();
         hudManager.getStage().dispose();
         gameLoop.loop.interrupt();
     }
 
-    @Override
     public void render() {
         Gdx.gl.glClearColor(1, 1, 0, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         renderer.render();
         hudManager.getStage().draw();
         hudManager.getStage().act();
-
-    }
-
-    @Override
-    public void show() {
-
-    }
-
-    @Override
-    public void render(float v) {
-
-    }
-
-    @Override
-    public void resize(int width, int height) {
-    }
-
-    @Override
-    public void pause() {
-    }
-
-    @Override
-    public void resume() {
-    }
-
-    @Override
-    public void hide() {
 
     }
 
