@@ -1,6 +1,8 @@
 package inf112.skeleton.app;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -81,11 +83,13 @@ public class Robot implements IRobot {
     public void die(){
         currentState = playerStates.get("dead");
         updateModel();
+
     }
 
     public void win(){
         currentState = playerStates.get("won");
         updateModel();
+
     }
 
 

@@ -1,7 +1,10 @@
 package inf112.skeleton.app;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.files.FileHandle;
 import inf112.skeleton.app.scenes.Orchestrator;
 import inf112.skeleton.app.scenes.Renderer;
 

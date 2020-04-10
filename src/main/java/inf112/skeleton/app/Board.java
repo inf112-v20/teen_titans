@@ -1,11 +1,15 @@
 package inf112.skeleton.app;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import inf112.skeleton.app.cards.ICard;
+import inf112.skeleton.app.scenes.MainMenuScreen;
 
+import javax.swing.*;
 import java.util.HashMap;
 
 public class Board extends InputAdapter {
@@ -68,6 +72,10 @@ public class Board extends InputAdapter {
             try {
                 if (mapLayers.get("hole").getCell(pos.getPosX(), pos.getPosY()) != null) return SUICIDALMOVE;
                 else if (mapLayers.get("flag").getCell(pos.getPosX(), pos.getPosY()) != null) {
+
+                    Sound sound = Gdx.audio.newSound(Gdx.files.internal("assets/Sound effects/WeAreTheChampions.mp3"));
+                    long id = sound.play(1.0f);
+
                     robot.win();
                     return LEGALMOVE;
                 }
@@ -78,6 +86,9 @@ public class Board extends InputAdapter {
             }
         }
         else {
+
+            Sound sound = Gdx.audio.newSound(Gdx.files.internal("assets/Sound effects/FBI_OpenUp.mp3"));
+            sound.play(1.0f);
             return SUICIDALMOVE;
         }
 
