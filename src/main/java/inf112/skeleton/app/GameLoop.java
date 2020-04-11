@@ -33,26 +33,18 @@ public class GameLoop extends InputAdapter {
         loop = new Thread(() -> {
             int r = 0;
             while(true) {
+                cardHandler.dealCards();
+                hud.recieveCards(players[0].getCardStorage());
+
                 PriorityQueue<ICard>[] queues = cardHandler.getSortedCards();
-                hud.recieveCards((ICard[]) players[0].getCardStorage());
-
-
                 for(PriorityQueue<ICard> round : queues){
-                    if(round.size() < 0) {
+                    while(!round.isEmpty()) {
                         ICard currentCard = round.remove();
-                    }
-                    //doRobotTurn(currentCard);
-
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-
+                        System.out.println(currentCard.toString());
+                        board.doRobotTurn(currentCard);
                     }
                 }
-
                 doGroundTileEffects();
-
 
             }
         });

@@ -4,17 +4,12 @@ import inf112.skeleton.app.Board;
 import inf112.skeleton.app.Player;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.PriorityQueue;
-import java.util.Random;
+import java.util.*;
 
 public class CardHandler {
     private ArrayList<ICard> deck;
 
-    private PriorityQueue<ICard>[] cardsPQ;
     private Player[] players;
-    private ICard[][] individuallySortedCards;
     private Random random;
     private Board board;
 
@@ -23,13 +18,7 @@ public class CardHandler {
         this.players = players;
         this.board = board;
         createDeck();
-        individuallySortedCards = new ICard[players.length][5];
 
-
-        cardsPQ = new PriorityQueue[5];
-        for(int i = 0; i < cardsPQ.length; i++){
-            cardsPQ[i] = new PriorityQueue<>();
-        }
     }
 
     public void createDeck(){
@@ -45,7 +34,7 @@ public class CardHandler {
         }
     }
 
-    private void dealCards(){
+    public void dealCards() {
         Collections.shuffle(deck);
         for(int p = 0; p < players.length; p++) {
             ArrayList<ICard> playerCards = new ArrayList<>();
@@ -53,13 +42,22 @@ public class CardHandler {
                 playerCards.add(deck.get(i));
             }
             players[p].recieveCards(playerCards);
-            ICard[] sortedCards = players[p].getSortedCards();
-            individuallySortedCards[p] = sortedCards;
         }
     }
 
+    private ICard[][] getPlayerCards(){
+        ICard[][] individuallySortedCards = new ICard[players.length][5];
+        for(int p = 0; p < players.length; p++){
+            individuallySortedCards[p] = players[p].getSortedCards();
+        }
+        return individuallySortedCards;
+    }
 
-    private void addCardsToPQArray(){
+    private PriorityQueue<ICard>[] addCardsToPQArray(ICard[][] individuallySortedCards){
+        PriorityQueue<ICard>[] cardsPQ = new PriorityQueue[5];
+        for(int i = 0; i < cardsPQ.length; i++){
+            cardsPQ[i] = new PriorityQueue<>();
+        }
         for(int i = 0; i < 5; i++){
             PriorityQueue<ICard> currentQueue = new PriorityQueue<>();
             for(ICard[] playerChoice : individuallySortedCards){
@@ -67,15 +65,11 @@ public class CardHandler {
             }
             cardsPQ[i] = currentQueue;
         }
-
+        return cardsPQ;
     }
 
-
     public PriorityQueue<ICard>[] getSortedCards(){
-        dealCards();
-        addCardsToPQArray();
-
-        return cardsPQ;
+        return addCardsToPQArray(getPlayerCards());
     }
 
 

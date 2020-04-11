@@ -11,9 +11,10 @@ public class Orchestrator extends Game {
 
     @Override
     public void create() {
-        menuScreen = new MainMenuScreen(this);
+        /*menuScreen = new MainMenuScreen(this);
         Gdx.input.setInputProcessor(menuScreen);
-        currentScreen = Screens.MAINMENU;
+        currentScreen = Screens.MAINMENU;*/
+        createGame();
     }
 
 
@@ -33,7 +34,6 @@ public class Orchestrator extends Game {
     }
 
     public void createGame(){
-        System.out.println("1");
         renderer = new Renderer(this);
         currentScreen = Screens.RENDERER;
     }

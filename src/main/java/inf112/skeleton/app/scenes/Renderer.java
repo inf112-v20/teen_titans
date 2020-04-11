@@ -26,13 +26,11 @@ public class Renderer {
 
 
    public Renderer(Orchestrator orchestrator) {
-       System.out.println("2");
        parent = orchestrator;
        create();
    }
 
     public void create() {
-        System.out.println("3");
         hudManager = new HudManager();
         gameLoop = new GameLoop(hudManager);
         gameLoop.loop.start();
@@ -56,7 +54,7 @@ public class Renderer {
     }
 
     public void render() {
-        Gdx.gl.glClearColor(1, 1, 0, 1);
+        Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         renderer.render();
         hudManager.getStage().draw();

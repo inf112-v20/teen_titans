@@ -1,12 +1,16 @@
 package inf112.skeleton.app;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import inf112.skeleton.app.cards.ICard;
 import inf112.skeleton.app.cards.MoveForwardCard;
 import inf112.skeleton.app.cards.TurnLeftCard;
 import inf112.skeleton.app.cards.TurnRightCard;
 import inf112.skeleton.app.scenes.HudManager;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Player extends InputAdapter {
 
@@ -14,6 +18,8 @@ public class Player extends InputAdapter {
     private HudManager hud;
     private Robot robot;
     private ArrayList<ICard> cardStorage = new ArrayList<>();
+    private ArrayList<ICard> sortedCards = new ArrayList<>();
+    private boolean cardsReady = false;
 
     public ICard[] getCardStorage(){
         ICard[] cardStorage = new ICard[9];
@@ -24,11 +30,19 @@ public class Player extends InputAdapter {
     }
 
     public ICard[] getSortedCards(){
-        ICard[] sortedCards = new ICard[5];
-        for(int i = 0; i < sortedCards.length; i++){
-            sortedCards[i] = this.cardStorage.get(i);
+        while(sortedCards.size() < 5 || cardsReady) {
+            try {
+                Thread.sleep(1000);
+            } catch (Exception e) {
+                //do sleep next iteration then...
+            }
         }
-        return sortedCards;
+
+        ICard[]  sortedCardsArray = new ICard[5];
+        for(int i = 0; i < sortedCardsArray.length; i++){
+            sortedCardsArray[i] = sortedCards.get(i);
+        }
+        return sortedCardsArray;
     }
 
     public Robot getRobot(){
@@ -42,14 +56,44 @@ public class Player extends InputAdapter {
     }
 
     public void recieveCards(ArrayList<ICard> cards){
+        sortedCards.clear();
+        cardsReady = false;
         cardStorage = cards;
+        hud.updateCardNumbers(sortedCards);
     }
 
 
+    public void selectCard(){
+        int toSelect = hud.getSelected();
+        if(sortedCards.contains(cardStorage.get(toSelect))){
+            sortedCards.remove(cardStorage.get(toSelect));
+            hud.updateCardNumbers(sortedCards);
+        }
+        else {
+            if(sortedCards.size() < 5) {
+                sortedCards.add(cardStorage.get(toSelect));
+                hud.updateCardNumbers(sortedCards);
+            }
+        }
+    }
 
-
-
-
+    @Override
+    public boolean keyUp(int keycode){
+        switch (keycode){
+            case Input.Keys.RIGHT:
+                hud.updateSelectedCard(hud.getSelected()+1);
+                break;
+            case Input.Keys.LEFT:
+                hud.updateSelectedCard(hud.getSelected()-1);
+                break;
+            case Input.Keys.ENTER:
+                selectCard();
+                break;
+            case Input.Keys.U:
+                cardsReady = true;
+        }
+        return true;
+    }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button){
