@@ -2,6 +2,9 @@ package inf112.skeleton.app;
 
 import com.badlogic.gdx.InputAdapter;
 import inf112.skeleton.app.cards.*;
+import inf112.skeleton.app.player.IPlayer;
+import inf112.skeleton.app.player.Opponent;
+import inf112.skeleton.app.player.Player;
 import inf112.skeleton.app.scenes.HudManager;
 import java.util.PriorityQueue;
 import java.util.Random;
@@ -10,19 +13,24 @@ public class GameLoop extends InputAdapter {
     HudManager hud;
     Random random;
     Board board;
-    Player[] players;
-    Robot[] robots;
+    IPlayer[] players;
+    int myPlayer;
     CardHandler cardHandler;
     public Thread loop;
 
-    public GameLoop(HudManager hud){
+    public GameLoop(int myPlayer){
 
-        board = new Board(1);
-        this.hud = hud;
+        this.myPlayer = myPlayer;
+        board = new Board(2);
+        hud = new HudManager();
 
-        players = new Player[] {
-                new Player(board.getRobots()[0], hud, board),
-        };
+        players = new IPlayer[board.getRobots().length];
+        players[myPlayer] = new Player(myPlayer, board.getRobots()[myPlayer], hud, board);
+        for(int i = 0; i < players.length; i++){
+            if(i != myPlayer){
+                players[i] = new Opponent(board.getRobots()[i], i);
+            }
+        }
 
         cardHandler = new CardHandler(players, board);
         random = new Random();
@@ -40,7 +48,6 @@ public class GameLoop extends InputAdapter {
                 for(PriorityQueue<ICard> round : queues){
                     while(!round.isEmpty()) {
                         ICard currentCard = round.remove();
-                        System.out.println(currentCard.toString());
                         board.doRobotTurn(currentCard);
                     }
                 }
@@ -54,13 +61,15 @@ public class GameLoop extends InputAdapter {
         board.doGroundTileEffects();
     }
 
-
+    public HudManager getHudManager(){
+        return hud;
+    }
 
     public Board getBoard(){
         return board;
     }
 
-    public Player[] getPlayers() {
+    public IPlayer[] getPlayers() {
         return players;
     }
 

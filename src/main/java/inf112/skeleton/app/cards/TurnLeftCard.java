@@ -3,18 +3,29 @@ package inf112.skeleton.app.cards;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import inf112.skeleton.app.Player;
+import inf112.skeleton.app.player.IPlayer;
+import inf112.skeleton.app.player.Player;
 import inf112.skeleton.app.Robot;
 
 public class TurnLeftCard implements ICard{
 
     private int priority;
-    private Player player;
+    private IPlayer player;
     private Image image = new Image(new Texture(Gdx.files.internal("TurnLeftCard.png")));
+    private int typeID = 2;
 
-    public TurnLeftCard(int priority, Player player){
+    public TurnLeftCard(int priority, IPlayer player){
         this.priority = priority;
         this.player = player;
+    }
+
+    @Override
+    public void setPlayer(IPlayer player){
+        this.player = player;
+    }
+    @Override
+    public IPlayer getPlayer(){
+        return player;
     }
 
     @Override
@@ -45,6 +56,11 @@ public class TurnLeftCard implements ICard{
     @Override
     public Image getImage() {
         return image;
+    }
+
+    @Override
+    public int getTypeID() {
+        return typeID;
     }
 
 }

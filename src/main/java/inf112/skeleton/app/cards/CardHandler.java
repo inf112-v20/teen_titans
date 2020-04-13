@@ -1,24 +1,28 @@
 package inf112.skeleton.app.cards;
 
 import inf112.skeleton.app.Board;
-import inf112.skeleton.app.Player;
+import inf112.skeleton.app.player.IPlayer;
+import inf112.skeleton.app.player.Player;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class CardHandler {
-    private ArrayList<ICard> deck;
 
-    private Player[] players;
+    private ArrayList<ICard> deck;
+    private IPlayer[] players;
     private Random random;
     private Board board;
 
-    public CardHandler(Player[] players, Board board){
+
+    public CardHandler(IPlayer[] players, Board board){
         random = new Random();
         this.players = players;
         this.board = board;
         createDeck();
+    }
 
+    public ArrayList<ICard> getDeck(){
+        return deck;
     }
 
     public void createDeck(){
@@ -38,8 +42,10 @@ public class CardHandler {
         Collections.shuffle(deck);
         for(int p = 0; p < players.length; p++) {
             ArrayList<ICard> playerCards = new ArrayList<>();
-            for(int i = p*players.length; i < p*players.length + 9; i++){
-                playerCards.add(deck.get(i));
+            for(int i = p*9; i < p*9 + 9; i++){
+                ICard card = deck.get(i);
+                card.setPlayer(players[p]);
+                playerCards.add(card);
             }
             players[p].recieveCards(playerCards);
         }
@@ -49,7 +55,9 @@ public class CardHandler {
         ICard[][] individuallySortedCards = new ICard[players.length][5];
         for(int p = 0; p < players.length; p++){
             individuallySortedCards[p] = players[p].getSortedCards();
+            System.out.println(Arrays.toString(individuallySortedCards[p]));
         }
+
         return individuallySortedCards;
     }
 

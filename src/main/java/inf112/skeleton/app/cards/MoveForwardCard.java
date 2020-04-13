@@ -4,21 +4,32 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import inf112.skeleton.app.Board;
-import inf112.skeleton.app.Player;
 import inf112.skeleton.app.Pos;
 import inf112.skeleton.app.Robot;
+import inf112.skeleton.app.player.IPlayer;
 
 public class MoveForwardCard implements ICard{
 
     private int priority;
-    private Player player;
+    private IPlayer player;
     private Board board;
     private Image image = new Image(new Texture(Gdx.files.internal("MoveForwardCard.png")));
+    private int typeID = 1;
 
-    public MoveForwardCard(int priority, Player player, Board board){
+    public MoveForwardCard(int priority, IPlayer player, Board board){
         this.board = board;
         this.priority = priority;
         this.player = player;
+    }
+
+    @Override
+    public void setPlayer(IPlayer player){
+        this.player = player;
+    }
+
+    @Override
+    public IPlayer getPlayer(){
+        return player;
     }
 
     @Override
@@ -52,6 +63,11 @@ public class MoveForwardCard implements ICard{
     @Override
     public Image getImage() {
         return image;
+    }
+
+    @Override
+    public int getTypeID() {
+        return typeID;
     }
 
 }

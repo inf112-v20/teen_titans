@@ -1,9 +1,6 @@
 package inf112.skeleton.app.scenes;
 
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -31,12 +28,12 @@ public class Renderer {
    }
 
     public void create() {
-        hudManager = new HudManager();
-        gameLoop = new GameLoop(hudManager);
+        gameLoop = new GameLoop(0);
+        hudManager = gameLoop.getHudManager();
         gameLoop.loop.start();
         setupTextures();
 
-        Gdx.input.setInputProcessor(gameLoop.getPlayers()[0]);
+        Gdx.input.setInputProcessor((InputProcessor) gameLoop.getPlayers()[0]);
 
         camera = new OrthographicCamera();
         renderer = new OrthogonalTiledMapRenderer(gameLoop.getBoard().getMap(), 1/300f);

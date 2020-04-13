@@ -2,6 +2,7 @@ package inf112.skeleton.app.cards;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import inf112.skeleton.app.Robot;
+import inf112.skeleton.app.player.IPlayer;
 
 public interface ICard extends Comparable<ICard> {
 
@@ -31,6 +32,23 @@ public interface ICard extends Comparable<ICard> {
      * @return title of current card's image representation
      */
     Image getImage();
+
+    /**
+     * @return card's type ID, used in Translator class
+     */
+    int getTypeID();
+
+
+    /**
+     * Sets card's player value
+     */
+    void setPlayer(IPlayer player);
+
+    /**
+     *
+     * @return Given card's player
+     */
+    IPlayer getPlayer();
 
 
 }

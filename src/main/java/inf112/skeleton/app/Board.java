@@ -3,6 +3,7 @@ package inf112.skeleton.app;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -11,6 +12,7 @@ import inf112.skeleton.app.scenes.MainMenuScreen;
 
 import javax.swing.*;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Board extends InputAdapter {
 
@@ -42,6 +44,9 @@ public class Board extends InputAdapter {
         mapLayers.put("playerLayer", (TiledMapTileLayer) map.getLayers().get("Player"));
         mapLayers.put("wall", (TiledMapTileLayer) map.getLayers().get("Wall"));
         playerLayer = mapLayers.get("playerLayer");
+        for(Robot robot : listOfRobots){
+            updatePlayer(new Pos(), robot);
+        }
     }
 
 
@@ -166,8 +171,7 @@ public class Board extends InputAdapter {
     private void createRobots(int n){
         listOfRobots = new Robot[n];
         for(int i = 0; i < n; i++){
-            //TODO, LAG CUSTOM PLASSERING
-            listOfRobots[i] = new Robot(3, 3);
+            listOfRobots[i] = new Robot((i+1)*2, (i+1)*2);
         }
         robot = listOfRobots[0];
     }

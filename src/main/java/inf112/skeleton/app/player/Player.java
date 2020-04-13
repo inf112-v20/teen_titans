@@ -1,19 +1,19 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.player;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import inf112.skeleton.app.Board;
+import inf112.skeleton.app.Robot;
 import inf112.skeleton.app.cards.ICard;
 import inf112.skeleton.app.cards.MoveForwardCard;
 import inf112.skeleton.app.cards.TurnLeftCard;
 import inf112.skeleton.app.cards.TurnRightCard;
 import inf112.skeleton.app.scenes.HudManager;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class Player extends InputAdapter {
+public class Player extends InputAdapter implements IPlayer {
 
+    private int playerNumber;
     private Board board;
     private HudManager hud;
     private Robot robot;
@@ -21,6 +21,12 @@ public class Player extends InputAdapter {
     private ArrayList<ICard> sortedCards = new ArrayList<>();
     private boolean cardsReady = false;
 
+    @Override
+    public int getPlayerNumber(){
+        return playerNumber;
+    }
+
+    @Override
     public ICard[] getCardStorage(){
         ICard[] cardStorage = new ICard[9];
         for(int i = 0; i < this.cardStorage.size(); i++){
@@ -29,8 +35,9 @@ public class Player extends InputAdapter {
         return cardStorage;
     }
 
+    @Override
     public ICard[] getSortedCards(){
-        while(sortedCards.size() < 5 || cardsReady) {
+        while(sortedCards.size() < 5 && !cardsReady) {
             try {
                 Thread.sleep(1000);
             } catch (Exception e) {
@@ -45,16 +52,19 @@ public class Player extends InputAdapter {
         return sortedCardsArray;
     }
 
+    @Override
     public Robot getRobot(){
         return robot;
     }
 
-    public Player(Robot robot, HudManager hud, Board board){
+    public Player(int playerNumber, Robot robot, HudManager hud, Board board){
+        this.playerNumber = playerNumber;
         this.board = board;
         this.robot = robot;
         this.hud = hud;
     }
 
+    @Override
     public void recieveCards(ArrayList<ICard> cards){
         sortedCards.clear();
         cardsReady = false;
@@ -62,16 +72,15 @@ public class Player extends InputAdapter {
         hud.updateCardNumbers(sortedCards);
     }
 
-
-    public void selectCard(){
-        int toSelect = hud.getSelected();
-        if(sortedCards.contains(cardStorage.get(toSelect))){
-            sortedCards.remove(cardStorage.get(toSelect));
+    @Override
+    public void selectCard(int i){
+        if(sortedCards.contains(cardStorage.get(i))){
+            sortedCards.remove(cardStorage.get(i));
             hud.updateCardNumbers(sortedCards);
         }
         else {
             if(sortedCards.size() < 5) {
-                sortedCards.add(cardStorage.get(toSelect));
+                sortedCards.add(cardStorage.get(i));
                 hud.updateCardNumbers(sortedCards);
             }
         }
@@ -87,31 +96,14 @@ public class Player extends InputAdapter {
                 hud.updateSelectedCard(hud.getSelected()-1);
                 break;
             case Input.Keys.ENTER:
-                selectCard();
+                selectCard(hud.getSelected());
                 break;
             case Input.Keys.U:
-                cardsReady = true;
+                cardsReady = !cardsReady;
         }
         return true;
     }
 
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button){
-
-        if(screenX > hud.getStage().getWidth()/2 - 170 && screenX < hud.getStage().getWidth()/2 - 70 && screenY > hud.getStage().getHeight() - 150 && screenY < hud.getStage().getHeight()){
-            board.doRobotTurn(new TurnLeftCard(1, this));
-        }
-
-        else if(screenX > hud.getStage().getWidth()/2 - 50 && screenX < hud.getStage().getWidth()/2 + 50 && screenY > hud.getStage().getHeight() - 150 && screenY < hud.getStage().getHeight()){
-            board.doRobotTurn(new MoveForwardCard(1, this, board));
-        }
-
-        else if(screenX > hud.getStage().getWidth()/2 + 70 && screenX < hud.getStage().getWidth()/2 + 170 && screenY > hud.getStage().getHeight()-150 && screenY < hud.getStage().getHeight()){
-            board.doRobotTurn(new TurnRightCard(1, this));
-        }
-
-        return true;
-    }
 
 
 

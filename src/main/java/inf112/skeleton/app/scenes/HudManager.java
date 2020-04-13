@@ -16,12 +16,13 @@ public class HudManager {
 
     private Stage stage;
     private ICard[] cardList = new ICard[9];
-    private Image selectedImage = new Image(new Texture(Gdx.files.internal("SelectedCard.png")));
+    private Image selectedImage;
     private int selected;
     private Image[] numbers = new Image[5];
 
     public HudManager(){
         stage = new Stage(new ScreenViewport());
+        selectedImage = new Image(new Texture(Gdx.files.internal("SelectedCard.png")));
         numbers[0] = new Image(new Texture(Gdx.files.internal("Number1.png")));
         numbers[1] = new Image(new Texture(Gdx.files.internal("Number2.png")));
         numbers[2] = new Image(new Texture(Gdx.files.internal("Number3.png")));
@@ -90,7 +91,8 @@ public class HudManager {
     }
 
     public void updateSelectedCard(int selected){
-        this.selected = selected;
+        if(selected < 0){selected = 8;}
+        this.selected = selected % 9;
         switch (selected){
             case 1:
                 selectedImage.setPosition(stage.getWidth()/2-410, 0);
@@ -131,16 +133,19 @@ public class HudManager {
     }
 
     public void updateCardNumbers(ArrayList<ICard> cards){
+        selectedImage.setZIndex(stage.getActors().size);
         //Move existing numbers out of the way in case of unselect
         for(Image number : numbers){
             number.setPosition(-200, 0);
         }
-        System.out.println(Arrays.toString(cards.toArray()));
+        //Move selected cards into position
         for(int i = 0; i < cards.size(); i++){
             for(ICard card : cardList){
                 if(cards.get(i).equals(card)){
                     numbers[i].setPosition(card.getImage().getX(), card.getImage().getY());
                     stage.addActor(numbers[i]);
+                    numbers[i].setZIndex(stage.getActors().size);
+
                 }
             }
         }

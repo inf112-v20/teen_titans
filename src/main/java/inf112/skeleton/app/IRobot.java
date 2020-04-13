@@ -1,8 +1,6 @@
 package inf112.skeleton.app;
 
-
 public interface IRobot {
-
 
     void turn(boolean turnRight);
 
@@ -13,6 +11,5 @@ public interface IRobot {
     void push(Direction pushDir);
 
     Direction getDir();
-
 
 }
