@@ -14,11 +14,14 @@ public class CardHandler {
     private Board board;
 
 
-    public CardHandler(IPlayer[] players, Board board){
+    public CardHandler(IPlayer[] players, Board board, boolean host){
         random = new Random();
         this.players = players;
         this.board = board;
-        createDeck();
+        //createDeckFromRecipe(new int[]{95401, 85401, 45201, 27401, 37401, 47602, 47502, 87603, 22403});
+        if(host) {
+            createDeck();
+        }
     }
 
     public ArrayList<ICard> getDeck(){
@@ -28,34 +31,54 @@ public class CardHandler {
     public void createDeck(){
         deck = new ArrayList<>();
         for(int i = 0; i < players.length * 5; i++){
-            deck.add(new MoveForwardCard(random.nextInt(1000), players[0], board));
+            deck.add(new MoveForwardCard(random.nextInt(900)+100, players[0], board));
         }
         for(int i = 0; i < players.length * 2; i++){
-            deck.add(new TurnRightCard(random.nextInt(1000), players[0]));
+            deck.add(new TurnRightCard(random.nextInt(900)+100, players[0]));
         }
         for(int i = 0; i < players.length * 2; i++){
-            deck.add(new TurnLeftCard(random.nextInt(1000), players[0]));
+            deck.add(new TurnLeftCard(random.nextInt(900)+100, players[0]));
         }
     }
 
-    public void dealCards() {
-        Collections.shuffle(deck);
-        for(int p = 0; p < players.length; p++) {
-            ArrayList<ICard> playerCards = new ArrayList<>();
-            for(int i = p*9; i < p*9 + 9; i++){
-                ICard card = deck.get(i);
-                card.setPlayer(players[p]);
-                playerCards.add(card);
+    public void createDeckFromRecipe(int[] recipe){
+        System.out.println("here");
+        deck = new ArrayList<>();
+        for(int newCard : recipe){
+            System.out.println();
+            switch(newCard % 10){
+                case 1:
+                    deck.add(new MoveForwardCard(newCard / 100, players[(newCard / 10) % 10], board));
+                case 2:
+                    deck.add(new TurnLeftCard(newCard/100, players[(newCard / 10) % 10]));
+                case 3:
+                    deck.add(new TurnRightCard(newCard/100, players[(newCard/10)%10]));
             }
-            players[p].recieveCards(playerCards);
         }
+        System.out.println(deck.size());
+    }
+
+    public ICard[][] dealCards() {
+        Collections.shuffle(deck);
+        ICard[][] cardsToDeal = new ICard[players.length][9];
+
+        for(int p = 0; p < players.length; p++) {
+            //ArrayList<ICard> playerCards = new ArrayList<>();
+            for(int i = 0; i < 9; i++){
+                cardsToDeal[p][i] = deck.get(9*p + i);
+                //ICard card = deck.get(i);
+                //card.setPlayer(players[p]);
+                //playerCards.add(card);
+            }
+            //players[p].recieveCards(playerCards);
+        }
+        return cardsToDeal;
     }
 
     private ICard[][] getPlayerCards(){
         ICard[][] individuallySortedCards = new ICard[players.length][5];
         for(int p = 0; p < players.length; p++){
             individuallySortedCards[p] = players[p].getSortedCards();
-            System.out.println(Arrays.toString(individuallySortedCards[p]));
         }
 
         return individuallySortedCards;

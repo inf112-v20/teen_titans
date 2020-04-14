@@ -26,7 +26,7 @@ public class Robot implements IRobot {
      * @param xPos The horisontal starting pos
      * @param yPos The vertical starting pos
      */
-    public Robot(int xPos, int yPos) {
+    public Robot(int xPos, int yPos, String texture) {
 
         pos = new Pos();
         pos.setPos(xPos, yPos);
@@ -34,7 +34,7 @@ public class Robot implements IRobot {
         currentHP = MAXHP;
         dir = Direction.NORTH; //Kanskje endre til en parameter for ROBOT
 
-        createPlayerTexture("player.png");
+        createPlayerTexture(texture);
         currentState = playerStates.get("alive");
     }
 
@@ -43,8 +43,8 @@ public class Robot implements IRobot {
         Texture playerTexture = new Texture(Gdx.files.internal(location));
         TextureRegion[][] robotStates = new TextureRegion(playerTexture).split(300,300);
         playerStates.put("alive", new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotStates[0][0])));
-        playerStates.put("dead", new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotStates[0][1])));
-        playerStates.put("won", new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotStates[0][2])));
+        playerStates.put("dead", new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotStates[0][0])));
+        playerStates.put("won", new TiledMapTileLayer.Cell().setTile(new StaticTiledMapTile(robotStates[0][0])));
     }
 
     public TiledMapTileLayer.Cell getCurrentState() {

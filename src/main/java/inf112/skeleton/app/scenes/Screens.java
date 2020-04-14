@@ -1,5 +1,5 @@
 package inf112.skeleton.app.scenes;
 
 public enum Screens {
-    RENDERER, LOADING, MAINMENU, END, PREFERENCES
+    RENDERER, MAINMENU, HOSTGAME, JOINGAME
 }

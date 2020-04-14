@@ -27,9 +27,26 @@ public class ClientListener extends Listener {
         client.sendTCP(cards);
     }
 
-    public void recieved(Connection c, Object o){
-        if(o instanceof PacketInfo.Cards){
-            //Cards recieved, alert gameloop.
+    public void sendName(String name){
+        PacketInfo.Name namePacket = new PacketInfo.Name();
+        namePacket.name = name;
+        namePacket.playerID = client.getID();
+        client.sendTCP(namePacket);
+    }
+
+    public void received(Connection c, Object o){
+        System.out.print("Client recieved: ");System.out.println(o.toString());
+
+        if(o instanceof PacketInfo.Deck){
+            parent.setDeck(((PacketInfo.Deck) o).cards);
+        }
+
+        else if(o instanceof PacketInfo.Name){
+            parent.addName(((PacketInfo.Name) o).playerID, ((PacketInfo.Name) o).name);
+        }
+
+        else if(o instanceof PacketInfo.NumPlayers){
+            parent.setPlayerAmount(((PacketInfo.NumPlayers) o).numPlayers);
         }
 
     }

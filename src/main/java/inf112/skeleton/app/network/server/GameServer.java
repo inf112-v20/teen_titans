@@ -1,12 +1,18 @@
 package inf112.skeleton.app.network.server;
 
 import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Server;
+import com.jcraft.jogg.Packet;
+import inf112.skeleton.app.cards.CardHandler;
+import inf112.skeleton.app.cards.ICard;
 import inf112.skeleton.app.network.PacketInfo;
+import inf112.skeleton.app.network.Translator;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.HashMap;
 
 public class GameServer implements Runnable {
 
@@ -17,30 +23,18 @@ public class GameServer implements Runnable {
     private Server server;
     private ServerListener listener;
 
-    public GameServer(int udp, int tcp){
-        this.udp = udp;
-        this.tcp = tcp;
-    }
+    private CardHandler cardHandler;
+    private HashMap<Integer, String> playerNames = new HashMap<>();
+
     public GameServer(){
         udp = 54333;
         tcp = 54555;
     }
 
-    private void registerPacketInfo() {
-        Kryo kryo = server.getKryo();
-        kryo.register(PacketInfo.Cards.class);
-        kryo.register(PacketInfo.Name.class);
-        kryo.register(PacketInfo.StartSignal.class);
-        kryo.register(int[].class);
-        kryo.register(String.class);
-        kryo.register(boolean.class);
-    }
-
-
     @Override
     public void run() {
         server = new Server();
-        listener = new ServerListener(server);
+        listener = new ServerListener(server, this);
         server.addListener(listener);
 
         try {
@@ -58,9 +52,58 @@ public class GameServer implements Runnable {
         }
     }
 
+    public void gameStart(CardHandler cardHandler){
+        this.cardHandler = cardHandler;
+        sendDeckRecipe();
+        //dealCards();
+    }
+
+    private void sendDeckRecipe(){
+        ICard[] deckAsArray = Translator.arrayListToArray(cardHandler.getDeck());
+        int[] deckAsInts = Translator.cardsToInts(deckAsArray);
+        PacketInfo.Deck deck = new PacketInfo.Deck();
+        deck.cards = deckAsInts;
+        server.sendToAllTCP(deck);
+    }
+
+    public void dealCards(){
+        ICard[][] cards = cardHandler.dealCards();
+        Connection[] connections = server.getConnections();
+        for(int i = 0; i < connections.length; i++){
+            int[] cardsAsInts = Translator.cardsToInts(cards[i]);
+            PacketInfo.Cards deck = new PacketInfo.Cards();
+            deck.cards = cardsAsInts;
+            server.sendToTCP(connections[i].getID(), deck);
+        }
+    }
+
+
+    private void registerPacketInfo() {
+        Kryo kryo = server.getKryo();
+        kryo.register(PacketInfo.Cards.class);
+        kryo.register(PacketInfo.Deck.class);
+        kryo.register(PacketInfo.Name.class);
+        kryo.register(PacketInfo.StartSignal.class);
+        kryo.register(PacketInfo.NumPlayers.class);
+        kryo.register(PacketInfo.AllCards.class);
+        kryo.register(int[].class);
+        kryo.register(String.class);
+        kryo.register(boolean.class);
+        kryo.register(int.class);
+        kryo.register(HashMap.class);
+    }
+
     public InetAddress getAddress(){
         return address;
     }
+
+    public void addName(String name, int id){
+        playerNames.put(id, name);
+    }
+    public HashMap getPlayerNames(){
+        return playerNames;
+    }
+
 
     public void dispose(){
         try {

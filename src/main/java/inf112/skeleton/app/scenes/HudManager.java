@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.cards.ICard;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class HudManager {
@@ -23,11 +22,11 @@ public class HudManager {
     public HudManager(){
         stage = new Stage(new ScreenViewport());
         selectedImage = new Image(new Texture(Gdx.files.internal("SelectedCard.png")));
-        numbers[0] = new Image(new Texture(Gdx.files.internal("Number1.png")));
-        numbers[1] = new Image(new Texture(Gdx.files.internal("Number2.png")));
-        numbers[2] = new Image(new Texture(Gdx.files.internal("Number3.png")));
-        numbers[3] = new Image(new Texture(Gdx.files.internal("Number4.png")));
-        numbers[4] = new Image(new Texture(Gdx.files.internal("Number5.png")));
+        numbers[0] = new Image(new Texture(Gdx.files.internal("numbers/Number1.png")));
+        numbers[1] = new Image(new Texture(Gdx.files.internal("numbers/Number2.png")));
+        numbers[2] = new Image(new Texture(Gdx.files.internal("numbers/Number3.png")));
+        numbers[3] = new Image(new Texture(Gdx.files.internal("numbers/Number4.png")));
+        numbers[4] = new Image(new Texture(Gdx.files.internal("numbers/Number5.png")));
     }
 
 

@@ -5,8 +5,6 @@ import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import inf112.skeleton.app.GameLoop;
-import inf112.skeleton.app.scenes.Orchestrator;
-import inf112.skeleton.app.scenes.HudManager;
 
 public class Renderer {
 
@@ -22,15 +20,16 @@ public class Renderer {
 
 
 
-   public Renderer(Orchestrator orchestrator) {
+   public Renderer(Orchestrator orchestrator, int playerNumber, boolean host) {
        parent = orchestrator;
-       create();
+       gameLoop = new GameLoop(playerNumber, host);
+       //create();
    }
 
-    public void create() {
-        gameLoop = new GameLoop(0);
+    public void create(int playersAmount) {
+        gameLoop.create(playersAmount);
         hudManager = gameLoop.getHudManager();
-        gameLoop.loop.start();
+        //gameLoop.getGameLoopThread().start();
         setupTextures();
 
         Gdx.input.setInputProcessor((InputProcessor) gameLoop.getPlayers()[0]);
@@ -41,13 +40,12 @@ public class Renderer {
         camera.position.set(camera.viewportWidth/2 - 1, camera.viewportHeight/2 - 2, 0);
         camera.update();
         renderer.setView(camera);
-
     }
 
     public void dispose() {
         renderer.dispose();
         hudManager.getStage().dispose();
-        gameLoop.loop.interrupt();
+        gameLoop.getGameLoopThread().interrupt();
     }
 
     public void render() {
@@ -61,6 +59,10 @@ public class Renderer {
 
     private void setupTextures(){
         gameLoop.getBoard().createTextures();
+    }
+
+    public GameLoop getGameLoop(){
+       return gameLoop;
     }
 
 

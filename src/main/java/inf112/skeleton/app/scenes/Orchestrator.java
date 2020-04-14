@@ -6,18 +6,24 @@ public class Orchestrator extends Game {
 
     private Screens currentScreen;
     private MainMenuScreen menuScreen;
+    private HostGameScreen hostGameScreen;
+    private JoinGameScreen joinGameScreen;
     private Renderer renderer;
+
 
 
     @Override
     public void create() {
-        /*menuScreen = new MainMenuScreen(this);
-        Gdx.input.setInputProcessor(menuScreen);
-        currentScreen = Screens.MAINMENU;*/
-        createGame();
+        boolean skipmenu = false;
+        if(skipmenu){
+            createGame();
+        }
+        else{
+            menuScreen = new MainMenuScreen(this);
+            Gdx.input.setInputProcessor(menuScreen);
+            currentScreen = Screens.MAINMENU;
+        }
     }
-
-
 
     @Override
     public void render(){
@@ -28,14 +34,34 @@ public class Orchestrator extends Game {
             case MAINMENU:
                 menuScreen.render();
                 break;
-
+            case HOSTGAME:
+                hostGameScreen.render();
+                break;
+            case JOINGAME:
+                joinGameScreen.render();
         }
+    }
 
+    public void hostGame(){
+        renderer = new Renderer(this, 0, true);
+        hostGameScreen = new HostGameScreen(this, renderer.getGameLoop().getGameClient());
+        currentScreen = Screens.HOSTGAME;
     }
 
     public void createGame(){
-        renderer = new Renderer(this);
+        renderer = new Renderer(this,0, true);
         currentScreen = Screens.RENDERER;
+    }
+
+    public void startGame(int playersAmount){
+        renderer.create(playersAmount);
+        currentScreen = Screens.RENDERER;
+    }
+
+    public void joinGame(){
+        renderer = new Renderer(this, 1, false);
+        joinGameScreen = new JoinGameScreen(this, renderer.getGameLoop().getGameClient());
+        currentScreen = Screens.JOINGAME;
     }
 
 }

@@ -30,8 +30,8 @@ public class Board extends InputAdapter {
     private final boolean LEFT = false;
 
 
-    public Board(int numPlayers){
-        createRobots(numPlayers);
+    public Board(){
+        //createRobots(numPlayers);
 
         map = new TmxMapLoader().load("testMap2.tmx");
 
@@ -44,9 +44,7 @@ public class Board extends InputAdapter {
         mapLayers.put("playerLayer", (TiledMapTileLayer) map.getLayers().get("Player"));
         mapLayers.put("wall", (TiledMapTileLayer) map.getLayers().get("Wall"));
         playerLayer = mapLayers.get("playerLayer");
-        for(Robot robot : listOfRobots){
-            updatePlayer(new Pos(), robot);
-        }
+
     }
 
 
@@ -168,12 +166,23 @@ public class Board extends InputAdapter {
         playerLayer.setCell(robot.getPos().getPosX(), robot.getPos().getPosY(), robot.getCurrentState());
     }
 
-    private void createRobots(int n){
+    public void createRobots(int n){
         listOfRobots = new Robot[n];
         for(int i = 0; i < n; i++){
-            listOfRobots[i] = new Robot((i+1)*2, (i+1)*2);
+            if(i==0) {
+                listOfRobots[i] = new Robot((i + 1) * 2, (i + 1) * 2, "marsvin.png");
+            }
+            else if(i==2){
+                listOfRobots[i] = new Robot((i + 1)*2, (i+1)*2, "pika.png");
+            }
+            else{
+                listOfRobots[i] = new Robot(6, 4, "marsvin2.png");
+            }
         }
         robot = listOfRobots[0];
+        for(Robot robot : listOfRobots){
+            updatePlayer(new Pos(), robot);
+        }
     }
 
     public Robot[] getRobots(){

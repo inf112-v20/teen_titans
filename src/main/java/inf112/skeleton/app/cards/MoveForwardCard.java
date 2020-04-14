@@ -13,7 +13,7 @@ public class MoveForwardCard implements ICard{
     private int priority;
     private IPlayer player;
     private Board board;
-    private Image image = new Image(new Texture(Gdx.files.internal("MoveForwardCard.png")));
+    private Image image = new Image(new Texture(Gdx.files.internal("cards/MoveForwardCard.png")));
     private int typeID = 1;
 
     public MoveForwardCard(int priority, IPlayer player, Board board){
