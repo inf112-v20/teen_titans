@@ -161,20 +161,21 @@ public class HudManager {
 
     public void recieveCards(ICard[] cards){
         clearImages();
-        try{
-            createPos1(cards[0]);
-            createPos2(cards[1]);
-            createPos3(cards[2]);
-            createPos4(cards[3]);
-            createPos5(cards[4]);
-            createPos6(cards[5]);
-            createPos7(cards[6]);
-            createPos8(cards[7]);
-            createPos9(cards[8]);
-        }
-        catch(NullPointerException e){
-            System.out.println("Exception called");
-            //continue, this is fine
+        if(cards != null) {
+            try {
+                createPos1(cards[0]);
+                createPos2(cards[1]);
+                createPos3(cards[2]);
+                createPos4(cards[3]);
+                createPos5(cards[4]);
+                createPos6(cards[5]);
+                createPos7(cards[6]);
+                createPos8(cards[7]);
+                createPos9(cards[8]);
+            } catch (NullPointerException e) {
+                System.out.println("Exception called");
+                //continue, this is fine
+            }
         }
         selected = 0;
         updateSelectedCard(0);

@@ -30,7 +30,7 @@ public class PacketInfo {
     }
 
     public static class AllCards{
-        public HashMap<Integer, int[]> allCards;
+        public int[][] allCards;
         @Override
         public String toString() {
             return "All Cards Packet";

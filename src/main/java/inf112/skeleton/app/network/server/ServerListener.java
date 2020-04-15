@@ -14,18 +14,12 @@ public class ServerListener extends Listener {
     private int[] players;
     private String[] names;
     private int playerNumber;
-    private HashMap<Integer, int[]> playerCards;
-    private int[] deckRecipe;
-    private boolean setupComplete;
-
 
     public ServerListener(Server server, GameServer parent){
         this.parent = parent;
         this.server = server;
         players = new int[4];
         names = new String[players.length];
-        playerCards = new HashMap<>();
-        setupComplete = false;
     }
 
     public void connected(Connection c){
@@ -34,16 +28,6 @@ public class ServerListener extends Listener {
         PacketInfo.NumPlayers nrOfPlayers = new PacketInfo.NumPlayers();
         nrOfPlayers.numPlayers = playerNumber;
         server.sendToAllTCP(nrOfPlayers);
-        for(int i = 0; i < players.length; i++){
-            try {
-                PacketInfo.Name namePacket = new PacketInfo.Name();
-                namePacket.name = names[i];
-                namePacket.playerID = players[i];
-                server.sendToTCP(c.getID(), namePacket);
-            } catch (NullPointerException e){
-                break;
-            }
-        }
     }
 
     public void disconnected(Connection c){
@@ -56,12 +40,15 @@ public class ServerListener extends Listener {
     }
 
     public void received(Connection c, Object o){
-        System.out.print("Server recieved: "); System.out.println(o.toString());
+        System.out.println("Server recieved: " + o.toString());
         if(o instanceof PacketInfo.Name){
             String name = ((PacketInfo.Name) o).name;
             int ID = ((PacketInfo.Name) o).playerID;
             parent.addName(name, ID);
             server.sendToAllTCP(o);
+        }
+        else if(o instanceof PacketInfo.Cards){
+            parent.addPlayerCards(c.getID(), ((PacketInfo.Cards) o).cards);
         }
 
     }

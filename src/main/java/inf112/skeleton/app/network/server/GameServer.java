@@ -24,12 +24,12 @@ public class GameServer implements Runnable {
     private CardHandler cardHandler;
 
     private HashMap<Integer, String> playerNames = new HashMap<>();
+    private HashMap<Integer, int[]> playerCards = new HashMap<>();
 
     public GameServer(){
         udp = 54333;
         tcp = 54555;
     }
-
     @Override
     public void run() {
         server = new Server();
@@ -62,7 +62,6 @@ public class GameServer implements Runnable {
         startSignal.signal = true;
         server.sendToAllTCP(startSignal);
     }
-
     private void sendDeckRecipe(){
         ICard[] deckAsArray = Translator.arrayListToArray(cardHandler.getDeck());
         int[] deckAsInts = Translator.cardsToInts(deckAsArray);
@@ -70,7 +69,6 @@ public class GameServer implements Runnable {
         deck.cards = deckAsInts;
         server.sendToAllTCP(deck);
     }
-
     public void dealCards(){
         ICard[][] cards = cardHandler.dealCards();
         Connection[] connections = server.getConnections();
@@ -82,6 +80,11 @@ public class GameServer implements Runnable {
         }
     }
 
+    public void distributeSortedCards(int[][] cards){
+        PacketInfo.AllCards allCards = new PacketInfo.AllCards();
+        allCards.allCards = cards;
+        server.sendToAllTCP(allCards);
+    }
 
     private void registerPacketInfo() {
         Kryo kryo = server.getKryo();
@@ -95,21 +98,17 @@ public class GameServer implements Runnable {
         kryo.register(String.class);
         kryo.register(boolean.class);
         kryo.register(int.class);
-        kryo.register(HashMap.class);
+        kryo.register(int[][].class);
     }
-
     public InetAddress getAddress(){
         return address;
     }
-
     public void addName(String name, int id){
         playerNames.put(id, name);
     }
     public HashMap getPlayerNames(){
         return playerNames;
     }
-
-
     public void dispose(){
         try {
             server.dispose();
@@ -117,5 +116,16 @@ public class GameServer implements Runnable {
             e.printStackTrace();
         }
     }
+
+    public void addPlayerCards(int id, int[] cards){
+        playerCards.put(id, cards);
+    }
+    public HashMap getPlayerCards(){
+        return playerCards;
+    }
+    public void clearPlayerCards(){
+        playerCards.clear();
+    }
+
 
 }

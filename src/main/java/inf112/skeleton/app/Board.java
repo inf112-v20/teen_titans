@@ -170,9 +170,9 @@ public class Board extends InputAdapter {
         listOfRobots = new Robot[n];
         for(int i = 0; i < n; i++){
             if(i==0) {
-                listOfRobots[i] = new Robot((i + 1) * 2, (i + 1) * 2, "marsvin.png");
+                listOfRobots[i] = new Robot((i + 1) * 2, (i + 1) * 2, "bulbasaur.png");
             }
-            else if(i==2){
+            else if(i==1){
                 listOfRobots[i] = new Robot((i + 1)*2, (i+1)*2, "pika.png");
             }
             else{

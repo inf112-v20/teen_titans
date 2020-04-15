@@ -7,7 +7,6 @@ import com.esotericsoftware.kryonet.Client;
 import inf112.skeleton.app.GameLoop;
 import inf112.skeleton.app.cards.ICard;
 import inf112.skeleton.app.network.PacketInfo;
-import inf112.skeleton.app.scenes.Renderer;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -28,6 +27,7 @@ public class GameClient {
     private int[] deck = null;
     private boolean startSignal = false;
     private boolean activeChooseCard = false;
+    private boolean activeHandleAllCards = false;
 
 
     public GameClient(boolean isHost, GameLoop gameLoop){
@@ -62,51 +62,6 @@ public class GameClient {
             }, "Enter IP adress: ", "", "");
         }
         sendName();
-
-
-    }
-
-    public void handReceived(int[] hand){
-        gameLoop.getMyPlayer().recieveCards(gameLoop.getCardHandler().intsToCards(hand));
-        setActiveChooseCard(true);
-    }
-
-
-    public void setDeck(int[] deck){
-        System.out.println(Arrays.toString(deck));
-        this.deck = deck;
-    }
-    public int[] getDeck(){
-        return deck;
-    }
-
-    private void registerPacketInfo() {
-        Kryo kryo = client.getKryo();
-        kryo.register(PacketInfo.Cards.class);
-        kryo.register(PacketInfo.Deck.class);
-        kryo.register(PacketInfo.Name.class);
-        kryo.register(PacketInfo.StartSignal.class);
-        kryo.register(PacketInfo.NumPlayers.class);
-        kryo.register(PacketInfo.AllCards.class);
-        kryo.register(int[].class);
-        kryo.register(String.class);
-        kryo.register(boolean.class);
-        kryo.register(int.class);
-        kryo.register(HashMap.class);
-    }
-
-    public void setStartSignal(boolean b){
-        startSignal = b;
-    }
-    public boolean getStartSignal() {
-        return startSignal;
-    }
-
-    public void setActiveChooseCard(boolean b){
-        activeChooseCard = b;
-    }
-    public boolean getActiveChooseCard(){
-        return activeChooseCard;
     }
 
     private void sendName(){
@@ -129,10 +84,70 @@ public class GameClient {
         }, "Enter name: ", "", "");
 
     }
+    private void registerPacketInfo() {
+        Kryo kryo = client.getKryo();
+        kryo.register(PacketInfo.Cards.class);
+        kryo.register(PacketInfo.Deck.class);
+        kryo.register(PacketInfo.Name.class);
+        kryo.register(PacketInfo.StartSignal.class);
+        kryo.register(PacketInfo.NumPlayers.class);
+        kryo.register(PacketInfo.AllCards.class);
+        kryo.register(int[].class);
+        kryo.register(String.class);
+        kryo.register(boolean.class);
+        kryo.register(int.class);
+        kryo.register(int[][].class);
+    }
 
+    public void setDeck(int[] deck){
+        this.deck = deck;
+    }
+    public int[] getDeck(){
+        return deck;
+    }
+
+    public void setStartSignal(boolean b){
+        startSignal = b;
+    }
+    public boolean getStartSignal() {
+        return startSignal;
+    }
+
+
+    public void handReceived(int[] hand){
+        gameLoop.getMyPlayer().recieveCards(gameLoop.getCardHandler().intsToCards(hand));
+        setActiveChooseCard(true);
+    }
     public void sendCards(ICard[] cards){
         listener.sendCards(cards);
     }
+
+    public void setActiveChooseCard(boolean b){
+        activeChooseCard = b;
+    }
+    public boolean getActiveChooseCard(){
+        return activeChooseCard;
+    }
+
+
+    public void allCardsReceived(int[][] allCards){
+        System.out.println("eigth: received " + Arrays.toString(allCards));
+        gameLoop.getCardHandler().setIndividuallySortedCards(allCards);
+        setActiveHandleAllCards(true);
+    }
+
+    public void setActiveHandleAllCards(boolean b){
+        activeHandleAllCards = b;
+    }
+    public boolean getActiveHandleAllCards(){
+        return activeHandleAllCards;
+    }
+
+
+
+
+
+
 
     public Client getClient(){
         return client;

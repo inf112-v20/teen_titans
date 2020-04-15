@@ -19,7 +19,6 @@ public class Player extends InputAdapter implements IPlayer {
     private Robot robot;
     private ArrayList<ICard> cardStorage = new ArrayList<>();
     private ArrayList<ICard> sortedCards = new ArrayList<>();
-    private boolean cardsReady = false;
 
     @Override
     public int getPlayerNumber(){
@@ -37,7 +36,7 @@ public class Player extends InputAdapter implements IPlayer {
 
     @Override
     public ICard[] getSortedCards(){
-        while(sortedCards.size() < 5 && !cardsReady) {
+        while(sortedCards.size() < 5) {
             try {
                 Thread.sleep(1000);
             } catch (Exception e) {
@@ -67,7 +66,6 @@ public class Player extends InputAdapter implements IPlayer {
     @Override
     public void recieveCards(ArrayList<ICard> cards){
         sortedCards.clear();
-        cardsReady = false;
         cardStorage = cards;
         hud.updateCardNumbers(sortedCards);
     }
@@ -98,8 +96,6 @@ public class Player extends InputAdapter implements IPlayer {
             case Input.Keys.ENTER:
                 selectCard(hud.getSelected());
                 break;
-            case Input.Keys.U:
-                cardsReady = !cardsReady;
         }
         return true;
     }

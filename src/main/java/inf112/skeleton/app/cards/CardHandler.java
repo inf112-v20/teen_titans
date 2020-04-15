@@ -2,7 +2,6 @@ package inf112.skeleton.app.cards;
 
 import inf112.skeleton.app.Board;
 import inf112.skeleton.app.player.IPlayer;
-import inf112.skeleton.app.player.Player;
 
 import java.util.*;
 
@@ -12,8 +11,11 @@ public class CardHandler {
     private IPlayer[] players;
     private Random random;
     private Board board;
+    private int[][] individuallySortedCards;
 
-
+    public void setIndividuallySortedCards(int[][] cards){
+        individuallySortedCards = cards;
+    }
     public CardHandler(IPlayer[] players, Board board, boolean host){
         random = new Random();
         this.players = players;
@@ -23,7 +25,6 @@ public class CardHandler {
             createDeck();
         }
     }
-
     public ArrayList<ICard> getDeck(){
         return deck;
     }
@@ -55,29 +56,28 @@ public class CardHandler {
             }
         }
     }
-
     public ICard[][] dealCards() {
         Collections.shuffle(deck);
-
         ICard[][] cardsToDeal = new ICard[players.length][9];
         for(int p = 0; p < players.length; p++) {
             for(int i = 0; i < 9; i++){
-                cardsToDeal[p][i] = deck.get(9*p + i);
+                ICard card = deck.get(9*p + i);
+                card.setPlayer(players[p]);
+                cardsToDeal[p][i] = card;
             }
         }
         return cardsToDeal;
     }
-
-    private ICard[][] getPlayerCards(){
-        ICard[][] individuallySortedCards = new ICard[players.length][5];
-        for(int p = 0; p < players.length; p++){
-            individuallySortedCards[p] = players[p].getSortedCards();
+    public int[][] handlePlayerCards(HashMap<Integer, int[]> playerCards){
+        int[][] individuallySortedCards = new int[players.length][5];
+        for(int[] hand : playerCards.values()){
+            individuallySortedCards[(hand[0] / 10) % 10] = hand;
         }
         return individuallySortedCards;
     }
 
     private PriorityQueue<ICard>[] addCardsToPQArray(ICard[][] individuallySortedCards){
-        PriorityQueue<ICard>[] cardsPQ = new PriorityQueue[5];
+        PriorityQueue<ICard>[] cardsPQ = new PriorityQueue [5];
         for(int i = 0; i < cardsPQ.length; i++){
             cardsPQ[i] = new PriorityQueue<>();
         }
@@ -90,26 +90,35 @@ public class CardHandler {
         }
         return cardsPQ;
     }
-
     public PriorityQueue<ICard>[] getSortedCards(){
-        return addCardsToPQArray(getPlayerCards());
+        ICard[][] individuallySortedCards = new ICard[players.length][5];
+        for(int i = 0; i < individuallySortedCards.length; i++){
+            individuallySortedCards[i] = new ICard[5];
+            ArrayList<ICard> gencards = intsToCards(this.individuallySortedCards[i]);
+            System.out.println(Arrays.toString(gencards.toArray()));
+            for(int j = 0; j < 5; j++){
+                ICard card = gencards.get(j);
+                individuallySortedCards[i][j] = card;
+            }
+        }
+        for(ICard[] inni : individuallySortedCards){
+            System.out.println("in getSortedCards"+Arrays.toString(inni));
+        }
+        return addCardsToPQArray(individuallySortedCards);
     }
-
     public ArrayList<ICard> intsToCards(int[] hand){
         ArrayList<ICard> cards = new ArrayList<>();
         for(int num : hand){
             for(ICard card : deck){
                 int typeID = num % 10;
-                int playerID = (num / 10) % 10;
                 int priority = num / 100;
-
-                if(card.getPlayer().getPlayerNumber() == playerID && card.getPriority() == priority && card.getTypeID() == typeID){
+                if(card.getPriority() == priority && card.getTypeID() == typeID){
                     cards.add(card);
                     break;
                 }
-
             }
         }
+
         return cards;
     }
 

@@ -35,27 +35,26 @@ public class ClientListener extends Listener {
     }
 
     public void received(Connection c, Object o){
-        System.out.print("Client recieved: ");System.out.println(o.toString());
-
+        System.out.println("Client recieved: " + o.toString());
         if(o instanceof PacketInfo.Deck){
             parent.setDeck(((PacketInfo.Deck) o).cards);
         }
-
         else if(o instanceof PacketInfo.Name){
             parent.addName(((PacketInfo.Name) o).playerID, ((PacketInfo.Name) o).name);
         }
-
         else if(o instanceof PacketInfo.NumPlayers){
             parent.setPlayerAmount(((PacketInfo.NumPlayers) o).numPlayers);
         }
-
         else if(o instanceof PacketInfo.StartSignal){
             parent.setStartSignal(true);
         }
-
         else if(o instanceof PacketInfo.Cards){
             System.out.println("Client listener: Client received hand.");
             parent.handReceived(((PacketInfo.Cards) o).cards);
+        }
+
+        else if(o instanceof PacketInfo.AllCards){
+            parent.allCardsReceived(((PacketInfo.AllCards) o).allCards);
         }
 
     }
