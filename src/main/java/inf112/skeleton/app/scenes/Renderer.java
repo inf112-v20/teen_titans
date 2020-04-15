@@ -22,24 +22,22 @@ public class Renderer {
 
    public Renderer(Orchestrator orchestrator, int playerNumber, boolean host) {
        parent = orchestrator;
-       gameLoop = new GameLoop(playerNumber, host);
-       //create();
+       gameLoop = new GameLoop(this, playerNumber, host);
    }
 
     public void create(int playersAmount) {
         gameLoop.create(playersAmount);
         hudManager = gameLoop.getHudManager();
-        //gameLoop.getGameLoopThread().start();
         setupTextures();
-
-        Gdx.input.setInputProcessor((InputProcessor) gameLoop.getPlayers()[0]);
-
+        Gdx.input.setInputProcessor(gameLoop.getMyPlayer());
         camera = new OrthographicCamera();
         renderer = new OrthogonalTiledMapRenderer(gameLoop.getBoard().getMap(), 1/300f);
         camera.setToOrtho(false, BOARDWIDTH, BOARDHEIGHT);
         camera.position.set(camera.viewportWidth/2 - 1, camera.viewportHeight/2 - 2, 0);
         camera.update();
         renderer.setView(camera);
+
+        gameLoop.getGameLoopThread().start();
     }
 
     public void dispose() {

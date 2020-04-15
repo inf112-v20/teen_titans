@@ -3,7 +3,6 @@ package inf112.skeleton.app.network.server;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Server;
-import com.jcraft.jogg.Packet;
 import inf112.skeleton.app.cards.CardHandler;
 import inf112.skeleton.app.cards.ICard;
 import inf112.skeleton.app.network.PacketInfo;
@@ -22,8 +21,8 @@ public class GameServer implements Runnable {
 
     private Server server;
     private ServerListener listener;
-
     private CardHandler cardHandler;
+
     private HashMap<Integer, String> playerNames = new HashMap<>();
 
     public GameServer(){
@@ -58,6 +57,12 @@ public class GameServer implements Runnable {
         //dealCards();
     }
 
+    public void sendStartSignal(){
+        PacketInfo.StartSignal startSignal = new PacketInfo.StartSignal();
+        startSignal.signal = true;
+        server.sendToAllTCP(startSignal);
+    }
+
     private void sendDeckRecipe(){
         ICard[] deckAsArray = Translator.arrayListToArray(cardHandler.getDeck());
         int[] deckAsInts = Translator.cardsToInts(deckAsArray);
@@ -71,9 +76,9 @@ public class GameServer implements Runnable {
         Connection[] connections = server.getConnections();
         for(int i = 0; i < connections.length; i++){
             int[] cardsAsInts = Translator.cardsToInts(cards[i]);
-            PacketInfo.Cards deck = new PacketInfo.Cards();
-            deck.cards = cardsAsInts;
-            server.sendToTCP(connections[i].getID(), deck);
+            PacketInfo.Cards hand = new PacketInfo.Cards();
+            hand.cards = cardsAsInts;
+            server.sendToTCP(connections[i].getID(), hand);
         }
     }
 

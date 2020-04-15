@@ -49,6 +49,15 @@ public class ClientListener extends Listener {
             parent.setPlayerAmount(((PacketInfo.NumPlayers) o).numPlayers);
         }
 
+        else if(o instanceof PacketInfo.StartSignal){
+            parent.setStartSignal(true);
+        }
+
+        else if(o instanceof PacketInfo.Cards){
+            System.out.println("Client listener: Client received hand.");
+            parent.handReceived(((PacketInfo.Cards) o).cards);
+        }
+
     }
 
 

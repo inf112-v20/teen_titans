@@ -27,7 +27,6 @@ public class CardHandler {
     public ArrayList<ICard> getDeck(){
         return deck;
     }
-
     public void createDeck(){
         deck = new ArrayList<>();
         for(int i = 0; i < players.length * 5; i++){
@@ -40,37 +39,31 @@ public class CardHandler {
             deck.add(new TurnLeftCard(random.nextInt(900)+100, players[0]));
         }
     }
-
     public void createDeckFromRecipe(int[] recipe){
-        System.out.println("here");
         deck = new ArrayList<>();
         for(int newCard : recipe){
-            System.out.println();
             switch(newCard % 10){
                 case 1:
                     deck.add(new MoveForwardCard(newCard / 100, players[(newCard / 10) % 10], board));
+                    break;
                 case 2:
                     deck.add(new TurnLeftCard(newCard/100, players[(newCard / 10) % 10]));
+                    break;
                 case 3:
                     deck.add(new TurnRightCard(newCard/100, players[(newCard/10)%10]));
+                    break;
             }
         }
-        System.out.println(deck.size());
     }
 
     public ICard[][] dealCards() {
         Collections.shuffle(deck);
-        ICard[][] cardsToDeal = new ICard[players.length][9];
 
+        ICard[][] cardsToDeal = new ICard[players.length][9];
         for(int p = 0; p < players.length; p++) {
-            //ArrayList<ICard> playerCards = new ArrayList<>();
             for(int i = 0; i < 9; i++){
                 cardsToDeal[p][i] = deck.get(9*p + i);
-                //ICard card = deck.get(i);
-                //card.setPlayer(players[p]);
-                //playerCards.add(card);
             }
-            //players[p].recieveCards(playerCards);
         }
         return cardsToDeal;
     }
@@ -80,7 +73,6 @@ public class CardHandler {
         for(int p = 0; p < players.length; p++){
             individuallySortedCards[p] = players[p].getSortedCards();
         }
-
         return individuallySortedCards;
     }
 
@@ -101,6 +93,24 @@ public class CardHandler {
 
     public PriorityQueue<ICard>[] getSortedCards(){
         return addCardsToPQArray(getPlayerCards());
+    }
+
+    public ArrayList<ICard> intsToCards(int[] hand){
+        ArrayList<ICard> cards = new ArrayList<>();
+        for(int num : hand){
+            for(ICard card : deck){
+                int typeID = num % 10;
+                int playerID = (num / 10) % 10;
+                int priority = num / 100;
+
+                if(card.getPlayer().getPlayerNumber() == playerID && card.getPriority() == priority && card.getTypeID() == typeID){
+                    cards.add(card);
+                    break;
+                }
+
+            }
+        }
+        return cards;
     }
 
 

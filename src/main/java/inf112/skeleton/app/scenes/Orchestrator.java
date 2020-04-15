@@ -44,7 +44,7 @@ public class Orchestrator extends Game {
 
     public void hostGame(){
         renderer = new Renderer(this, 0, true);
-        hostGameScreen = new HostGameScreen(this, renderer.getGameLoop().getGameClient());
+        hostGameScreen = new HostGameScreen(this, renderer.getGameLoop().getGameClient(), renderer.getGameLoop().getGameServer());
         currentScreen = Screens.HOSTGAME;
     }
 

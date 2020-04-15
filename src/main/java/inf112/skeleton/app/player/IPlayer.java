@@ -1,11 +1,12 @@
 package inf112.skeleton.app.player;
 
+import com.badlogic.gdx.InputProcessor;
 import inf112.skeleton.app.Robot;
 import inf112.skeleton.app.cards.ICard;
 
 import java.util.ArrayList;
 
-public interface IPlayer {
+public interface IPlayer{
 
     ICard[] getCardStorage();
 

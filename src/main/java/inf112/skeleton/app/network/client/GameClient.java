@@ -7,6 +7,7 @@ import com.esotericsoftware.kryonet.Client;
 import inf112.skeleton.app.GameLoop;
 import inf112.skeleton.app.cards.ICard;
 import inf112.skeleton.app.network.PacketInfo;
+import inf112.skeleton.app.scenes.Renderer;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -19,26 +20,23 @@ public class GameClient {
     private HashMap<Integer, String> playerNames = new HashMap();
     private int playerAmount;
 
-    public Client client;
-    private ClientListener listener;
-    private int tcpPort;
-    private int udpPort;
-    private int[] deck;
+    public Client client = new Client();
+    private ClientListener listener = new ClientListener();
+    private int tcpPort = 54555;
+    private int udpPort = 54333;
+
+    private int[] deck = null;
+    private boolean startSignal = false;
+    private boolean activeChooseCard = false;
+
 
     public GameClient(boolean isHost, GameLoop gameLoop){
         this.host = isHost;
         this.gameLoop = gameLoop;
-        client = new Client();
-        listener = new ClientListener();
-        tcpPort = 54555;
-        udpPort = 54333;
-
         listener.constructor(gameLoop, this);
         registerPacketInfo();
-
         client.addListener(listener);
         new Thread(client).start();
-
         if(isHost) {
             try {
                 client.connect(5000, "127.0.0.1", tcpPort, udpPort);
@@ -68,11 +66,18 @@ public class GameClient {
 
     }
 
+    public void handReceived(int[] hand){
+        gameLoop.getMyPlayer().recieveCards(gameLoop.getCardHandler().intsToCards(hand));
+        setActiveChooseCard(true);
+    }
+
+
     public void setDeck(int[] deck){
+        System.out.println(Arrays.toString(deck));
         this.deck = deck;
-        if(!host) {
-            gameLoop.getCardHandler().createDeckFromRecipe(deck);
-        }
+    }
+    public int[] getDeck(){
+        return deck;
     }
 
     private void registerPacketInfo() {
@@ -88,6 +93,20 @@ public class GameClient {
         kryo.register(boolean.class);
         kryo.register(int.class);
         kryo.register(HashMap.class);
+    }
+
+    public void setStartSignal(boolean b){
+        startSignal = b;
+    }
+    public boolean getStartSignal() {
+        return startSignal;
+    }
+
+    public void setActiveChooseCard(boolean b){
+        activeChooseCard = b;
+    }
+    public boolean getActiveChooseCard(){
+        return activeChooseCard;
     }
 
     private void sendName(){
@@ -122,9 +141,6 @@ public class GameClient {
     public void addName(int id, String name){
         playerNames.put(id, name);
 
-        System.out.println("--player names--");
-        System.out.println(Arrays.toString(playerNames.values().toArray()));
-        System.out.println("");
     }
     public HashMap getPlayerNames(){
         return playerNames;

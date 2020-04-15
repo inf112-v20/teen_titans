@@ -9,7 +9,10 @@ public class Translator {
     public static int[] cardsToInts(ICard[] cards){
         int[] ints = new int[cards.length];
         for(int i = 0; i < cards.length; i++){
-            ints[i] = cards[i].getPriority() * 10 + cards[i].getTypeID();
+            //int priority = cards[i].getPriority();
+            //int playerID = cards[i].getPlayer().getPlayerNumber();
+            //int typeID = cards[i].getTypeID();
+            ints[i] = (cards[i].getPriority() * 100) + (cards[i].getPlayer().getPlayerNumber() * 10) + cards[i].getTypeID();
         }
         return ints;
     }

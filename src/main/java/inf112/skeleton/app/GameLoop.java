@@ -1,25 +1,26 @@
 package inf112.skeleton.app;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.InputAdapter;
 import inf112.skeleton.app.cards.*;
+import inf112.skeleton.app.network.PacketInfo;
 import inf112.skeleton.app.network.client.GameClient;
 import inf112.skeleton.app.network.server.GameServer;
 import inf112.skeleton.app.player.IPlayer;
 import inf112.skeleton.app.player.Opponent;
 import inf112.skeleton.app.player.Player;
 import inf112.skeleton.app.scenes.HudManager;
+import inf112.skeleton.app.scenes.Renderer;
 
-import java.net.Inet4Address;
-import java.net.UnknownHostException;
 import java.util.PriorityQueue;
-import java.util.Random;
 
 public class GameLoop extends InputAdapter {
 
-    private int myPlayer;
+    private Player myPlayer;
+    private int myPlayerNumber;
     private HudManager hud;
     private IPlayer[] players;
+
+    private Renderer parent;
     private GameClient gameClient;
     private GameServer gameServer;
     private boolean host;
@@ -30,9 +31,10 @@ public class GameLoop extends InputAdapter {
     private Thread loop;
     private Thread networking;
 
-    public GameLoop(int myPlayer, boolean host){
+    public GameLoop(Renderer parent, int myPlayerNumber, boolean host){
+        this.parent = parent;
         this.host = host;
-        this.myPlayer = myPlayer;
+        this.myPlayerNumber = myPlayerNumber;
         board = new Board();
         hud = new HudManager();
         createNetworking();
@@ -46,58 +48,62 @@ public class GameLoop extends InputAdapter {
         if(host){
             gameServer.gameStart(cardHandler);
         }
-        else{
-            waitForDeck();
-        }
+        waitForDeck();
     }
 
     private void waitForDeck(){
-        while(cardHandler.getDeck() == null){
+        while(gameClient.getDeck() == null){
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        cardHandler.createDeckFromRecipe(gameClient.getDeck());
+
     }
 
     private void createGameLoopThread() {
         loop = new Thread(() -> {
             int r = 0;
-            while(true) {
-                cardHandler.dealCards();
+            while(true) { r++;
+                System.out.println("____LOOP_ITERATION_GAME_ROUND_"+r+"____ \n");
+                //Host sends cards
+                if(host) {
+                    gameServer.dealCards();
+                }
 
-                hud.recieveCards(players[myPlayer].getCardStorage());
-                PriorityQueue<ICard>[] queues = cardHandler.getSortedCards();
-                for(PriorityQueue<ICard> round : queues){
-                    while(!round.isEmpty()) {
-                        ICard currentCard = round.remove();
-                        board.doRobotTurn(currentCard);
+                //Client waits to recieve cards
+                while(!gameClient.getActiveChooseCard()){
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
+
+
+                //Client has recievedcards. Send cards to HUD.
+                hud.recieveCards(myPlayer.getCardStorage());
+
+                //Player selects cards
+                ICard[] sortedHand = myPlayer.getSortedCards();
+
+                //Player sends cards to server
+                gameClient.sendCards(sortedHand);
+
+
+
+                //PriorityQueue<ICard>[] queues = cardHandler.getSortedCards();
+                //for(PriorityQueue<ICard> round : queues){
+                //    while(!round.isEmpty()) {
+                //        ICard currentCard = round.remove();
+                //        board.doRobotTurn(currentCard);
+                //    }
+                //}
                 board.doGroundTileEffects();
             }
         });
-    }
-
-    public Thread getGameLoopThread(){
-        return loop;
-    }
-
-    public void createNetworkingThread(){
-        networking = new Thread(() ->{
-            if(host){
-                gameServer = new GameServer();
-                gameServer.run();
-                gameClient = new GameClient(host, this);
-            }
-
-            else{
-                gameClient = new GameClient(host,this);
-                //do not create server.
-            }
-        });
-        networking.start();
     }
 
     private void createNetworking(){
@@ -114,34 +120,34 @@ public class GameLoop extends InputAdapter {
 
     private void createPlayers() {
         players = new IPlayer[board.getRobots().length];
-        players[myPlayer] = new Player(myPlayer, board.getRobots()[myPlayer], hud, board);
+        myPlayer = new Player(myPlayerNumber, board.getRobots()[myPlayerNumber], hud, board);
+        players[myPlayer.getPlayerNumber()] = myPlayer;
         for (int i = 0; i < players.length; i++) {
-            if (i != myPlayer) {
+            if (i != myPlayerNumber) {
                 players[i] = new Opponent(board.getRobots()[i], i);
             }
         }
     }
 
+    public Thread getGameLoopThread(){
+        return loop;
+    }
+    public Player getMyPlayer(){
+        return myPlayer;
+    }
     public HudManager getHudManager(){
         return hud;
     }
-
+    public CardHandler getCardHandler(){
+        return cardHandler;
+    }
     public Board getBoard(){
         return board;
     }
-
-    public IPlayer[] getPlayers() {
-        return players;
-    }
-
     public GameServer getGameServer() {
         return gameServer;
     }
     public GameClient getGameClient(){
         return gameClient;
-    }
-
-    public CardHandler getCardHandler() {
-        return cardHandler;
     }
 }

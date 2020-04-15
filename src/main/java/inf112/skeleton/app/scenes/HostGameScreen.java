@@ -8,21 +8,24 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.network.client.GameClient;
+import inf112.skeleton.app.network.server.GameServer;
 
 
 public class HostGameScreen extends InputAdapter {
 
     private int playersJoined;
     private GameClient gameClient;
+    private GameServer gameServer;
     private Orchestrator parent;
     private Stage stage;
     private Table table;
     private Skin skin;
 
-    public HostGameScreen(Orchestrator orchestrator, GameClient server) {
+    public HostGameScreen(Orchestrator orchestrator, GameClient client, GameServer server) {
         Gdx.input.setInputProcessor(this);
         playersJoined = 0;
-        gameClient = server;
+        gameClient = client;
+        gameServer = server;
         parent = orchestrator;
         stage = new Stage(new ScreenViewport());
         create();
@@ -45,7 +48,7 @@ public class HostGameScreen extends InputAdapter {
         TextField text = new TextField("Joined players", skin);
         table.add(text).expandX().padBottom(20);
         table.row();
-        System.out.println("1");
+        //System.out.println("1");
         for(Object name :  gameClient.getPlayerNames().values()){
 
             if(name instanceof String){
@@ -61,12 +64,16 @@ public class HostGameScreen extends InputAdapter {
         if(playersJoined < gameClient.getPlayerNames().size()){
             updateTable();
         }
+        if(gameClient.getStartSignal()){
+            parent.startGame(gameClient.getPlayerAmount());
+        }
+
         Gdx.gl.glClearColor(0f,0f,0f,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Math.min(Gdx.graphics.getDeltaTime(),1/30f));
         stage.draw();
-
     }
+
 
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
@@ -86,8 +93,7 @@ public class HostGameScreen extends InputAdapter {
     public boolean keyUp(int keycode) {
         switch (keycode){
             case Input.Keys.ENTER:
-                int playerAmount = gameClient.getPlayerNames().size();
-                parent.startGame(playerAmount);
+                gameServer.sendStartSignal();
                 return true;
         }
         return false;

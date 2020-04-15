@@ -1,12 +1,13 @@
 package inf112.skeleton.app.player;
 
+import com.badlogic.gdx.InputAdapter;
 import inf112.skeleton.app.Robot;
 import inf112.skeleton.app.cards.ICard;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Opponent implements IPlayer {
+public class Opponent implements IPlayer{
 
     private int playerNumber;
     private Robot robot;
