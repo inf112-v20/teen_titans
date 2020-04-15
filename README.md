@@ -6,7 +6,13 @@
 Simple skeleton with libgdx. 
 
 ## To start the game
-Clone the project to Intellij and press play.
+Clone the project to Intellij.
+
+### Single player
+Run the game once. Select "host game" (using the enter key). Enter your name when prompted. Press enter to start the game.
+
+### Multiplayer
+Click "edit run configurations". In the upper right corner, check the "allow parallell run" box. Run up to 4 iterations of the game. First, in one iteration, chose "host game", and enter your name when prompted. In the other iterations, choose "join game", enter adress "localhost" when prompted, then enter name when prompted. To start the game, press enter in the host iteration.
 
 ## Manuel Tests
 Tests 1-4 assumes player is facing upwards.
