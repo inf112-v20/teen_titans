@@ -1,10 +1,14 @@
-package inf112.skeleton.app.scenes;
+package inf112.skeleton.app.scenes.game;
 
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.cards.ICard;
 
@@ -18,6 +22,7 @@ public class HudManager {
     private Image selectedImage;
     private int selected;
     private Image[] numbers = new Image[5];
+    private Skin skin;
 
     public HudManager(){
         stage = new Stage(new ScreenViewport());
@@ -27,6 +32,7 @@ public class HudManager {
         numbers[2] = new Image(new Texture(Gdx.files.internal("numbers/Number3.png")));
         numbers[3] = new Image(new Texture(Gdx.files.internal("numbers/Number4.png")));
         numbers[4] = new Image(new Texture(Gdx.files.internal("numbers/Number5.png")));
+        skin = new Skin(Gdx.files.internal("styles/glassy-ui.json"));
     }
 
 
@@ -34,55 +40,70 @@ public class HudManager {
     public void createPos1(ICard img){
         img.getImage().setPosition(stage.getWidth()/2 - 530, 0);
         stage.addActor(img.getImage());
+        addPriorityLabel(img);
         cardList[0] = img;
     }
 
     public void createPos2(ICard img){
         img.getImage().setPosition(stage.getWidth()/2 - 410, 0);
         stage.addActor(img.getImage());
+        addPriorityLabel(img);
         cardList[1] = img;
     }
 
     public void createPos3(ICard img){
         img.getImage().setPosition(stage.getWidth()/2 - 290, 0);
         stage.addActor(img.getImage());
+        addPriorityLabel(img);
         cardList[2] = img;
     }
 
     public void createPos4(ICard img){
         img.getImage().setPosition(stage.getWidth()/2 - 170,0);
         stage.addActor(img.getImage());
+        addPriorityLabel(img);
         cardList[3] = img;
     }
 
     public void createPos5(ICard img){
         img.getImage().setPosition(stage.getWidth()/2 - 50,0);
         stage.addActor(img.getImage());
+        addPriorityLabel(img);
         cardList[4] = img;
     }
 
     public void createPos6(ICard img){
         img.getImage().setPosition(stage.getWidth()/2 + 70, 0);
         stage.addActor(img.getImage());
+        addPriorityLabel(img);
         cardList[5] = img;
     }
 
     public void createPos7(ICard img){
         img.getImage().setPosition(stage.getWidth()/2 + 190, 0);
         stage.addActor(img.getImage());
+        addPriorityLabel(img);
         cardList[6] = img;
     }
 
     public void createPos8(ICard img){
         img.getImage().setPosition(stage.getWidth()/2 + 310, 0);
         stage.addActor(img.getImage());
+        addPriorityLabel(img);
         cardList[7] = img;
     }
 
     public void createPos9(ICard img){
         img.getImage().setPosition(stage.getWidth()/2 + 430, 0);
         stage.addActor(img.getImage());
+        addPriorityLabel(img);
         cardList[8] = img;
+    }
+
+    private void addPriorityLabel(ICard img){
+        Label field = new Label(Integer.toString(img.getPriority()), skin);
+        field.setPosition(img.getImage().getX()+60, 10);
+        stage.addActor(field);
     }
 
     public int getSelected(){
@@ -158,32 +179,32 @@ public class HudManager {
         }
     }
 
-
     public void recieveCards(ICard[] cards){
         clearImages();
-        if(cards != null) {
-            try {
-                createPos1(cards[0]);
-                createPos2(cards[1]);
-                createPos3(cards[2]);
-                createPos4(cards[3]);
-                createPos5(cards[4]);
-                createPos6(cards[5]);
-                createPos7(cards[6]);
-                createPos8(cards[7]);
-                createPos9(cards[8]);
-            } catch (NullPointerException e) {
-                System.out.println("Exception called");
-                //continue, this is fine
-            }
+        try {
+            createPos1(cards[0]);
+            createPos2(cards[1]);
+            createPos3(cards[2]);
+            createPos4(cards[3]);
+            createPos5(cards[4]);
+            createPos6(cards[5]);
+            createPos7(cards[6]);
+            createPos8(cards[7]);
+            createPos9(cards[8]);
+        } catch (NullPointerException e) {
+            System.out.println("Exception called");
+            //continue, this is fine
         }
         selected = 0;
         updateSelectedCard(0);
 
     }
 
-
-
+    public void clear(){
+        for(Actor a : stage.getActors()){
+            a.setPosition(-200, 0);
+        }
+    }
     public Stage getStage(){
         return stage;
     }

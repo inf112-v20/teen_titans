@@ -5,7 +5,7 @@ import com.badlogic.gdx.InputAdapter;
 import inf112.skeleton.app.board.Board;
 import inf112.skeleton.app.board.Robot;
 import inf112.skeleton.app.cards.ICard;
-import inf112.skeleton.app.scenes.HudManager;
+import inf112.skeleton.app.scenes.game.HudManager;
 import java.util.ArrayList;
 
 public class Player extends InputAdapter implements IPlayer {

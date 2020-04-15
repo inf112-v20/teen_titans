@@ -8,8 +8,6 @@ import inf112.skeleton.app.network.server.GameServer;
 import inf112.skeleton.app.player.IPlayer;
 import inf112.skeleton.app.player.Opponent;
 import inf112.skeleton.app.player.Player;
-import inf112.skeleton.app.scenes.HudManager;
-import inf112.skeleton.app.scenes.game.Renderer;
 
 import java.util.PriorityQueue;
 
@@ -29,7 +27,6 @@ public class GameLoop extends InputAdapter {
     private CardHandler cardHandler;
 
     private Thread loop;
-    private Thread networking;
 
     public GameLoop(Renderer parent, int myPlayerNumber, boolean host){
         this.parent = parent;
@@ -82,14 +79,13 @@ public class GameLoop extends InputAdapter {
                     }
                 }
 
-
                 /**  Client has recievedcards. Send cards to HUD.  check**/
                 hud.recieveCards(myPlayer.getCardStorage());
                 /**  Player selects cards  check**/
                 ICard[] sortedHand = myPlayer.getSortedCards();
                 /**  Player sends cards to server check**/
                 gameClient.sendCards(sortedHand);
-                hud.recieveCards(null);
+                hud.clear();
 
                 if(host){
                     /** Host waits for all players to send cards... **/
