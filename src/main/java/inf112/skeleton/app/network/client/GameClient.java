@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
-import inf112.skeleton.app.GameLoop;
+import inf112.skeleton.app.scenes.game.GameLoop;
 import inf112.skeleton.app.cards.ICard;
 import inf112.skeleton.app.network.PacketInfo;
 

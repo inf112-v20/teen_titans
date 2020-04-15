@@ -1,10 +1,11 @@
-package inf112.skeleton.app.scenes;
+package inf112.skeleton.app.scenes.game;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import inf112.skeleton.app.GameLoop;
+import inf112.skeleton.app.scenes.HudManager;
+import inf112.skeleton.app.scenes.Orchestrator;
 
 public class Renderer {
 

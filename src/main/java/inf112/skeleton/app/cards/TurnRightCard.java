@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import inf112.skeleton.app.player.IPlayer;
-import inf112.skeleton.app.Robot;
+import inf112.skeleton.app.board.Robot;
 
 public class TurnRightCard implements ICard{
 

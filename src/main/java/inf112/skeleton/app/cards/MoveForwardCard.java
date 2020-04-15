@@ -3,9 +3,9 @@ package inf112.skeleton.app.cards;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import inf112.skeleton.app.Board;
-import inf112.skeleton.app.Pos;
-import inf112.skeleton.app.Robot;
+import inf112.skeleton.app.board.Board;
+import inf112.skeleton.app.board.Pos;
+import inf112.skeleton.app.board.Robot;
 import inf112.skeleton.app.player.IPlayer;
 
 public class MoveForwardCard implements ICard{

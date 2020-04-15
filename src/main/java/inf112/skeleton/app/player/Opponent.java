@@ -1,7 +1,6 @@
 package inf112.skeleton.app.player;
 
-import com.badlogic.gdx.InputAdapter;
-import inf112.skeleton.app.Robot;
+import inf112.skeleton.app.board.Robot;
 import inf112.skeleton.app.cards.ICard;
 
 import java.util.ArrayList;

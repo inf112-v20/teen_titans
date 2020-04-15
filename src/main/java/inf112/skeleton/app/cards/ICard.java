@@ -1,7 +1,7 @@
 package inf112.skeleton.app.cards;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import inf112.skeleton.app.Robot;
+import inf112.skeleton.app.board.Robot;
 import inf112.skeleton.app.player.IPlayer;
 
 public interface ICard extends Comparable<ICard> {

@@ -1,6 +1,6 @@
 package inf112.skeleton.app.cards;
 
-import inf112.skeleton.app.Board;
+import inf112.skeleton.app.board.Board;
 import inf112.skeleton.app.player.IPlayer;
 
 import java.util.*;

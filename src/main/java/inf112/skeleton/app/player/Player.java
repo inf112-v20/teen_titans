@@ -2,12 +2,9 @@ package inf112.skeleton.app.player;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import inf112.skeleton.app.Board;
-import inf112.skeleton.app.Robot;
+import inf112.skeleton.app.board.Board;
+import inf112.skeleton.app.board.Robot;
 import inf112.skeleton.app.cards.ICard;
-import inf112.skeleton.app.cards.MoveForwardCard;
-import inf112.skeleton.app.cards.TurnLeftCard;
-import inf112.skeleton.app.cards.TurnRightCard;
 import inf112.skeleton.app.scenes.HudManager;
 import java.util.ArrayList;
 

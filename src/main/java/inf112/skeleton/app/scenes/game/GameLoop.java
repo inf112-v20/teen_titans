@@ -1,17 +1,16 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.scenes.game;
 
 import com.badlogic.gdx.InputAdapter;
+import inf112.skeleton.app.board.Board;
 import inf112.skeleton.app.cards.*;
-import inf112.skeleton.app.network.PacketInfo;
 import inf112.skeleton.app.network.client.GameClient;
 import inf112.skeleton.app.network.server.GameServer;
 import inf112.skeleton.app.player.IPlayer;
 import inf112.skeleton.app.player.Opponent;
 import inf112.skeleton.app.player.Player;
 import inf112.skeleton.app.scenes.HudManager;
-import inf112.skeleton.app.scenes.Renderer;
+import inf112.skeleton.app.scenes.game.Renderer;
 
-import java.util.Arrays;
 import java.util.PriorityQueue;
 
 public class GameLoop extends InputAdapter {

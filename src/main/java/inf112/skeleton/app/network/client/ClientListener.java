@@ -3,7 +3,7 @@ package inf112.skeleton.app.network.client;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
-import inf112.skeleton.app.GameLoop;
+import inf112.skeleton.app.scenes.game.GameLoop;
 import inf112.skeleton.app.cards.ICard;
 import inf112.skeleton.app.network.PacketInfo;
 import inf112.skeleton.app.network.Translator;
