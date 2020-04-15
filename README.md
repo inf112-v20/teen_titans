@@ -6,19 +6,21 @@
 Simple skeleton with libgdx. 
 
 ## To start the game
-Clone the project to Intellij and press play.
+Clone the project to Intellij.
+
+### Single player
+Run the game once. Select "host game" (using the enter key). Enter your name when prompted. Press enter to start the game.
+
+### Multiplayer
+Click "edit run configurations". In the upper right corner, check the "allow parallell run" box. Run up to 4 iterations of the game. First, in one iteration, chose "host game", and enter your name when prompted. In the other iterations, choose "join game", enter adress "localhost" when prompted, then enter name when prompted. To start the game, press enter in the host iteration.
 
 ## Manuel Tests
 Tests 1-4 assumes player is facing upwards.
 
 0. Start the game and graphics appear means graphics work.
-1. If you click UP-card, the character should walk 1 step up.
-2. If you click 2 LEFT/RIGHT-cards & UP-card, the character should walk 1 step down.
-3. If you click RIGHT-card & UP-card, the character should walk 1 step RIGHT.
-4. If you click LEFT-card & UP-card, the character should walk 1 step LEFT.
-5. Step on the HOLE will make the character die
-6. Step on the GEARS will make the character rotate
-7. Step on the CONVEYOR BELT will make the character move towards the direction it points
+1. Step on the HOLE will make the character die
+2. Step on the GEARS will make the character rotate
+3. Step on the CONVEYOR BELT will make the character move towards the direction it points
 
 
 ## Known bugs
