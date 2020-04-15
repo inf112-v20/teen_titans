@@ -36,7 +36,7 @@ public class HostGameScreen extends InputAdapter {
         table.setFillParent(true);
         table.setDebug(true);
         stage.addActor(table);
-        skin = new Skin(Gdx.files.internal("glassy-ui.json"));
+        skin = new Skin(Gdx.files.internal("styles/glassy-ui.json"));
         TextField text = new TextField("Joined players", skin);
         table.add(text).expandX();
         table.row();

@@ -3,16 +3,12 @@ package inf112.skeleton.app;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import inf112.skeleton.app.cards.ICard;
-import inf112.skeleton.app.scenes.MainMenuScreen;
 
-import javax.swing.*;
 import java.util.HashMap;
-import java.util.Random;
 
 public class Board extends InputAdapter {
 
@@ -33,7 +29,7 @@ public class Board extends InputAdapter {
     public Board(){
         //createRobots(numPlayers);
 
-        map = new TmxMapLoader().load("testMap2.tmx");
+        map = new TmxMapLoader().load("maps/testMap2.tmx");
 
         mapLayers = new HashMap<>();
         mapLayers.put("conveyor", (TiledMapTileLayer) map.getLayers().get("Conveyor"));
@@ -170,13 +166,13 @@ public class Board extends InputAdapter {
         listOfRobots = new Robot[n];
         for(int i = 0; i < n; i++){
             if(i==0) {
-                listOfRobots[i] = new Robot((i + 1) * 2, (i + 1) * 2, "bulbasaur.png");
+                listOfRobots[i] = new Robot((i + 1) * 2, (i + 1) * 2, "robots/bulbasaur.png");
             }
             else if(i==1){
-                listOfRobots[i] = new Robot((i + 1)*2, (i+1)*2, "pika.png");
+                listOfRobots[i] = new Robot((i + 1)*2, (i+1)*2, "robots/pika.png");
             }
             else{
-                listOfRobots[i] = new Robot(6, 4, "marsvin2.png");
+                listOfRobots[i] = new Robot(6, 4, "robots/marsvin2.png");
             }
         }
         robot = listOfRobots[0];

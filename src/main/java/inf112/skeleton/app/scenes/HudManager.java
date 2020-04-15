@@ -21,7 +21,7 @@ public class HudManager {
 
     public HudManager(){
         stage = new Stage(new ScreenViewport());
-        selectedImage = new Image(new Texture(Gdx.files.internal("SelectedCard.png")));
+        selectedImage = new Image(new Texture(Gdx.files.internal("cards/SelectedCard.png")));
         numbers[0] = new Image(new Texture(Gdx.files.internal("numbers/Number1.png")));
         numbers[1] = new Image(new Texture(Gdx.files.internal("numbers/Number2.png")));
         numbers[2] = new Image(new Texture(Gdx.files.internal("numbers/Number3.png")));

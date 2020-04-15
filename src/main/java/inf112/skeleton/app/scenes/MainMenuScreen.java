@@ -3,7 +3,6 @@ package inf112.skeleton.app.scenes;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -34,7 +33,7 @@ public class MainMenuScreen extends InputAdapter {
         table.setDebug(true);
         stage.addActor(table);
 
-        Skin skin = new Skin(Gdx.files.internal("glassy-ui.json"));
+        Skin skin = new Skin(Gdx.files.internal("styles/glassy-ui.json"));
 
         TextButton newGame = new TextButton("Host Game", skin);
         newGame.setName("New Game");

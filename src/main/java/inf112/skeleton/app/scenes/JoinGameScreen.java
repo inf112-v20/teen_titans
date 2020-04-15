@@ -1,6 +1,5 @@
 package inf112.skeleton.app.scenes;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -31,7 +30,7 @@ public class JoinGameScreen {
         table.setFillParent(true);
         table.setDebug(true);
         stage.addActor(table);
-        skin = new Skin(Gdx.files.internal("glassy-ui.json"));
+        skin = new Skin(Gdx.files.internal("styles/glassy-ui.json"));
         TextField text = new TextField("Joined players", skin);
         table.add(text).expandX();
         table.row();
