@@ -9,6 +9,7 @@ import inf112.skeleton.app.player.IPlayer;
 import inf112.skeleton.app.player.Opponent;
 import inf112.skeleton.app.player.Player;
 
+import java.util.Arrays;
 import java.util.PriorityQueue;
 
 public class GameLoop extends InputAdapter {
@@ -90,7 +91,6 @@ public class GameLoop extends InputAdapter {
                 if(host){
                     /** Host waits for all players to send cards... **/
                     while(gameServer.getPlayerCards().size() < players.length){
-                        System.out.println("Amount of cards recieved: "+gameServer.getPlayerCards().size());
                         try {
                             Thread.sleep(500);
                         } catch (InterruptedException e) {
@@ -105,7 +105,6 @@ public class GameLoop extends InputAdapter {
 
                 /**  Client waits to recieve all player cards from server  **/
                 while(!gameClient.getActiveHandleAllCards()){
-                    System.out.println("waiting to recieve all cards");
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException e) {
@@ -115,7 +114,9 @@ public class GameLoop extends InputAdapter {
 
                 /**  Cards recieved, perform card tasks.  **/
                 PriorityQueue<ICard>[] queues = cardHandler.getSortedCards();
+
                 for(PriorityQueue<ICard> round : queues){
+                    System.out.println(Arrays.toString(round.toArray()));
                     while(!round.isEmpty()) {
                         ICard currentCard = round.remove();
                         board.doRobotTurn(currentCard);

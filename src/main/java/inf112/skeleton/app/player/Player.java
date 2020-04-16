@@ -40,7 +40,6 @@ public class Player extends InputAdapter implements IPlayer {
                 //do sleep next iteration then...
             }
         }
-
         ICard[]  sortedCardsArray = new ICard[5];
         for(int i = 0; i < sortedCardsArray.length; i++){
             sortedCardsArray[i] = sortedCards.get(i);
@@ -62,6 +61,9 @@ public class Player extends InputAdapter implements IPlayer {
 
     @Override
     public void recieveCards(ArrayList<ICard> cards){
+        for(ICard card : cards){
+            card.setPlayer(this);
+        }
         sortedCards.clear();
         cardStorage = cards;
         hud.updateCardNumbers(sortedCards);
@@ -90,7 +92,7 @@ public class Player extends InputAdapter implements IPlayer {
             case Input.Keys.LEFT:
                 hud.updateSelectedCard(hud.getSelected()-1);
                 break;
-            case Input.Keys.ENTER:
+            case Input.Keys.SPACE:
                 selectCard(hud.getSelected());
                 break;
         }

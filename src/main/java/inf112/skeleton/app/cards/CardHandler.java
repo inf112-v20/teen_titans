@@ -62,7 +62,6 @@ public class CardHandler {
         for(int p = 0; p < players.length; p++) {
             for(int i = 0; i < 9; i++){
                 ICard card = deck.get(9*p + i);
-                card.setPlayer(players[p]);
                 cardsToDeal[p][i] = card;
             }
         }
@@ -95,14 +94,10 @@ public class CardHandler {
         for(int i = 0; i < individuallySortedCards.length; i++){
             individuallySortedCards[i] = new ICard[5];
             ArrayList<ICard> gencards = intsToCards(this.individuallySortedCards[i]);
-            System.out.println(Arrays.toString(gencards.toArray()));
             for(int j = 0; j < 5; j++){
                 ICard card = gencards.get(j);
                 individuallySortedCards[i][j] = card;
             }
-        }
-        for(ICard[] inni : individuallySortedCards){
-            System.out.println("in getSortedCards"+Arrays.toString(inni));
         }
         return addCardsToPQArray(individuallySortedCards);
     }
@@ -111,8 +106,15 @@ public class CardHandler {
         for(int num : hand){
             for(ICard card : deck){
                 int typeID = num % 10;
+                int playerID = (num / 10) % 10;
                 int priority = num / 100;
                 if(card.getPriority() == priority && card.getTypeID() == typeID){
+                    for(IPlayer player : players){
+                        if(player.getPlayerNumber() == playerID){
+                            card.setPlayer(player);
+                            break;
+                        }
+                    }
                     cards.add(card);
                     break;
                 }

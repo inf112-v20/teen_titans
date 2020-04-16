@@ -12,8 +12,6 @@ public interface ICard extends Comparable<ICard> {
      */
     int getPriority();
 
-    Robot getRobot();
-
 
     /**
      * Performs action.

@@ -34,9 +34,6 @@ public class TurnRightCard implements ICard{
     }
 
     @Override
-    public Robot getRobot() { return player.getRobot(); }
-
-    @Override
     public void action() {
         player.getRobot().turn(true);
     }

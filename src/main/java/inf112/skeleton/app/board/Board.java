@@ -53,7 +53,8 @@ public class Board extends InputAdapter {
     }
 
     public void doRobotTurn(ICard currentCard) {
-        Robot currentRobot = currentCard.getRobot();
+        System.out.println(currentCard.toString()+" belongs to "+currentCard.getPlayer().getPlayerNumber());
+        Robot currentRobot = currentCard.getPlayer().getRobot();
         Pos oldPos = currentRobot.getPos().copy();
         currentCard.action();
         updatePlayer(oldPos, currentRobot);
@@ -166,13 +167,13 @@ public class Board extends InputAdapter {
         listOfRobots = new Robot[n];
         for(int i = 0; i < n; i++){
             if(i==0) {
-                listOfRobots[i] = new Robot((i + 1) * 2, (i + 1) * 2, "robots/bulbasaur.png");
+                listOfRobots[i] = new Robot((i + 1) * 2, (i + 1) * 2, "robots/charmander.png");
             }
             else if(i==1){
                 listOfRobots[i] = new Robot((i + 1)*2, (i+1)*2, "robots/pika.png");
             }
             else{
-                listOfRobots[i] = new Robot(6, 4, "robots/marsvin2.png");
+                listOfRobots[i] = new Robot(6, 4, "robots/bulbasaur.png");
             }
         }
         robot = listOfRobots[0];

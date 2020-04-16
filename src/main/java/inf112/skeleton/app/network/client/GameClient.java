@@ -44,6 +44,7 @@ public class GameClient {
                 e.printStackTrace();
             }
         }
+
         else{
             Gdx.input.getTextInput(new Input.TextInputListener() {
                 @Override
@@ -131,7 +132,6 @@ public class GameClient {
 
 
     public void allCardsReceived(int[][] allCards){
-        System.out.println("eigth: received " + Arrays.toString(allCards));
         gameLoop.getCardHandler().setIndividuallySortedCards(allCards);
         setActiveHandleAllCards(true);
     }
