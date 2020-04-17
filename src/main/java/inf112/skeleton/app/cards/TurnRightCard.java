@@ -12,6 +12,7 @@ public class TurnRightCard implements ICard{
     private IPlayer player;
     private Image image = new Image(new Texture(Gdx.files.internal("cards/TurnRightCard.png")));
     private int typeID = 3;
+    private final boolean RIGHT = true;
 
     public TurnRightCard(int priority, IPlayer robot){
         this.priority = priority;
@@ -35,7 +36,7 @@ public class TurnRightCard implements ICard{
 
     @Override
     public void action() {
-        player.getRobot().turn(true);
+        player.getRobot().turn(RIGHT);
     }
 
     @Override

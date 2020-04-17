@@ -25,6 +25,7 @@ public class GameLoop extends InputAdapter {
     private boolean host;
 
     private Board board;
+    private int totalRound;
     private CardHandler cardHandler;
 
     private Thread loop;
@@ -121,9 +122,10 @@ public class GameLoop extends InputAdapter {
                         ICard currentCard = round.remove();
                         board.doRobotTurn(currentCard);
                     }
+                    /**  Do board tile effects  **/
+                    board.doGroundTileEffects(++totalRound);
                 }
-                /**  Do board tile effects  **/
-                board.doGroundTileEffects();
+
 
                 resetAfterRound();
             }

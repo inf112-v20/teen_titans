@@ -42,6 +42,13 @@ public class Pos implements IPos {
         this.y = y;
     }
 
+    @Override
+    public void setPos(Pos pos) {
+        this.pos = new Vector2(pos.getPosX(), pos.getPosY());
+        this.x = pos.getPosX();
+        this.y = pos.getPosY();
+    }
+
     public Pos copy(){
         Pos copy = new Pos();
         copy.setPos(x, y);
