@@ -43,8 +43,18 @@ public class ServerListener extends Listener {
         System.out.println("Server recieved: " + o.toString());
         if(o instanceof PacketInfo.Name){
             String name = ((PacketInfo.Name) o).name;
-            int ID = ((PacketInfo.Name) o).playerID;
-            parent.addName(name, ID);
+            for(int i = 0; i < players.length; i++){
+                if(names[i] != null){
+                    PacketInfo.Name namePacket = new PacketInfo.Name();
+                    namePacket.name = names[i];
+                    namePacket.playerID = players[i];
+                    server.sendToTCP(c.getID(), namePacket);
+                }
+                if(c.getID() == players[i]){
+                    names[i] = name;
+                    break;
+                }
+            }
             server.sendToAllTCP(o);
         }
         else if(o instanceof PacketInfo.Cards){

@@ -2,7 +2,9 @@ package inf112.skeleton.app.scenes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -28,12 +30,12 @@ public class JoinGameScreen {
     public void create(){
         table = new Table();
         table.setFillParent(true);
-        table.setDebug(true);
         stage.addActor(table);
         skin = new Skin(Gdx.files.internal("styles/glassy-ui.json"));
         TextField text = new TextField("Joined players", skin);
         table.add(text).expandX();
         table.row();
+        showcasePlayerModels();
     }
 
     private void updateTable(){
@@ -42,11 +44,9 @@ public class JoinGameScreen {
         table.add(text).expandX().padBottom(20);
         table.row();
         for(Object name :  client.getPlayerNames().values()){
-            if(name instanceof String){
-                TextField textField = new TextField((String) name, skin);
-                table.add(textField).expandX();
-                table.row();
-            }
+            TextField textField = new TextField((String) name, skin);
+            table.add(textField).expandX();
+            table.row();
         }
     }
 
@@ -56,7 +56,7 @@ public class JoinGameScreen {
             updateTable();
         }
         if(client.getStartSignal()){
-            parent.startGame(client.getPlayerAmount());
+            parent.startGame(client.getPlayerAmount(), 0);
         }
 
         Gdx.gl.glClearColor(0f,0f,0f,1);
@@ -76,6 +76,29 @@ public class JoinGameScreen {
 
     public Stage getStage(){
         return stage;
+    }
+
+    public void showcasePlayerModels(){
+        Image pika = new Image(new Texture(Gdx.files.internal("robots/pika.png")));
+        Image cha = new Image(new Texture(Gdx.files.internal("robots/charmander.png")));
+        Image bulb = new Image(new Texture(Gdx.files.internal("robots/bulbasaur.png")));
+        Image ham2 = new Image(new Texture(Gdx.files.internal("robots/marsvin2.png")));
+        Image ham = new Image(new Texture(Gdx.files.internal("robots/marsvin.png")));
+        bulb.setSize(100, 100);
+        bulb.setPosition(stage.getWidth()/2-50, 20);
+        stage.addActor(bulb);
+        cha.setSize(100, 100);
+        cha.setPosition(stage.getWidth()/2-170, 20);
+        stage.addActor(cha);
+        pika.setSize(100, 100);
+        pika.setPosition(stage.getWidth()/2-290, 20);
+        stage.addActor(pika);
+        ham.setSize(100, 100);
+        ham.setPosition(stage.getWidth()/2+70,20);
+        stage.addActor(ham);
+        ham2.setSize(100, 100);
+        ham2.setPosition(stage.getWidth()/2+190, 20);
+        stage.addActor(ham2);
     }
 
 

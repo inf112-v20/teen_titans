@@ -15,8 +15,9 @@ import java.util.HashMap;
 public class GameClient {
 
     private GameLoop gameLoop;
-    private boolean host;
     private HashMap<Integer, String> playerNames = new HashMap();
+    private String[] names;
+
     private int playerAmount;
 
     public Client client = new Client();
@@ -31,7 +32,6 @@ public class GameClient {
 
 
     public GameClient(boolean isHost, GameLoop gameLoop){
-        this.host = isHost;
         this.gameLoop = gameLoop;
         listener.constructor(gameLoop, this);
         registerPacketInfo();
@@ -98,6 +98,13 @@ public class GameClient {
         kryo.register(boolean.class);
         kryo.register(int.class);
         kryo.register(int[][].class);
+    }
+
+    public void setNames(String[] names){
+        this.names = names;
+    }
+    public String[] getNames(){
+        return names;
     }
 
     public void setDeck(int[] deck){

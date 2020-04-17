@@ -34,6 +34,7 @@ public class HudManager {
         skin = new Skin(Gdx.files.internal("styles/glassy-ui.json"));
     }
 
+
     public void createPos1(ICard img){
         img.getImage().setPosition(stage.getWidth()/2 - 530, 0);
         stage.addActor(img.getImage());

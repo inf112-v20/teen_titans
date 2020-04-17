@@ -163,9 +163,9 @@ public class Board extends InputAdapter {
         playerLayer.setCell(robot.getPos().getPosX(), robot.getPos().getPosY(), robot.getCurrentState());
     }
 
-    public void createRobots(int n){
-        listOfRobots = new Robot[n];
-        for(int i = 0; i < n; i++){
+    public void createRobots(int playerAmount, int myPlayerNumber, int playerModel){
+        listOfRobots = new Robot[playerAmount];
+        for(int i = 0; i < listOfRobots.length; i++){
             if(i==0) {
                 listOfRobots[i] = new Robot((i + 1) * 2, (i + 1) * 2, "robots/charmander.png");
             }
@@ -174,6 +174,10 @@ public class Board extends InputAdapter {
             }
             else{
                 listOfRobots[i] = new Robot(6, 4, "robots/bulbasaur.png");
+            }
+
+            if(i == myPlayerNumber){
+                listOfRobots[i] = new Robot(3, 3, intToPlayerModel(playerModel));
             }
         }
         robot = listOfRobots[0];
@@ -184,6 +188,23 @@ public class Board extends InputAdapter {
 
     public Robot[] getRobots(){
         return listOfRobots;
+    }
+
+    public String intToPlayerModel(int i){
+        switch (i){
+            case 0:
+                return "robots/pika.png";
+            case 1:
+                return "robots/charmander.png";
+            case 2:
+                return "robots/bulbasaur.png";
+            case 3:
+                return "robots/marsvin.png";
+            case 4:
+                return "robots/marsvin2.png";
+            default:
+                return "player.png";
+        }
     }
 
 

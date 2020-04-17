@@ -33,6 +33,7 @@ public class GameServer implements Runnable {
     @Override
     public void run() {
         server = new Server();
+        registerPacketInfo();
         listener = new ServerListener(server, this);
         server.addListener(listener);
 
@@ -41,7 +42,6 @@ public class GameServer implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        registerPacketInfo();
         server.start();
         try {
             address = InetAddress.getLocalHost();
@@ -99,6 +99,7 @@ public class GameServer implements Runnable {
         kryo.register(boolean.class);
         kryo.register(int.class);
         kryo.register(int[][].class);
+        kryo.register(String[].class);
     }
     public InetAddress getAddress(){
         return address;

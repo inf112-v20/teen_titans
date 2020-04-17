@@ -54,8 +54,8 @@ public class Orchestrator extends Game {
         currentScreen = Screens.RENDERER;
     }
 
-    public void startGame(int playersAmount){
-        renderer.create(playersAmount);
+    public void startGame(int playersAmount, int playerModel){
+        renderer.create(playersAmount, playerModel);
         currentScreen = Screens.RENDERER;
     }
 
