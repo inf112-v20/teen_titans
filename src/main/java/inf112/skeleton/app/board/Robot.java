@@ -10,12 +10,15 @@ import java.util.HashMap;
 
 public class Robot implements IRobot {
 
+    Walls wall;
     private Direction dir;
     private Pos pos;
     private int MAXHP = 10;
     private int currentHP;
     private HashMap<String, TiledMapTileLayer.Cell> playerStates;
     private TiledMapTileLayer.Cell currentState;
+
+    Walls walls;
 
     /**
      * Constructor for the robot.
@@ -24,7 +27,7 @@ public class Robot implements IRobot {
      * @param xPos The horisontal starting pos
      * @param yPos The vertical starting pos
      */
-    public Robot(int xPos, int yPos, String texture) {
+    public Robot(int xPos, int yPos, String texture, Board board) {
 
         pos = new Pos();
         pos.setPos(xPos, yPos);
@@ -34,6 +37,8 @@ public class Robot implements IRobot {
 
         createPlayerTexture(texture);
         currentState = playerStates.get("alive");
+
+        walls = new Walls(board);
     }
 
     public void createPlayerTexture(String location){
@@ -87,31 +92,32 @@ public class Robot implements IRobot {
     public void win(){
         currentState = playerStates.get("won");
         updateModel();
-
     }
 
 
-    /**
+    /** //TODO distance må alltid vere 1, visst vi går lenger bruk rekrusjon E.L.!
      * Gives a new position for the robot
      * @param distance How far the robot moves in 'direction'
      * @return returns the new position for the robot
      */
     public void move(int distance) {
+        Pos newPos = new Pos();
+        newPos.setPos(pos.copy());
         switch (dir) {
             case NORTH:
-                pos.setPosY(pos.getPosY() + distance);
+                newPos.setPosY(pos.getPosY() + distance);
                 break;
             case EAST:
-                pos.setPosX(pos.getPosX() + distance);
+                newPos.setPosX(pos.getPosX() + distance);
                 break;
             case SOUTH:
-                pos.setPosY(pos.getPosY() - distance);
+                newPos.setPosY(pos.getPosY() - distance);
                 break;
             case WEST:
-                pos.setPosX(pos.getPosX() - distance);
+                newPos.setPosX(pos.getPosX() - distance);
                 break;
         }
-
+        if(walls.wall(pos, dir)) pos.setPos(newPos);
     }
 
     /**

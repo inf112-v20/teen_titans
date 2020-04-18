@@ -11,6 +11,7 @@ public class TurnLeftCard implements ICard{
     private IPlayer player;
     private Image image = new Image(new Texture(Gdx.files.internal("cards/TurnLeftCard.png")));
     private int typeID = 2;
+    private final boolean LEFT = false;
 
     public TurnLeftCard(int priority, IPlayer player){
         this.priority = priority;
@@ -33,7 +34,7 @@ public class TurnLeftCard implements ICard{
 
     @Override
     public void action() {
-        player.getRobot().turn(false);
+        player.getRobot().turn(LEFT);
     }
 
     @Override

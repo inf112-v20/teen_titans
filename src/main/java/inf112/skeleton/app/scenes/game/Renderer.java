@@ -13,8 +13,8 @@ public class Renderer {
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
 
-    public final int BOARDHEIGHT = 12;
-    public final int BOARDWIDTH = 12;
+    public final int BOARDHEIGHT = 14;
+    public final int BOARDWIDTH = 14;
 
     private HudManager hudManager;
 

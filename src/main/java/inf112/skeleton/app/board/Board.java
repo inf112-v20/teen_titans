@@ -17,19 +17,23 @@ public class Board extends InputAdapter {
     private TiledMapTileLayer playerLayer;
     private Robot robot;
     private Robot[] listOfRobots;
-    private final int BOARDWIDTH = 10;
-    private final int BOARDHEIGHT = 10;
+    private final int BOARDWIDTH = 12;
+    private final int BOARDHEIGHT = 12;
     private final int LEGALMOVE = 1; //For normal board movement
     private final int ILLEGALMOVE = 0; //For walls/obstacles
     private final int SUICIDALMOVE = -1; //For holes/fall off map
     private final boolean RIGHT = true;
     private final boolean LEFT = false;
 
+    ConveyorBelts conveyorBelts;
+    Walls walls;
+
+
 
     public Board(){
         //createRobots(numPlayers);
 
-        map = new TmxMapLoader().load("maps/testMap2.tmx");
+        map = new TmxMapLoader().load("maps/Map1.tmx");
 
         mapLayers = new HashMap<>();
         mapLayers.put("conveyor", (TiledMapTileLayer) map.getLayers().get("Conveyor"));
@@ -40,6 +44,8 @@ public class Board extends InputAdapter {
         mapLayers.put("playerLayer", (TiledMapTileLayer) map.getLayers().get("Player"));
         mapLayers.put("wall", (TiledMapTileLayer) map.getLayers().get("Wall"));
         playerLayer = mapLayers.get("playerLayer");
+        conveyorBelts = new ConveyorBelts();
+        //walls = new Walls();
 
     }
 
@@ -47,6 +53,8 @@ public class Board extends InputAdapter {
     public TiledMap getMap(){
         return map;
     }
+
+    public HashMap<String, TiledMapTileLayer> getTiledMapTileLayers() { return mapLayers; }
 
     public TiledMapTileLayer getPlayerLayer(){
         return mapLayers.get("playerLayer");
@@ -79,6 +87,7 @@ public class Board extends InputAdapter {
                     robot.win();
                     return LEGALMOVE;
                 }
+
             }
             catch (NullPointerException e)
             {
@@ -95,7 +104,8 @@ public class Board extends InputAdapter {
         return LEGALMOVE;
     }
 
-    public void doGroundTileEffects(){
+    //TODO Give own classes
+    public void doGroundTileEffects(int round){
         Pos currentPos;
         for (Robot robot : listOfRobots) {
             currentPos = robot.getPos().copy();
@@ -109,6 +119,7 @@ public class Board extends InputAdapter {
                 gearTypes(currentPos, robot);
             }
             if (mapLayers.get("wall").getCell(currentPos.getPosX(), currentPos.getPosY()) != null) {  }; //TODO Add walls
+
         }
     }
 
@@ -118,45 +129,44 @@ public class Board extends InputAdapter {
         else if (currentGear.getTile().getId() == 54) { robot.turn(RIGHT); }
     }
 
+
     private void conveyorTypes(Pos currentPos, Robot robot) {
         TiledMapTileLayer.Cell currentBelt = mapLayers.get("conveyor").getCell(currentPos.getPosX(), currentPos.getPosY());
-        if      (currentBelt.getTile().getId() == 49) robot.push(Direction.NORTH); //UP ARROW
-        else if (currentBelt.getTile().getId() == 50) robot.push(Direction.SOUTH); //DOWN ARROW
-        else if (currentBelt.getTile().getId() == 51) robot.push(Direction.WEST);  //LEFT ARROW
-        else if (currentBelt.getTile().getId() == 52) robot.push(Direction.EAST);  //RIGHT ARROW
-        else if ((currentBelt.getTile().getId() == 35)) { //UP TO RIGHT ARROW
-            robot.turn(RIGHT);
-            robot.push(Direction.EAST);
+        int beltType = currentBelt.getTile().getId();
+        int aboveBeltType = -1;
+        int belowBeltType = -1;
+        int leftBeltType = -1;
+        int rightBeltType = -1;
+        TiledMapTileLayer.Cell aboveBelt = null;
+        TiledMapTileLayer.Cell belowBelt = null;
+        TiledMapTileLayer.Cell leftBelt = null;
+        TiledMapTileLayer.Cell rightBelt = null;
+
+
+        if (mapLayers.get("conveyor").getCell(currentPos.getPosX(), currentPos.getPosY()+1) != null) {
+            aboveBelt = mapLayers.get("conveyor").getCell(currentPos.getPosX(), currentPos.getPosY()+1);
+            aboveBeltType = aboveBelt.getTile().getId();
         }
-        else if ((currentBelt.getTile().getId() == 36)) { //RIGHT TO DOWN ARROW
-            System.out.println("hej");
-            robot.turn(RIGHT);
-            robot.push(Direction.SOUTH);
+
+
+        if (mapLayers.get("conveyor").getCell(currentPos.getPosX(), currentPos.getPosY()-1) != null) {
+            belowBelt = mapLayers.get("conveyor").getCell(currentPos.getPosX(), currentPos.getPosY()-1);
+            belowBeltType = belowBelt.getTile().getId();
         }
-        else if ((currentBelt.getTile().getId() == 43)) { //LEFT TO UP ARROW
-            robot.turn(RIGHT);
-            robot.push(Direction.NORTH);
+
+        if (mapLayers.get("conveyor").getCell(currentPos.getPosX()-1, currentPos.getPosY()) != null) {
+            leftBelt = mapLayers.get("conveyor").getCell(currentPos.getPosX()-1, currentPos.getPosY());
+            leftBeltType = leftBelt.getTile().getId();
         }
-        else if ((currentBelt.getTile().getId() == 44)) { //DOWN TO LEFT ARROW
-            robot.turn(RIGHT);
-            robot.push(Direction.WEST);
+
+        if (mapLayers.get("conveyor").getCell(currentPos.getPosX()+1, currentPos.getPosY()) != null) {
+            rightBelt = mapLayers.get("conveyor").getCell(currentPos.getPosX()+1, currentPos.getPosY());
+            rightBeltType = rightBelt.getTile().getId();
         }
-        else if ((currentBelt.getTile().getId() == 33)) { //LEFT TO DOWN ARROW
-            robot.turn(LEFT);
-            robot.push(Direction.SOUTH);
-        }
-        else if ((currentBelt.getTile().getId() == 34)) { //UP TO LEFT ARROW
-            robot.turn(LEFT);
-            robot.push(Direction.WEST);
-        }
-        else if ((currentBelt.getTile().getId() == 41)) { //DOWN TO RIGHT ARROW
-            robot.turn(LEFT);
-            robot.push(Direction.EAST);
-        }
-        else if ((currentBelt.getTile().getId() == 42)) { //RIGHT TO UP ARROW
-            robot.turn(LEFT);
-            robot.push(Direction.NORTH);
-        }
+
+
+        conveyorBelts.belts(robot, beltType, aboveBeltType, belowBeltType, leftBeltType, rightBeltType);
+
     }
 
     public void createTextures(){
@@ -167,17 +177,17 @@ public class Board extends InputAdapter {
         listOfRobots = new Robot[playerAmount];
         for(int i = 0; i < listOfRobots.length; i++){
             if(i==0) {
-                listOfRobots[i] = new Robot((i + 1) * 2, (i + 1) * 2, "robots/charmander.png");
+                listOfRobots[i] = new Robot((i + 1) * 2, (i + 1) * 2, "robots/charmander.png", this);
             }
             else if(i==1){
-                listOfRobots[i] = new Robot((i + 1)*2, (i+1)*2, "robots/pika.png");
+                listOfRobots[i] = new Robot((i + 1)*2, (i+1)*2, "robots/pika.png", this);
             }
             else{
-                listOfRobots[i] = new Robot(6, 4, "robots/bulbasaur.png");
+                listOfRobots[i] = new Robot(6, 4, "robots/bulbasaur.png", this);
             }
 
             if(i == myPlayerNumber){
-                listOfRobots[i] = new Robot(3, 3, intToPlayerModel(playerModel));
+                listOfRobots[i] = new Robot(3, 3, intToPlayerModel(playerModel), this);
             }
         }
         robot = listOfRobots[0];
