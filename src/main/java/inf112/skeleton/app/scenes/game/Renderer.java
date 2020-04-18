@@ -13,8 +13,8 @@ public class Renderer {
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
 
-    public final int BOARDHEIGHT = 14;
-    public final int BOARDWIDTH = 14;
+    public final int BOARDHEIGHT = 16;
+    public final int BOARDWIDTH = 16;
 
     private HudManager hudManager;
 
@@ -33,7 +33,7 @@ public class Renderer {
         camera = new OrthographicCamera();
         renderer = new OrthogonalTiledMapRenderer(gameLoop.getBoard().getMap(), 1/300f);
         camera.setToOrtho(false, BOARDWIDTH, BOARDHEIGHT);
-        camera.position.set(camera.viewportWidth/2 - 1, camera.viewportHeight/2 - 2, 0);
+        camera.position.set(camera.viewportWidth/2 - 2, camera.viewportHeight/2 - 4, 0);
         camera.update();
         renderer.setView(camera);
         gameLoop.getGameLoopThread().start();

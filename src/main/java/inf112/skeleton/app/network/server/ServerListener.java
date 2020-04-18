@@ -24,6 +24,9 @@ public class ServerListener extends Listener {
         players = new int[4];
         names = new String[players.length];
         readies = new boolean[players.length];
+
+
+        //PER NÅ: alle 4 spillere må joine for å starte spillet. Lag system for å starte spill med færre spillere
         for(int i = 0; i < readies.length; i++){
             readies[i] = false;
         }
@@ -82,11 +85,11 @@ public class ServerListener extends Listener {
         }
     }
 
-
-
+    
     private boolean allTrue(){
         for(int i = 0; i < readies.length; i++){
-            if(!readies[i]) return false;
+            System.out.println(players[i]);
+            if(!readies[i] && players[i] != 0) return false;
         }
         return true;
     }

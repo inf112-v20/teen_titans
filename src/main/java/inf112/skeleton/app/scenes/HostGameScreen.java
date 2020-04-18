@@ -96,8 +96,8 @@ public class HostGameScreen extends InputAdapter {
         switch (keycode){
             case Input.Keys.ENTER:
                 highlightCharacter(true);
-                //gameClient.sendReadySignal(ready);
-                gameServer.sendStartSignal();
+                gameClient.sendReadySignal(ready);
+                //gameServer.sendStartSignal();
                 return true;
             case Input.Keys.RIGHT:
                 if(!ready){hightlighted = (hightlighted+1) % 5;}
