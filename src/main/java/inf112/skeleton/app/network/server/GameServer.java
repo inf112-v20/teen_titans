@@ -88,6 +88,7 @@ public class GameServer implements Runnable {
 
     private void registerPacketInfo() {
         Kryo kryo = server.getKryo();
+        kryo.register(PacketInfo.ReadySignal.class);
         kryo.register(PacketInfo.Cards.class);
         kryo.register(PacketInfo.Deck.class);
         kryo.register(PacketInfo.Name.class);

@@ -36,7 +36,6 @@ public class Renderer {
         camera.position.set(camera.viewportWidth/2 - 1, camera.viewportHeight/2 - 2, 0);
         camera.update();
         renderer.setView(camera);
-
         gameLoop.getGameLoopThread().start();
     }
 

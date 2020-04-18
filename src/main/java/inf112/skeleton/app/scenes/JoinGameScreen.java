@@ -1,6 +1,8 @@
 package inf112.skeleton.app.scenes;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -11,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.network.client.GameClient;
 
-public class JoinGameScreen {
+public class JoinGameScreen extends InputAdapter {
 
     private int playersJoined;
     private GameClient client;
@@ -19,8 +21,12 @@ public class JoinGameScreen {
     private Stage stage;
     private Table table;
     private Skin skin;
+    private boolean ready = false;
+    private Image highlight = new Image(new Texture(Gdx.files.internal("robots/HighlightedCharacter.png")));
+    private Image selected = new Image(new Texture(Gdx.files.internal("robots/selectedCharacter.png")));
 
     public JoinGameScreen(Orchestrator orchestrator, GameClient client) {
+        Gdx.input.setInputProcessor(this);
         this.client = client;
         parent = orchestrator;
         stage = new Stage(new ScreenViewport());
@@ -36,6 +42,7 @@ public class JoinGameScreen {
         table.add(text).expandX();
         table.row();
         showcasePlayerModels();
+        highlightCharacter(false);
     }
 
     private void updateTable(){
@@ -99,6 +106,59 @@ public class JoinGameScreen {
         ham2.setSize(100, 100);
         ham2.setPosition(stage.getWidth()/2+190, 20);
         stage.addActor(ham2);
+        stage.addActor(highlight);
+        stage.addActor(selected);
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        switch (keycode){
+            case Input.Keys.ENTER:
+                highlightCharacter(true);
+                client.sendReadySignal(ready);
+                return true;
+            case Input.Keys.RIGHT:
+                if(!ready){hightlighted = (hightlighted+1) % 5;}
+                highlightCharacter(false);
+                return true;
+            case Input.Keys.LEFT:
+                if(!ready){hightlighted -= 1;
+                    if(hightlighted < 0){hightlighted = 4;}}
+                highlightCharacter(false);
+                return true;
+        }
+        return false;
+    }
+
+
+
+    private int hightlighted = 0;
+    private void highlightCharacter(boolean selected){
+        if(!ready) {
+            this.selected.setPosition(-200, 0);
+            switch (hightlighted) {
+                case 0:
+                    highlight.setPosition(stage.getWidth() / 2 - 290, 20);
+                    break;
+                case 1:
+                    highlight.setPosition(stage.getWidth() / 2 - 170, 20);
+                    break;
+                case 2:
+                    highlight.setPosition(stage.getWidth() / 2 - 50, 20);
+                    break;
+                case 3:
+                    highlight.setPosition(stage.getWidth() / 2 + 70, 20);
+                    break;
+                case 4:
+                    highlight.setPosition(stage.getWidth()/2+190, 20);
+                    break;
+            }
+        }
+        else{
+            highlight.setPosition(-200,0);
+            this.selected.setPosition(stage.getWidth()/2-290 + 120 * hightlighted, 20);
+        }
+        if(selected){ready = !ready; highlightCharacter(false);}
     }
 
 

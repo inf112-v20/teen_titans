@@ -5,9 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import inf112.skeleton.app.board.Direction;
-import inf112.skeleton.app.board.IRobot;
-import inf112.skeleton.app.board.Pos;
 
 import java.util.HashMap;
 

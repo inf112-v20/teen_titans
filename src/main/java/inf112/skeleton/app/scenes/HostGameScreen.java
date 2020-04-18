@@ -55,7 +55,6 @@ public class HostGameScreen extends InputAdapter {
         TextField text = new TextField("Joined players", skin);
         table.add(text).expandX().padBottom(20);
         table.row();
-        //System.out.println("1");
         for(Object name :  gameClient.getPlayerNames().values()){
             TextField textField = new TextField((String) name, skin);
             table.add(textField).expandX();
@@ -97,6 +96,7 @@ public class HostGameScreen extends InputAdapter {
         switch (keycode){
             case Input.Keys.ENTER:
                 highlightCharacter(true);
+                //gameClient.sendReadySignal(ready);
                 gameServer.sendStartSignal();
                 return true;
             case Input.Keys.RIGHT:
