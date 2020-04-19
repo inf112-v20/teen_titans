@@ -60,8 +60,10 @@ public class GameServer implements Runnable {
     public void sendStartSignal(){
         PacketInfo.StartSignal startSignal = new PacketInfo.StartSignal();
         startSignal.signal = true;
+        startSignal.models = listener.getModels();
         server.sendToAllTCP(startSignal);
     }
+
     private void sendDeckRecipe(){
         ICard[] deckAsArray = Translator.arrayListToArray(cardHandler.getDeck());
         int[] deckAsInts = Translator.cardsToInts(deckAsArray);

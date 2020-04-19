@@ -1,20 +1,18 @@
 package inf112.skeleton.app.network.server;
 
-import com.badlogic.gdx.Game;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.FrameworkMessage;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import inf112.skeleton.app.network.PacketInfo;
 
-import java.util.Arrays;
-import java.util.HashMap;
 
 public class ServerListener extends Listener {
     private GameServer parent;
     private Server server;
     private int[] players;
     private String[] names;
+    private String[] models;
     private boolean[] readies;
     private int playerNumber;
 
@@ -23,8 +21,8 @@ public class ServerListener extends Listener {
         this.server = server;
         players = new int[4];
         names = new String[players.length];
+        models = new String[players.length];
         readies = new boolean[players.length];
-
 
         //PER NÅ: alle 4 spillere må joine for å starte spillet. Lag system for å starte spill med færre spillere
         for(int i = 0; i < readies.length; i++){
@@ -74,6 +72,7 @@ public class ServerListener extends Listener {
             for(int i = 0; i < players.length; i++){
                 if(players[i] == c.getID()){
                     readies[i] = ((PacketInfo.ReadySignal) o).ready;
+                    models[i] = ((PacketInfo.ReadySignal) o).model;
                 }
             }
             if(allTrue()){
@@ -85,12 +84,16 @@ public class ServerListener extends Listener {
         }
     }
 
-    
+
     private boolean allTrue(){
         for(int i = 0; i < readies.length; i++){
             System.out.println(players[i]);
             if(!readies[i] && players[i] != 0) return false;
         }
         return true;
+    }
+
+    public String[] getModels(){
+        return models;
     }
 }

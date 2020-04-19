@@ -40,8 +40,8 @@ public class GameLoop extends InputAdapter {
         createGameLoopThread();
     }
 
-    public void create(int playerAmount, int playerModel){
-        board.createRobots(playerAmount, myPlayerNumber, playerModel);
+    public void create(int playerAmount){
+        board.createRobots(playerAmount, gameClient.getModels());
         createPlayers();
         cardHandler = new CardHandler(players, board, host);
         if(host){

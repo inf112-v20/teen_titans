@@ -25,8 +25,8 @@ public class Renderer {
        gameLoop = new GameLoop(this, playerNumber, host);
    }
 
-    public void create(int playersAmount, int playerModel) {
-        gameLoop.create(playersAmount, playerModel);
+    public void create(int playersAmount) {
+        gameLoop.create(playersAmount);
         hudManager = gameLoop.getHudManager();
         setupTextures();
         Gdx.input.setInputProcessor(gameLoop.getMyPlayer());

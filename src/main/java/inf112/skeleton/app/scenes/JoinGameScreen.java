@@ -63,7 +63,7 @@ public class JoinGameScreen extends InputAdapter {
             updateTable();
         }
         if(client.getStartSignal()){
-            parent.startGame(client.getPlayerAmount(), 0);
+            parent.startGame(client.getPlayerAmount());
         }
 
         Gdx.gl.glClearColor(0f,0f,0f,1);
@@ -115,15 +115,18 @@ public class JoinGameScreen extends InputAdapter {
         switch (keycode){
             case Input.Keys.ENTER:
                 highlightCharacter(true);
-                client.sendReadySignal(ready);
+                client.sendReadySignal(ready, currentModel());
                 return true;
             case Input.Keys.RIGHT:
-                if(!ready){hightlighted = (hightlighted+1) % 5;}
+                if(!ready){
+                    highlighted = (highlighted +1) % 5;}
                 highlightCharacter(false);
                 return true;
             case Input.Keys.LEFT:
-                if(!ready){hightlighted -= 1;
-                    if(hightlighted < 0){hightlighted = 4;}}
+                if(!ready){
+                    highlighted -= 1;
+                    if(highlighted < 0){
+                        highlighted = 4;}}
                 highlightCharacter(false);
                 return true;
         }
@@ -132,11 +135,11 @@ public class JoinGameScreen extends InputAdapter {
 
 
 
-    private int hightlighted = 0;
+    private int highlighted = 0;
     private void highlightCharacter(boolean selected){
         if(!ready) {
             this.selected.setPosition(-200, 0);
-            switch (hightlighted) {
+            switch (highlighted) {
                 case 0:
                     highlight.setPosition(stage.getWidth() / 2 - 290, 20);
                     break;
@@ -156,9 +159,24 @@ public class JoinGameScreen extends InputAdapter {
         }
         else{
             highlight.setPosition(-200,0);
-            this.selected.setPosition(stage.getWidth()/2-290 + 120 * hightlighted, 20);
+            this.selected.setPosition(stage.getWidth()/2-290 + 120 * highlighted, 20);
         }
         if(selected){ready = !ready; highlightCharacter(false);}
+    }
+
+    private String currentModel(){
+        switch (highlighted){
+            case 1:
+                return "robots/charmander.png";
+            case 2:
+                return "robots/bulbasaur.png";
+            case 3:
+                return "robots/marsvin.png";
+            case 4:
+                return "robots/marsvin2.png";
+            default:
+                return "robots/pika.png";
+        }
     }
 
 

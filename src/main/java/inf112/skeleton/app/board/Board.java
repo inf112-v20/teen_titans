@@ -173,22 +173,10 @@ public class Board extends InputAdapter {
         playerLayer.setCell(robot.getPos().getPosX(), robot.getPos().getPosY(), robot.getCurrentState());
     }
 
-    public void createRobots(int playerAmount, int myPlayerNumber, int playerModel){
+    public void createRobots(int playerAmount, String[] models){
         listOfRobots = new Robot[playerAmount];
         for(int i = 0; i < listOfRobots.length; i++){
-            if(i==0) {
-                listOfRobots[i] = new Robot((i + 1) * 2, (i + 1) * 2, "robots/charmander.png", this);
-            }
-            else if(i==1){
-                listOfRobots[i] = new Robot((i + 1)*2, (i+1)*2, "robots/pika.png", this);
-            }
-            else{
-                listOfRobots[i] = new Robot(6, 4, "robots/bulbasaur.png", this);
-            }
-
-            if(i == myPlayerNumber){
-                listOfRobots[i] = new Robot(3, 3, intToPlayerModel(playerModel), this);
-            }
+        listOfRobots[i] = new Robot((i+1)*2, (i+1)*2, models[i], this);
         }
         robot = listOfRobots[0];
         for(Robot robot : listOfRobots){

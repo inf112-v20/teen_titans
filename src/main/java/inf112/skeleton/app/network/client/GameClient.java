@@ -16,6 +16,7 @@ public class GameClient {
     private GameLoop gameLoop;
     private HashMap<Integer, String> playerNames = new HashMap();
     private String[] names;
+    private String[] models;
     private int playerAmount;
     public Client client = new Client();
     private ClientListener listener = new ClientListener();
@@ -94,6 +95,7 @@ public class GameClient {
         kryo.register(boolean.class);
         kryo.register(int.class);
         kryo.register(int[][].class);
+        kryo.register(String[].class);
     }
 
     public void setNames(String[] names){
@@ -110,20 +112,22 @@ public class GameClient {
         return deck;
     }
 
-    public void sendReadySignal(boolean b){
+    public void sendReadySignal(boolean b, String model){
         PacketInfo.ReadySignal packet = new PacketInfo.ReadySignal();
         packet.ready = b;
+        packet.model = model;
         client.sendTCP(packet);
     }
 
 
-
-    public void setStartSignal(boolean b){
-        startSignal = b;
+    public void setStartSignal(PacketInfo.StartSignal signal){
+        models = signal.models;
+        startSignal = signal.signal;
     }
     public boolean getStartSignal() {
         return startSignal;
     }
+    public String[] getModels(){return models;}
 
     public void handReceived(int[] hand){
         gameLoop.getMyPlayer().recieveCards(gameLoop.getCardHandler().intsToCards(hand));
