@@ -11,9 +11,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.network.client.GameClient;
 import inf112.skeleton.app.network.server.GameServer;
 
-import java.io.File;
-
-
 public class HostGameScreen extends InputAdapter {
 
     private int playersJoined;
@@ -55,7 +52,6 @@ public class HostGameScreen extends InputAdapter {
         TextField text = new TextField("Joined players", skin);
         table.add(text).expandX().padBottom(20);
         table.row();
-        //System.out.println("1");
         for(Object name :  gameClient.getPlayerNames().values()){
             TextField textField = new TextField((String) name, skin);
             table.add(textField).expandX();
@@ -69,7 +65,7 @@ public class HostGameScreen extends InputAdapter {
             updateTable();
         }
         if(gameClient.getStartSignal()){
-            parent.startGame(gameClient.getPlayerAmount(), hightlighted);
+            parent.startGame(gameClient.getPlayerAmount());
         }
         Gdx.gl.glClearColor(0f,0f,0f,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -97,15 +93,16 @@ public class HostGameScreen extends InputAdapter {
         switch (keycode){
             case Input.Keys.ENTER:
                 highlightCharacter(true);
-                gameServer.sendStartSignal();
+                gameClient.sendReadySignal(ready, currentModel());
+                //gameServer.sendStartSignal();
                 return true;
             case Input.Keys.RIGHT:
-                if(!ready){hightlighted = (hightlighted+1) % 5;}
+                if(!ready){highlighted = (highlighted+1) % 5;}
                 highlightCharacter(false);
                 return true;
             case Input.Keys.LEFT:
-                if(!ready){hightlighted -= 1;
-                if(hightlighted < 0){hightlighted = 4;}}
+                if(!ready){highlighted -= 1;
+                if(highlighted < 0){highlighted = 4;}}
                 highlightCharacter(false);
                 return true;
         }
@@ -114,11 +111,11 @@ public class HostGameScreen extends InputAdapter {
 
 
 
-    private int hightlighted = 0;
+    private int highlighted = 0;
     private void highlightCharacter(boolean selected){
         if(!ready) {
             this.selected.setPosition(-200, 0);
-            switch (hightlighted) {
+            switch (highlighted) {
                 case 0:
                     highlight.setPosition(stage.getWidth() / 2 - 290, 20);
                     break;
@@ -138,7 +135,7 @@ public class HostGameScreen extends InputAdapter {
         }
         else{
             highlight.setPosition(-200,0);
-            this.selected.setPosition(stage.getWidth()/2-290 + 120 * hightlighted, 20);
+            this.selected.setPosition(stage.getWidth()/2-290 + 120 * highlighted, 20);
         }
         if(selected){ready = !ready; highlightCharacter(false);}
     }
@@ -174,5 +171,20 @@ public class HostGameScreen extends InputAdapter {
 
         stage.addActor(highlight);
         stage.addActor(selected);
+    }
+
+    private String currentModel(){
+        switch (highlighted){
+            case 1:
+                return "robots/charmander.png";
+            case 2:
+                return "robots/bulbasaur.png";
+            case 3:
+                return "robots/marsvin.png";
+            case 4:
+                return "robots/marsvin2.png";
+            default:
+                return "robots/pika.png";
+        }
     }
 }

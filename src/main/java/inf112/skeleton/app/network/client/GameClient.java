@@ -9,7 +9,6 @@ import inf112.skeleton.app.cards.ICard;
 import inf112.skeleton.app.network.PacketInfo;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class GameClient {
@@ -17,19 +16,16 @@ public class GameClient {
     private GameLoop gameLoop;
     private HashMap<Integer, String> playerNames = new HashMap();
     private String[] names;
-
+    private String[] models;
     private int playerAmount;
-
     public Client client = new Client();
     private ClientListener listener = new ClientListener();
     private int tcpPort = 54555;
     private int udpPort = 54333;
-
     private int[] deck = null;
     private boolean startSignal = false;
     private boolean activeChooseCard = false;
     private boolean activeHandleAllCards = false;
-
 
     public GameClient(boolean isHost, GameLoop gameLoop){
         this.gameLoop = gameLoop;
@@ -87,6 +83,7 @@ public class GameClient {
     }
     private void registerPacketInfo() {
         Kryo kryo = client.getKryo();
+        kryo.register(PacketInfo.ReadySignal.class);
         kryo.register(PacketInfo.Cards.class);
         kryo.register(PacketInfo.Deck.class);
         kryo.register(PacketInfo.Name.class);
@@ -98,6 +95,7 @@ public class GameClient {
         kryo.register(boolean.class);
         kryo.register(int.class);
         kryo.register(int[][].class);
+        kryo.register(String[].class);
     }
 
     public void setNames(String[] names){
@@ -114,13 +112,22 @@ public class GameClient {
         return deck;
     }
 
-    public void setStartSignal(boolean b){
-        startSignal = b;
+    public void sendReadySignal(boolean b, String model){
+        PacketInfo.ReadySignal packet = new PacketInfo.ReadySignal();
+        packet.ready = b;
+        packet.model = model;
+        client.sendTCP(packet);
+    }
+
+
+    public void setStartSignal(PacketInfo.StartSignal signal){
+        models = signal.models;
+        startSignal = signal.signal;
     }
     public boolean getStartSignal() {
         return startSignal;
     }
-
+    public String[] getModels(){return models;}
 
     public void handReceived(int[] hand){
         gameLoop.getMyPlayer().recieveCards(gameLoop.getCardHandler().intsToCards(hand));
@@ -137,7 +144,6 @@ public class GameClient {
         return activeChooseCard;
     }
 
-
     public void allCardsReceived(int[][] allCards){
         gameLoop.getCardHandler().setIndividuallySortedCards(allCards);
         setActiveHandleAllCards(true);
@@ -149,12 +155,6 @@ public class GameClient {
     public boolean getActiveHandleAllCards(){
         return activeHandleAllCards;
     }
-
-
-
-
-
-
 
     public Client getClient(){
         return client;

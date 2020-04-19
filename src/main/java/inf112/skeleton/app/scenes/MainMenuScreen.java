@@ -30,7 +30,6 @@ public class MainMenuScreen extends InputAdapter {
     public void create(){
         Table table = new Table();
         table.setFillParent(true);
-        table.setDebug(true);
         stage.addActor(table);
 
         Skin skin = new Skin(Gdx.files.internal("styles/glassy-ui.json"));

@@ -4,8 +4,16 @@ import java.util.HashMap;
 
 public class PacketInfo {
 
+    public static class ReadySignal{
+        public boolean ready;
+        public String model;
+        @Override
+        public String toString(){return "Ready Signal Packet";}
+    }
+
     public static class StartSignal{
         public boolean signal;
+        public String[] models;
         @Override
         public String toString() {
             return "Start Signal Packet";

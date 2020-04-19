@@ -2,6 +2,7 @@ package inf112.skeleton.app.network.client;
 
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
+import com.esotericsoftware.kryonet.FrameworkMessage;
 import com.esotericsoftware.kryonet.Listener;
 import inf112.skeleton.app.scenes.game.GameLoop;
 import inf112.skeleton.app.cards.ICard;
@@ -35,7 +36,9 @@ public class ClientListener extends Listener {
     }
 
     public void received(Connection c, Object o){
-        System.out.println("Client recieved: " + o.toString());
+        if(!(o instanceof FrameworkMessage.KeepAlive)) {
+            System.out.println("Client recieved: " + o.toString());
+        }
         if(o instanceof PacketInfo.Deck){
             parent.setDeck(((PacketInfo.Deck) o).cards);
         }
@@ -46,7 +49,7 @@ public class ClientListener extends Listener {
             parent.setPlayerAmount(((PacketInfo.NumPlayers) o).numPlayers);
         }
         else if(o instanceof PacketInfo.StartSignal){
-            parent.setStartSignal(true);
+            parent.setStartSignal((PacketInfo.StartSignal) o);
         }
         else if(o instanceof PacketInfo.Cards){
             System.out.println("Client listener: Client received hand.");
