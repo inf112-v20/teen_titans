@@ -8,6 +8,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import inf112.skeleton.app.cards.ICard;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Board extends InputAdapter {
@@ -24,6 +25,7 @@ public class Board extends InputAdapter {
     private final int SUICIDALMOVE = -1; //For holes/fall off map
     private final boolean RIGHT = true;
     private final boolean LEFT = false;
+    private ArrayList<Lazers> LazerList = new ArrayList<>();
 
     ConveyorBelts conveyorBelts;
     Walls walls;
@@ -43,8 +45,10 @@ public class Board extends InputAdapter {
         mapLayers.put("hole", (TiledMapTileLayer) map.getLayers().get("Hole"));
         mapLayers.put("playerLayer", (TiledMapTileLayer) map.getLayers().get("Player"));
         mapLayers.put("wall", (TiledMapTileLayer) map.getLayers().get("Wall"));
+        mapLayers.put("lazer", (TiledMapTileLayer) map.getLayers().get("Lazer"));
         playerLayer = mapLayers.get("playerLayer");
-        conveyorBelts = new ConveyorBelts();
+        conveyorBelts = new ConveyorBelts(this);
+        createLazers();
         //walls = new Walls();
 
     }
@@ -106,6 +110,11 @@ public class Board extends InputAdapter {
 
     //TODO Give own classes
     public void doGroundTileEffects(int round){
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            //nutthin
+        }
         Pos currentPos;
         for (Robot robot : listOfRobots) {
             currentPos = robot.getPos().copy();
@@ -205,7 +214,31 @@ public class Board extends InputAdapter {
         }
     }
 
+    private void createLazers(){
+        TiledMapTileLayer.Cell lazerTile;
+        for (int i = 0; i < BOARDWIDTH; i++) {
+            for (int j = 0; j < BOARDHEIGHT; j++) {
+                lazerTile = mapLayers.get("lazer").getCell(i,j);
 
+                if (lazerTile != null) {
+                    Pos pos = new Pos();
+                    pos.setPos(i, j);
+
+                    int lazerTileType = lazerTile.getTile().getId();
+                    if (lazerTileType == 38) LazerList.add(new Lazers(pos, Direction.EAST, this));
+                    //Lag ny "if (lazerTileType == num) for hver retning laser, vi har bare 1 for no
+                }
+            }
+        }
+    }
+
+    public int getBOARDWIDTH(){
+        return BOARDWIDTH;
+    }
+
+    public int getBOARDHEIGHT(){
+        return BOARDHEIGHT;
+    }
 
 
 }

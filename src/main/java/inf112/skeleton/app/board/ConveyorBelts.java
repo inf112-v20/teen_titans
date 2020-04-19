@@ -6,9 +6,10 @@ public class ConveyorBelts {
     private final boolean RIGHT = true;
     private final boolean LEFT = false;
     private final int STOP = -1;
+    private Board board;
 
-    public ConveyorBelts() {
-
+    public ConveyorBelts(Board board) {
+        this.board = board;
     }
 
     /**
@@ -23,6 +24,7 @@ public class ConveyorBelts {
      * @param rightBelt The belt right of the robot
      */
     public void belts(Robot robot, int belt, int aboveBelt, int belowBelt, int leftBelt, int rightBelt) {
+
         if (belt == 49) robot.push(Direction.NORTH); //UP ARROW
         else if (belt == 50) robot.push(Direction.SOUTH); // DOWN ARROW
         else if (belt == 51) robot.push(Direction.WEST); // LEFT ARROW
