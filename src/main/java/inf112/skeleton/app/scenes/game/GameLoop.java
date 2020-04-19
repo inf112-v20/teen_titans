@@ -124,6 +124,17 @@ public class GameLoop extends InputAdapter {
                     }
                     /**  Do board tile effects  **/
                     board.doGroundTileEffects(++totalRound);
+
+
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        //nutthin
+                    }
+
+
+
+
                 }
 
 

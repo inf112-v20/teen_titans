@@ -16,6 +16,7 @@ public class Robot implements IRobot {
     Walls wall;
     private Direction dir;
     private Pos pos;
+    private Pos newPos;
     private int MAXHP = 10;
     private int currentHP;
     private HashMap<String, TiledMapTileLayer.Cell> playerStates;
@@ -33,7 +34,9 @@ public class Robot implements IRobot {
     public Robot(int xPos, int yPos, String texture, Board board) {
 
         pos = new Pos();
+        newPos = new Pos();
         pos.setPos(xPos, yPos);
+        newPos.setPos(0, 0);
 
         currentHP = MAXHP;
         dir = Direction.NORTH; //Kanskje endre til en parameter for ROBOT
@@ -104,7 +107,6 @@ public class Robot implements IRobot {
      * @return returns the new position for the robot
      */
     public void move(int distance) {
-        Pos newPos = new Pos();
         newPos.setPos(pos.copy());
         switch (dir) {
             case NORTH:
@@ -120,6 +122,8 @@ public class Robot implements IRobot {
                 newPos.setPosX(pos.getPosX() - distance);
                 break;
         }
+        System.out.println("POS:    " + pos.getPosX() + " " + pos.getPosY());
+        System.out.println("NEWPOS: " + newPos.getPosX() + " " + newPos.getPosY());
         if(walls.wall(pos, dir)) pos.setPos(newPos);
     }
 
@@ -156,19 +160,21 @@ public class Robot implements IRobot {
     }
 
     public void push(Direction pushDir) {
+        newPos.setPos(pos.copy());
         switch (pushDir) {
             case NORTH:
-                pos.setPosY(pos.getPosY() + 1);
+                newPos.setPosY(pos.getPosY() + 1);
                 break;
             case EAST:
-                pos.setPosX(pos.getPosX() + 1);
+                newPos.setPosX(pos.getPosX() + 1);
                 break;
             case SOUTH:
-                pos.setPosY(pos.getPosY() - 1);
+                newPos.setPosY(pos.getPosY() - 1);
                 break;
             case WEST:
-                pos.setPosX(pos.getPosX() - 1);
+                newPos.setPosX(pos.getPosX() - 1);
                 break;
         }
+        pos.setPos(newPos);
     }
 }
