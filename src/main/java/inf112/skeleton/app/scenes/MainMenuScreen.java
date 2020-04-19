@@ -17,6 +17,10 @@ public class MainMenuScreen extends InputAdapter {
     private Stage stage;
     private int SELECTED = 0;
 
+    private TextButton newGame;
+    private TextButton joinGame;
+    private TextButton exit;
+
     private Image img0;
     private Image img1;
     private Image img2;
@@ -34,35 +38,21 @@ public class MainMenuScreen extends InputAdapter {
 
         Skin skin = new Skin(Gdx.files.internal("styles/glassy-ui.json"));
 
-        TextButton newGame = new TextButton("Host Game", skin);
-        newGame.setName("New Game");
-        img0 = new Image(new Texture(Gdx.files.internal("cards/MoveForwardCard.png")));
-        img0.rotateBy(90);
-
-        TextButton preferences = new TextButton("Join Game", skin);
-        preferences.setName("Preferences");
-        img1 = new Image(new Texture(Gdx.files.internal("cards/MoveForwardCard.png")));
-        img1.rotateBy(90);
-        img1.setVisible(false);
-
-        TextButton exit = new TextButton("Exit", skin);
-        exit.setName("Exit");
-        img2 = new Image(new Texture(Gdx.files.internal("cards/MoveForwardCard.png")));
-        img2.rotateBy(90);
-        img2.setVisible(false);
-
+        newGame = new TextButton("Host Game", skin);
+        joinGame = new TextButton("Join Game", skin);
+        exit = new TextButton("Exit", skin);
         table.add(newGame).expandX();
         table.add(img0);
-        table.row().pad(10,0,0,0);
-        table.add(preferences).expandX();
+        table.row().pad(20,0,0,0);
+        table.add(joinGame).expandX();
         table.add(img1);
-        table.row().pad(10,0,0,0);
+        table.row().pad(20,0,0,0);
         table.add(exit).expandX();
         table.add(img2);
     }
 
     public void render() {
-        Gdx.gl.glClearColor(0f,0f,0f,1);
+        Gdx.gl.glClearColor(0.06f,0.04f,0.15f,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Math.min(Gdx.graphics.getDeltaTime(),1/30f));
         stage.draw();
@@ -105,19 +95,10 @@ public class MainMenuScreen extends InputAdapter {
     private void updateArrows(){
         switch (SELECTED){
             case 0:
-                img0.setVisible(true);
-                img1.setVisible(false);
-                img2.setVisible(false);
                 break;
             case 1:
-                img0.setVisible(false);
-                img1.setVisible(true);
-                img2.setVisible(false);
                 break;
             case 2:
-                img0.setVisible(false);
-                img1.setVisible(false);
-                img2.setVisible(true);
                 break;
         }
     }
@@ -129,7 +110,6 @@ public class MainMenuScreen extends InputAdapter {
                 //Music music = Gdx.audio.newMusic(Gdx.files.internal("assets/Sound effects/YouRepostedInTheWrongNeighbourhood.mp3"));
                 //music.play();
                 //music.setVolume(0.5f);
-
                 break;
             case 1:
                 parent.joinGame();

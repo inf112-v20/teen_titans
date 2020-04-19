@@ -6,10 +6,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.network.client.GameClient;
 
@@ -43,6 +40,10 @@ public class JoinGameScreen extends InputAdapter {
         table.row();
         showcasePlayerModels();
         highlightCharacter(false);
+
+        Image logo = new Image(new Texture(Gdx.files.internal("other/logo.png")));
+        logo.setPosition(stage.getWidth()/2 - 250, stage.getHeight()-200);
+        stage.addActor(logo);
     }
 
     private void updateTable(){
@@ -65,8 +66,7 @@ public class JoinGameScreen extends InputAdapter {
         if(client.getStartSignal()){
             parent.startGame(client.getPlayerAmount());
         }
-
-        Gdx.gl.glClearColor(0f,0f,0f,1);
+        Gdx.gl.glClearColor(61/255f,36/255f,111/255f,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Math.min(Gdx.graphics.getDeltaTime(),1/30f));
         stage.draw();
@@ -86,6 +86,15 @@ public class JoinGameScreen extends InputAdapter {
     }
 
     public void showcasePlayerModels(){
+        Label info1 = new Label("The game will start when every player has selected a character", skin);
+        info1.setPosition(stage.getWidth()/2-290, 170);
+        stage.addActor(info1);
+
+        Label info2 = new Label("Please select character:", skin);
+        info2.setPosition(stage.getWidth()/2-100, 150);
+        stage.addActor(info2);
+
+
         Image pika = new Image(new Texture(Gdx.files.internal("robots/pika.png")));
         Image cha = new Image(new Texture(Gdx.files.internal("robots/charmander.png")));
         Image bulb = new Image(new Texture(Gdx.files.internal("robots/bulbasaur.png")));
@@ -133,8 +142,6 @@ public class JoinGameScreen extends InputAdapter {
         return false;
     }
 
-
-
     private int highlighted = 0;
     private void highlightCharacter(boolean selected){
         if(!ready) {
@@ -178,6 +185,5 @@ public class JoinGameScreen extends InputAdapter {
                 return "robots/pika.png";
         }
     }
-
 
 }

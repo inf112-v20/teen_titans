@@ -21,7 +21,7 @@ public class GameClient {
     public Client client = new Client();
     private ClientListener listener = new ClientListener();
     private int tcpPort = 54555;
-    private int udpPort = 54333;
+    private int udpPort = 54334;
     private int[] deck = null;
     private boolean startSignal = false;
     private boolean activeChooseCard = false;

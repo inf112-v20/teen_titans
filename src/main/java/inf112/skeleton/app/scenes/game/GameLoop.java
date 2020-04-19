@@ -119,10 +119,16 @@ public class GameLoop extends InputAdapter {
                 for(PriorityQueue<ICard> round : queues){
                     System.out.println(Arrays.toString(round.toArray()));
                     while(!round.isEmpty()) {
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         ICard currentCard = round.remove();
                         board.doRobotTurn(currentCard);
                     }
                     /**  Do board tile effects  **/
+
                     board.doGroundTileEffects(++totalRound);
                 }
 

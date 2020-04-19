@@ -27,7 +27,7 @@ public class GameServer implements Runnable {
     private HashMap<Integer, int[]> playerCards = new HashMap<>();
 
     public GameServer(){
-        udp = 54333;
+        udp = 54334;
         tcp = 54555;
     }
     @Override
