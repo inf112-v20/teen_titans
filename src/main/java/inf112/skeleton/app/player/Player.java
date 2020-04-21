@@ -7,6 +7,7 @@ import inf112.skeleton.app.board.Robot;
 import inf112.skeleton.app.cards.ICard;
 import inf112.skeleton.app.scenes.game.HudManager;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Player extends InputAdapter implements IPlayer {
 

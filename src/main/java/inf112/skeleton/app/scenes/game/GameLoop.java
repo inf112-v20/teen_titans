@@ -69,6 +69,7 @@ public class GameLoop extends InputAdapter {
                 System.out.println("____LOOP_ITERATION_GAME_ROUND_"+r+"____ \n");
                 /**  Host sends cards  check**/
                 if(host) {
+
                     gameServer.dealCards();
                 }
 
@@ -117,7 +118,6 @@ public class GameLoop extends InputAdapter {
                 PriorityQueue<ICard>[] queues = cardHandler.getSortedCards();
 
                 for(PriorityQueue<ICard> round : queues){
-                    System.out.println(Arrays.toString(round.toArray()));
                     while(!round.isEmpty()) {
                         try {
                             Thread.sleep(500);

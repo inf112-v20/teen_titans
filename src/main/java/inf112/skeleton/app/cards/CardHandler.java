@@ -35,9 +35,13 @@ public class CardHandler {
         }
         for(int i = 0; i < players.length * 2; i++){
             deck.add(new TurnRightCard(random.nextInt(900)+100, players[0]));
-        }
-        for(int i = 0; i < players.length * 2; i++){
             deck.add(new TurnLeftCard(random.nextInt(900)+100, players[0]));
+            deck.add(new UTurnCard(random.nextInt(900)+100, players[0]));
+            deck.add(new MoveTwoForwardCard(random.nextInt(900)+100, players[0], board));
+            deck.add(new ReverseCard(random.nextInt(900)+100, players[0], board));
+        }
+        for(int i = 0; i < players.length*1; i++){
+            deck.add(new MoveThreeForwardCard(random.nextInt(900)+100, players[0], board));
         }
     }
     public void createDeckFromRecipe(int[] recipe){
@@ -53,11 +57,24 @@ public class CardHandler {
                 case 3:
                     deck.add(new TurnRightCard(newCard/100, players[(newCard/10)%10]));
                     break;
+                case 4:
+                    deck.add(new UTurnCard(newCard/100, players[(newCard/10)%10]));
+                    break;
+                case 5:
+                    deck.add(new MoveTwoForwardCard(newCard/100, players[(newCard/10)%10], board));
+                    break;
+                case 6:
+                    deck.add(new MoveThreeForwardCard(newCard/100, players[(newCard/10)%10], board));
+                    break;
+                case 7:
+                    deck.add(new ReverseCard(newCard/100, players[(newCard/10)%10], board));
+                    break;
             }
         }
     }
     public ICard[][] dealCards() {
         Collections.shuffle(deck);
+        System.out.println(Arrays.toString(deck.toArray()));
         ICard[][] cardsToDeal = new ICard[players.length][9];
         for(int p = 0; p < players.length; p++) {
             for(int i = 0; i < 9; i++){

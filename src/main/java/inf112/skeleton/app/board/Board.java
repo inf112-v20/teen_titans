@@ -65,7 +65,6 @@ public class Board extends InputAdapter {
     }
 
     public void doRobotTurn(ICard currentCard) {
-        System.out.println(currentCard.toString()+" belongs to "+currentCard.getPlayer().getPlayerNumber());
         Robot currentRobot = currentCard.getPlayer().getRobot();
         Pos oldPos = currentRobot.getPos().copy();
         currentCard.action();
@@ -195,23 +194,6 @@ public class Board extends InputAdapter {
 
     public Robot[] getRobots(){
         return listOfRobots;
-    }
-
-    public String intToPlayerModel(int i){
-        switch (i){
-            case 0:
-                return "robots/pika.png";
-            case 1:
-                return "robots/charmander.png";
-            case 2:
-                return "robots/bulbasaur.png";
-            case 3:
-                return "robots/marsvin.png";
-            case 4:
-                return "robots/marsvin2.png";
-            default:
-                return "player.png";
-        }
     }
 
     private void createLazers(){

@@ -3,16 +3,20 @@ package inf112.skeleton.app.cards;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import inf112.skeleton.app.board.Board;
+import inf112.skeleton.app.board.Pos;
 import inf112.skeleton.app.player.IPlayer;
 
-public class UTurnCard implements ICard {
+public class MoveThreeForwardCard implements ICard {
+
     private int priority;
     private IPlayer player;
-    private Image image = new Image(new Texture(Gdx.files.internal("cards/UTurnCard.png")));
-    private int typeID = 4;
-    private final boolean LEFT = false;
+    private Board board;
+    private Image image = new Image(new Texture(Gdx.files.internal("robots/bulbasaur.png")));
+    private int typeID = 6;
 
-    public UTurnCard(int priority, IPlayer player){
+    public MoveThreeForwardCard(int priority, IPlayer player, Board board){
+        this.board = board;
         this.priority = priority;
         this.player = player;
     }
@@ -21,6 +25,7 @@ public class UTurnCard implements ICard {
     public void setPlayer(IPlayer player){
         this.player = player;
     }
+
     @Override
     public IPlayer getPlayer(){
         return player;
@@ -33,8 +38,9 @@ public class UTurnCard implements ICard {
 
     @Override
     public void action() {
-        player.getRobot().turn(LEFT);
-        player.getRobot().turn(LEFT);
+        Pos oldPos = player.getRobot().getPos().copy();
+        player.getRobot().move(3);
+        board.updatePlayer(oldPos, player.getRobot());
     }
 
     @Override
@@ -46,7 +52,7 @@ public class UTurnCard implements ICard {
 
     @Override
     public String toString(){
-        return "U-Turn";
+        return "Forward 3";
     }
 
     @Override
@@ -58,4 +64,5 @@ public class UTurnCard implements ICard {
     public int getTypeID() {
         return typeID;
     }
+
 }
