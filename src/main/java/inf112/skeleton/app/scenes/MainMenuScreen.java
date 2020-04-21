@@ -84,11 +84,7 @@ public class MainMenuScreen extends InputAdapter {
                 SELECTED = (SELECTED + 1) % 3;
                 break;
             case Input.Keys.ENTER:
-                try {
-                    loop.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                loop.interrupt();
                 action();
                 break;
         }
@@ -124,9 +120,9 @@ public class MainMenuScreen extends InputAdapter {
         }
     }
 
-    private boolean visible = true;
     private void highlightThread(){
         loop = new Thread(() ->{
+            boolean visible = true;
             while(true){
                 switch(SELECTED){
                     case 0:
