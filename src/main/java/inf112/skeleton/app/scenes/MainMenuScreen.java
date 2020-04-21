@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -16,14 +17,13 @@ public class MainMenuScreen extends InputAdapter {
     private Orchestrator parent;
     private Stage stage;
     private int SELECTED = 0;
+    private Thread loop;
 
     private TextButton newGame;
     private TextButton joinGame;
     private TextButton exit;
 
-    private Image img0;
-    private Image img1;
-    private Image img2;
+    private Image highlight;
 
     public MainMenuScreen(Orchestrator orchestrator) {
         parent = orchestrator;
@@ -41,14 +41,14 @@ public class MainMenuScreen extends InputAdapter {
         newGame = new TextButton("Host Game", skin);
         joinGame = new TextButton("Join Game", skin);
         exit = new TextButton("Exit", skin);
-        table.add(newGame).expandX();
-        table.add(img0);
+
+        table.add(newGame);
         table.row().pad(20,0,0,0);
         table.add(joinGame).expandX();
-        table.add(img1);
         table.row().pad(20,0,0,0);
         table.add(exit).expandX();
-        table.add(img2);
+
+        highlightThread();
     }
 
     public void render() {
@@ -60,7 +60,6 @@ public class MainMenuScreen extends InputAdapter {
 
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
-
     }
 
     public void dispose() {
@@ -85,6 +84,11 @@ public class MainMenuScreen extends InputAdapter {
                 SELECTED = (SELECTED + 1) % 3;
                 break;
             case Input.Keys.ENTER:
+                try {
+                    loop.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 action();
                 break;
         }
@@ -118,5 +122,46 @@ public class MainMenuScreen extends InputAdapter {
                 Gdx.app.exit();
                 break;
         }
+    }
+
+    private boolean visible = true;
+    private void highlightThread(){
+        loop = new Thread(() ->{
+            while(true){
+                switch(SELECTED){
+                    case 0:
+                        newGame.setVisible(visible);
+                        joinGame.setVisible(true);
+                        exit.setVisible(true);
+                        break;
+                    case 1:
+                        newGame.setVisible(true);
+                        joinGame.setVisible(visible);
+                        exit.setVisible(true);
+                        break;
+                    case 2:
+                        newGame.setVisible(true);
+                        joinGame.setVisible(true);
+                        exit.setVisible(visible);
+                        break;
+                }
+                if(visible){
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else{
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                visible = !visible;
+            }
+        });
+        loop.start();
     }
 }
