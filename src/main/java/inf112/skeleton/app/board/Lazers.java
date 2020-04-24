@@ -14,14 +14,20 @@ public class Lazers {
     TiledMapTileLayer.Cell wallCheck;
     TiledMapTileLayer.Cell playerCheck;
     HashMap<String, TiledMapTileLayer> mapLayers;
+    TiledMapTileLayer playerlayer;
+    Walls walls;
+    Pos wallPos;
 
 
     public Lazers(Pos pos, Direction dir, Board board){
         x = pos.getPosX();
         y = pos.getPosY();
+        wallPos = new Pos();
         this.dir = dir;
         this.board = board;
         mapLayers = board.getTiledMapTileLayers();
+        playerlayer = board.getPlayerLayer();
+        walls = board.getWalls();
     }
 
     public void shoot(){
@@ -31,21 +37,92 @@ public class Lazers {
                 hit = shootUp();
                 break;
             case EAST:
-                //hit = shootRight();
+                hit = shootRight();
                 break;
             case SOUTH:
-                //hit = shootDown();
+                hit = shootDown();
                 break;
             case WEST:
-                //hit = shootLeft();
+                hit = shootLeft();
                 break;
         }
     }
 
     private boolean shootUp(){
         for (int i = 0; i < board.getBOARDHEIGHT() - y; i++) {
+            if (!checkWall(x, y+i, Direction.NORTH)) {
+                if (checkPlayer(x, y+i)) {
+                    for (Robot robot : board.getListOfRobots()) {
+                        if (robot.getPos().getPosX() == x && robot.getPos().getPosY() == y+i) {
+                            robot.takeDamage(1);
+                            return true;
+                        }
+                    }
+                }
+            }
+            else {
+                return false;
+            }
         }
-        return true;
+        return false;
+    }
+
+    private boolean shootRight(){
+        for (int i = 0; i < board.getBOARDWIDTH() - y; i++) {
+            if (checkWall(x+i, y, Direction.EAST)) {
+                if (checkPlayer(x+i, y)) {
+                    System.out.println("hej");
+                    for (Robot robot : board.getListOfRobots()) {
+                        if (robot.getPos().getPosX() == x+i && robot.getPos().getPosY() == y) {
+                            robot.takeDamage(1);
+                            return true;
+                        }
+                    }
+                }
+            }
+            else {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    private boolean shootDown() {
+        for (int i = 0; i < board.getBOARDHEIGHT() - y; i++) {
+            if (!checkWall(x, y-i, Direction.NORTH)) {
+                if (checkPlayer(x, y-i)) {
+                    for (Robot robot : board.getListOfRobots()) {
+                        if (robot.getPos().getPosX() == x && robot.getPos().getPosY() == y-i) {
+                            robot.takeDamage(1);
+                            return true;
+                        }
+                    }
+                }
+            }
+            else {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    private boolean shootLeft() {
+        for (int i = 0; i < board.getBOARDWIDTH() - y; i++) {
+            if (!checkWall(x-i, y, Direction.NORTH)) {
+                if (checkPlayer(x-i, y)) {
+                    for (Robot robot : board.getListOfRobots()) {
+                        if (robot.getPos().getPosX() == x-i && robot.getPos().getPosY() == y) {
+                            robot.takeDamage(1);
+                            return true;
+                        }
+                    }
+                }
+            }
+            else {
+                return false;
+            }
+        }
+        return false;
     }
 
     private boolean checkPlayer(int x, int y){
@@ -57,9 +134,9 @@ public class Lazers {
         return false;
     }
 
-    private boolean checkWall(int x, int y) {
-        return true;
-        //TODO Sjekk om den treffer en vegg, stopp isåfall
-        //TODO Pass på om veggen er horisontal/vertikal
+    private boolean checkWall(int x, int y, Direction dir) {
+        //wallCheck = walls.mapLayers.get("wall").getCell(x,y);
+        wallPos.setPos(x, y);
+        return walls.wall(wallPos, dir);
     }
 }

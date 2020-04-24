@@ -41,7 +41,7 @@ public class Robot implements IRobot {
         createPlayerTexture(texture);
         currentState = playerStates.get("alive");
 
-        walls = new Walls(board);
+        walls = board.getWalls();
     }
 
     public void createPlayerTexture(String location){
@@ -75,7 +75,8 @@ public class Robot implements IRobot {
      */
     //TODO Implement sources of damage
     public void takeDamage(int dmg) {
-        currentHP--;
+        currentHP -= dmg;
+        System.out.println("Hp: " + currentHP);
         if (currentHP <= 0) {
             die();
         }
@@ -98,9 +99,7 @@ public class Robot implements IRobot {
     }
 
 
-    /** //TODO distance må alltid vere 1, visst vi går lenger bruk rekrusjon E.L.!
-     *  //TODO Går vel fint å ha det sånn? Its not a bug its a feature
-     *
+    /**
      * Gives a new position for the robot
      * @param distance How far the robot moves in 'direction'
      * @return returns the new position for the robot
@@ -109,16 +108,16 @@ public class Robot implements IRobot {
         newPos.setPos(pos.copy());
         switch (dir) {
             case NORTH:
-                newPos.setPosY(pos.getPosY() + distance);
+                newPos.setPosY(pos.getPosY() + 1);
                 break;
             case EAST:
-                newPos.setPosX(pos.getPosX() + distance);
+                newPos.setPosX(pos.getPosX() + 1);
                 break;
             case SOUTH:
-                newPos.setPosY(pos.getPosY() - distance);
+                newPos.setPosY(pos.getPosY() - 1);
                 break;
             case WEST:
-                newPos.setPosX(pos.getPosX() - distance);
+                newPos.setPosX(pos.getPosX() - 1);
                 break;
         }
         if(walls.wall(pos, dir)) pos.setPos(newPos);
@@ -175,6 +174,6 @@ public class Robot implements IRobot {
                 newPos.setPosX(pos.getPosX() - 1);
                 break;
         }
-        pos.setPos(newPos);
+        if(walls.wall(pos, pushDir)) pos.setPos(newPos);
     }
 }
