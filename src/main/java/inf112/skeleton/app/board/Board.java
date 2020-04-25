@@ -26,9 +26,12 @@ public class Board extends InputAdapter {
     private final boolean RIGHT = true;
     private final boolean LEFT = false;
     private ArrayList<Lazers> LazerList = new ArrayList<>();
+    private ArrayList<Grills> GrillList = new ArrayList<>();
+    private ArrayList<Pushers> PusherList = new ArrayList<>();
 
     ConveyorBelts conveyorBelts;
     Walls walls;
+    Grills grills;
 
 
 
@@ -46,17 +49,22 @@ public class Board extends InputAdapter {
         mapLayers.put("playerLayer", (TiledMapTileLayer) map.getLayers().get("Player"));
         mapLayers.put("wall", (TiledMapTileLayer) map.getLayers().get("Wall"));
         mapLayers.put("lazer", (TiledMapTileLayer) map.getLayers().get("Lazer"));
+        mapLayers.put("grill", (TiledMapTileLayer) map.getLayers().get("Burner"));
+        mapLayers.put("push", (TiledMapTileLayer) map.getLayers().get("Push"));
         playerLayer = mapLayers.get("playerLayer");
         conveyorBelts = new ConveyorBelts(this);
-        createLazers();
-        //walls = new Walls();
-
+        walls = new Walls(this);
+        createBoardElems();
     }
 
 
     public TiledMap getMap(){
         return map;
     }
+
+    public Walls getWalls() {return walls; }
+
+    public Robot[] getListOfRobots() {return listOfRobots; }
 
     public HashMap<String, TiledMapTileLayer> getTiledMapTileLayers() { return mapLayers; }
 
@@ -114,6 +122,19 @@ public class Board extends InputAdapter {
         } catch (InterruptedException e) {
             //nutthin
         }
+
+        for (Lazers lazer : LazerList) {
+            lazer.shoot();
+        }
+
+        for (Grills grill : GrillList) {
+            grill.burn(round);
+        }
+
+        for (Pushers pusher : PusherList) {
+            pusher.push(round);
+        }
+
         Pos currentPos;
         for (Robot robot : listOfRobots) {
             currentPos = robot.getPos().copy();
@@ -126,7 +147,10 @@ public class Board extends InputAdapter {
             if (mapLayers.get("gear").getCell(currentPos.getPosX(), currentPos.getPosY()) != null) {
                 gearTypes(currentPos, robot);
             }
-            if (mapLayers.get("wall").getCell(currentPos.getPosX(), currentPos.getPosY()) != null) {  }; //TODO Add walls
+            if (mapLayers.get("wall").getCell(currentPos.getPosX(), currentPos.getPosY()) != null) {  };
+            if (mapLayers.get("push").getCell(currentPos.getPosX(), currentPos.getPosY()) != null) {
+
+            }
 
         }
     }
@@ -196,23 +220,47 @@ public class Board extends InputAdapter {
         return listOfRobots;
     }
 
-    private void createLazers(){
+    private void createBoardElems(){
         TiledMapTileLayer.Cell lazerTile;
+        TiledMapTileLayer.Cell grillTile;
+        TiledMapTileLayer.Cell pushTile;
+        Pos pos;
         for (int i = 0; i < BOARDWIDTH; i++) {
             for (int j = 0; j < BOARDHEIGHT; j++) {
                 lazerTile = mapLayers.get("lazer").getCell(i,j);
+                grillTile = mapLayers.get("grill").getCell(i, j);
+                pushTile = mapLayers.get("push").getCell(i, j);
 
                 if (lazerTile != null) {
-                    Pos pos = new Pos();
+                    pos = new Pos();
                     pos.setPos(i, j);
 
                     int lazerTileType = lazerTile.getTile().getId();
                     if (lazerTileType == 38) LazerList.add(new Lazers(pos, Direction.EAST, this));
                     //Lag ny "if (lazerTileType == num) for hver retning laser, vi har bare 1 for no
                 }
+
+                if (grillTile != null) {
+                    pos = new Pos();
+                    pos.setPos(i, j);
+
+                    int grillTileType = grillTile.getTile().getId();
+                    if (grillTileType == 90) GrillList.add(new Grills(pos, this, true));
+                    if (grillTileType == 89) GrillList.add(new Grills(pos, this, false));
+                }
+
+                if (pushTile != null) {
+                    pos = new Pos();
+                    pos.setPos(i, j);
+
+                    int pushTileType = pushTile.getTile().getId();
+                    if (pushTileType == 9) PusherList.add(new Pushers(pos, this, false, Direction.SOUTH));
+                    if (pushTileType == 2) PusherList.add(new Pushers(pos, this, true, Direction.WEST));
+                }
             }
         }
     }
+
 
     public int getBOARDWIDTH(){
         return BOARDWIDTH;

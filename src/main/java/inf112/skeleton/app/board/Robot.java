@@ -41,7 +41,7 @@ public class Robot implements IRobot {
         createPlayerTexture(texture);
         currentState = playerStates.get("alive");
 
-        walls = new Walls(board);
+        walls = board.getWalls();
     }
 
     public void createPlayerTexture(String location){
@@ -75,7 +75,8 @@ public class Robot implements IRobot {
      */
     //TODO Implement sources of damage
     public void takeDamage(int dmg) {
-        currentHP--;
+        currentHP -= dmg;
+        System.out.println("Hp: " + currentHP);
         if (currentHP <= 0) {
             die();
         }
@@ -95,7 +96,7 @@ public class Robot implements IRobot {
         currentState = playerStates.get("won");
         updateModel();
     }
-    
+
     /**
      * Gives a new position for the robot
      * @param distance How far the robot moves in 'direction'
@@ -171,6 +172,6 @@ public class Robot implements IRobot {
                 newPos.setPosX(pos.getPosX() - 1);
                 break;
         }
-        pos.setPos(newPos);
+        if(walls.wall(pos, pushDir)) pos.setPos(newPos);
     }
 }
