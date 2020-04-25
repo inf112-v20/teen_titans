@@ -83,12 +83,10 @@ public class GameLoop extends InputAdapter {
                 }
 
                 /**  Client has recievedcards. Send cards to HUD.  check**/
-                hud.recieveCards(myPlayer.getCardStorage());
                 /**  Player selects cards  check**/
                 ICard[] sortedHand = myPlayer.getSortedCards();
                 /**  Player sends cards to server check**/
                 gameClient.sendCards(sortedHand);
-                hud.clear();
 
                 if(host){
                     /** Host waits for all players to send cards... **/

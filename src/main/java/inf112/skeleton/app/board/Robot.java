@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import inf112.skeleton.app.scenes.game.HudManager;
 
 import java.util.HashMap;
 
@@ -18,6 +19,7 @@ public class Robot implements IRobot {
     private int currentHP;
     private HashMap<String, TiledMapTileLayer.Cell> playerStates;
     private TiledMapTileLayer.Cell currentState;
+    private HudManager hud;
 
     Walls walls;
 
@@ -29,7 +31,6 @@ public class Robot implements IRobot {
      * @param yPos The vertical starting pos
      */
     public Robot(int xPos, int yPos, String texture, Board board) {
-
         pos = new Pos();
         newPos = new Pos();
         pos.setPos(xPos, yPos);
@@ -42,6 +43,9 @@ public class Robot implements IRobot {
         currentState = playerStates.get("alive");
 
         walls = board.getWalls();
+    }
+    public void recieveHud(HudManager hud){
+        this.hud = hud;
     }
 
     public void createPlayerTexture(String location){
@@ -76,10 +80,12 @@ public class Robot implements IRobot {
     //TODO Implement sources of damage
     public void takeDamage(int dmg) {
         currentHP -= dmg;
-        System.out.println("Hp: " + currentHP);
         if (currentHP <= 0) {
             die();
+            hud.updateHealth(0);
+            return;
         }
+        hud.updateHealth(currentHP);
     }
 
     /**
