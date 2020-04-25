@@ -89,18 +89,14 @@ public class Robot implements IRobot {
     public void die(){
         currentState = playerStates.get("dead");
         updateModel();
-
     }
 
     public void win(){
         currentState = playerStates.get("won");
         updateModel();
     }
-
-
-    /** //TODO distance må alltid vere 1, visst vi går lenger bruk rekrusjon E.L.!
-     *  //TODO Går vel fint å ha det sånn? Its not a bug its a feature
-     *
+    
+    /**
      * Gives a new position for the robot
      * @param distance How far the robot moves in 'direction'
      * @return returns the new position for the robot
@@ -109,16 +105,16 @@ public class Robot implements IRobot {
         newPos.setPos(pos.copy());
         switch (dir) {
             case NORTH:
-                newPos.setPosY(pos.getPosY() + distance);
+                newPos.setPosY(pos.getPosY() + 1);
                 break;
             case EAST:
-                newPos.setPosX(pos.getPosX() + distance);
+                newPos.setPosX(pos.getPosX() + 1);
                 break;
             case SOUTH:
-                newPos.setPosY(pos.getPosY() - distance);
+                newPos.setPosY(pos.getPosY() - 1);
                 break;
             case WEST:
-                newPos.setPosX(pos.getPosX() - distance);
+                newPos.setPosX(pos.getPosX() - 1);
                 break;
         }
         if(walls.wall(pos, dir)) pos.setPos(newPos);

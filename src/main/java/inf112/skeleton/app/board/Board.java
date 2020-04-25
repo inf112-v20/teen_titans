@@ -71,7 +71,7 @@ public class Board extends InputAdapter {
         updatePlayer(oldPos, currentRobot);
     }
 
-
+    
     public void updatePlayer(Pos oldPos, Robot player){
         getPlayerLayer().setCell(oldPos.getPosX(), oldPos.getPosY(), null);
         if(checkPos(player.getPos()) == SUICIDALMOVE){player.die();}
