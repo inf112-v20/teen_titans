@@ -45,6 +45,7 @@ public class Player extends InputAdapter implements IPlayer {
         for(int i = 0; i < sortedCardsArray.length; i++){
             sortedCardsArray[i] = sortedCards.get(i);
         }
+        hud.clear();
         return sortedCardsArray;
     }
 
@@ -57,6 +58,7 @@ public class Player extends InputAdapter implements IPlayer {
         this.playerNumber = playerNumber;
         this.board = board;
         this.robot = robot;
+        robot.recieveHud(hud);
         this.hud = hud;
     }
 
@@ -67,6 +69,7 @@ public class Player extends InputAdapter implements IPlayer {
         }
         sortedCards.clear();
         cardStorage = cards;
+        hud.recieveCards(getCardStorage());
         hud.updateCardNumbers(sortedCards);
     }
 
@@ -95,6 +98,9 @@ public class Player extends InputAdapter implements IPlayer {
                 break;
             case Input.Keys.SPACE:
                 selectCard(hud.getSelected());
+                break;
+            case Input.Keys.ENTER:
+                robot.takeDamage(1);
                 break;
         }
         return true;

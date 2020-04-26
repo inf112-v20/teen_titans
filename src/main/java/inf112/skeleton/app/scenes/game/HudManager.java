@@ -21,6 +21,7 @@ public class HudManager {
     private Image selectedImage;
     private int selected;
     private Image[] numbers = new Image[5];
+    private Image[][] hearts = new Image[5][3];
     private Skin skin;
 
     public HudManager(){
@@ -31,9 +32,36 @@ public class HudManager {
         numbers[2] = new Image(new Texture(Gdx.files.internal("numbers/Number3.png")));
         numbers[3] = new Image(new Texture(Gdx.files.internal("numbers/Number4.png")));
         numbers[4] = new Image(new Texture(Gdx.files.internal("numbers/Number5.png")));
+        createHearts();
         skin = new Skin(Gdx.files.internal("styles/glassy-ui.json"));
     }
 
+    private void createHearts(){
+        for(int i = 0; i < hearts.length; i++){
+            hearts[i][0] = new Image(new Texture(Gdx.files.internal("other/FullHeart.png")));
+            hearts[i][0].setSize(60, 60);
+            stage.addActor(hearts[i][0]);
+            hearts[i][1] = new Image(new Texture(Gdx.files.internal("other/HalfHeart.png")));
+            hearts[i][1].setSize(60, 60);
+            hearts[i][1].setVisible(false);
+            stage.addActor(hearts[i][1]);
+            hearts[i][2] = new Image(new Texture(Gdx.files.internal("other/EmptyHeart.png")));
+            hearts[i][2].setSize(60, 60);
+            hearts[i][2].setVisible(false);
+            stage.addActor(hearts[i][2]);
+        }
+        for(int i = 0; i < 3; i++){
+            hearts[i][0].setPosition(i*60, stage.getHeight()-50);
+            hearts[i][1].setPosition(i*60, stage.getHeight()-50);
+            hearts[i][2].setPosition(i*60, stage.getHeight()-50);
+        }
+        for(int i = 0; i < 2; i++){
+            hearts[i+3][0].setPosition(i*60+30, stage.getHeight()-90);
+            hearts[i+3][1].setPosition(i*60+30, stage.getHeight()-90);
+            hearts[i+3][2].setPosition(i*60+30, stage.getHeight()-90);
+
+        }
+    }
 
     public void createPos1(ICard img){
         img.getImage().setPosition(stage.getWidth()/2 - 530, 0);
@@ -167,6 +195,28 @@ public class HudManager {
                 }
             }
         }
+    }
+
+    public void updateHealth(int hp){
+        System.out.println(hp);
+        hearts[hp/2][2].setVisible(true);
+        for(int i = 0; i < hp/2; i++){
+            System.out.println(i + "f");
+            hearts[i][0].setVisible(true);
+            hearts[i][1].setVisible(false);
+            //hearts[i][2].setVisible(false);
+        }
+        for(int i = hp/2; i < 5; i++){
+            System.out.println(i + "s");
+            hearts[i][0].setVisible(false);
+            hearts[i][1].setVisible(false);
+            //hearts[i][2].setVisible(true);
+        }
+        if(hp%2 == 1){
+            hearts[hp/2][0].setVisible(false);
+            hearts[hp/2][1].setVisible(true);
+        }
+
     }
 
     private void clearImages(){
