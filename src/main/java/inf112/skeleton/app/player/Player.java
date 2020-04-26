@@ -4,7 +4,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import inf112.skeleton.app.board.Board;
 import inf112.skeleton.app.board.Robot;
-import inf112.skeleton.app.cards.ICard;
+import inf112.skeleton.app.cards.*;
 import inf112.skeleton.app.scenes.game.HudManager;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -101,6 +101,20 @@ public class Player extends InputAdapter implements IPlayer {
                 break;
             case Input.Keys.ENTER:
                 robot.takeDamage(1);
+                break;
+
+                //FOR DEBUGGING
+            case Input.Keys.W:
+                board.doRobotTurn(new MoveForwardCard(999, this, board));
+                break;
+            case Input.Keys.A:
+                board.doRobotTurn(new TurnLeftCard(999, this));
+                break;
+            case Input.Keys.D:
+                board.doRobotTurn(new TurnRightCard(999, this));
+                break;
+            case Input.Keys.S:
+                board.doRobotTurn(new ReverseCard(999, this, board));
                 break;
         }
         return true;

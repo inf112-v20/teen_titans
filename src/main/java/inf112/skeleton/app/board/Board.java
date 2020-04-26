@@ -36,10 +36,7 @@ public class Board extends InputAdapter {
 
 
     public Board(){
-        //createRobots(numPlayers);
-
         map = new TmxMapLoader().load("maps/Map1.tmx");
-
         mapLayers = new HashMap<>();
         mapLayers.put("conveyor", (TiledMapTileLayer) map.getLayers().get("Conveyor"));
         mapLayers.put("flag", (TiledMapTileLayer) map.getLayers().get("Flag"));
@@ -80,39 +77,39 @@ public class Board extends InputAdapter {
     }
 
     
-    public void updatePlayer(Pos oldPos, Robot player){
+    public void updatePlayer(Pos oldPos, Robot robot){
         getPlayerLayer().setCell(oldPos.getPosX(), oldPos.getPosY(), null);
-        if(checkPos(player.getPos()) == SUICIDALMOVE){player.die();}
-        playerLayer.setCell(player.getPos().getPosX(), player.getPos().getPosY(), player.getCurrentState());
+        if(checkPos(robot.getPos()) == SUICIDALMOVE){robot.die();}
+        else{
+            playerLayer.setCell(robot.getPos().getPosX(), robot.getPos().getPosY(), robot.getCurrentState());
+            checkFlags(robot);
+        }
     }
 
     private int checkPos(Pos pos) {
         if (pos.getPosX() >= 0 && pos.getPosX() < BOARDWIDTH && pos.getPosY() >= 0 && pos.getPosY() < BOARDHEIGHT) {
+            //Check for hole
             try {
                 if (mapLayers.get("hole").getCell(pos.getPosX(), pos.getPosY()) != null) return SUICIDALMOVE;
-                else if (mapLayers.get("flag").getCell(pos.getPosX(), pos.getPosY()) != null) {
-
-                    Sound sound = Gdx.audio.newSound(Gdx.files.internal("assets/Sound effects/WeAreTheChampions.mp3"));
-                    long id = sound.play(1.0f);
-
-                    robot.win();
-                    return LEGALMOVE;
-                }
-
             }
-            catch (NullPointerException e)
-            {
-                //Do nothing
-            }
+            catch (NullPointerException e) {}
         }
         else {
-
-            Sound sound = Gdx.audio.newSound(Gdx.files.internal("assets/Sound effects/FBI_OpenUp.mp3"));
-            sound.play(1.0f);
+            //Sound sound = Gdx.audio.newSound(Gdx.files.internal("assets/Sound effects/FBI_OpenUp.mp3"));
+            //sound.play(1.0f);
             return SUICIDALMOVE;
         }
 
         return LEGALMOVE;
+    }
+
+    private void checkFlags(Robot robot){
+        try{
+            Pos pos  = robot.getPos();
+            if(mapLayers.get("flag").getCell(pos.getPosX(), pos.getPosY()) != null){
+                robot.updateCheckpoint(mapLayers.get("flag").getCell(pos.getPosX(), pos.getPosY()).getTile().getId());
+            }
+        }catch(NullPointerException e){}
     }
 
     //TODO Give own classes
@@ -208,7 +205,7 @@ public class Board extends InputAdapter {
     public void createRobots(int playerAmount, String[] models){
         listOfRobots = new Robot[playerAmount];
         for(int i = 0; i < listOfRobots.length; i++){
-        listOfRobots[i] = new Robot((i+1)*2, (i+1)*2, models[i], this);
+        listOfRobots[i] = new Robot(i, 0, models[i], this);
         }
         robot = listOfRobots[0];
         for(Robot robot : listOfRobots){

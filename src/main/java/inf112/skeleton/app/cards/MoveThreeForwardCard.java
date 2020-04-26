@@ -19,6 +19,7 @@ public class MoveThreeForwardCard implements ICard {
         this.board = board;
         this.priority = priority;
         this.player = player;
+        image.setSize(150, 100);
     }
 
     @Override

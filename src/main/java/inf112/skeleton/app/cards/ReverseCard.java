@@ -19,6 +19,7 @@ public class ReverseCard implements ICard{
         this.board = board;
         this.priority = priority;
         this.player = player;
+        image.setSize(100, 150);
     }
 
     @Override

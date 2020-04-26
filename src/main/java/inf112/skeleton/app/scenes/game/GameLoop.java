@@ -53,7 +53,7 @@ public class GameLoop extends InputAdapter {
     private void waitForDeck(){
         while(gameClient.getDeck() == null){
             try {
-                Thread.sleep(500);
+                Thread.sleep(200);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

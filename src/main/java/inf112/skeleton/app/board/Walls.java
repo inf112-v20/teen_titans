@@ -127,7 +127,6 @@ public class Walls {
     }
 
     private boolean checkLegalRight(Pos pos) {
-
         if (mapLayers.get("wall").getCell(pos.getPosX()+1, pos.getPosY()) != null){
             rightTile = mapLayers.get("wall").getCell(pos.getPosX()+1, pos.getPosY());
         }

@@ -15,6 +15,7 @@ public class UTurnCard implements ICard {
     public UTurnCard(int priority, IPlayer player){
         this.priority = priority;
         this.player = player;
+        image.setSize(100, 150);
     }
 
     @Override

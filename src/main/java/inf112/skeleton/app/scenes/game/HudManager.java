@@ -131,11 +131,9 @@ public class HudManager {
         field.setPosition(img.getImage().getX()+60, 10);
         stage.addActor(field);
     }
-
     public int getSelected(){
         return selected;
     }
-
     public void updateSelectedCard(int selected){
         if(selected < 0){selected = 8;}
         this.selected = selected % 9;
@@ -177,7 +175,6 @@ public class HudManager {
                 stage.addActor(selectedImage);
         }
     }
-
     public void updateCardNumbers(ArrayList<ICard> cards){
         selectedImage.setZIndex(stage.getActors().size);
         //Move existing numbers out of the way in case of unselect
@@ -196,7 +193,6 @@ public class HudManager {
             }
         }
     }
-
     public void updateHealth(int hp){
         System.out.println(hp);
         hearts[hp/2][2].setVisible(true);
@@ -218,7 +214,6 @@ public class HudManager {
         }
 
     }
-
     private void clearImages(){
         for(ICard card : cardList){
             if(card != null){

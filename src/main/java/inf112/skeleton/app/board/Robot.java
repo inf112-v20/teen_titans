@@ -17,6 +17,7 @@ public class Robot implements IRobot {
     private Pos newPos;
     private int MAXHP = 10;
     private int currentHP;
+    private boolean[] checkpoints;
     private HashMap<String, TiledMapTileLayer.Cell> playerStates;
     private TiledMapTileLayer.Cell currentState;
     private HudManager hud;
@@ -38,7 +39,7 @@ public class Robot implements IRobot {
 
         currentHP = MAXHP;
         dir = Direction.NORTH; //Kanskje endre til en parameter for ROBOT
-
+        checkpoints = new boolean[4];
         createPlayerTexture(texture);
         currentState = playerStates.get("alive");
 
@@ -86,6 +87,29 @@ public class Robot implements IRobot {
             return;
         }
         hud.updateHealth(currentHP);
+    }
+
+    public void updateCheckpoint(int checkpointID){
+        switch(checkpointID){
+            case 55:
+                checkpoints[0] = true;
+                break;
+            case 63:
+                if(checkpoints[0]){
+                    checkpoints[1] = true;
+                }
+                break;
+            case 71:
+                if(checkpoints[0] && checkpoints[1]){
+                    checkpoints[2] = true;
+                }
+                break;
+            case 79:
+                if(checkpoints[0] && checkpoints[1] && checkpoints[2]){
+                    checkpoints[3] = true;
+                }
+                break;
+        }
     }
 
     /**

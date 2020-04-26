@@ -74,7 +74,6 @@ public class CardHandler {
     }
     public ICard[][] dealCards() {
         Collections.shuffle(deck);
-        System.out.println(Arrays.toString(deck.toArray()));
         ICard[][] cardsToDeal = new ICard[players.length][9];
         for(int p = 0; p < players.length; p++) {
             for(int i = 0; i < 9; i++){
