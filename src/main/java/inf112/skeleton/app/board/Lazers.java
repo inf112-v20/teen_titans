@@ -46,6 +46,7 @@ public class Lazers {
                 hit = shootLeft();
                 break;
         }
+
     }
 
     private boolean shootUp(){
@@ -69,9 +70,9 @@ public class Lazers {
 
     private boolean shootRight(){
         for (int i = 0; i < board.getBOARDWIDTH() - y; i++) {
+            System.out.println(i + " " + checkWall(x+i, y, Direction.EAST));
             if (checkWall(x+i, y, Direction.EAST)) {
                 if (checkPlayer(x+i, y)) {
-                    System.out.println("hej");
                     for (Robot robot : board.getListOfRobots()) {
                         if (robot.getPos().getPosX() == x+i && robot.getPos().getPosY() == y) {
                             robot.takeDamage(1);
@@ -136,7 +137,7 @@ public class Lazers {
 
     private boolean checkWall(int x, int y, Direction dir) {
         //wallCheck = walls.mapLayers.get("wall").getCell(x,y);
-        wallPos.setPos(x, y);
-        return walls.wall(wallPos, dir);
+        System.out.println(this.x + "slef" + this.y);
+        return walls.wall(new Pos(x, y), dir);
     }
 }

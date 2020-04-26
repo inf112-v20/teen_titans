@@ -12,7 +12,7 @@ public class Pushers {
     public Pushers(Pos pos, Board board, boolean even, Direction dir){
         x = pos.getPosX();
         y = pos.getPosY();
-        pos.setPos(x, y);
+        this.pos = pos;
         this.board = board;
         this.dir = dir;
     }
@@ -23,7 +23,8 @@ public class Pushers {
                 if (even && round % 2 == 0 || !even && round % 2 == 1) {
 
                     robot.push(dir);
-                    //board.updatePlayer(pos, robot);
+                    System.out.println(pos);
+                    board.updatePlayer(pos, robot);
 
                 }
             }

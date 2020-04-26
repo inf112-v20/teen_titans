@@ -73,13 +73,20 @@ public class Robot implements IRobot {
      * Call to take damage
      * @param dmg How much damage taken
      */
-    //TODO Implement sources of damage
     public void takeDamage(int dmg) {
         currentHP -= dmg;
         System.out.println("Hp: " + currentHP);
         if (currentHP <= 0) {
             die();
         }
+    }
+
+    public int getCurrentHp(){
+        return currentHP;
+    }
+
+    public int getMaxHp(){
+        return MAXHP;
     }
 
     /**
@@ -106,6 +113,7 @@ public class Robot implements IRobot {
      */
     public void move(int distance) {
         newPos.setPos(pos.copy());
+        System.out.println("Pos: " + pos);
         switch (dir) {
             case NORTH:
                 newPos.setPosY(pos.getPosY() + 1);
@@ -120,6 +128,7 @@ public class Robot implements IRobot {
                 newPos.setPosX(pos.getPosX() - 1);
                 break;
         }
+        System.out.println("MOVEDIR: " + dir);
         if(walls.wall(pos, dir)) pos.setPos(newPos);
         if(distance > 1){
             move(distance-1);
@@ -130,7 +139,6 @@ public class Robot implements IRobot {
      * Turns the robot in a certain direction
      * @param turnRight The robots new rotation
      */
-    //TODO Give code
     public void turn(boolean turnRight) {
         if (turnRight) {
             dir = dir.next();
@@ -174,6 +182,7 @@ public class Robot implements IRobot {
                 newPos.setPosX(pos.getPosX() - 1);
                 break;
         }
+        System.out.println("PUSHDIR: " + pushDir);
         if(walls.wall(pos, pushDir)) pos.setPos(newPos);
     }
 }
