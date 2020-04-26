@@ -8,6 +8,18 @@ public class Pos implements IPos {
     private int y;
     private Vector2 pos;
 
+    //TODO lag constructor og endre alle instanser av new Pos(); til å passe
+    //(Constructoren skal være Pos(int x, int y)
+    public Pos(){
+
+    }
+
+    public Pos(int x, int y){
+        this.x = x;
+        this.y = y;
+        pos = new Vector2(x, y);
+    }
+
     @Override
     public int getPosX() {
         return x;

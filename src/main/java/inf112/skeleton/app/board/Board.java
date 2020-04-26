@@ -28,10 +28,11 @@ public class Board extends InputAdapter {
     private ArrayList<Lazers> LazerList = new ArrayList<>();
     private ArrayList<Grills> GrillList = new ArrayList<>();
     private ArrayList<Pushers> PusherList = new ArrayList<>();
+    private ArrayList<Repair> RepairList = new ArrayList<>();
 
     ConveyorBelts conveyorBelts;
     Walls walls;
-    Grills grills;
+
 
 
 
@@ -48,6 +49,7 @@ public class Board extends InputAdapter {
         mapLayers.put("lazer", (TiledMapTileLayer) map.getLayers().get("Lazer"));
         mapLayers.put("grill", (TiledMapTileLayer) map.getLayers().get("Burner"));
         mapLayers.put("push", (TiledMapTileLayer) map.getLayers().get("Push"));
+        mapLayers.put("repair", (TiledMapTileLayer) map.getLayers().get("Repair"));
         playerLayer = mapLayers.get("playerLayer");
         conveyorBelts = new ConveyorBelts(this);
         walls = new Walls(this);
@@ -132,20 +134,29 @@ public class Board extends InputAdapter {
             pusher.push(round);
         }
 
+
+
         Pos currentPos;
         for (Robot robot : listOfRobots) {
             currentPos = robot.getPos().copy();
             if (mapLayers.get("conveyor").getCell(currentPos.getPosX(), currentPos.getPosY()) != null) {
                 conveyorTypes(currentPos, robot);
                 updatePlayer(currentPos, robot);
-                currentPos = robot.getPos().copy();
+                currentPos = robot.getPos();//.copy();
             };
             if (mapLayers.get("hole").getCell(currentPos.getPosX(), currentPos.getPosY()) != null) { robot.die(); }
             if (mapLayers.get("gear").getCell(currentPos.getPosX(), currentPos.getPosY()) != null) {
                 gearTypes(currentPos, robot);
             }
             if (mapLayers.get("wall").getCell(currentPos.getPosX(), currentPos.getPosY()) != null) {  };
-            if (mapLayers.get("push").getCell(currentPos.getPosX(), currentPos.getPosY()) != null) {
+
+            for (Repair fix : RepairList) {
+                if (robot.getPos().getPosX() == fix.getPos().getPosX()
+                && robot.getPos().getPosX() == fix.getPos().getPosY()) {
+                    System.out.println(robot.getCurrentHp());
+                    fix.heal(robot);
+                    System.out.println(robot.getCurrentHp());
+                }
 
             }
 
@@ -221,12 +232,14 @@ public class Board extends InputAdapter {
         TiledMapTileLayer.Cell lazerTile;
         TiledMapTileLayer.Cell grillTile;
         TiledMapTileLayer.Cell pushTile;
+        TiledMapTileLayer.Cell repairTile;
         Pos pos;
         for (int i = 0; i < BOARDWIDTH; i++) {
             for (int j = 0; j < BOARDHEIGHT; j++) {
                 lazerTile = mapLayers.get("lazer").getCell(i,j);
                 grillTile = mapLayers.get("grill").getCell(i, j);
                 pushTile = mapLayers.get("push").getCell(i, j);
+                repairTile = mapLayers.get("repair").getCell(i, j);
 
                 if (lazerTile != null) {
                     pos = new Pos();
@@ -253,6 +266,14 @@ public class Board extends InputAdapter {
                     int pushTileType = pushTile.getTile().getId();
                     if (pushTileType == 9) PusherList.add(new Pushers(pos, this, false, Direction.SOUTH));
                     if (pushTileType == 2) PusherList.add(new Pushers(pos, this, true, Direction.WEST));
+                }
+
+                if (repairTile != null) {
+                    pos = new Pos();
+                    pos.setPos(i, j);
+
+                    int repairTileType = repairTile.getTile().getId();
+                    if (repairTileType == 15) RepairList.add(new Repair(pos, this));
                 }
             }
         }

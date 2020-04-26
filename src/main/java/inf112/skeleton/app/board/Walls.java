@@ -26,6 +26,7 @@ public class Walls {
 
 
     public boolean wall(Pos oldPos, Direction dir){
+
         wallTile = mapLayers.get("wall").getCell(oldPos.getPosX(), oldPos.getPosY());
         lazerTile = mapLayers.get("lazer").getCell(oldPos.getPosX(), oldPos.getPosY());
         pusherTile = mapLayers.get("push").getCell(oldPos.getPosX(), oldPos.getPosY());
@@ -55,6 +56,8 @@ public class Walls {
     }
 
     private boolean checkLegalUp(Pos pos) {
+        upTile = null;
+        upTileType = -1;
 
         if (mapLayers.get("wall").getCell(pos.getPosX(), pos.getPosY()+1) != null){
             upTile = mapLayers.get("wall").getCell(pos.getPosX(), pos.getPosY()+1);
@@ -73,7 +76,7 @@ public class Walls {
 
         //Her er bare veggene vi bruker no, kan utvides med flere
         if (currentTileType == 24 || currentTileType == 31 || currentTileType == 9 || upTileType == 32 || upTileType == 29) {
-            System.out.println("kræsj");
+            System.out.println("kræsjUp");
             return false;
         }
 
@@ -81,6 +84,8 @@ public class Walls {
     }
 
     private boolean checkLegalDown(Pos pos) {
+        downTile = null;
+        downTileType = -1;
 
         if (mapLayers.get("wall").getCell(pos.getPosX(), pos.getPosY()-1) != null){
             downTile = mapLayers.get("wall").getCell(pos.getPosX(), pos.getPosY()-1);
@@ -97,6 +102,7 @@ public class Walls {
 
         //Her er bare veggene vi bruker no, kan utvides med flere
         if (downTileType == 24 || downTileType == 31 || downTileType == 9 || currentTileType == 32 || currentTileType == 29) {
+            System.out.println("kræsjDOWN");
             return false;
         }
 
@@ -104,6 +110,8 @@ public class Walls {
     }
 
     private boolean checkLegalLeft(Pos pos) {
+        leftTile = null;
+        leftTileType = -1;
 
         if (mapLayers.get("wall").getCell(pos.getPosX()-1, pos.getPosY()) != null){
             leftTile = mapLayers.get("wall").getCell(pos.getPosX()-1, pos.getPosY());
@@ -120,6 +128,7 @@ public class Walls {
 
         //Her er bare veggene vi bruker no, kan utvides med flere
         if (currentTileType == 32 || currentTileType == 30 || currentTileType == 24 || currentTileType == 38 || leftTileType == 2) {
+            System.out.println("kræsjLeft");
             return false;
         }
 
@@ -127,6 +136,9 @@ public class Walls {
     }
 
     private boolean checkLegalRight(Pos pos) {
+        rightTile = null;
+        rightTileType = -1;
+
         if (mapLayers.get("wall").getCell(pos.getPosX()+1, pos.getPosY()) != null){
             rightTile = mapLayers.get("wall").getCell(pos.getPosX()+1, pos.getPosY());
         }
@@ -142,6 +154,8 @@ public class Walls {
 
         //Her er bare veggene vi bruker no, kan utvides med flere
         if (rightTileType == 32 || rightTileType == 30 || rightTileType == 24 || rightTileType == 38 || currentTileType == 2) {
+            System.out.println("RIGHTTILETYPE " + rightTileType);
+            System.out.println("kræsjRight");
             return false;
         }
 
