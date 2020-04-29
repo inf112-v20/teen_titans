@@ -14,7 +14,8 @@ import inf112.skeleton.app.cards.ICard;
 import java.util.ArrayList;
 
 
-public class HudManager {
+public class
+HudManager {
 
     private Stage stage;
     private ICard[] cardList = new ICard[9];

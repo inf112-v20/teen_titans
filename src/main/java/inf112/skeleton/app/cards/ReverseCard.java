@@ -7,12 +7,14 @@ import inf112.skeleton.app.board.Board;
 import inf112.skeleton.app.board.Pos;
 import inf112.skeleton.app.player.IPlayer;
 
-public class ReverseCard implements ICard{
+public class
+
+ReverseCard implements ICard{
 
     private int priority;
     private IPlayer player;
     private Board board;
-    private Image image = new Image(new Texture(Gdx.files.internal("robots/charmander.png")));
+    private Image image = new Image(new Texture(Gdx.files.internal("Cards/MoveReverseCard.png")));
     private int typeID = 7;
 
     public ReverseCard(int priority, IPlayer player, Board board){
