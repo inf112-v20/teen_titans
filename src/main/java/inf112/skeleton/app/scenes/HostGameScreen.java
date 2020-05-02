@@ -107,7 +107,7 @@ public class HostGameScreen extends InputAdapter {
                 return true;
             case Input.Keys.LEFT:
                 if(!ready){highlighted -= 1;
-                if(highlighted < 0){highlighted = 9;}}
+                if(highlighted < 0){highlighted = 8;}}
                 highlightCharacter(false);
                 return true;
         }
