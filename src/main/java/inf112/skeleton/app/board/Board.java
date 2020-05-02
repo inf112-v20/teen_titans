@@ -88,7 +88,7 @@ public class Board extends InputAdapter {
         }
     }
 
-    private int checkPos(Pos pos) {
+    public int checkPos(Pos pos) {
         if (pos.getPosX() >= 0 && pos.getPosX() < BOARDWIDTH && pos.getPosY() >= 0 && pos.getPosY() < BOARDHEIGHT) {
             //Check for hole
             try {

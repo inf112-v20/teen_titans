@@ -226,6 +226,11 @@ public class Robot implements IRobot {
                 return;
             }
         }
+    }
 
+    public int getCurrentCheckpoint() {
+        int i = 0;
+        while(i < checkpoints.length && !checkpoints[i]){}
+        return i;
     }
 }
