@@ -88,27 +88,29 @@ public class Robot implements IRobot {
         hud.updateHealth(currentHP);
     }
 
-    public void updateCheckpoint(int checkpointID){
-        switch(checkpointID){
+    public void updateCheckpoint(int checkpointID) {
+        switch (checkpointID) {
             case 55:
                 checkpoints[0] = true;
                 break;
             case 63:
-                if(checkpoints[0]){
+                if (checkpoints[0]) {
                     checkpoints[1] = true;
                 }
                 break;
             case 71:
-                if(checkpoints[0] && checkpoints[1]){
+                if (checkpoints[0] && checkpoints[1]) {
                     checkpoints[2] = true;
                 }
                 break;
             case 79:
-                if(checkpoints[0] && checkpoints[1] && checkpoints[2]){
+                if (checkpoints[0] && checkpoints[1] && checkpoints[2]) {
                     checkpoints[3] = true;
                 }
                 break;
         }
+    }
+
     public int getCurrentHp(){
         return currentHP;
     }

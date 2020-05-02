@@ -159,8 +159,8 @@ public class HostGameScreen extends InputAdapter {
         Image pika = new Image(new Texture(Gdx.files.internal("robots/pika.png")));
         Image cha = new Image(new Texture(Gdx.files.internal("robots/charmander.png")));
         Image bulb = new Image(new Texture(Gdx.files.internal("robots/bulbasaur.png")));
-        Image ham2 = new Image(new Texture(Gdx.files.internal("robots/marsvin2.png")));
-        Image ham = new Image(new Texture(Gdx.files.internal("robots/marsvin.png")));
+        Image ham2 = new Image(new Texture(Gdx.files.internal("robots/marsvin.png")));
+        Image ham = new Image(new Texture(Gdx.files.internal("robots/squirtle.png")));
 
         bulb.setSize(100, 100);
         bulb.setPosition(stage.getWidth()/2-50, 20);
@@ -193,9 +193,9 @@ public class HostGameScreen extends InputAdapter {
             case 2:
                 return "robots/bulbasaur.png";
             case 3:
-                return "robots/marsvin.png";
+                return "robots/squirtle.png";
             case 4:
-                return "robots/marsvin2.png";
+                return "robots/marsvin.png";
             default:
                 return "robots/pika.png";
         }
