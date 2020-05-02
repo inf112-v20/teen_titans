@@ -230,7 +230,9 @@ public class Robot implements IRobot {
 
     public int getCurrentCheckpoint() {
         int i = 0;
-        while(i < checkpoints.length && !checkpoints[i]){}
+        while(i < checkpoints.length && checkpoints[i]){
+            System.out.println(i);
+        }
         return i;
     }
 }
