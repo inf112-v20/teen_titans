@@ -14,7 +14,6 @@ public class Robot implements IRobot {
     Walls wall;
     private Direction dir;
     private Pos pos;
-    private Pos newPos;
     private int MAXHP = 10;
     private int currentHP;
     private boolean[] checkpoints;
@@ -34,21 +33,20 @@ public class Robot implements IRobot {
      */
     public Robot(int xPos, int yPos, String texture, Board board) {
         pos = new Pos();
-        newPos = new Pos();
         pos.setPos(xPos, yPos);
-        newPos.setPos(0, 0);
         this.board = board;
-
         currentHP = MAXHP;
         dir = Direction.NORTH; //Kanskje endre til en parameter for ROBOT
         checkpoints = new boolean[4];
         createPlayerTexture(texture);
         currentState = playerStates.get("alive");
-
         walls = board.getWalls();
     }
     public void recieveHud(HudManager hud){
         this.hud = hud;
+    }
+    public HudManager getHud(){
+        return hud;
     }
 
     public void createPlayerTexture(String location){
@@ -62,6 +60,10 @@ public class Robot implements IRobot {
 
     public TiledMapTileLayer.Cell getCurrentState() {
         return currentState;
+    }
+
+    public HashMap getPlayerStates(){
+        return playerStates;
     }
 
     /**
@@ -144,6 +146,7 @@ public class Robot implements IRobot {
      * @return returns the new position for the robot
      */
     public void move(int distance) {
+        Pos newPos = new Pos();
         newPos.setPos(pos.copy());
         switch (dir) {
             case NORTH:
@@ -200,6 +203,7 @@ public class Robot implements IRobot {
     }
 
     public void push(Direction pushDir) {
+        Pos newPos = new Pos(0,0);
         newPos.setPos(pos.copy());
         switch (pushDir) {
             case NORTH:
@@ -234,7 +238,6 @@ public class Robot implements IRobot {
         int i = 0;
         while(i < checkpoints.length && checkpoints[i]){
             i++;
-            System.out.println(i);
         }
         return i;
     }

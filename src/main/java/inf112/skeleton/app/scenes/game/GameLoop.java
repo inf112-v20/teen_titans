@@ -57,7 +57,6 @@ public class GameLoop extends InputAdapter {
             }
         }
         cardHandler.createDeckFromRecipe(gameClient.getDeck());
-
     }
 
     private void createGameLoopThread() {

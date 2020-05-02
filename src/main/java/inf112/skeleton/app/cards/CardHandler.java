@@ -29,6 +29,8 @@ public class CardHandler {
         return deck;
     }
     public void createDeck(){
+
+        //TODO fiks duplicate priority bug
         deck = new ArrayList<>();
         for(int i = 0; i < players.length * 5; i++){
             deck.add(new MoveForwardCard(random.nextInt(900)+100, players[0], board));
