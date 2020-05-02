@@ -154,7 +154,6 @@ public class Walls {
 
         //Her er bare veggene vi bruker no, kan utvides med flere
         if (rightTileType == 32 || rightTileType == 30 || rightTileType == 24 || rightTileType == 38 || currentTileType == 2) {
-            System.out.println("RIGHTTILETYPE " + rightTileType);
             System.out.println("kræsjRight");
             return false;
         }
