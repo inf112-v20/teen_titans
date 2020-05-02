@@ -170,8 +170,8 @@ public class HostGameScreen extends InputAdapter {
         Image pika = new Image(new Texture(Gdx.files.internal("robots/pika.png")));
         Image cha = new Image(new Texture(Gdx.files.internal("robots/charmander.png")));
         Image bulb = new Image(new Texture(Gdx.files.internal("robots/bulbasaur.png")));
+        Image ham = new Image(new Texture(Gdx.files.internal("robots/squirtle.png")));
         Image ham2 = new Image(new Texture(Gdx.files.internal("robots/marsvin2.png")));
-        Image ham = new Image(new Texture(Gdx.files.internal("robots/marsvin.png")));
         Image larv = new Image(new Texture(Gdx.files.internal("robots/PixelLarvitar.png")));
         Image cele = new Image(new Texture(Gdx.files.internal("robots/PixelCelebi.png")));
         Image geng = new Image(new Texture(Gdx.files.internal("robots/PixelGengar.png")));

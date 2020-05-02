@@ -9,6 +9,8 @@ import com.badlogic.gdx.backends.headless.HeadlessApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
 import inf112.skeleton.app.board.Board;
 import inf112.skeleton.app.board.Pos;
+import inf112.skeleton.app.scenes.game.GameLoop;
+import inf112.skeleton.app.scenes.game.Renderer;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,5 +30,10 @@ public class BoardTest {
         Pos pos = new Pos(-1, -1);
         assertEquals(testBoard.checkPos(pos), -1);
     }
+    @Test public void posInBoundsTest(){
+        Pos pos = new Pos(1, 1);
+        assertEquals(testBoard.checkPos(pos), 1);
+    }
+
 
 }

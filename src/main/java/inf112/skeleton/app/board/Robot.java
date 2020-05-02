@@ -87,7 +87,9 @@ public class Robot implements IRobot {
             hud.updateHealth(0);
             return;
         }
-        hud.updateHealth(currentHP);
+        if(hud != null){
+            hud.updateHealth(currentHP);
+        }
     }
 
     public void updateCheckpoint(int checkpointID) {
@@ -231,6 +233,7 @@ public class Robot implements IRobot {
     public int getCurrentCheckpoint() {
         int i = 0;
         while(i < checkpoints.length && checkpoints[i]){
+            i++;
             System.out.println(i);
         }
         return i;
