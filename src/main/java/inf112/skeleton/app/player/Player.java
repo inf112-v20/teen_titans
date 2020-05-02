@@ -3,6 +3,7 @@ package inf112.skeleton.app.player;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import inf112.skeleton.app.board.Board;
+import inf112.skeleton.app.board.Direction;
 import inf112.skeleton.app.board.Robot;
 import inf112.skeleton.app.cards.*;
 import inf112.skeleton.app.scenes.game.HudManager;
@@ -103,7 +104,7 @@ public class Player extends InputAdapter implements IPlayer {
                 robot.takeDamage(1);
                 break;
 
-                //FOR DEBUGGING
+                //FOR DEBUGGING USE ONLY
             case Input.Keys.W:
                 board.doRobotTurn(new MoveForwardCard(999, this, board));
                 break;
@@ -120,7 +121,9 @@ public class Player extends InputAdapter implements IPlayer {
         return true;
     }
 
-
+    public boolean checkWinCondition(){
+        return robot.getCurrentCheckpoint() == 4;
+    }
 
 
 

@@ -102,12 +102,12 @@ public class HostGameScreen extends InputAdapter {
                 //gameServer.sendStartSignal();
                 return true;
             case Input.Keys.RIGHT:
-                if(!ready){highlighted = (highlighted+1) % 5;}
+                if(!ready){highlighted = (highlighted+1) % 9;}
                 highlightCharacter(false);
                 return true;
             case Input.Keys.LEFT:
                 if(!ready){highlighted -= 1;
-                if(highlighted < 0){highlighted = 4;}}
+                if(highlighted < 0){highlighted = 8;}}
                 highlightCharacter(false);
                 return true;
         }
@@ -122,20 +122,31 @@ public class HostGameScreen extends InputAdapter {
             this.selected.setPosition(-200, 0);
             switch (highlighted) {
                 case 0:
-                    highlight.setPosition(stage.getWidth() / 2 - 290, 20);
+                    highlight.setPosition(stage.getWidth() / 2 - 370, 20);
                     break;
                 case 1:
-                    highlight.setPosition(stage.getWidth() / 2 - 170, 20);
+                    highlight.setPosition(stage.getWidth() / 2 - 250, 20);
                     break;
                 case 2:
-                    highlight.setPosition(stage.getWidth() / 2 - 50, 20);
+                    highlight.setPosition(stage.getWidth() / 2 - 130, 20);
                     break;
                 case 3:
-                    highlight.setPosition(stage.getWidth() / 2 + 70, 20);
+                    highlight.setPosition(stage.getWidth() / 2 -10, 20);
                     break;
                 case 4:
+                    highlight.setPosition(stage.getWidth()/2+90, 20);
+                    break;
+                case 5:
                     highlight.setPosition(stage.getWidth()/2+190, 20);
                     break;
+                case 6:
+                    highlight.setPosition(stage.getWidth()/2+270,20);
+                    break;
+                case 7:
+                    highlight.setPosition(stage.getWidth()/2+370, 20);
+                    break;
+                case 8:
+                    highlight.setPosition(stage.getWidth()/2+460,20);
             }
         }
         else{
@@ -159,28 +170,48 @@ public class HostGameScreen extends InputAdapter {
         Image pika = new Image(new Texture(Gdx.files.internal("robots/pika.png")));
         Image cha = new Image(new Texture(Gdx.files.internal("robots/charmander.png")));
         Image bulb = new Image(new Texture(Gdx.files.internal("robots/bulbasaur.png")));
-        Image ham2 = new Image(new Texture(Gdx.files.internal("robots/marsvin.png")));
-        Image ham = new Image(new Texture(Gdx.files.internal("robots/squirtle.png")));
+        Image ham2 = new Image(new Texture(Gdx.files.internal("robots/marsvin2.png")));
+        Image ham = new Image(new Texture(Gdx.files.internal("robots/marsvin.png")));
+        Image larv = new Image(new Texture(Gdx.files.internal("robots/PixelLarvitar.png")));
+        Image cele = new Image(new Texture(Gdx.files.internal("robots/PixelCelebi.png")));
+        Image geng = new Image(new Texture(Gdx.files.internal("robots/PixelGengar.png")));
+        Image axe = new Image(new Texture(Gdx.files.internal("robots/PixelAxew.png")));
 
         bulb.setSize(100, 100);
-        bulb.setPosition(stage.getWidth()/2-50, 20);
+        bulb.setPosition(stage.getWidth()/2-130, 20);
         stage.addActor(bulb);
 
         cha.setSize(100, 100);
-        cha.setPosition(stage.getWidth()/2-170, 20);
+        cha.setPosition(stage.getWidth()/2-250, 20);
         stage.addActor(cha);
 
         pika.setSize(100, 100);
-        pika.setPosition(stage.getWidth()/2-290, 20);
+        pika.setPosition(stage.getWidth()/2-370, 20);
         stage.addActor(pika);
 
         ham.setSize(100, 100);
-        ham.setPosition(stage.getWidth()/2+70,20);
+        ham.setPosition(stage.getWidth()/2-10,20);
         stage.addActor(ham);
 
         ham2.setSize(100, 100);
-        ham2.setPosition(stage.getWidth()/2+190, 20);
+        ham2.setPosition(stage.getWidth()/2+90, 20);
         stage.addActor(ham2);
+
+        larv.setSize(100,100);
+        larv.setPosition(stage.getWidth()/2+190, 20);
+        stage.addActor(larv);
+
+        cele.setSize(100,100);
+        cele.setPosition(stage.getWidth()/2+280,20);
+        stage.addActor(cele);
+
+        geng.setSize(100,100);
+        geng.setPosition(stage.getWidth()/2+370,20);
+        stage.addActor(geng);
+
+        axe.setSize(100,100);
+        axe.setPosition(stage.getWidth()/2+460,20);
+        stage.addActor(axe);
 
         stage.addActor(highlight);
         stage.addActor(selected);
@@ -195,7 +226,15 @@ public class HostGameScreen extends InputAdapter {
             case 3:
                 return "robots/squirtle.png";
             case 4:
-                return "robots/marsvin.png";
+                return "robots/marsvin2.png";
+            case 5:
+                return "robots/PixelLarvitar.png";
+            case 6:
+                return "robots/PixelCelebi.png";
+            case 7:
+                return "robots/PixelGengar.png";
+            case 8:
+                return "robots/PixelAxew.png";
             default:
                 return "robots/pika.png";
         }

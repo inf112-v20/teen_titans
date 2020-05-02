@@ -70,7 +70,6 @@ public class Lazers {
 
     private boolean shootRight(){
         for (int i = 0; i < board.getBOARDWIDTH() - y; i++) {
-            System.out.println(i + " " + checkWall(x+i, y, Direction.EAST));
             if (checkWall(x+i, y, Direction.EAST)) {
                 if (checkPlayer(x+i, y)) {
                     for (Robot robot : board.getListOfRobots()) {
@@ -137,7 +136,7 @@ public class Lazers {
 
     private boolean checkWall(int x, int y, Direction dir) {
         //wallCheck = walls.mapLayers.get("wall").getCell(x,y);
-        System.out.println(this.x + "slef" + this.y);
+
         return walls.wall(new Pos(x, y), dir);
     }
 }

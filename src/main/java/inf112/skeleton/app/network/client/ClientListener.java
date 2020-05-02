@@ -4,6 +4,7 @@ import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.FrameworkMessage;
 import com.esotericsoftware.kryonet.Listener;
+import com.jcraft.jogg.Packet;
 import inf112.skeleton.app.scenes.game.GameLoop;
 import inf112.skeleton.app.cards.ICard;
 import inf112.skeleton.app.network.PacketInfo;
@@ -35,6 +36,10 @@ public class ClientListener extends Listener {
         client.sendTCP(namePacket);
     }
 
+    public void sendGameOver(){
+        client.sendTCP(new PacketInfo.GameWinner());
+    }
+
     public void received(Connection c, Object o){
         if(!(o instanceof FrameworkMessage.KeepAlive)) {
             System.out.println("Client recieved: " + o.toString());
@@ -55,11 +60,12 @@ public class ClientListener extends Listener {
             System.out.println("Client listener: Client received hand.");
             parent.handReceived(((PacketInfo.Cards) o).cards);
         }
-
         else if(o instanceof PacketInfo.AllCards){
             parent.allCardsReceived(((PacketInfo.AllCards) o).allCards);
         }
-
+        else if(o instanceof PacketInfo.GameWinner){
+            parent.setGameWinner(((PacketInfo.GameWinner) o).winner);
+        }
     }
 
 

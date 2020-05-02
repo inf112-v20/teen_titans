@@ -26,6 +26,7 @@ public class GameClient {
     private boolean startSignal = false;
     private boolean activeChooseCard = false;
     private boolean activeHandleAllCards = false;
+    private String gameWinner = "ILLEGAL GAME WINNER NAME ORpNZmJ2d2n3PWwXMOGJ";
 
     public GameClient(boolean isHost, GameLoop gameLoop){
         this.gameLoop = gameLoop;
@@ -90,6 +91,7 @@ public class GameClient {
         kryo.register(PacketInfo.StartSignal.class);
         kryo.register(PacketInfo.NumPlayers.class);
         kryo.register(PacketInfo.AllCards.class);
+        kryo.register(PacketInfo.GameWinner.class);
         kryo.register(int[].class);
         kryo.register(String.class);
         kryo.register(boolean.class);
@@ -174,6 +176,19 @@ public class GameClient {
     }
     public int getPlayerAmount(){
         return playerAmount;
+    }
+
+    public void sendGameOverSignal(){
+        listener.sendGameOver();
+    }
+    public boolean gameOver(){
+        return gameWinner != "ILLEGAL GAME WINNER NAME ORpNZmJ2d2n3PWwXMOGJ";
+    }
+    public void setGameWinner(String winner){
+        gameWinner = winner;
+    }
+    public String getGameWinner(){
+        return gameWinner;
     }
 
 }

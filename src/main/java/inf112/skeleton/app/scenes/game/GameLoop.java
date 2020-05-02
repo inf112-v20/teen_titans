@@ -18,12 +18,10 @@ public class GameLoop extends InputAdapter {
     private int myPlayerNumber;
     private HudManager hud;
     private IPlayer[] players;
-
     private Renderer parent;
     private GameClient gameClient;
     private GameServer gameServer;
     private boolean host;
-
     private Board board;
     private int totalRound;
     private CardHandler cardHandler;
@@ -68,8 +66,7 @@ public class GameLoop extends InputAdapter {
             while(true) { r++;
                 System.out.println("____LOOP_ITERATION_GAME_ROUND_"+r+"____ \n");
                 /**  Host sends cards  check**/
-                if(host) {
-
+                if(host && !gameClient.gameOver()) {
                     gameServer.dealCards();
                 }
 
@@ -126,27 +123,21 @@ public class GameLoop extends InputAdapter {
                         board.doRobotTurn(currentCard);
                     }
                     /**  Do board tile effects  **/
-
                     board.doGroundTileEffects(++totalRound);
-
-
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException e) {
                         //nutthin
                     }
-
-
-
-
                 }
-
-
                 resetAfterRound();
             }
         });
     }
     private void resetAfterRound(){
+        if(myPlayer.checkWinCondition()){
+            gameClient.sendGameOverSignal();
+        }
         gameClient.setActiveChooseCard(false);
         gameClient.setActiveHandleAllCards(false);
     }

@@ -12,14 +12,14 @@ public class MoveThreeForwardCard implements ICard {
     private int priority;
     private IPlayer player;
     private Board board;
-    private Image image = new Image(new Texture(Gdx.files.internal("robots/bulbasaur.png")));
+    private Image image = new Image(new Texture(Gdx.files.internal("Cards/MoveThreeForward.png")));
     private int typeID = 6;
 
     public MoveThreeForwardCard(int priority, IPlayer player, Board board){
         this.board = board;
         this.priority = priority;
         this.player = player;
-        image.setSize(150, 100);
+        image.setSize(100, 150);
     }
 
     @Override

@@ -21,6 +21,7 @@ public class Robot implements IRobot {
     private HashMap<String, TiledMapTileLayer.Cell> playerStates;
     private TiledMapTileLayer.Cell currentState;
     private HudManager hud;
+    private Board board;
 
     Walls walls;
 
@@ -36,6 +37,7 @@ public class Robot implements IRobot {
         newPos = new Pos();
         pos.setPos(xPos, yPos);
         newPos.setPos(0, 0);
+        this.board = board;
 
         currentHP = MAXHP;
         dir = Direction.NORTH; //Kanskje endre til en parameter for ROBOT
@@ -126,7 +128,7 @@ public class Robot implements IRobot {
 
     public void die(){
         currentState = playerStates.get("dead");
-        updateModel();
+        updateModel(); //Updatemodel??
     }
 
     public void win(){
@@ -141,7 +143,6 @@ public class Robot implements IRobot {
      */
     public void move(int distance) {
         newPos.setPos(pos.copy());
-        System.out.println("Pos: " + pos);
         switch (dir) {
             case NORTH:
                 newPos.setPosY(pos.getPosY() + 1);
@@ -156,8 +157,10 @@ public class Robot implements IRobot {
                 newPos.setPosX(pos.getPosX() - 1);
                 break;
         }
-        System.out.println("MOVEDIR: " + dir);
-        if(walls.wall(pos, dir)) pos.setPos(newPos);
+        if(walls.wall(pos, dir)){
+            pushOther(newPos);
+            pos.setPos(newPos);
+        }
         if(distance > 1){
             move(distance-1);
         }
@@ -177,7 +180,7 @@ public class Robot implements IRobot {
         updateModel();
     }
 
-    private void updateModel(){
+    public void updateModel(){
         switch (dir) {
             case NORTH:
                 currentState.setRotation(TiledMapTileLayer.Cell.ROTATE_0);
@@ -210,7 +213,19 @@ public class Robot implements IRobot {
                 newPos.setPosX(pos.getPosX() - 1);
                 break;
         }
-        System.out.println("PUSHDIR: " + pushDir);
+
         if(walls.wall(pos, pushDir)) pos.setPos(newPos);
+    }
+
+    private void pushOther(Pos pos) {
+        for (Robot robot : board.getRobots()) {
+            if (robot.getPos().getPosX() == pos.getPosX() && robot.getPos().getPosY() == pos.getPosY()) {
+                robot.push(dir);
+                board.updatePlayer(pos, robot);
+                System.out.println("!!!!!!!!!!!!!!!!!!!");
+                return;
+            }
+        }
+
     }
 }
