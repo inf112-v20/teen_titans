@@ -21,6 +21,7 @@ public class Robot implements IRobot {
     private TiledMapTileLayer.Cell currentState;
     private HudManager hud;
     private Board board;
+    private boolean dead;
 
     Walls walls;
 
@@ -35,6 +36,8 @@ public class Robot implements IRobot {
         pos = new Pos();
         pos.setPos(xPos, yPos);
         this.board = board;
+        dead = false;
+
         currentHP = MAXHP;
         dir = Direction.NORTH; //Kanskje endre til en parameter for ROBOT
         checkpoints = new boolean[4];
@@ -131,6 +134,7 @@ public class Robot implements IRobot {
      */
 
     public void die(){
+        dead = true;
         currentState = playerStates.get("dead");
         updateModel(); //Updatemodel??
     }
@@ -138,6 +142,43 @@ public class Robot implements IRobot {
     public void win(){
         currentState = playerStates.get("won");
         updateModel();
+    }
+
+    public void respawn(){
+        Pos copy = new Pos();
+        switch (getCurrentCheckpoint()) {
+            case 1:
+                copy.setPos(3, 8);
+                break;
+            case 2:
+                copy.setPos(9, 7);
+                break;
+            case 3:
+                copy.setPos(3, 2);
+                break;
+            case 4:
+                copy.setPos(9, 2);
+                break;
+            default:
+                copy.setPos(0, 0);
+                break;
+        }
+
+        for (Robot robot : board.getRobots()) {
+            if (robot.getPos().getPosX() == copy.getPosX()
+            && robot.getPos().getPosY() == copy.getPosY()) {
+                return;
+            }
+        }
+        Pos temp = new Pos();
+        temp.setPos(pos.getPosX(), pos.getPosY());
+        pos.setPos(copy.getPosX(), copy.getPosY());
+        dir = Direction.NORTH;
+        updateModel();
+        dead = false;
+        System.out.println(temp.getPosY() + "hej");
+        board.updatePlayer(temp, this);
+        currentHP = MAXHP;
     }
 
     /**
@@ -162,10 +203,14 @@ public class Robot implements IRobot {
                 newPos.setPosX(pos.getPosX() - 1);
                 break;
         }
+        Pos temp = new Pos();
+        temp.setPos(pos.copy());
+        if (dead) return;
         if(walls.wall(pos, dir)){
-            pushOther(newPos);
+            pushOther(newPos, dir);
             pos.setPos(newPos);
         }
+        board.updatePlayer(temp, this);
         if(distance > 1){
             move(distance-1);
         }
@@ -220,10 +265,13 @@ public class Robot implements IRobot {
                 break;
         }
 
-        if(walls.wall(pos, pushDir)) pos.setPos(newPos);
+        if(walls.wall(pos, pushDir)) {
+            pushOther(newPos, pushDir);
+            pos.setPos(newPos);
+        }
     }
 
-    private void pushOther(Pos pos) {
+    private void pushOther(Pos pos, Direction dir) {
         for (Robot robot : board.getRobots()) {
             if (robot.getPos().getPosX() == pos.getPosX() && robot.getPos().getPosY() == pos.getPosY()) {
                 robot.push(dir);
@@ -232,6 +280,10 @@ public class Robot implements IRobot {
                 return;
             }
         }
+    }
+
+    public boolean getLivingState() {
+        return dead;
     }
 
     public int getCurrentCheckpoint() {

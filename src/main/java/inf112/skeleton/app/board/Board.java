@@ -30,6 +30,7 @@ public class Board extends InputAdapter {
     private ArrayList<Pushers> PusherList = new ArrayList<>();
     private ArrayList<Repair> RepairList = new ArrayList<>();
 
+
     ConveyorBelts conveyorBelts;
     Walls walls;
 
@@ -88,6 +89,8 @@ public class Board extends InputAdapter {
         }
     }
 
+
+
     public int checkPos(Pos pos) {
         if (pos.getPosX() >= 0 && pos.getPosX() < BOARDWIDTH && pos.getPosY() >= 0 && pos.getPosY() < BOARDHEIGHT) {
             //Check for hole
@@ -138,6 +141,9 @@ public class Board extends InputAdapter {
 
         Pos currentPos;
         for (Robot robot : listOfRobots) {
+
+
+
             currentPos = robot.getPos().copy();
             if (mapLayers.get("conveyor").getCell(currentPos.getPosX(), currentPos.getPosY()) != null) {
                 conveyorTypes(currentPos, robot);
