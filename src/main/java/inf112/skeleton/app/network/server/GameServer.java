@@ -98,6 +98,7 @@ public class GameServer implements Runnable {
         kryo.register(PacketInfo.StartSignal.class);
         kryo.register(PacketInfo.NumPlayers.class);
         kryo.register(PacketInfo.AllCards.class);
+        kryo.register(PacketInfo.GameWinner.class);
         kryo.register(int[].class);
         kryo.register(String.class);
         kryo.register(boolean.class);

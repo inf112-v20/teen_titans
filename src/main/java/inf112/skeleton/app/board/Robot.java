@@ -110,6 +110,14 @@ public class Robot implements IRobot {
                 break;
         }
     }
+
+    public int getCurrentCheckpoint(){
+        int i = 0;
+        while(i < 4 && checkpoints[i]){i++;}
+        return i;
+    }
+
+
     public int getCurrentHp(){
         return currentHP;
     }

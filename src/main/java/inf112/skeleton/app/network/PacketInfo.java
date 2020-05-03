@@ -62,6 +62,11 @@ public class PacketInfo {
         }
     }
 
+    public static class GameWinner{
+        public String winner;
+        @Override
+        public String toString(){return "Game winner packet";}
 
+    }
 
 }
