@@ -2,6 +2,7 @@ package inf112.skeleton.app.scenes.game;
 
 import com.badlogic.gdx.InputAdapter;
 import inf112.skeleton.app.board.Board;
+import inf112.skeleton.app.board.Robot;
 import inf112.skeleton.app.cards.*;
 import inf112.skeleton.app.network.client.GameClient;
 import inf112.skeleton.app.network.server.GameServer;
@@ -122,12 +123,19 @@ public class GameLoop extends InputAdapter {
                         ICard currentCard = round.remove();
                         board.doRobotTurn(currentCard);
                     }
+
                     /**  Do board tile effects  **/
                     board.doGroundTileEffects(++totalRound);
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException e) {
                         //nutthin
+                    }
+                }
+                /** Between rounds **/
+                for (Robot robot : board.getRobots()) {
+                    if (robot.getLivingState()) {
+                        robot.respawn();
                     }
                 }
                 resetAfterRound();
