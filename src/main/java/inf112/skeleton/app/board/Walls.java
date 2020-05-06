@@ -71,12 +71,12 @@ public class Walls {
 
         if (upTile != null) upTileType = upTile.getTile().getId();
         else upTileType = -1;
-        System.out.println("upTileType: " + upTileType);
-        System.out.println("currentTileType: " + currentTileType);
+        //System.out.println("upTileType: " + upTileType);
+        //System.out.println("currentTileType: " + currentTileType);
 
         //Her er bare veggene vi bruker no, kan utvides med flere
         if (currentTileType == 24 || currentTileType == 31 || currentTileType == 9 || upTileType == 32 || upTileType == 29) {
-            System.out.println("kræsjUp");
+            //System.out.println("kræsjUp");
             return false;
         }
 
@@ -102,7 +102,7 @@ public class Walls {
 
         //Her er bare veggene vi bruker no, kan utvides med flere
         if (downTileType == 24 || downTileType == 31 || downTileType == 9 || currentTileType == 32 || currentTileType == 29) {
-            System.out.println("kræsjDOWN");
+            //System.out.println("kræsjDOWN");
             return false;
         }
 
@@ -128,7 +128,7 @@ public class Walls {
 
         //Her er bare veggene vi bruker no, kan utvides med flere
         if (currentTileType == 32 || currentTileType == 30 || currentTileType == 24 || currentTileType == 38 || leftTileType == 2) {
-            System.out.println("kræsjLeft");
+            //System.out.println("kræsjLeft");
             return false;
         }
 
@@ -154,7 +154,7 @@ public class Walls {
 
         //Her er bare veggene vi bruker no, kan utvides med flere
         if (rightTileType == 32 || rightTileType == 30 || rightTileType == 24 || rightTileType == 38 || currentTileType == 2) {
-            System.out.println("kræsjRight");
+            //System.out.println("kræsjRight");
             return false;
         }
 

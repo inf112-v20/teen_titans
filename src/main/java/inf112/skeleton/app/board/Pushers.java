@@ -23,7 +23,7 @@ public class Pushers {
                 if (even && round % 2 == 0 || !even && round % 2 == 1) {
 
                     robot.push(dir);
-                    System.out.println(pos);
+                    //System.out.println(pos);
                     board.updatePlayer(pos, robot);
 
                 }

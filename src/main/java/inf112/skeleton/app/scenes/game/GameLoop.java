@@ -115,7 +115,7 @@ public class GameLoop extends InputAdapter {
                 for(PriorityQueue<ICard> round : queues){
                     while(!round.isEmpty()) {
                         try {
-                            Thread.sleep(500);
+                            Thread.sleep(50);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -126,9 +126,9 @@ public class GameLoop extends InputAdapter {
                     /**  Do board tile effects  **/
                     board.doGroundTileEffects(++totalRound);
                     try {
-                        Thread.sleep(500);
+                        Thread.sleep(50);
                     } catch (InterruptedException e) {
-                        //nutthin
+                        //Do nothing
                     }
                 }
                 /** Between rounds **/
@@ -140,6 +140,7 @@ public class GameLoop extends InputAdapter {
                 resetAfterRound();
             }
         });
+        loop.setName("Main Game Loop Thread");
     }
     private void resetAfterRound(){
         if(myPlayer.checkWinCondition()){

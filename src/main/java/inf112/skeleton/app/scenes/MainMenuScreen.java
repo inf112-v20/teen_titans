@@ -145,19 +145,18 @@ public class MainMenuScreen extends InputAdapter {
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
                     }
                 }
                 else{
                     try {
                         Thread.sleep(200);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
                     }
                 }
                 visible = !visible;
             }
         });
+        loop.setName("Main Menu Highlighter Thread");
         loop.start();
     }
 }

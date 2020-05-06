@@ -48,10 +48,6 @@ public class BoardTest {
         assertTrue(!(robot.getPos().equals(oldPos)));
         assertNull(testBoard.getPlayerLayer().getCell(oldPos.getPosX(), oldPos.getPosY()));
         assertNotNull(testBoard.getPlayerLayer().getCell(robot.getPos().getPosX(), robot.getPos().getPosY()));
-
     }
-
-
-
 
 }

@@ -9,9 +9,11 @@ import inf112.skeleton.app.cards.*;
 import inf112.skeleton.app.scenes.game.HudManager;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Player extends InputAdapter implements IPlayer {
 
+    private Thread timer;
     private int playerNumber;
     private Board board;
     private HudManager hud;
@@ -37,11 +39,12 @@ public class Player extends InputAdapter implements IPlayer {
     public ICard[] getSortedCards(){
         while(sortedCards.size() < 5) {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(200);
             } catch (Exception e) {
                 //do sleep next iteration then...
             }
         }
+        timer.interrupt();
         ICard[]  sortedCardsArray = new ICard[5];
         for(int i = 0; i < sortedCardsArray.length; i++){
             sortedCardsArray[i] = sortedCards.get(i);
@@ -72,6 +75,7 @@ public class Player extends InputAdapter implements IPlayer {
         cardStorage = cards;
         hud.recieveCards(getCardStorage());
         hud.updateCardNumbers(sortedCards);
+        startNewTimer();
     }
 
     @Override
@@ -123,6 +127,34 @@ public class Player extends InputAdapter implements IPlayer {
 
     public boolean checkWinCondition(){
         return robot.getCurrentCheckpoint() == 4;
+    }
+
+    private void startNewTimer(){
+        timer = new Thread(() -> {
+            int t = 60;
+            while(--t > 0){
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                hud.updateTimer(t);
+            }
+            chaoticDeck();
+        });
+        timer.setName("Timer Thread");
+        timer.start();
+    }
+
+    private void chaoticDeck(){
+        Random random = new Random();
+        sortedCards.clear();
+        while(sortedCards.size() < 5){
+            ICard card = cardStorage.get(random.nextInt(cardStorage.size()));
+            if(!sortedCards.contains(card)){
+                sortedCards.add(card);
+            }
+        }
     }
 
 

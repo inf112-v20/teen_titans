@@ -176,7 +176,7 @@ public class Robot implements IRobot {
         dir = Direction.NORTH;
         updateModel();
         dead = false;
-        System.out.println(temp.getPosY() + "hej");
+        //System.out.println(temp.getPosY() + "hej");
         board.updatePlayer(temp, this);
         currentHP = MAXHP;
     }
@@ -276,7 +276,7 @@ public class Robot implements IRobot {
             if (robot.getPos().getPosX() == pos.getPosX() && robot.getPos().getPosY() == pos.getPosY()) {
                 robot.push(dir);
                 board.updatePlayer(pos, robot);
-                System.out.println("!!!!!!!!!!!!!!!!!!!");
+                //System.out.println("!!!!!!!!!!!!!!!!!!!");
                 return;
             }
         }

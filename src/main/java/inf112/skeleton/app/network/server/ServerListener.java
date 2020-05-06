@@ -28,7 +28,6 @@ public class ServerListener extends Listener {
         for(int i = 0; i < readies.length; i++){
             readies[i] = false;
         }
-        if(!readies[0]) System.out.println("IN SERVERLISTENER");
     }
 
     public void connected(Connection c){
