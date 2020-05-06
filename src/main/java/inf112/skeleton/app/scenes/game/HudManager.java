@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.cards.ICard;
 
@@ -23,6 +24,7 @@ public class HudManager {
     private Image[] numbers = new Image[5];
     private Image[][] timerNumbers = new Image[10][2];
     private Image[][] hearts = new Image[5][3];
+    private ArrayList<Label> labels = new ArrayList<>();
     private Skin skin;
 
     public HudManager(){
@@ -229,6 +231,7 @@ public class HudManager {
     public void updateTimer(int t){
         int firstDigit = t / 10;
         int secondDigit = t % 10;
+        System.out.println("Timer value: "+firstDigit + ", " + secondDigit);
         for(Image[] list : timerNumbers){
             for(Image img : list){
                 img.setVisible(false);
@@ -270,6 +273,9 @@ public class HudManager {
         selectedImage.setPosition(-200, 0);
         for(ICard img : cardList){
             img.getImage().setPosition(-200, 0);
+        }
+        for(Label label : labels){
+            label.setPosition(-200, 0);
         }
         updateCardNumbers(new ArrayList<>());
     }
