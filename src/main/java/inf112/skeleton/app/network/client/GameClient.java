@@ -15,6 +15,7 @@ public class GameClient {
 
     private GameLoop gameLoop;
     private HashMap<Integer, String> playerNames = new HashMap();
+    private String name;
     private String[] names;
     private String[] models;
     private int playerAmount;
@@ -73,6 +74,7 @@ public class GameClient {
         Gdx.input.getTextInput(new Input.TextInputListener() {
             @Override
             public void input(String s) {
+                name = s;
                 listener.sendName(s);
             }
             @Override
@@ -105,6 +107,9 @@ public class GameClient {
     }
     public String[] getNames(){
         return names;
+    }
+    public String getName(){
+        return name;
     }
 
     public void setDeck(int[] deck){

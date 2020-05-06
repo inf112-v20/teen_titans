@@ -37,7 +37,10 @@ public class ClientListener extends Listener {
     }
 
     public void sendGameOver(){
-        client.sendTCP(new PacketInfo.GameWinner());
+        PacketInfo.GameWinner packet = new PacketInfo.GameWinner();
+
+
+        client.sendTCP(packet);
     }
 
     public void received(Connection c, Object o){

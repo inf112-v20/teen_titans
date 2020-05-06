@@ -44,7 +44,7 @@ public class Player extends InputAdapter implements IPlayer {
                 //do sleep next iteration then...
             }
         }
-        timer.interrupt();
+        //timer.interrupt();
         ICard[]  sortedCardsArray = new ICard[5];
         for(int i = 0; i < sortedCardsArray.length; i++){
             sortedCardsArray[i] = sortedCards.get(i);
@@ -75,7 +75,7 @@ public class Player extends InputAdapter implements IPlayer {
         cardStorage = cards;
         hud.recieveCards(getCardStorage());
         hud.updateCardNumbers(sortedCards);
-        startNewTimer();
+        //startNewTimer();
     }
 
     @Override

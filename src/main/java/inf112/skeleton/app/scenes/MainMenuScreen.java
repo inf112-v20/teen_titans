@@ -23,8 +23,6 @@ public class MainMenuScreen extends InputAdapter {
     private TextButton joinGame;
     private TextButton exit;
 
-    private Image highlight;
-
     public MainMenuScreen(Orchestrator orchestrator) {
         parent = orchestrator;
         stage = new Stage(new ScreenViewport());
