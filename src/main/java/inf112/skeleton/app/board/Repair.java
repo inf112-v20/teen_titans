@@ -12,8 +12,10 @@ public class Repair {
 
     public void heal(Robot robot) {
         int hp = robot.getCurrentHp();
+        System.out.println("Bout to heal");
         if (hp < robot.getMaxHp()) {
-            hp++;
+            System.out.println("healing");
+            robot.heal();
         }
     }
 

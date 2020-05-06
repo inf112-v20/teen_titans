@@ -11,9 +11,9 @@ import java.util.HashMap;
 
 public class Robot implements IRobot {
 
-    Walls wall;
     private Direction dir;
     private Pos pos;
+    private Pos respawnPoint;
     private int MAXHP = 10;
     private int currentHP;
     private boolean[] checkpoints;
@@ -22,8 +22,7 @@ public class Robot implements IRobot {
     private HudManager hud;
     private Board board;
     private boolean dead;
-
-    Walls walls;
+    private Walls walls;
 
     /**
      * Constructor for the robot.
@@ -37,6 +36,7 @@ public class Robot implements IRobot {
         pos.setPos(xPos, yPos);
         this.board = board;
         dead = false;
+        respawnPoint = pos.copy();
 
         currentHP = MAXHP;
         dir = Direction.NORTH; //Kanskje endre til en parameter for ROBOT
@@ -97,6 +97,10 @@ public class Robot implements IRobot {
         }
     }
 
+    public void heal() {
+        hud.updateHealth(++currentHP);
+    }
+
     public void updateCheckpoint(int checkpointID) {
         switch (checkpointID) {
             case 55:
@@ -134,8 +138,12 @@ public class Robot implements IRobot {
      */
 
     public void die(){
+        System.out.println("You defeated");
         dead = true;
         currentState = playerStates.get("dead");
+        if (!board.getDeadRobots().contains(this)){
+            board.getDeadRobots().add(this);
+        }
         updateModel(); //Updatemodel??
     }
 
@@ -144,41 +152,29 @@ public class Robot implements IRobot {
         updateModel();
     }
 
+    public void updateRespawnPoint(Pos spawn) {
+        respawnPoint = spawn.copy();
+    }
+
     public void respawn(){
-        Pos copy = new Pos();
-        switch (getCurrentCheckpoint()) {
-            case 1:
-                copy.setPos(3, 8);
-                break;
-            case 2:
-                copy.setPos(9, 7);
-                break;
-            case 3:
-                copy.setPos(3, 2);
-                break;
-            case 4:
-                copy.setPos(9, 2);
-                break;
-            default:
-                copy.setPos(0, 0);
-                break;
-        }
 
         for (Robot robot : board.getRobots()) {
-            if (robot.getPos().getPosX() == copy.getPosX()
-            && robot.getPos().getPosY() == copy.getPosY()) {
+            if (robot.getPos().getPosX() == respawnPoint.getPosX()
+            && robot.getPos().getPosY() == respawnPoint.getPosY()) {
                 return;
             }
         }
+
         Pos temp = new Pos();
         temp.setPos(pos.getPosX(), pos.getPosY());
-        pos.setPos(copy.getPosX(), copy.getPosY());
+        pos.setPos(respawnPoint.getPosX(), respawnPoint.getPosY());
         dir = Direction.NORTH;
         updateModel();
         dead = false;
         //System.out.println(temp.getPosY() + "hej");
         board.updatePlayer(temp, this);
         currentHP = MAXHP;
+        hud.updateHealth(currentHP);
     }
 
     /**
@@ -187,6 +183,9 @@ public class Robot implements IRobot {
      * @return returns the new position for the robot
      */
     public void move(int distance) {
+        //TEMP
+        System.out.println(getCurrentHp());
+
         Pos newPos = new Pos();
         newPos.setPos(pos.copy());
         switch (dir) {

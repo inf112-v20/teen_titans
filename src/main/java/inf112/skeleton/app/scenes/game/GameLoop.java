@@ -141,10 +141,9 @@ public class GameLoop extends InputAdapter {
                     }
                 }
                 /** Between rounds **/
-                for (Robot robot : board.getRobots()) {
-                    if (robot.getLivingState()) {
-                        robot.respawn();
-                    }
+                if (!board.getDeadRobots().isEmpty()) {
+                    board.getDeadRobots().get(0).respawn();
+                    board.getDeadRobots().remove(0);
                 }
                 resetAfterRound();
             }

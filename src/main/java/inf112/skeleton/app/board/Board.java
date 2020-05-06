@@ -29,6 +29,7 @@ public class Board extends InputAdapter {
     private ArrayList<Grills> GrillList = new ArrayList<>();
     private ArrayList<Pushers> PusherList = new ArrayList<>();
     private ArrayList<Repair> RepairList = new ArrayList<>();
+    private ArrayList<Robot> DeadRobots = new ArrayList<>();
 
 
     ConveyorBelts conveyorBelts;
@@ -89,6 +90,10 @@ public class Board extends InputAdapter {
         }
     }
 
+    public ArrayList<Robot> getDeadRobots(){
+        return DeadRobots;
+    }
+
 
 
     public int checkPos(Pos pos) {
@@ -145,6 +150,10 @@ public class Board extends InputAdapter {
 
 
             currentPos = robot.getPos().copy();
+            if (mapLayers.get("flag").getCell(currentPos.getPosX(), currentPos.getPosY()) != null){
+                System.out.println("hej");
+                robot.updateRespawnPoint(currentPos);
+            }
             if (mapLayers.get("conveyor").getCell(currentPos.getPosX(), currentPos.getPosY()) != null) {
                 conveyorTypes(currentPos, robot);
                 updatePlayer(currentPos, robot);
@@ -158,7 +167,8 @@ public class Board extends InputAdapter {
 
             for (Repair fix : RepairList) {
                 if (robot.getPos().getPosX() == fix.getPos().getPosX()
-                && robot.getPos().getPosX() == fix.getPos().getPosY()) {
+                && robot.getPos().getPosY() == fix.getPos().getPosY()) {
+
                     System.out.println(robot.getCurrentHp());
                     fix.heal(robot);
                     System.out.println(robot.getCurrentHp());
@@ -239,47 +249,49 @@ public class Board extends InputAdapter {
         TiledMapTileLayer.Cell grillTile;
         TiledMapTileLayer.Cell pushTile;
         TiledMapTileLayer.Cell repairTile;
+        TiledMapTileLayer.Cell flagTile;
         Pos pos;
         for (int i = 0; i < BOARDWIDTH; i++) {
             for (int j = 0; j < BOARDHEIGHT; j++) {
+                pos = new Pos();
                 lazerTile = mapLayers.get("lazer").getCell(i,j);
                 grillTile = mapLayers.get("grill").getCell(i, j);
                 pushTile = mapLayers.get("push").getCell(i, j);
                 repairTile = mapLayers.get("repair").getCell(i, j);
-
+                flagTile = mapLayers.get("flag").getCell(i, j);
                 if (lazerTile != null) {
-                    pos = new Pos();
                     pos.setPos(i, j);
-
                     int lazerTileType = lazerTile.getTile().getId();
                     if (lazerTileType == 38) LazerList.add(new Lazers(pos, Direction.EAST, this));
                     //Lag ny "if (lazerTileType == num) for hver retning laser, vi har bare 1 for no
                 }
 
                 if (grillTile != null) {
-                    pos = new Pos();
                     pos.setPos(i, j);
-
                     int grillTileType = grillTile.getTile().getId();
                     if (grillTileType == 90) GrillList.add(new Grills(pos, this, true));
                     if (grillTileType == 89) GrillList.add(new Grills(pos, this, false));
                 }
 
                 if (pushTile != null) {
-                    pos = new Pos();
                     pos.setPos(i, j);
-
                     int pushTileType = pushTile.getTile().getId();
                     if (pushTileType == 9) PusherList.add(new Pushers(pos, this, false, Direction.SOUTH));
                     if (pushTileType == 2) PusherList.add(new Pushers(pos, this, true, Direction.WEST));
                 }
 
                 if (repairTile != null) {
-                    pos = new Pos();
                     pos.setPos(i, j);
-
                     int repairTileType = repairTile.getTile().getId();
                     if (repairTileType == 15) RepairList.add(new Repair(pos, this));
+                }
+
+                if (flagTile != null) {
+                    pos.setPos(i, j);
+                    int flagTileType = flagTile.getTile().getId();
+                    if (flagTileType == 55 || flagTileType == 63 || flagTileType == 71 || flagTileType == 79) {
+                        RepairList.add(new Repair(pos, this));
+                    }
                 }
             }
         }

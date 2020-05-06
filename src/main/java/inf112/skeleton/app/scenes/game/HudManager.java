@@ -214,7 +214,9 @@ public class HudManager {
         }
     }
     public void updateHealth(int hp){
-        hearts[hp/2][2].setVisible(true);
+        //Hei Bendik, om du ser ditta så endra eg dinna linja
+        //slik at vi ikkje overflowa
+        hearts[Math.min(hp/2, 4)][2].setVisible(true);
         for(int i = 0; i < hp/2; i++){
             hearts[i][0].setVisible(true);
             hearts[i][1].setVisible(false);
