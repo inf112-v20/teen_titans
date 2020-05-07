@@ -1,4 +1,5 @@
 package inf112.skeleton.app.scenes;
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import inf112.skeleton.app.scenes.game.Renderer;

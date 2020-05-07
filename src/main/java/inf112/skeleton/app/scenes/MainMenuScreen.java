@@ -1,8 +1,10 @@
 package inf112.skeleton.app.scenes;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -12,6 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+
+import javax.management.monitor.CounterMonitor;
 
 public class MainMenuScreen extends InputAdapter {
     private Orchestrator parent;
@@ -105,9 +109,6 @@ public class MainMenuScreen extends InputAdapter {
         switch(SELECTED){
             case 0:
                 parent.hostGame();
-                //Music music = Gdx.audio.newMusic(Gdx.files.internal("assets/Sound effects/YouRepostedInTheWrongNeighbourhood.mp3"));
-                //music.play();
-                //music.setVolume(0.5f);
                 break;
             case 1:
                 parent.joinGame();
@@ -156,5 +157,9 @@ public class MainMenuScreen extends InputAdapter {
         });
         loop.setName("Main Menu Highlighter Thread");
         loop.start();
+        Music music = Gdx.audio.newMusic(Gdx.files.internal("assets/Sound effects/PokBatRev-Theme.mp3"));
+        music.play();
+        music.setVolume(0.1f);
+        music.setLooping(true);
     }
 }
