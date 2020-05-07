@@ -49,6 +49,7 @@ public class Robot implements IRobot {
     public void recieveHud(HudManager hud){
         this.hud = hud;
     }
+
     public HudManager getHud(){
         return hud;
     }
@@ -175,7 +176,7 @@ public class Robot implements IRobot {
         //System.out.println(temp.getPosY() + "hej");
         board.updatePlayer(temp, this);
         currentHP = MAXHP;
-        hud.updateHealth(currentHP);
+        if (hud != null) hud.updateHealth(currentHP);
     }
 
     /**
@@ -185,8 +186,7 @@ public class Robot implements IRobot {
      */
     public void move(int distance) {
         //TEMP
-        System.out.println(getCurrentHp());
-
+        System.out.println(hud == null);
         Pos newPos = new Pos();
         newPos.setPos(pos.copy());
         switch (dir) {

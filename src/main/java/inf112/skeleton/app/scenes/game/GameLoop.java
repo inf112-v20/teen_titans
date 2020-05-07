@@ -79,7 +79,7 @@ public class GameLoop extends InputAdapter {
                 if(host && !gameClient.gameOver()) {
                     gameServer.dealCards();
                 }
-
+                System.out.println("Print1");
                 /**  Client waits to recieve cards  check**/
                 while(!gameClient.getActiveChooseCard()){
                     try {
@@ -88,13 +88,13 @@ public class GameLoop extends InputAdapter {
                         e.printStackTrace();
                     }
                 }
-
+                System.out.println("Print2");
                 /**  Client has recievedcards. Send cards to HUD.  check**/
                 /**  Player selects cards  check**/
                 ICard[] sortedHand = myPlayer.getSortedCards();
                 /**  Player sends cards to server check**/
                 gameClient.sendCards(sortedHand);
-
+                System.out.println("Print3");
                 if(host){
                     /** Host waits for all players to send cards... **/
                     while(gameServer.getPlayerCards().size() < players.length){
@@ -109,7 +109,7 @@ public class GameLoop extends InputAdapter {
                     gameServer.distributeSortedCards(allPlayerCards);
                     gameServer.clearPlayerCards();
                 }
-
+                System.out.println("Print4");
                 /**  Client waits to recieve all player cards from server  **/
                 while(!gameClient.getActiveHandleAllCards()){
                     try {
@@ -118,7 +118,7 @@ public class GameLoop extends InputAdapter {
                         e.printStackTrace();
                     }
                 }
-
+                System.out.println("Print5");
                 /**  Cards recieved, perform card tasks.  **/
                 PriorityQueue<ICard>[] queues = cardHandler.getSortedCards();
 
@@ -131,6 +131,7 @@ public class GameLoop extends InputAdapter {
                         }
                         ICard currentCard = round.remove();
                         board.doRobotTurn(currentCard);
+
                     }
 
                     /**  Do board tile effects  **/

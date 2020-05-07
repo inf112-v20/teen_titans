@@ -1,5 +1,6 @@
 package inf112.skeleton.app.board;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.audio.Sound;
@@ -78,6 +79,8 @@ public class Board extends InputAdapter {
         Pos oldPos = currentRobot.getPos().copy();
         currentCard.action();
         updatePlayer(oldPos, currentRobot);
+        System.out.println("Turn: " + currentRobot.getDir());
+        System.out.println("X: " + currentRobot.getPos().getPosX() + "  Y: " + currentRobot.getPos().getPosY());
     }
 
     
