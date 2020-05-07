@@ -61,8 +61,8 @@ public class Player extends InputAdapter implements IPlayer {
         this.playerNumber = playerNumber;
         this.board = board;
         this.robot = robot;
-        this.robot.recieveHud(hud);
         this.hud = hud;
+        robot.recieveHud(hud);
     }
 
     @Override
