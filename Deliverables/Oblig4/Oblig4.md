@@ -61,3 +61,42 @@ Vi må spre arbeidsmengenden mer effektivt, og mer tydligere inndeling av arbeid
 Krav:
 Siden sist har vi....
 
+### Brukerhistorie
+
+Jeg som kunde ønsker:
+
+* Å ha checkpoints på brettet for å kunne respawne der om man dør.
+ 
+* Laserer med lydeffekt.
+
+* Forskjellige karakterer (pokemon sprites) man kan velge mellom sånn at spillerne vet hvem de er.
+
+* 9 tilfeldige delt kort til spillerne der de kan velge 5.
+
+* Brennbarte gulv, noen ved checkpoints og noen andre steder.
+
+Jeg som spiller ønsker:
+
+* En respawn. Der om jeg dør så vil jeg respawne der vi startet eller på checkpoints om jeg har kommet meg dit.
+
+* Forskjellige kort for hver tur som går sånn at jeg ikke kan bruke de samme bevegelsene hele tiden
+
+* Velge 5 kort som beveger seg i den retningen jeg har valgt i rekkefølge.
+Altså at hvis jeg velger kortet som beveger meg framover først og snu til venstre som andre kort så vil jeg bevege meg framover først også snu til venstre,
+ikke omvendte.
+
+* At alle får sin egen tur, 
+sånn at en spiller ikke får flere tur før det er en annen spillers tur.
+
+* Å se hvor mange hp jeg har igjen, hvis jeg går i brennbart gulv, laser etc så vil jeg se at hp'en min minker.
+
+Lister over hva vi har fokusert på:
+
+* Checkpoints
+* Lydeffekt for laser
+* Forskjellige karakterer
+* Flere kort
+* Brennbarte gulv
+* Respawn
+* Spillere får sine tur til velge kort
+* Hp
