@@ -280,7 +280,4 @@ public class HudManager {
         return stage;
     }
 
-
-
-
 }

@@ -93,13 +93,11 @@ public class Robot implements IRobot {
             hud.updateHealth(0);
             return;
         }
-        if(hud != null){
-            hud.updateHealth(currentHP);
-        }
+        if(hud != null) hud.updateHealth(currentHP);
     }
 
     public void heal() {
-        currentHP = getMaxHp();
+        currentHP++;
         if(hud != null) hud.updateHealth(++currentHP);
 
     }
