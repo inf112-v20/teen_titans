@@ -79,6 +79,8 @@ public class Board extends InputAdapter {
         Pos oldPos = currentRobot.getPos().copy();
         currentCard.action();
         updatePlayer(oldPos, currentRobot);
+        System.out.println("Turn: " + currentRobot.getDir());
+        System.out.println("X: " + currentRobot.getPos().getPosX() + "  Y: " + currentRobot.getPos().getPosY());
     }
 
     

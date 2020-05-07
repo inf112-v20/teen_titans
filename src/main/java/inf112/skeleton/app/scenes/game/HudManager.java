@@ -216,19 +216,23 @@ public class HudManager {
     public void updateHealth(int hp){
         //Hei Bendik, om du ser ditta så endra eg dinna linja
         //slik at vi ikkje overflowa
-        hearts[Math.min(hp/2, 4)][2].setVisible(true);
+        System.out.println("AAAAAAAAAAAAAAAA");
+        hearts[hp/2-1][2].setVisible(true);
         for(int i = 0; i < hp/2; i++){
             hearts[i][0].setVisible(true);
             hearts[i][1].setVisible(false);
         }
+        System.out.println("BBBBBBBBBBBBBBBBB");
         for(int i = hp/2; i < 5; i++){
             hearts[i][0].setVisible(false);
             hearts[i][1].setVisible(false);
         }
+        System.out.println("CCCCCCCCCCCCCCCC");
         if(hp%2 == 1){
-            hearts[hp/2][0].setVisible(false);
-            hearts[hp/2][1].setVisible(true);
+            hearts[hp/2-1][0].setVisible(false);
+            hearts[hp/2-1][1].setVisible(true);
         }
+        System.out.println("DDDDDDDDDDDDDDDD");
     }
     public void updateTimer(int t){
         int firstDigit = t / 10;
