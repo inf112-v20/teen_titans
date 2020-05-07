@@ -66,7 +66,8 @@ public class GameLoop extends InputAdapter {
     private void createGameLoopThread() {
         loop = new Thread(() -> {
             int r = 0;
-            while(true) { r++;
+            while(true) {
+                r++;
                 System.out.println("____LOOP_ITERATION_GAME_ROUND_"+r+"____ \n");
 
                 /** Creates display to show winner of game **/

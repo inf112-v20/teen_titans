@@ -49,6 +49,7 @@ public class Orchestrator extends Game {
         currentScreen = Screens.HOSTGAME;
     }
 
+
     public void createGame(){
         renderer = new Renderer(this,0, true);
         currentScreen = Screens.RENDERER;

@@ -15,6 +15,7 @@ public class Robot implements IRobot {
     private Pos pos;
     private Pos respawnPoint;
     private int MAXHP = 10;
+    private int lives = 3;
     private int currentHP;
     private boolean[] checkpoints;
     private HashMap<String, TiledMapTileLayer.Cell> playerStates;
@@ -138,7 +139,7 @@ public class Robot implements IRobot {
      */
 
     public void die(){
-        System.out.println("You defeated");
+        hud.updateLives(--lives);
         dead = true;
         currentState = playerStates.get("dead");
         if (!board.getDeadRobots().contains(this)){
@@ -283,6 +284,10 @@ public class Robot implements IRobot {
 
     public boolean getLivingState() {
         return dead;
+    }
+
+    public int getLives(){
+        return lives;
     }
 
     public int getCurrentCheckpoint() {

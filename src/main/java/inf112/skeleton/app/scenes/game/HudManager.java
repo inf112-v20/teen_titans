@@ -22,7 +22,7 @@ public class HudManager {
     private Image selectedImage;
     private int selected;
     private Image[] numbers = new Image[5];
-    private Image[][] timerNumbers = new Image[10][2];
+    private Image[] timerNumbers = new Image[4];
     private Image[][] hearts = new Image[5][3];
     private ArrayList<Label> labels = new ArrayList<>();
     private Skin skin;
@@ -32,6 +32,7 @@ public class HudManager {
         selectedImage = new Image(new Texture(Gdx.files.internal("cards/SelectedCard.png")));
         createHearts();
         createNumbers();
+        updateLives(3);
         skin = new Skin(Gdx.files.internal("styles/glassy-ui.json"));
     }
 
@@ -60,27 +61,34 @@ public class HudManager {
             hearts[i+3][2].setPosition(i*60+30, stage.getHeight()-90);
 
         }
+
+
     }
     private void createNumbers(){
-        System.out.println("CREATING NUMBERS NOW HEHEHE");
-        for(int i = 0; i < timerNumbers.length; i++){
+        for(int i = 0; i < numbers.length; i++){
             String file = "numbers/Number";
-            file = file.concat(String.valueOf(i));
+            file = file.concat(String.valueOf(i+1));
             file = file.concat(".png");
-            System.out.println(file);
-            if(i > 0 && i < 6){
-                numbers[i-1] = new Image(new Texture(Gdx.files.internal(file)));
+            numbers[i] = new Image(new Texture(Gdx.files.internal(file)));
+            stage.addActor(numbers[i]);
+            if(i < 4){
+                String file1 = "numbers/Number";
+                file1 = file1.concat(String.valueOf(i));
+                file1 = file1.concat(".png");
+                timerNumbers[i] = new Image(new Texture(Gdx.files.internal(file1)));
+                timerNumbers[i].setVisible(false);
+                stage.addActor(timerNumbers[i]);
             }
-
-
-            timerNumbers[i][0] = new Image(new Texture(Gdx.files.internal(file)));
-            timerNumbers[i][0].setPosition(stage.getWidth()-100, 150);
-            timerNumbers[i][0].setVisible(true);
-
-            timerNumbers[i][1] = new Image(new Texture(Gdx.files.internal(file)));
-            timerNumbers[i][1].setPosition(stage.getWidth()-80, 150);
-            timerNumbers[i][1].setVisible(true);
         }
+    }
+
+    public void updateLives(int l){
+        if(l < 0) return;
+        for(int i = 0; i < 4; i++){
+            timerNumbers[i].setPosition(80, stage.getHeight()-130);
+            timerNumbers[i].setVisible(false);
+        }
+        timerNumbers[l].setVisible(true);
     }
 
     public void createPos1(ICard img){
@@ -230,20 +238,7 @@ public class HudManager {
             hearts[hp/2][1].setVisible(true);
         }
     }
-    public void updateTimer(int t){
-        int firstDigit = t / 10;
-        int secondDigit = t % 10;
-        System.out.println("Timer value: "+firstDigit + ", " + secondDigit);
-        for(Image[] list : timerNumbers){
-            for(Image img : list){
-                img.setVisible(false);
-            }
-        }
-        timerNumbers[firstDigit][0].setVisible(true);
-        timerNumbers[secondDigit][1].setVisible(true);
 
-
-    }
     private void clearImages(){
         for(ICard card : cardList){
             if(card != null){

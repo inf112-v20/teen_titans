@@ -44,7 +44,6 @@ public class Player extends InputAdapter implements IPlayer {
                 //do sleep next iteration then...
             }
         }
-        //timer.interrupt();
         ICard[]  sortedCardsArray = new ICard[5];
         for(int i = 0; i < sortedCardsArray.length; i++){
             sortedCardsArray[i] = sortedCards.get(i);
@@ -62,7 +61,7 @@ public class Player extends InputAdapter implements IPlayer {
         this.playerNumber = playerNumber;
         this.board = board;
         this.robot = robot;
-        robot.recieveHud(hud);
+        this.robot.recieveHud(hud);
         this.hud = hud;
     }
 
@@ -71,11 +70,16 @@ public class Player extends InputAdapter implements IPlayer {
         for(ICard card : cards){
             card.setPlayer(this);
         }
-        sortedCards.clear();
         cardStorage = cards;
+        sortedCards.clear();
+        if(robot.getLives() <= 0){
+            for(int i = 0; i < 5; i++){
+                sortedCards.add(new DoNothingCard(999, this));
+            }
+            return;
+        }
         hud.recieveCards(getCardStorage());
         hud.updateCardNumbers(sortedCards);
-        //startNewTimer();
     }
 
     @Override
@@ -129,33 +133,6 @@ public class Player extends InputAdapter implements IPlayer {
         return robot.getCurrentCheckpoint() == 4;
     }
 
-    private void startNewTimer(){
-        timer = new Thread(() -> {
-            int t = 60;
-            while(--t > 0){
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                hud.updateTimer(t);
-            }
-            chaoticDeck();
-        });
-        timer.setName("Timer Thread");
-        timer.start();
-    }
-
-    private void chaoticDeck(){
-        Random random = new Random();
-        sortedCards.clear();
-        while(sortedCards.size() < 5){
-            ICard card = cardStorage.get(random.nextInt(cardStorage.size()));
-            if(!sortedCards.contains(card)){
-                sortedCards.add(card);
-            }
-        }
-    }
 
 
 

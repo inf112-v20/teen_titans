@@ -50,6 +50,9 @@ public class CardHandler {
         deck = new ArrayList<>();
         for(int newCard : recipe){
             switch(newCard % 10){
+                case 0:
+                    deck.add(new DoNothingCard(newCard/100, players[(newCard / 10) % 10]));
+                    break;
                 case 1:
                     deck.add(new MoveForwardCard(newCard / 100, players[(newCard / 10) % 10], board));
                     break;
@@ -126,6 +129,15 @@ public class CardHandler {
                 int typeID = num % 10;
                 int playerID = (num / 10) % 10;
                 int priority = num / 100;
+                if (typeID == 0){
+                    for(IPlayer player : players){
+                        if(player.getPlayerNumber() == playerID){
+                            cards.add(new DoNothingCard(priority, player));
+                            break;
+                        }
+                    }
+                    break;
+                }
                 if(card.getPriority() == priority && card.getTypeID() == typeID){
                     for(IPlayer player : players){
                         if(player.getPlayerNumber() == playerID){

@@ -28,8 +28,7 @@ public class WinnerDisplay {
     }
 
     public void setWinner(String name){
-        System.out.println("in setwinner");
-        System.out.println(name);
+        //TODO: lagre modell i serverlistener v/ start, match med connection v/ slutt.
         for(Actor actor : stage.getActors()){
             if(actor.getName() == name){
                 actor.setVisible(true);
