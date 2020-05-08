@@ -17,9 +17,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import javax.management.monitor.CounterMonitor;
 
-public class MainMenuScreen extends InputAdapter {
-    private Orchestrator parent;
-    private Stage stage;
+class MainMenuScreen extends InputAdapter {
+    private final Orchestrator parent;
+    private final Stage stage;
     private int SELECTED = 0;
     private Thread loop;
 
@@ -33,7 +33,7 @@ public class MainMenuScreen extends InputAdapter {
         create();
     }
 
-    public void create(){
+    private void create(){
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);

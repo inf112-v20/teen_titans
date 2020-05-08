@@ -14,12 +14,12 @@ import java.util.Random;
 public class Player extends InputAdapter implements IPlayer {
 
     private Thread timer;
-    private int playerNumber;
-    private Board board;
-    private HudManager hud;
-    private Robot robot;
+    private final int playerNumber;
+    private final Board board;
+    private final HudManager hud;
+    private final Robot robot;
     private ArrayList<ICard> cardStorage = new ArrayList<>();
-    private ArrayList<ICard> sortedCards = new ArrayList<>();
+    private final ArrayList<ICard> sortedCards = new ArrayList<>();
 
     @Override
     public int getPlayerNumber(){

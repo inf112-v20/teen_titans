@@ -7,10 +7,10 @@ import inf112.skeleton.app.player.IPlayer;
 
 public class TurnLeftCard implements ICard{
 
-    private int priority;
+    private final int priority;
     private IPlayer player;
-    private Image image = new Image(new Texture(Gdx.files.internal("cards/TurnLeftCard.png")));
-    private int typeID = 2;
+    private final Image image = new Image(new Texture(Gdx.files.internal("cards/TurnLeftCard.png")));
+    private final int typeID = 2;
     private final boolean LEFT = false;
 
     public TurnLeftCard(int priority, IPlayer player){

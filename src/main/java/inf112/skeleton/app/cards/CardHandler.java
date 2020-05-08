@@ -8,9 +8,9 @@ import java.util.*;
 public class CardHandler {
 
     private ArrayList<ICard> deck;
-    private IPlayer[] players;
-    private Random random;
-    private Board board;
+    private final IPlayer[] players;
+    private final Random random;
+    private final Board board;
     private int[][] individuallySortedCards;
 
     public void setIndividuallySortedCards(int[][] cards){
@@ -28,7 +28,7 @@ public class CardHandler {
     public ArrayList<ICard> getDeck(){
         return deck;
     }
-    public void createDeck(){
+    private void createDeck(){
 
         //TODO fiks duplicate priority bug
         deck = new ArrayList<>();
@@ -96,8 +96,8 @@ public class CardHandler {
         return individuallySortedCards;
     }
 
-    private PriorityQueue<ICard>[] addCardsToPQArray(ICard[][] individuallySortedCards){
-        PriorityQueue<ICard>[] cardsPQ = new PriorityQueue [5];
+    private PriorityQueue[] addCardsToPQArray(ICard[][] individuallySortedCards){
+        PriorityQueue[] cardsPQ = new PriorityQueue [5];
         for(int i = 0; i < cardsPQ.length; i++){
             cardsPQ[i] = new PriorityQueue<>();
         }
@@ -110,7 +110,7 @@ public class CardHandler {
         }
         return cardsPQ;
     }
-    public PriorityQueue<ICard>[] getSortedCards(){
+    public PriorityQueue[] getSortedCards(){
         ICard[][] individuallySortedCards = new ICard[players.length][5];
         for(int i = 0; i < individuallySortedCards.length; i++){
             individuallySortedCards[i] = new ICard[5];

@@ -13,16 +13,16 @@ import java.util.HashMap;
 
 public class GameClient {
 
-    private GameLoop gameLoop;
-    private HashMap<Integer, String> playerNames = new HashMap();
+    private final GameLoop gameLoop;
+    private final HashMap<Integer, String> playerNames = new HashMap<>();
     private String name;
     private String[] names;
     private String[] models;
     private int playerAmount;
-    public Client client = new Client();
-    private ClientListener listener = new ClientListener();
-    private int tcpPort = 54555;
-    private int udpPort = 54334;
+    private final Client client = new Client();
+    private final ClientListener listener = new ClientListener();
+    private final int tcpPort = 54555;
+    private final int udpPort = 54334;
     private int[] deck = null;
     private boolean startSignal = false;
     private boolean activeChooseCard = false;
@@ -171,7 +171,7 @@ public class GameClient {
         playerNames.put(id, name);
 
     }
-    public HashMap getPlayerNames(){
+    public HashMap<Integer, String> getPlayerNames(){
         return playerNames;
     }
 

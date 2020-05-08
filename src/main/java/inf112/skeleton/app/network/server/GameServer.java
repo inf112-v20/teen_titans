@@ -16,16 +16,16 @@ import java.util.HashMap;
 
 public class GameServer implements Runnable {
 
-    private int udp;
-    private int tcp;
+    private final int udp;
+    private final int tcp;
     private InetAddress address;
 
     private Server server;
     private ServerListener listener;
     private CardHandler cardHandler;
 
-    private HashMap<Integer, String> playerNames = new HashMap<>();
-    private HashMap<Integer, int[]> playerCards = new HashMap<>();
+    private final HashMap<Integer, String> playerNames = new HashMap<>();
+    private final HashMap<Integer, int[]> playerCards = new HashMap<>();
 
     public GameServer(){
         udp = 54334;

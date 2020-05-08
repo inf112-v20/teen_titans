@@ -7,10 +7,10 @@ import inf112.skeleton.app.player.IPlayer;
 
 public class TurnRightCard implements ICard{
 
-    private int priority;
+    private final int priority;
     private IPlayer player;
-    private Image image = new Image(new Texture(Gdx.files.internal("cards/TurnRightCard.png")));
-    private int typeID = 3;
+    private final Image image = new Image(new Texture(Gdx.files.internal("cards/TurnRightCard.png")));
+    private final int typeID = 3;
     private final boolean RIGHT = true;
 
     public TurnRightCard(int priority, IPlayer robot){

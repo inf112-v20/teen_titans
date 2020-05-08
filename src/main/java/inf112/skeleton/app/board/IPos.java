@@ -2,7 +2,7 @@ package inf112.skeleton.app.board;
 
 import com.badlogic.gdx.math.Vector2;
 
-public interface IPos {
+interface IPos {
 
     int getPosX();
 

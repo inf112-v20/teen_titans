@@ -7,10 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class WinnerDisplay {
+class WinnerDisplay {
 
 
-    private Stage stage;
+    private final Stage stage;
     public WinnerDisplay(){
         stage = new Stage(new ScreenViewport());
 

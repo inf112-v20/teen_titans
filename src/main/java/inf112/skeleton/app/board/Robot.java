@@ -73,7 +73,7 @@ public class Robot implements IRobot {
 
     /**
      * returns the current position of the robot
-     * @return
+     * @return Robot position
      */
     public Pos getPos() {
         return pos;
@@ -99,8 +99,7 @@ public class Robot implements IRobot {
 
     public void heal() {
         currentHP++;
-        if(hud != null) hud.updateHealth(++currentHP);
-
+        if (hud != null) hud.updateHealth(++currentHP);
     }
 
     public void updateCheckpoint(int checkpointID) {

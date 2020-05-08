@@ -16,15 +16,15 @@ import java.util.PriorityQueue;
 public class GameLoop extends InputAdapter {
 
     private Player myPlayer;
-    private int myPlayerNumber;
-    private HudManager hud;
-    private WinnerDisplay wdisp;
+    private final int myPlayerNumber;
+    private final HudManager hud;
+    private final WinnerDisplay wdisp;
     private IPlayer[] players;
-    private Renderer parent;
+    private final Renderer parent;
     private GameClient gameClient;
     private GameServer gameServer;
-    private boolean host;
-    private Board board;
+    private final boolean host;
+    private final Board board;
     private int totalRound;
     private CardHandler cardHandler;
 

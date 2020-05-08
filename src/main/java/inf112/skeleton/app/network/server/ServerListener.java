@@ -7,13 +7,13 @@ import com.esotericsoftware.kryonet.Server;
 import inf112.skeleton.app.network.PacketInfo;
 
 
-public class ServerListener extends Listener {
-    private GameServer parent;
-    private Server server;
-    private int[] players;
-    private String[] names;
-    private String[] models;
-    private boolean[] readies;
+class ServerListener extends Listener {
+    private final GameServer parent;
+    private final Server server;
+    private final int[] players;
+    private final String[] names;
+    private final String[] models;
+    private final boolean[] readies;
     private int playerNumber;
 
     public ServerListener(Server server, GameServer parent){

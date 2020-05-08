@@ -2,7 +2,7 @@ package inf112.skeleton.app.board;
 
 import inf112.skeleton.app.board.Direction;
 
-public interface IRobot {
+interface IRobot {
 
     void turn(boolean turnRight);
 

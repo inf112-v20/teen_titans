@@ -10,7 +10,7 @@ import inf112.skeleton.app.cards.ICard;
 import inf112.skeleton.app.network.PacketInfo;
 import inf112.skeleton.app.network.Translator;
 
-public class ClientListener extends Listener {
+class ClientListener extends Listener {
 
     private GameLoop gameLoop;
     private GameClient parent;

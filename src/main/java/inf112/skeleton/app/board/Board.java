@@ -14,27 +14,26 @@ import java.util.HashMap;
 
 public class Board extends InputAdapter {
 
-    private TiledMap map;
-    private HashMap<String, TiledMapTileLayer> mapLayers;
-    private TiledMapTileLayer playerLayer;
+    private final TiledMap map;
+    private final HashMap<String, TiledMapTileLayer> mapLayers;
+    private final TiledMapTileLayer playerLayer;
     private Robot robot;
     private Robot[] listOfRobots;
     private final int BOARDWIDTH = 12;
     private final int BOARDHEIGHT = 12;
     private final int LEGALMOVE = 1; //For normal board movement
-    private final int ILLEGALMOVE = 0; //For walls/obstacles
     private final int SUICIDALMOVE = -1; //For holes/fall off map
     private final boolean RIGHT = true;
     private final boolean LEFT = false;
-    private ArrayList<Lazers> LazerList = new ArrayList<>();
-    private ArrayList<Grills> GrillList = new ArrayList<>();
-    private ArrayList<Pushers> PusherList = new ArrayList<>();
-    private ArrayList<Repair> RepairList = new ArrayList<>();
-    private ArrayList<Robot> DeadRobots = new ArrayList<>();
+    private final ArrayList<Lazers> LazerList = new ArrayList<>();
+    private final ArrayList<Grills> GrillList = new ArrayList<>();
+    private final ArrayList<Pushers> PusherList = new ArrayList<>();
+    private final ArrayList<Repair> RepairList = new ArrayList<>();
+    private final ArrayList<Robot> DeadRobots = new ArrayList<>();
 
 
-    ConveyorBelts conveyorBelts;
-    Walls walls;
+    private final ConveyorBelts conveyorBelts;
+    private final Walls walls;
 
 
 
@@ -158,12 +157,12 @@ public class Board extends InputAdapter {
                 conveyorTypes(currentPos, robot);
                 updatePlayer(currentPos, robot);
                 currentPos = robot.getPos();//.copy();
-            };
+            }
             if (mapLayers.get("hole").getCell(currentPos.getPosX(), currentPos.getPosY()) != null) { robot.die(); }
             if (mapLayers.get("gear").getCell(currentPos.getPosX(), currentPos.getPosY()) != null) {
                 gearTypes(currentPos, robot);
             }
-            if (mapLayers.get("wall").getCell(currentPos.getPosX(), currentPos.getPosY()) != null) {  };
+            if (mapLayers.get("wall").getCell(currentPos.getPosX(), currentPos.getPosY()) != null) {  }
 
             for (Repair fix : RepairList) {
                 if (robot.getPos().getPosX() == fix.getPos().getPosX()

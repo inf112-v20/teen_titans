@@ -20,7 +20,7 @@ import static org.mockito.Mockito.mock;
 
 public class RobotTest {
     private Board board;
-    Random random;
+    private Random random;
 
     @Before
     public void setUp(){

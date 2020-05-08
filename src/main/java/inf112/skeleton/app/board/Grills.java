@@ -1,16 +1,17 @@
 package inf112.skeleton.app.board;
 
-public class Grills {
+class Grills {
 
-    Board board;
-    boolean even;
-    int x;
-    int y;
+    private final Board board;
+    private boolean even;
+    private final int x;
+    private final int y;
 
     public Grills(Pos pos, Board board, boolean even) {
         x = pos.getPosX();
         y = pos.getPosY();
         this.board = board;
+        this.even = even;
     }
 
     public void burn(int round) {

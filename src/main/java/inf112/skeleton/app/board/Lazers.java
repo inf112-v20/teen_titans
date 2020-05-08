@@ -4,19 +4,17 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 
 import java.util.HashMap;
 
-public class Lazers {
+class Lazers {
 
-    int x;
-    int y;
-    Direction dir;
-    Board board;
-    boolean hit;
-    TiledMapTileLayer.Cell wallCheck;
-    TiledMapTileLayer.Cell playerCheck;
-    HashMap<String, TiledMapTileLayer> mapLayers;
-    TiledMapTileLayer playerlayer;
-    Walls walls;
-    Pos wallPos;
+    private final int x;
+    private final int y;
+    private final Direction dir;
+    private final Board board;
+    private TiledMapTileLayer.Cell playerCheck;
+    private final HashMap<String, TiledMapTileLayer> mapLayers;
+    private final TiledMapTileLayer playerlayer;
+    private final Walls walls;
+    private final Pos wallPos;
 
 
     public Lazers(Pos pos, Direction dir, Board board){
@@ -31,19 +29,18 @@ public class Lazers {
     }
 
     public void shoot(){
-        hit = false;
         switch (dir) {
             case NORTH:
-                hit = shootUp();
+                shootUp();
                 break;
             case EAST:
-                hit = shootRight();
+                shootRight();
                 break;
             case SOUTH:
-                hit = shootDown();
+                shootDown();
                 break;
             case WEST:
-                hit = shootLeft();
+                shootLeft();
                 break;
         }
 
@@ -127,10 +124,8 @@ public class Lazers {
 
     private boolean checkPlayer(int x, int y){
         playerCheck = mapLayers.get("playerLayer").getCell(x, y);
-        if (playerCheck != null) {
-            return true;
-        }
-        return false;
+        //System.out.println("BOOM HEADSHOT");
+        return playerCheck != null;
     }
 
     private boolean checkWall(int x, int y, Direction dir) {
