@@ -42,7 +42,7 @@ WARNING: using WASD to control character will desync robots in multiplayer.
 Currently throws "WARNING: An illegal reflective access operation has occurred", 
 when the java version used is >8. This has no effect on function or performance, and is just a warning.
 
-
+Very rarely you get dealt an invisible card
 
 
 
