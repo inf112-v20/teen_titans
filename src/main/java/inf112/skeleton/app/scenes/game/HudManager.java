@@ -155,6 +155,7 @@ public class HudManager {
     private void addPriorityLabel(ICard img){
         Label field = new Label(Integer.toString(img.getPriority()), skin);
         field.setPosition(img.getImage().getX()+60, 10);
+        labels.add(field);
         stage.addActor(field);
     }
     public int getSelected(){
@@ -219,6 +220,7 @@ public class HudManager {
             }
         }
     }
+
     public void updateHealth(int hp){
         hearts[hp/2-1][2].setVisible(true);
         for(int i = 0; i < hp/2; i++){

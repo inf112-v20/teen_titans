@@ -20,7 +20,7 @@ public class WinnerDisplay {
         for(String model : playerModesls){
             if(model != null){
                 Image img = new Image(new Texture(Gdx.files.internal(model)));
-                img.setVisible(false);
+                //img.setVisible(false);
                 img.setName(model);
                 img.setPosition(stage.getWidth()/2-150, stage.getHeight()/2+150);
                 stage.addActor(img);
