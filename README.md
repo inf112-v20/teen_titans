@@ -14,6 +14,11 @@ Run the game once. Select "host game" (using the enter key). Enter your name whe
 ### Multiplayer
 Click "edit run configurations". In the upper right corner, check the "allow parallell run" box. Run up to 4 iterations of the game. First, in one iteration, chose "host game", and enter your name when prompted. In the other iterations, choose "join game", enter adress "localhost" when prompted, then enter name when prompted. To start the game, all users must select a character.
 
+### Controls
+When in game, use the arrow keys to highlight a card. To select the card, press space.
+FOR DEBUGGING: WASD will let you control your character, enter will cause character to take 1hp of damage.
+WARNING: using WASD to control character will desync robots in multiplayer.
+
 ## Manuel Tests
 Tests 1-4 assumes player is facing upwards.
 
