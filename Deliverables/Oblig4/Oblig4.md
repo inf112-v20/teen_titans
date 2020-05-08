@@ -43,7 +43,8 @@ Tiden ble brukt for å gå igjennom bugs og prøve å fikse de. Innspurt til inn
 
 08.08.20
 Meeting minutes:
-Meeting attendance: 
+Meeting attendance: all sammen
+Tiden ble brukt for siste bug fixes før innlevereing
 
 
 Rollene fungerer fint, og Matias gjør stadig vekk en fabelaktig jobb som teamleader. Vi ser derfor ingen grunn til å endre på vår rollestruktur, men vi muligens burde være litt tydligeree på tilldeling av arbeid.
