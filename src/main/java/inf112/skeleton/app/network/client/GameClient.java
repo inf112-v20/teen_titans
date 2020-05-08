@@ -177,7 +177,6 @@ public class GameClient {
 
     public void setPlayerAmount(int n){
         playerAmount = n;
-        System.out.println("player amount changed.");
     }
     public int getPlayerAmount(){
         return playerAmount;

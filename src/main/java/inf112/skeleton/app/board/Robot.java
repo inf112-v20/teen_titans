@@ -173,7 +173,6 @@ public class Robot implements IRobot {
         dir = Direction.NORTH;
         updateModel();
         dead = false;
-        //System.out.println(temp.getPosY() + "hej");
         board.updatePlayer(temp, this);
         currentHP = MAXHP;
         if (hud != null) hud.updateHealth(currentHP);
@@ -185,8 +184,6 @@ public class Robot implements IRobot {
      * @return returns the new position for the robot
      */
     public void move(int distance) {
-        //TEMP
-        System.out.println(hud == null);
         Pos newPos = new Pos();
         newPos.setPos(pos.copy());
         switch (dir) {
@@ -276,7 +273,6 @@ public class Robot implements IRobot {
             if (robot.getPos().getPosX() == pos.getPosX() && robot.getPos().getPosY() == pos.getPosY()) {
                 robot.push(dir);
                 board.updatePlayer(pos, robot);
-                //System.out.println("!!!!!!!!!!!!!!!!!!!");
                 return;
             }
         }

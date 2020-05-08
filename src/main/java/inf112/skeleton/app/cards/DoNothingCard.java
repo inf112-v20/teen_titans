@@ -1,7 +1,5 @@
 package inf112.skeleton.app.cards;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import inf112.skeleton.app.player.IPlayer;
 
@@ -11,6 +9,7 @@ public class DoNothingCard implements ICard {
     private Image image;
     private int typeID = 0;
 
+    /** For use when player is dead **/
     public DoNothingCard(int priority, IPlayer player){
         this.priority = priority;
         this.player = player;

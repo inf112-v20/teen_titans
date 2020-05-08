@@ -128,7 +128,6 @@ public class Lazers {
     private boolean checkPlayer(int x, int y){
         playerCheck = mapLayers.get("playerLayer").getCell(x, y);
         if (playerCheck != null) {
-            //System.out.println("BOOM HEADSHOT");
             return true;
         }
         return false;

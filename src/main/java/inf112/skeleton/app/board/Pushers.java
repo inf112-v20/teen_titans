@@ -21,11 +21,8 @@ public class Pushers {
         for (Robot robot: board.getListOfRobots()){
             if (robot.getPos().getPosX() == x && robot.getPos().getPosY() == y) {
                 if (even && round % 2 == 0 || !even && round % 2 == 1) {
-
                     robot.push(dir);
-                    //System.out.println(pos);
                     board.updatePlayer(pos, robot);
-
                 }
             }
         }

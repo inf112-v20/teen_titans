@@ -60,7 +60,6 @@ public class ClientListener extends Listener {
             parent.setStartSignal((PacketInfo.StartSignal) o);
         }
         else if(o instanceof PacketInfo.Cards){
-            System.out.println("Client listener: Client received hand.");
             parent.handReceived(((PacketInfo.Cards) o).cards);
         }
         else if(o instanceof PacketInfo.AllCards){

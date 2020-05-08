@@ -93,7 +93,6 @@ public class ServerListener extends Listener {
 
     private boolean allTrue(){
         for(int i = 0; i < readies.length; i++){
-            System.out.println(players[i]);
             if(!readies[i] && players[i] != 0) return false;
         }
         return true;

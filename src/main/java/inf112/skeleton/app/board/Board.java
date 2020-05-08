@@ -79,8 +79,6 @@ public class Board extends InputAdapter {
         Pos oldPos = currentRobot.getPos().copy();
         currentCard.action();
         updatePlayer(oldPos, currentRobot);
-        System.out.println("Turn: " + currentRobot.getDir());
-        System.out.println("X: " + currentRobot.getPos().getPosX() + "  Y: " + currentRobot.getPos().getPosY());
     }
 
     
@@ -154,7 +152,6 @@ public class Board extends InputAdapter {
 
             currentPos = robot.getPos().copy();
             if (mapLayers.get("flag").getCell(currentPos.getPosX(), currentPos.getPosY()) != null){
-                System.out.println("hej");
                 robot.updateRespawnPoint(currentPos);
             }
             if (mapLayers.get("conveyor").getCell(currentPos.getPosX(), currentPos.getPosY()) != null) {
@@ -171,10 +168,7 @@ public class Board extends InputAdapter {
             for (Repair fix : RepairList) {
                 if (robot.getPos().getPosX() == fix.getPos().getPosX()
                 && robot.getPos().getPosY() == fix.getPos().getPosY()) {
-
-                    System.out.println(robot.getCurrentHp());
                     fix.heal(robot);
-                    System.out.println(robot.getCurrentHp());
                 }
 
             }

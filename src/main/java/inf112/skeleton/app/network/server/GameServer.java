@@ -46,7 +46,6 @@ public class GameServer implements Runnable {
         server.start();
         try {
             address = InetAddress.getLocalHost();
-            System.out.println(address);
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
