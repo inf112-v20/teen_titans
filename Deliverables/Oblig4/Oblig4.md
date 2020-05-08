@@ -36,7 +36,17 @@ meeting attendance: Alle sammen
 Brukte  2timer før presentasjon for å gå igjennom bugs/bug fixes, og klaregjøre presentasjon.
 
 
-Rollene fungerer fint, og Matias gjør stadig vekk en fabelaktig jobb som teamleader. Vi ser derfor ingen grunn til å endre på vår rollestruktur, men vi må være mer tydlig på tilldeling av arbeid.
+07.08.20
+Meeting minutes: 150min
+Meeting attendance: All sammen
+Tiden ble brukt for å gå igjennom bugs og prøve å fikse de. Innspurt til innlevering.
+
+08.08.20
+Meeting minutes:
+Meeting attendance: 
+
+
+Rollene fungerer fint, og Matias gjør stadig vekk en fabelaktig jobb som teamleader. Vi ser derfor ingen grunn til å endre på vår rollestruktur, men vi muligens burde være litt tydligeree på tilldeling av arbeid.
 Vår bruk av Kanban som prosjektmetodikk fungerer fint som oftest. Vi er kjappe med å si ifra om forandringer, og å gi tilbakemeldinger om forbedringer. Til tider er vi slappe med vår arbeidsmetode og de blir mye koding på kort tid,
 og ikk en jevn progresjon. 
 Vi er stort sett fornøyd med våre valg, så ser ikke noe grunn til å endre på noe for øyeblikket.
@@ -46,8 +56,11 @@ Vi har blitt rimelig flink på møter via discord. Arbeidsmoralen har blitt litt
 Vi har bare hatt møter 1 gang i uken i det siste, dette hara ført til ganske store oppdateringer mellom hvert møte. Dette er noe vi kan
 forbedre oss på. Samtidig burde vi nok spre arbeidsmengeden litt mer. Vi har hatt tendenser til å benytte oss av "skippertak".
 Kanban bygger jo trossalt på att man skal jobbe litt hele tiden, for å ikke bli "overwhelmed".
+I starten fikk vi møtes i person for møtene, og dette var til stor fordel når vi trengte hjelp. Etter nedstengningen ble det slutt på dette,
+som førte til litt tap av motivasjon, og litt tregere start. Vi har blitt bedre og bedre på onlin gruppe møter, og det fungerer greit nå.
 Programmeringsmessig er det også et frustrasjonsmoment å ikke få sitte sammen. I tilfeller hvor man sitter fast og trenger hjelp fra et annet gruppemedlem, blir hjelpen mindre effektiv. Vi merker hvor viktig peking og kroppsspråk er når man diskuterer kode.
 En stemme i seg selv er ikke nok.
+
 
 ####Noen ting å forbedre
 Vi må bli bedre på å bruke prosjektboard igjen (slappe med å oppdatere).
