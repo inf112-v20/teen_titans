@@ -88,7 +88,8 @@ public class Robot implements IRobot {
      * @param dmg How much damage taken
      */
     public void takeDamage(int dmg) {
-        currentHP -= dmg;
+        if (currentHP > 0) currentHP -= dmg;
+        currentHP = Math.max(currentHP, 0);
         if (currentHP <= 0) {
             die();
             if(hud != null) hud.updateHealth(0);
@@ -177,7 +178,7 @@ public class Robot implements IRobot {
         dead = false;
         board.updatePlayer(temp, this);
         currentHP = MAXHP;
-        if (hud != null) hud.updateHealth(10);
+        if (hud != null) hud.updateHealth(currentHP);
         return true;
     }
 
@@ -187,25 +188,26 @@ public class Robot implements IRobot {
      * @return returns the new position for the robot
      */
     public void move(int distance) {
+        if (dead) return;
+        int moveDist = distance/Math.abs(distance);
         Pos newPos = new Pos();
         newPos.setPos(pos.copy());
         switch (dir) {
             case NORTH:
-                newPos.setPosY(pos.getPosY() + 1);
+                newPos.setPosY(pos.getPosY() + moveDist);
                 break;
             case EAST:
-                newPos.setPosX(pos.getPosX() + 1);
+                newPos.setPosX(pos.getPosX() + moveDist);
                 break;
             case SOUTH:
-                newPos.setPosY(pos.getPosY() - 1);
+                newPos.setPosY(pos.getPosY() - moveDist);
                 break;
             case WEST:
-                newPos.setPosX(pos.getPosX() - 1);
+                newPos.setPosX(pos.getPosX() - moveDist);
                 break;
         }
         Pos temp = new Pos();
         temp.setPos(pos.copy());
-        if (dead) return;
         if(walls.wall(pos, dir)){
             pushOther(newPos, dir);
             if (!occupied(newPos)) pos.setPos(newPos);
@@ -230,6 +232,7 @@ public class Robot implements IRobot {
      * @param turnRight The robots new rotation
      */
     public void turn(boolean turnRight) {
+        if (dead) return;
         if (turnRight) {
             dir = dir.next();
         }

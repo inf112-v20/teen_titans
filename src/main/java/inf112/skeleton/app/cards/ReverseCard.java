@@ -42,7 +42,7 @@ ReverseCard implements ICard{
     @Override
     public void action() {
         Pos oldPos = player.getRobot().getPos().copy();
-        player.getRobot().push(player.getRobot().getDir().opposite());
+        player.getRobot().move(-1);
         board.updatePlayer(oldPos, player.getRobot());
     }
 

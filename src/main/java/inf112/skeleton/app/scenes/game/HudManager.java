@@ -255,12 +255,12 @@ public class HudManager {
 
     public void updateHealth(int hp){
         if(hp >= 10){
-            for( int i = 0; i < 5; i++){
+            for( int i = 0; i < hearts.length; i++){
                 hearts[i][0].setVisible(true);
                 hearts[i][1].setVisible(false);
                 hearts[i][2].setVisible(false);
-                return;
             }
+            return;
         }
         System.out.println("health is "+hp);
         hearts[hp/2][2].setVisible(true);

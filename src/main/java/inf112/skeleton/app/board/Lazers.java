@@ -78,6 +78,14 @@ class Lazers {
                 }
             }
             else {
+                if (checkPlayer(x+i, y)) {
+                    for (Robot robot : board.getListOfRobots()) {
+                        if (robot.getPos().getPosX() == x+i && robot.getPos().getPosY() == y) {
+                            robot.takeDamage(1);
+                            return true;
+                        }
+                    }
+                }
                 return false;
             }
         }
@@ -124,7 +132,6 @@ class Lazers {
 
     private boolean checkPlayer(int x, int y){
         playerCheck = mapLayers.get("playerLayer").getCell(x, y);
-        //System.out.println("BOOM HEADSHOT");
         return playerCheck != null;
     }
 
