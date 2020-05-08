@@ -1,6 +1,7 @@
 package inf112.skeleton.app.scenes.game;
 
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.math.Interpolation;
 import inf112.skeleton.app.board.Board;
 import inf112.skeleton.app.board.Robot;
 import inf112.skeleton.app.cards.*;

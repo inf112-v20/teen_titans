@@ -58,9 +58,9 @@ Vi har bare hatt møter 1 gang i uken i det siste, dette hara ført til ganske s
 forbedre oss på. Samtidig burde vi nok spre arbeidsmengeden litt mer. Vi har hatt tendenser til å benytte oss av "skippertak".
 Kanban bygger jo trossalt på att man skal jobbe litt hele tiden, for å ikke bli "overwhelmed".
 I starten fikk vi møtes i person for møtene, og dette var til stor fordel når vi trengte hjelp. Etter nedstengningen ble det slutt på dette,
-som førte til litt tap av motivasjon, og litt tregere start. Vi har blitt bedre og bedre på onlin gruppe møter, og det fungerer greit nå.
+som førte til litt tap av motivasjon, og litt tregere start. Vi har blitt bedre og bedre på online gruppe møter, og det fungerer greit nå.
 Programmeringsmessig er det også et frustrasjonsmoment å ikke få sitte sammen. I tilfeller hvor man sitter fast og trenger hjelp fra et annet gruppemedlem, blir hjelpen mindre effektiv. Vi merker hvor viktig peking og kroppsspråk er når man diskuterer kode.
-En stemme i seg selv er ikke nok.
+En stemme i seg selv er ikke alltid nok.
 
 
 ####Noen ting å forbedre
@@ -72,7 +72,15 @@ Vi må spre arbeidsmengenden mer effektivt, og mer tydligere inndeling av arbeid
 
 
 ### Deloppgave 2 Krav
-#### Krav:
+Krav fra forrgie gang:
+Vi ville at spillerkortene og main menu skulle fungerer, og det gjør den som den skal.
+Denne gangen har vi fokusert på å rette på bugs som hindrer spillet i fra å fungere som det skal.
+
+Noen bugs vi har hatt som vi har jobbet med var:
+* Prioritetstallene på kortene vises dobbelt opp, som gjorde det uleselig for spilleren.
+* Når 2 spillere dør samtidig i multiplayer fryser spillet.
+* Når en robot gikk på en tile der det allerede var en robot så skal den pushe roboten, men hvis det var en vegg i veien, så gikk robot nummer 1 over den robot nummer 2. (Dette skal være fikset nå).
+
 Krav #1: 
 Multiplayer. Som en del av MVP må flere spillere kunne spille sammen. Akseptansekriterie er at man skal kunne hoste et spill/joine via en IP adresse, og spille symkronisert sammen.<br>
 
@@ -90,28 +98,32 @@ Krav 6: Win-HUD. Etter en spiller har vunnet skal modellen dens vises i stor for
 
 Jeg som kunde ønsker:
 
-* Å ha checkpoints på brettet for å kunne respawne hvor man dør.
+* Å ha checkpoints på brettet for å kunne respawne der om man dør.
  
 * Lasere.
 
 * Forskjellige karakterer (pokemon sprites) man kan velge mellom for å kjenne igjen min egen robot.
 
-* 9 tilfeldige utdelte kort, hvor jeg kan velge 3.
+* 9 tilfeldige delt kort til spillerne der de kan velge 5.
 
-* Brennbare gulv.
+* Brennbarte gulv, noen ved checkpoints og noen andre steder.
 
 Jeg som spiller ønsker:
+
+* En respawn. Der om jeg dør så vil jeg respawne der vi startet eller på checkpoints om jeg har kommet meg dit.
 
 * Forskjellige kort for hver tur som går sånn at jeg ikke kan bruke de samme bevegelsene hele tiden
 
 * Velge 5 kort som beveger seg i den retningen jeg har valgt i rekkefølge.
-Altså at hvis jeg velger kortet som beveger meg framover først og snu til venstre som andre kort så vil jeg bevege meg framover først og så snu til venstre.
+Altså at hvis jeg velger kortet som beveger meg framover først og snu til venstre som andre kort så vil jeg bevege meg framover først også snu til venstre,
+ikke omvendte.
 
-* At alle får sin egen tur, slik at en spiller ikke får flere turer før det er en annen spillers tur.
+* At alle får sin egen tur, 
+sånn at en spiller ikke får flere tur før det er en annen spillers tur.
 
-* Å se hvor mye hp jeg har igjen, hvis jeg går i brennbart gulv, laser etc så vil jeg se at hp'en min minker.
+* Å se hvor mange hp jeg har igjen, hvis jeg går i brennbart gulv, laser etc så vil jeg se at hp'en min minker.
 
-Liste over hva vi har fokusert på:
+Lister over hva vi har fokusert på:
 
 * Multiplayer multiplayer multiplayer
 * UI
@@ -119,6 +131,7 @@ Liste over hva vi har fokusert på:
 * Checkpoints
 * Bakgrunnsmusikk
 * Forskjellige velgbare karakterer
+* Forskjellige karakterer
 * Flere kort
 * Brennbare gulv
 * Respawn

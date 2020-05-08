@@ -49,7 +49,6 @@ public class Robot implements IRobot {
     public void recieveHud(HudManager hud){
         this.hud = hud;
     }
-
     public HudManager getHud(){
         return hud;
     }
@@ -149,6 +148,7 @@ public class Robot implements IRobot {
         if (!board.getDeadRobots().contains(this)){
             board.getDeadRobots().add(this);
         }
+        if(hud != null) hud.updateHealth(currentHP);
         updateModel(); //Updatemodel??
     }
 
