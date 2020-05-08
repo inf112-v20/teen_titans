@@ -28,8 +28,8 @@ WARNING: using WASD to control character will desync robots in multiplayer.
 3. Step on the CONVEYOR BELT will make the character move towards the direction it points
 4. Step in front of a PUSHER tile and it will PUSH the robot 1 tile in the direction of the PUSHER
 5. Step out of the MAP and the player will die
-6. Step on the GRILL and the player will loose HP
-7. Step in front of a LASER and the player will loose HP
+6. Step on the GRILL and the player will lose HP
+7. Step in front of a LASER and the player will lose HP
 8. Step on a FLAG the player will gain HP
 9. Step on a FLAG the player will get a new RESPAWN POINT
 10. Do either step 1 or step 4 after step 7 or step 8, and the player will RESPAWN at the latest RESPAWN POINT
