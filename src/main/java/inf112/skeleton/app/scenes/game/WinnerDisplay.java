@@ -23,12 +23,14 @@ public class WinnerDisplay {
                 img.setVisible(false);
                 img.setName(model);
                 img.setPosition(stage.getWidth()/2-150, stage.getHeight()/2+150);
+                stage.addActor(img);
             }
         }
     }
 
     public void setWinner(String name){
         //TODO: lagre modell i serverlistener v/ start, match med connection v/ slutt.
+        System.out.println("setwinner called with value " + name);
         for(Actor actor : stage.getActors()){
             if(actor.getName() == name){
                 actor.setVisible(true);

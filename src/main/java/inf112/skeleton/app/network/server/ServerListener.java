@@ -82,11 +82,14 @@ public class ServerListener extends Listener {
             parent.addPlayerCards(c.getID(), ((PacketInfo.Cards) o).cards);
         }
         else if(o instanceof PacketInfo.GameWinner){
-            int i = 0;
-            while(players[i] != c.getID()){i++;}
-            PacketInfo.GameWinner packet = new PacketInfo.GameWinner();
-            packet.winner = names[i];
-            server.sendToAllTCP(packet);
+            for(int i = 0; i < players.length; i++){
+                if(players[i] == c.getID()){
+                    System.out.println("sending winner packet");
+                    PacketInfo.GameWinner packet = new PacketInfo.GameWinner();
+                    packet.winner = models[i];
+                    server.sendToAllTCP(packet);
+                }
+            }
         }
     }
 

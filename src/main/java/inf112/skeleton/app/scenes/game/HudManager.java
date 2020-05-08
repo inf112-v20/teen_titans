@@ -3,12 +3,10 @@ package inf112.skeleton.app.scenes.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.cards.ICard;
 
@@ -22,7 +20,7 @@ public class HudManager {
     private Image selectedImage;
     private int selected;
     private Image[] numbers = new Image[5];
-    private Image[] timerNumbers = new Image[4];
+    private Image[] lifeNumbers = new Image[4];
     private Image[][] hearts = new Image[5][3];
     private ArrayList<Label> labels = new ArrayList<>();
     private Skin skin;
@@ -75,9 +73,9 @@ public class HudManager {
                 String file1 = "numbers/Number";
                 file1 = file1.concat(String.valueOf(i));
                 file1 = file1.concat(".png");
-                timerNumbers[i] = new Image(new Texture(Gdx.files.internal(file1)));
-                timerNumbers[i].setVisible(false);
-                stage.addActor(timerNumbers[i]);
+                lifeNumbers[i] = new Image(new Texture(Gdx.files.internal(file1)));
+                lifeNumbers[i].setVisible(false);
+                stage.addActor(lifeNumbers[i]);
             }
         }
     }
@@ -85,10 +83,10 @@ public class HudManager {
     public void updateLives(int l){
         if(l < 0) return;
         for(int i = 0; i < 4; i++){
-            timerNumbers[i].setPosition(80, stage.getHeight()-130);
-            timerNumbers[i].setVisible(false);
+            lifeNumbers[i].setPosition(80, stage.getHeight()-130);
+            lifeNumbers[i].setVisible(false);
         }
-        timerNumbers[l].setVisible(true);
+        lifeNumbers[l].setVisible(true);
     }
 
     public void createPos1(ICard img){

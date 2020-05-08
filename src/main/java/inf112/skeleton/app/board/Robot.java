@@ -138,9 +138,10 @@ public class Robot implements IRobot {
      * Kill the robot (currently resets position and health)
      * @return returns the starting position
      */
-
     public void die(){
-        hud.updateLives(--lives);
+        if(!dead){
+            hud.updateLives(--lives);
+        }
         dead = true;
         currentState = playerStates.get("dead");
         if (!board.getDeadRobots().contains(this)){
