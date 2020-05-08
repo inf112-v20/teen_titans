@@ -254,9 +254,8 @@ public class HudManager {
     }
 
     public void updateHealth(int hp){
-        if(hp > 10) return;
-        if(hp == 10){
-            for( int i = 0; i < hearts.length; i++){
+        if(hp >= 10){
+            for( int i = 0; i < 5; i++){
                 hearts[i][0].setVisible(true);
                 hearts[i][1].setVisible(false);
                 hearts[i][2].setVisible(false);

@@ -177,7 +177,7 @@ public class Robot implements IRobot {
         dead = false;
         board.updatePlayer(temp, this);
         currentHP = MAXHP;
-        if (hud != null) hud.updateHealth(currentHP);
+        if (hud != null) hud.updateHealth(10);
         return true;
     }
 

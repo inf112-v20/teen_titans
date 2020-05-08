@@ -71,45 +71,55 @@ Vi må spre arbeidsmengenden mer effektivt, og mer tydligere inndeling av arbeid
 
 
 ### Deloppgave 2 Krav
-Krav:
-Siden sist har vi....
+#### Krav:
+Krav #1: 
+Multiplayer. Som en del av MVP må flere spillere kunne spille sammen. Akseptansekriterie er at man skal kunne hoste et spill/joine via en IP adresse, og spille symkronisert sammen.<br>
+
+Krav 2: Spillregler. Som en del av MVP må man kunne starte et spill som følger spillreglene. Akseptansekriterie er at man kan starte et spill hvor man kan gå tom for liv og tape, eller nå alle flaggene og vinne.
+
+Krav 3: Valg av robotmodell. Spilleren skal selv kunne velge sin egen spillkarakter i lobbymenyen. Akseptansekriterie er at spiller man har valgt i lobbyen skal være den samme som dukker opp i selve spillet.
+
+Krav 4: Conveyor belts. En robot som trår på en conveyor-belt-tile skal flyttes i retningen beltet viser. Akseptansekriterie er at beltet fungerer som beskrevet.
+
+Krav 5: Lasere. En robot som står i veien for en laser skal miste et halvt hjerte. Akseptansekriterie er at laser fungerer som beskrevet.
+
+Krav 6: Win-HUD. Etter en spiller har vunnet skal modellen dens vises i stor form på skjermen. Akseptansekriterie: etter en spiller har nådd alle 4 checkpoints skal modellen dens dukke opp.
 
 ### Brukerhistorie
 
 Jeg som kunde ønsker:
 
-* Å ha checkpoints på brettet for å kunne respawne der om man dør.
+* Å ha checkpoints på brettet for å kunne respawne hvor man dør.
  
-* Laserer med lydeffekt.
+* Lasere.
 
-* Forskjellige karakterer (pokemon sprites) man kan velge mellom sånn at spillerne vet hvem de er.
+* Forskjellige karakterer (pokemon sprites) man kan velge mellom for å kjenne igjen min egen robot.
 
-* 9 tilfeldige delt kort til spillerne der de kan velge 5.
+* 9 tilfeldige utdelte kort, hvor jeg kan velge 3.
 
-* Brennbarte gulv, noen ved checkpoints og noen andre steder.
+* Brennbare gulv.
 
 Jeg som spiller ønsker:
-
-* En respawn. Der om jeg dør så vil jeg respawne der vi startet eller på checkpoints om jeg har kommet meg dit.
 
 * Forskjellige kort for hver tur som går sånn at jeg ikke kan bruke de samme bevegelsene hele tiden
 
 * Velge 5 kort som beveger seg i den retningen jeg har valgt i rekkefølge.
-Altså at hvis jeg velger kortet som beveger meg framover først og snu til venstre som andre kort så vil jeg bevege meg framover først også snu til venstre,
-ikke omvendte.
+Altså at hvis jeg velger kortet som beveger meg framover først og snu til venstre som andre kort så vil jeg bevege meg framover først og så snu til venstre.
 
-* At alle får sin egen tur, 
-sånn at en spiller ikke får flere tur før det er en annen spillers tur.
+* At alle får sin egen tur, slik at en spiller ikke får flere turer før det er en annen spillers tur.
 
-* Å se hvor mange hp jeg har igjen, hvis jeg går i brennbart gulv, laser etc så vil jeg se at hp'en min minker.
+* Å se hvor mye hp jeg har igjen, hvis jeg går i brennbart gulv, laser etc så vil jeg se at hp'en min minker.
 
-Lister over hva vi har fokusert på:
+Liste over hva vi har fokusert på:
 
+* Multiplayer multiplayer multiplayer
+* UI
+* Abstraksjon
 * Checkpoints
-* Lydeffekt for laser
-* Forskjellige karakterer
+* Bakgrunnsmusikk
+* Forskjellige velgbare karakterer
 * Flere kort
-* Brennbarte gulv
+* Brennbare gulv
 * Respawn
 * Spillere får sine tur til velge kort
 * Hp
