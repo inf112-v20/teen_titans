@@ -3,12 +3,15 @@ package inf112.skeleton.app.scenes.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.cards.ICard;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -23,6 +26,8 @@ public class HudManager {
     private Image[] lifeNumbers = new Image[4];
     private Image[][] hearts = new Image[5][3];
     private ArrayList<Label> labels = new ArrayList<>();
+    private ArrayList<Image> winModels = new ArrayList<>();
+    private TextButton winlabel;
     private Skin skin;
 
     public HudManager(){
@@ -76,6 +81,24 @@ public class HudManager {
                 lifeNumbers[i] = new Image(new Texture(Gdx.files.internal(file1)));
                 lifeNumbers[i].setVisible(false);
                 stage.addActor(lifeNumbers[i]);
+            }
+        }
+    }
+    public void createImages(String[] playerModesls){
+        winlabel = new TextButton("Winner:", skin);
+        winlabel.setPosition(stage.getWidth()/2-50, stage.getHeight()/2+300);
+        winlabel.setSize(100, 25);
+        winlabel.setVisible(false);
+        stage.addActor(winlabel);
+        for(String model : playerModesls){
+            if(model != null){
+                Image img = new Image(new Texture(Gdx.files.internal(model)));
+                img.setSize(600, 600);
+                img.setVisible(false);
+                img.setName(model);
+                img.setPosition(stage.getWidth()/2-300, stage.getHeight()/2-300);
+                winModels.add(img);
+                stage.addActor(img);
             }
         }
     }
@@ -221,8 +244,29 @@ public class HudManager {
         }
     }
 
+    public void setWinner(String name){
+        System.out.println("input name:" + name);
+        winlabel.setVisible(true);
+        for(Image image : winModels){
+            System.out.println("model name:" + image.getName());
+            if(image.getName().equals(name)){
+                image.setVisible(true);
+            }
+        }
+    }
+
     public void updateHealth(int hp){
-        hearts[hp/2-1][2].setVisible(true);
+        if(hp > 10) return;
+        if(hp == 10){
+            for( int i = 0; i < hearts.length; i++){
+                hearts[i][0].setVisible(true);
+                hearts[i][1].setVisible(false);
+                hearts[i][2].setVisible(false);
+                return;
+            }
+        }
+        System.out.println("health is "+hp);
+        hearts[hp/2][2].setVisible(true);
         for(int i = 0; i < hp/2; i++){
             hearts[i][0].setVisible(true);
             hearts[i][1].setVisible(false);
@@ -232,8 +276,8 @@ public class HudManager {
             hearts[i][1].setVisible(false);
         }
         if(hp%2 == 1){
-            hearts[hp/2-1][0].setVisible(false);
-            hearts[hp/2-1][1].setVisible(true);
+            hearts[hp/2][0].setVisible(false);
+            hearts[hp/2][1].setVisible(true);
         }
     }
 

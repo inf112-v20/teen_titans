@@ -84,7 +84,6 @@ public class ServerListener extends Listener {
         else if(o instanceof PacketInfo.GameWinner){
             for(int i = 0; i < players.length; i++){
                 if(players[i] == c.getID()){
-                    System.out.println("sending winner packet");
                     PacketInfo.GameWinner packet = new PacketInfo.GameWinner();
                     packet.winner = models[i];
                     server.sendToAllTCP(packet);

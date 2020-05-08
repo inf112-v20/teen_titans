@@ -18,7 +18,6 @@ public class GameLoop extends InputAdapter {
     private Player myPlayer;
     private int myPlayerNumber;
     private HudManager hud;
-    private WinnerDisplay wdisp;
     private IPlayer[] players;
     private Renderer parent;
     private GameClient gameClient;
@@ -36,7 +35,6 @@ public class GameLoop extends InputAdapter {
         this.myPlayerNumber = myPlayerNumber;
         board = new Board();
         hud = new HudManager();
-        wdisp = new WinnerDisplay();
         createNetworking();
         createGameLoopThread();
     }
@@ -45,7 +43,7 @@ public class GameLoop extends InputAdapter {
         board.createRobots(playerAmount, gameClient.getModels());
         createPlayers();
         cardHandler = new CardHandler(players, board, host);
-        wdisp.createImages(gameClient.getModels());
+        hud.createImages(gameClient.getModels());
         if(host){
             gameServer.gameStart(cardHandler);
         }
@@ -72,7 +70,8 @@ public class GameLoop extends InputAdapter {
 
                 /** Creates display to show winner of game **/
                 if(gameClient.gameOver()){
-                    wdisp.setWinner(gameClient.getGameWinner());
+                    hud.setWinner(gameClient.getGameWinner());
+                    break;
                 }
 
                 /**  Host sends cards  check**/
