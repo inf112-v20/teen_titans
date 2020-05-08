@@ -5,36 +5,35 @@
 03.04.20
 Meeting minutes: 90min.
 Meeting attendance: alle på gruppen
-Ny oblig ute, så vi har gått igjennom den. Vi ble enige om hva som burdee gjøres fremover og hva som har prioritet.
-Vi ble enige om at check points, lasere lydeffekter hadde størst prioritering. Alle oppdaterte hverandre på hva som har blitt endret
-på siden sist, for å holde alle oppdatert. Vi fordelte oppgaver, og ble enige om nyttt møtte skulle bli etter påske, men at det bare var
+Ny oblig ute, så vi har gått igjennom den. Vi ble enige om hva som burde gjøres fremover og hva som har prioritet.
+Vi ble enige om at checkpoints, lasere og lydeffekter hadde størst prioritering. Alle oppdaterte hverandre på hva som har blitt endret
+på siden sist, for å holde alle oppdatert. Vi fordelte oppgaver, og ble enige om nytt møte skulle bli etter påske, men at det bare var
 å ta kontakt på messanger/discord/slack om det var noe.
 
 17.04.20
 Meeting minutes: 100min.
 Meeting attendance: alle på gruppen
-En stund siden sist, og derfor en god del oppdateringer. Blant annet main menu som fungerer. Muligheter for å kunne velge karaakter, og gjør turn via kort.
-Etter å ha oppdart hverandre ble vi enige om prioriteringer som da ble: Fungerende vegger og lasere, meste parten er "ferdig" bortsett fra spill logikk.
+En stund siden sist, og derfor en god del oppdateringer. Blant annet main menu som fungerer. Muligheter for å kunne velge karakter, og gjør turn via kort.
+Etter å ha oppdart hverandre ble vi enige om prioriteringer som da ble: Fungerende vegger og lasere, mesteparten er "ferdig" bortsett fra spill logikk.
 Enige om å ta neste møte på fredag med mindre noe viktig dukker opp.
 
 24.04.20
 Meeting minutes: 120min.
 Meeting attendance: alle på gruppen
-Startet som vanlig med å oppdatere hverandre på vår progress. Nye klasser conveyor belts og gears. Vegger og conveyor belts skal fungere, og lasere startet på.
-Flere kort lagt til som U-turn.
-Mål for idag: Brennbart gulv og lasere til å fungere, og starte på et hp-system. (for å displaye hp osv.)
+Startet som vanlig med å oppdatere hverandre på vår progress. Nye klasser conveyor belts og gears. Vegger og conveyorbelts skal fungere, og lasere startet på.
+Flere kort lagt til som f.eks U-turn.
+Mål for idag: få brennbart gulv og lasere til å fungere, og starte på et hp-system. (for å displaye hp osv.)
 Nytt møte neste fredag. 
 
 02.05.20
 Meeting minutes: 90min.
-Meeting attendance: Ola & Mathias
+Meeting attendance: Ola & Matias
 Små arbeid for presentsajon, litt bug fixes, la til kjente bugs på projectboard, og gikk igjennom ting som manglet for oblig4. 
 
 04.05.20
 Meeting minutes:120min
 meeting attendance: Alle sammen
 Brukte  2timer før presentasjon for å gå igjennom bugs/bug fixes, og klaregjøre presentasjon.
-
 
 07.08.20
 Meeting minutes: 150min
