@@ -262,7 +262,6 @@ public class HudManager {
             }
             return;
         }
-        System.out.println("health is "+hp);
         hearts[hp/2][2].setVisible(true);
         for(int i = 0; i < hp/2; i++){
             hearts[i][0].setVisible(true);
