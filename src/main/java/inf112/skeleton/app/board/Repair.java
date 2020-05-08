@@ -1,9 +1,9 @@
 package inf112.skeleton.app.board;
 
-public class Repair {
+class Repair {
 
-    Board board;
-    Pos pos;
+    private final Board board;
+    private final Pos pos;
 
     public Repair(Pos pos, Board board){
         this.board = board;

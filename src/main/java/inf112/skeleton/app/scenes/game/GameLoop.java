@@ -10,6 +10,7 @@ import inf112.skeleton.app.player.IPlayer;
 import inf112.skeleton.app.player.Opponent;
 import inf112.skeleton.app.player.Player;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.PriorityQueue;
 
@@ -19,13 +20,14 @@ public class GameLoop extends InputAdapter {
     private int myPlayerNumber;
     private HudManager hud;
     private IPlayer[] players;
-    private Renderer parent;
+    private final Renderer parent;
     private GameClient gameClient;
     private GameServer gameServer;
-    private boolean host;
-    private Board board;
+    private final boolean host;
+    private final Board board;
     private int totalRound;
     private CardHandler cardHandler;
+    private ArrayList<Integer> markedForRespawn;
 
     private Thread loop;
 
@@ -137,9 +139,10 @@ public class GameLoop extends InputAdapter {
                     }
                 }
                 /** Between rounds **/
-                if (!board.getDeadRobots().isEmpty()) {
-                    board.getDeadRobots().get(0).respawn();
-                    board.getDeadRobots().remove(0);
+                for (int i = 0; i < board.getDeadRobots().size(); i++) {
+                    if (board.getDeadRobots().get(i).respawn()) {
+                        board.getDeadRobots().remove(i--);
+                    }
                 }
                 resetAfterRound();
             }

@@ -8,11 +8,11 @@ import java.util.Random;
 
 public class Opponent implements IPlayer{
 
-    private int playerNumber;
-    private Robot robot;
+    private final int playerNumber;
+    private final Robot robot;
     private ArrayList<ICard> cardStorage = new ArrayList<>();
-    private ArrayList<ICard> sortedCards = new ArrayList<>();
-    private Random random;
+    private final ArrayList<ICard> sortedCards = new ArrayList<>();
+    private final Random random;
 
     public Opponent(Robot robot, int playerNumber){
         this.playerNumber = playerNumber;

@@ -6,15 +6,17 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import inf112.skeleton.app.scenes.Orchestrator;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class Renderer {
 
-    private Orchestrator parent;
-    private GameLoop gameLoop;
+    @SuppressWarnings("FieldCanBeLocal")
+    private final Orchestrator parent;
+    private final GameLoop gameLoop;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
 
-    public final int BOARDHEIGHT = 16;
-    public final int BOARDWIDTH = 16;
+    private final int BOARDHEIGHT = 16;
+    private final int BOARDWIDTH = 16;
 
     private HudManager hudManager;
 

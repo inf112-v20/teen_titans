@@ -6,10 +6,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import inf112.skeleton.app.player.IPlayer;
 
 public class UTurnCard implements ICard {
-    private int priority;
+    private final int priority;
     private IPlayer player;
-    private Image image = new Image(new Texture(Gdx.files.internal("cards/UTurnCard.png")));
-    private int typeID = 4;
+    private final Image image = new Image(new Texture(Gdx.files.internal("cards/UTurnCard.png")));
+    private final int typeID = 4;
     private final boolean LEFT = false;
 
     public UTurnCard(int priority, IPlayer player){

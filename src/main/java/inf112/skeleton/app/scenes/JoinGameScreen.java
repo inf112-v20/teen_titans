@@ -10,17 +10,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.network.client.GameClient;
 
-public class JoinGameScreen extends InputAdapter {
+class JoinGameScreen extends InputAdapter {
 
     private int playersJoined;
-    private GameClient client;
-    private Orchestrator parent;
-    private Stage stage;
+    private final GameClient client;
+    private final Orchestrator parent;
+    private final Stage stage;
     private Table table;
     private Skin skin;
     private boolean ready = false;
-    private Image highlight = new Image(new Texture(Gdx.files.internal("robots/HighlightedCharacter.png")));
-    private Image selected = new Image(new Texture(Gdx.files.internal("robots/selectedCharacter.png")));
+    private final Image highlight = new Image(new Texture(Gdx.files.internal("robots/HighlightedCharacter.png")));
+    private final Image selected = new Image(new Texture(Gdx.files.internal("robots/selectedCharacter.png")));
 
     public JoinGameScreen(Orchestrator orchestrator, GameClient client) {
         Gdx.input.setInputProcessor(this);
@@ -30,7 +30,7 @@ public class JoinGameScreen extends InputAdapter {
         create();
     }
 
-    public void create(){
+    private void create(){
         table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
@@ -85,7 +85,7 @@ public class JoinGameScreen extends InputAdapter {
         return stage;
     }
 
-    public void showcasePlayerModels(){
+    private void showcasePlayerModels(){
         Label info1 = new Label("The game will start when every player has selected a character", skin);
         info1.setPosition(stage.getWidth()/2-290, 170);
         stage.addActor(info1);

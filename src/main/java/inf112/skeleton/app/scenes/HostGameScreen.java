@@ -12,13 +12,13 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import inf112.skeleton.app.network.client.GameClient;
 import inf112.skeleton.app.network.server.GameServer;
 
-public class HostGameScreen extends InputAdapter {
+class HostGameScreen extends InputAdapter {
 
     private int playersJoined;
-    private GameClient gameClient;
-    private GameServer gameServer;
-    private Orchestrator parent;
-    private Stage stage;
+    private final GameClient gameClient;
+    private final GameServer gameServer;
+    private final Orchestrator parent;
+    private final Stage stage;
     private Table table;
     private Skin skin;
 
@@ -36,7 +36,7 @@ public class HostGameScreen extends InputAdapter {
         create();
     }
 
-    public void create(){
+    private void create(){
         table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
@@ -145,7 +145,7 @@ public class HostGameScreen extends InputAdapter {
         if(selected){ready = !ready; highlightCharacter(false);}
     }
 
-    public void showcasePlayerModels(){
+    private void showcasePlayerModels(){
         Label info1 = new Label("The game will start when every player has selected a character", skin);
         info1.setPosition(stage.getWidth()/2-290, 170);
         stage.addActor(info1);

@@ -3,7 +3,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.ApplicationListener;
 
 
-public class TestpurposesApplicationListener implements ApplicationListener {
+class TestpurposesApplicationListener implements ApplicationListener {
 
     @Override
     public void create() {

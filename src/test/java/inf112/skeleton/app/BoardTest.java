@@ -14,7 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class BoardTest {
-    Board testBoard;
+    private Board testBoard;
 
     @Before
     public void setUp(){

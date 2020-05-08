@@ -73,7 +73,7 @@ public class Robot implements IRobot {
 
     /**
      * returns the current position of the robot
-     * @return
+     * @return Robot position
      */
     public Pos getPos() {
         return pos;
@@ -91,7 +91,7 @@ public class Robot implements IRobot {
         currentHP -= dmg;
         if (currentHP <= 0) {
             die();
-            hud.updateHealth(0);
+            if(hud != null) hud.updateHealth(0);
             return;
         }
         if(hud != null) hud.updateHealth(currentHP);
@@ -141,7 +141,7 @@ public class Robot implements IRobot {
      */
     public void die(){
         if(!dead){
-            hud.updateLives(--lives);
+            if (hud != null) hud.updateLives(--lives);
         }
         dead = true;
         currentState = playerStates.get("dead");
@@ -160,12 +160,12 @@ public class Robot implements IRobot {
         respawnPoint = spawn.copy();
     }
 
-    public void respawn(){
+    public boolean respawn(){
 
         for (Robot robot : board.getRobots()) {
             if (robot.getPos().getPosX() == respawnPoint.getPosX()
             && robot.getPos().getPosY() == respawnPoint.getPosY()) {
-                return;
+                return false;
             }
         }
 
@@ -178,6 +178,7 @@ public class Robot implements IRobot {
         board.updatePlayer(temp, this);
         currentHP = MAXHP;
         if (hud != null) hud.updateHealth(currentHP);
+        return true;
     }
 
     /**
@@ -207,12 +208,21 @@ public class Robot implements IRobot {
         if (dead) return;
         if(walls.wall(pos, dir)){
             pushOther(newPos, dir);
-            pos.setPos(newPos);
+            if (!occupied(newPos)) pos.setPos(newPos);
         }
         board.updatePlayer(temp, this);
         if(distance > 1){
             move(distance-1);
         }
+    }
+
+    private boolean occupied(Pos pos) {
+        for (Robot robot : board.getRobots()) {
+            if (robot.getPos().getPosX() == pos.getPosX() && robot.getPos().getPosY() == pos.getPosY()){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -266,7 +276,7 @@ public class Robot implements IRobot {
 
         if(walls.wall(pos, pushDir)) {
             pushOther(newPos, pushDir);
-            pos.setPos(newPos);
+            if(!occupied(newPos)) pos.setPos(newPos);
         }
     }
 

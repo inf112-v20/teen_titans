@@ -64,8 +64,6 @@ public class HudManager {
             hearts[i+3][2].setPosition(i*60+30, stage.getHeight()-90);
 
         }
-
-
     }
     private void createNumbers(){
         for(int i = 0; i < numbers.length; i++){

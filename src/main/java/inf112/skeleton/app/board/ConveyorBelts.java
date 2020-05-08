@@ -2,11 +2,12 @@ package inf112.skeleton.app.board;
 
 
 
-public class ConveyorBelts {
+@SuppressWarnings("unused")
+class ConveyorBelts {
     private final boolean RIGHT = true;
     private final boolean LEFT = false;
     private final int STOP = -1;
-    private Board board;
+    private final Board board;
 
     public ConveyorBelts(Board board) {
         this.board = board;

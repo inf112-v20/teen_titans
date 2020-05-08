@@ -9,11 +9,11 @@ import inf112.skeleton.app.player.IPlayer;
 
 public class MoveThreeForwardCard implements ICard {
 
-    private int priority;
+    private final int priority;
     private IPlayer player;
-    private Board board;
-    private Image image = new Image(new Texture(Gdx.files.internal("Cards/MoveThreeForward.png")));
-    private int typeID = 6;
+    private final Board board;
+    private final Image image = new Image(new Texture(Gdx.files.internal("Cards/MoveThreeForward.png")));
+    private final int typeID = 6;
 
     public MoveThreeForwardCard(int priority, IPlayer player, Board board){
         this.board = board;

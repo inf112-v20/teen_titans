@@ -6,19 +6,19 @@ import java.util.HashMap;
 
 public class Walls {
 
-    HashMap<String, TiledMapTileLayer> mapLayers;
-    int currentTileType = -1;
-    int upTileType   = -1;
-    int leftTileType = -1;
-    int rightTileType = -1;
-    int downTileType = -1;
-    TiledMapTileLayer.Cell wallTile;
-    TiledMapTileLayer.Cell lazerTile;
-    TiledMapTileLayer.Cell pusherTile;
-    TiledMapTileLayer.Cell upTile;
-    TiledMapTileLayer.Cell leftTile;
-    TiledMapTileLayer.Cell rightTile;
-    TiledMapTileLayer.Cell downTile;
+    private final HashMap<String, TiledMapTileLayer> mapLayers;
+    private int currentTileType = -1;
+    private int upTileType   = -1;
+    private int leftTileType = -1;
+    private int rightTileType = -1;
+    private int downTileType = -1;
+    private TiledMapTileLayer.Cell wallTile;
+    private TiledMapTileLayer.Cell lazerTile;
+    private TiledMapTileLayer.Cell pusherTile;
+    private TiledMapTileLayer.Cell upTile;
+    private TiledMapTileLayer.Cell leftTile;
+    private TiledMapTileLayer.Cell rightTile;
+    private TiledMapTileLayer.Cell downTile;
 
     public Walls(Board board){
         mapLayers = board.getTiledMapTileLayers();
@@ -72,12 +72,7 @@ public class Walls {
         if (upTile != null) upTileType = upTile.getTile().getId();
         else upTileType = -1;
 
-        //Her er bare veggene vi bruker no, kan utvides med flere
-        if (currentTileType == 24 || currentTileType == 31 || currentTileType == 9 || upTileType == 32 || upTileType == 29) {
-            return false;
-        }
-
-        return true;
+        return currentTileType != 24 && currentTileType != 31 && currentTileType != 9 && upTileType != 32 && upTileType != 29;
     }
 
     private boolean checkLegalDown(Pos pos) {
@@ -97,12 +92,7 @@ public class Walls {
         if (downTile != null) downTileType = downTile.getTile().getId();
         else downTileType = -1;
 
-        //Her er bare veggene vi bruker no, kan utvides med flere
-        if (downTileType == 24 || downTileType == 31 || downTileType == 9 || currentTileType == 32 || currentTileType == 29) {
-            return false;
-        }
-
-        return true;
+        return downTileType != 24 && downTileType != 31 && downTileType != 9 && currentTileType != 32 && currentTileType != 29;
     }
 
     private boolean checkLegalLeft(Pos pos) {
@@ -122,12 +112,7 @@ public class Walls {
         if (leftTile != null) leftTileType = leftTile.getTile().getId();
         else leftTileType = -1;
 
-        //Her er bare veggene vi bruker no, kan utvides med flere
-        if (currentTileType == 32 || currentTileType == 30 || currentTileType == 24 || currentTileType == 38 || leftTileType == 2) {
-            return false;
-        }
-
-        return true;
+        return currentTileType != 32 && currentTileType != 30 && currentTileType != 24 && currentTileType != 38 && leftTileType != 2;
     }
 
     private boolean checkLegalRight(Pos pos) {
@@ -147,11 +132,6 @@ public class Walls {
         if (rightTile != null) rightTileType = rightTile.getTile().getId();
         else rightTileType = -1;
 
-        //Her er bare veggene vi bruker no, kan utvides med flere
-        if (rightTileType == 32 || rightTileType == 30 || rightTileType == 24 || rightTileType == 38 || currentTileType == 2) {
-            return false;
-        }
-
-        return true;
+        return rightTileType != 32 && rightTileType != 30 && rightTileType != 24 && rightTileType != 38 && currentTileType != 2;
     }
 }

@@ -1,13 +1,13 @@
 package inf112.skeleton.app.board;
 
-public class Pushers {
+class Pushers {
 
-    Board board;
-    boolean even;
-    int x;
-    int y;
-    Pos pos;
-    Direction dir;
+    private final Board board;
+    private boolean even;
+    private final int x;
+    private final int y;
+    private final Pos pos;
+    private final Direction dir;
 
     public Pushers(Pos pos, Board board, boolean even, Direction dir){
         x = pos.getPosX();
